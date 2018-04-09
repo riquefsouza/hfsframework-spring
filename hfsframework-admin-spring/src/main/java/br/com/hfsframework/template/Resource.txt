@@ -1,0 +1,51 @@
+package ${pacote}.resource;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resources;
+
+import br.com.hfsframework.admin.model.${classe};
+import br.com.hfsframework.admin.restcontroller.${classe}RestController;
+import br.com.hfsframework.base.BaseResourceSupport;
+
+public class ${classe}Resource extends ResourceSupport { 
+
+	/*
+	extends BaseResourceSupport<${classe}, ${idTipo}, ${classe}RestController> {
+
+	public ${classe}Resource(${classe}RestController controller, ${classe} bean) {
+		super(controller, bean);
+	}
+	*/
+
+	private final ${classe} ${objeto};
+
+	public ${classe}Resource(${classe}RestController controller, Principal principal, ${classe} ${objeto}) {
+		this.${objeto} = ${objeto};
+
+		this.add(linkTo(methodOn(controller.getClass()).search(principal, ${objeto}.getId())).withSelfRel());
+		this.add(linkTo(methodOn(controller.getClass()).listar(principal)).withRel(BaseResourceSupport.LIST_ALL));
+	}
+
+	public ${classe} get${classe}() {
+		return ${objeto};
+	}
+
+	public static Resources<${classe}Resource> getLista(${classe}RestController controller, Principal principal, Iterable<${classe}> lista){
+		Stream<${classe}> stream = StreamSupport.stream(lista.spliterator(), false);
+		
+		List<${classe}Resource> listaResource = stream.map(bean -> new ${classe}Resource(controller, principal, bean))
+				.collect(Collectors.toList());
+
+		return new Resources<${classe}Resource>(listaResource);
+	}
+	
+}

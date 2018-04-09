@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+		//$("#admFuncionarioPerfisDlg").load("admFuncionarioCargosDialog.html");
+		//hfsDatatablesIniciar("AdmFuncionario", 6);
+		
+		var tabela = $('#tabelaAdmFuncionario').DataTable({
+			searching: true,
+			ordering:  true,	
+			dom: '<"top"lp>rt<"bottom"i><"clear">',
+			pagingType: "full_numbers",
+			select: {
+				style: 'single'
+			},
+			lengthMenu: [10, 20, 50, 80, 100],
+			language: hfsDatatablesLinguagem(),
+			columnDefs: [ { orderable: false, targets: 6 } ],
+			processing: true,
+			//ajax: "http://localhost:8080/api/admFuncionarios/?page=1&size=1",
+			ajax: "/sistemaMB"
+		});
+		
+		//hfsDatatablesSelecionar("AdmFuncionario", tabela);
+		
+	});
+</script>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmFuncionario">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Funcionários
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo cargo" onclick="window.location.href='editarAdmFuncionario.html'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar um cargo" onclick="hfsDatatablesEditar('AdmFuncionario')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir um cargo" onclick="hfsDatatablesExcluir('AdmFuncionario')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<div id="admFuncionarioPerfisDlg"></div>	
+		
+		<table id="tabelaAdmFuncionario"
+			class="table table-striped table-bordered" cellspacing="0" width="100%">				
+			<thead>
+				<tr class="tema-principal">
+				  <th>Matr&iacute;cula</th>
+				  <th>Nome</th>
+				  <th>CPF</th>
+				  <th>E-mail</th>
+				  <th>Setor</th>
+				  <th>Cargo Principal</th>
+				  <td></td>
+				</tr>	
+			</thead>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>
