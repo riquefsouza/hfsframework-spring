@@ -12,40 +12,38 @@ package br.com.hfsframework.base.relatorio;
 public enum RelatorioTipoEnum {
 	
 	/** The pdf. */
-	//Documentos
-	PDF("application/pdf", "Portable Document Format (.pdf)"),
+	PDF("Documentos", "application/pdf", "Portable Document Format (.pdf)"),
 	
 	/** The docx. */
-	DOCX("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Microsoft Word XML (.docx)"),
+	DOCX("Documentos", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Microsoft Word XML (.docx)"),
 	
 	/** The rtf. */
-	RTF("application/rtf", "Rich Text Format (.rtf)"),
+	RTF("Documentos", "application/rtf", "Rich Text Format (.rtf)"),
 	
 	/** The odt. */
-	ODT("application/vnd.oasis.opendocument.text", "OpenDocument Text (.odt)"),
+	ODT("Documentos", "application/vnd.oasis.opendocument.text", "OpenDocument Text (.odt)"),
 
-	//Planilhas
 	/** The xlsx. */
-	//XLS("application/vnd.ms-excel", "Microsoft Excel (.xls)"),
-	XLSX("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Microsoft Excel XML (.xlsx)"),
+	//XLS("Planilhas", "application/vnd.ms-excel", "Microsoft Excel (.xls)"),
+	XLSX("Planilhas", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Microsoft Excel XML (.xlsx)"),
 	
 	/** The ods. */
-	ODS("application/vnd.oasis.opendocument.spreadsheet", "OpenDocument Spreadsheet (.ods)"),
+	ODS("Planilhas", "application/vnd.oasis.opendocument.spreadsheet", "OpenDocument Spreadsheet (.ods)"),
 
 	/** The csv. */
-	//Texto puro
-	CSV("text/plain", "Valores Separados Por Vírgula (.csv)"),
+	CSV("Texto puro", "text/plain", "Valores Separados Por Vírgula (.csv)"),
 	
 	/** The txt. */
-	TXT("text/plain", "Somente Texto (.txt)"),	 	
+	TXT("Texto puro", "text/plain", "Somente Texto (.txt)"),	 	
 
 	/** The pptx. */
-	//Outros
-	PPTX("application/vnd.openxmlformats-officedocument.presentationml.presentation", "Microsoft Powerpoint XML (.pptx)"),	
+	PPTX("Outros", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "Microsoft Powerpoint XML (.pptx)"),	
 	
 	/** The html. */
-	//HTML("text/html", "Linguagem de Marcação de Hipertexto (.html)");
-	HTML("application/zip", "Linguagem de Marcação de Hipertexto (.html)");
+	//HTML("Outros", "text/html", "Linguagem de Marcação de Hipertexto (.html)");
+	HTML("Outros", "application/zip", "Linguagem de Marcação de Hipertexto (.html)");
+	
+	private String grupo;
 	
 	/** The tipo conteudo. */
 	private String tipoConteudo;
@@ -61,9 +59,14 @@ public enum RelatorioTipoEnum {
 	 * @param descricao
 	 *            the descricao
 	 */
-	private RelatorioTipoEnum(String tipoConteudo, String descricao) {
+	private RelatorioTipoEnum(String grupo, String tipoConteudo, String descricao) {
+		this.grupo = grupo;
 		this.tipoConteudo = tipoConteudo;
 		this.descricao = descricao;
+	}
+
+	public String getGrupo() {
+		return grupo;
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package br.com.hfsframework.config;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -15,18 +15,21 @@ import com.google.common.base.Predicates;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.OAuthBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.AuthorizationCodeGrant;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.GrantType;
+//import springfox.documentation.service.AuthorizationCodeGrant;
+import springfox.documentation.service.ResourceOwnerPasswordCredentialsGrant;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.SecurityScheme;
-import springfox.documentation.service.TokenEndpoint;
-import springfox.documentation.service.TokenRequestEndpoint;
+//import springfox.documentation.service.TokenEndpoint;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.ApiKeyVehicle;
 import springfox.documentation.swagger.web.SecurityConfiguration;
+import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
@@ -34,18 +37,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 public class SwaggerConfig  {
     
-    //private static final String swaggerTokenURL = "http://localhost:8080/oauth/token";
-
-    //@Value("${info.app.name}")
 	private String serviceName = "HFS Framework Admin";
-	//@Value("${info.app.desc}")
+
 	private String serviceDesc = "HFS Framework Admin using springframework";
-	//@Value("${uaa.clientId}")
+
 	String clientId = "admin-hfsframework";
-	//@Value("${uaa.clientSecret}")
+
 	String clientSecret = "admin"; //"$2a$10$y7jArsSYCAJjIudWb6zbkuMQZxNFGePkmYJQM0ChB4slgwtUG9RLy"
 	
-	//@Value("${uaa.url}")
 	String oAuthServerUri = "http://localhost:8080";
 /*
 	@Bean
@@ -85,13 +84,14 @@ public class SwaggerConfig  {
 	
 	@Bean
 	public Docket postsApi() {
-		return new Docket(DocumentationType.SWAGGER_2).groupName("public-api")
+		return new Docket(DocumentationType.SWAGGER_2).groupName("HFSFramework Admin Spring Restful")
 				.apiInfo(apiInfo()).select().paths(postPaths())
 				.apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))	
 				.paths(springBootActuatorJmxPaths())
 				.build()		
-				.securitySchemes(Collections.singletonList(oauth()))
-		;
+				.securitySchemes(newArrayList(oauth()))
+				//.securitySchemes(Collections.singletonList(oauth()));
+				.securityContexts(newArrayList(securityContext()));
 	}
 
 	private Predicate<String> postPaths() {
@@ -110,9 +110,10 @@ public class SwaggerConfig  {
 	@Bean
 	List<GrantType> grantTypes() {
 		List<GrantType> grantTypes = new ArrayList<>();
-		TokenRequestEndpoint tokenRequestEndpoint = new TokenRequestEndpoint(oAuthServerUri+"/oauth/authorize", clientId, clientSecret );
-        TokenEndpoint tokenEndpoint = new TokenEndpoint(oAuthServerUri+"/oauth/token", "token");
-        grantTypes.add(new AuthorizationCodeGrant(tokenRequestEndpoint, tokenEndpoint));
+		//TokenRequestEndpoint tokenRequestEndpoint = new TokenRequestEndpoint(oAuthServerUri+"/oauth/authorize", clientId, clientSecret );
+        //TokenEndpoint tokenEndpoint = new TokenEndpoint(oAuthServerUri+"/oauth/token", "token");
+		//grantTypes.add(new AuthorizationCodeGrant(tokenRequestEndpoint, tokenEndpoint));
+        grantTypes.add(new ResourceOwnerPasswordCredentialsGrant(oAuthServerUri+"/oauth/token"));
         return grantTypes;
 	}
 	
@@ -125,20 +126,42 @@ public class SwaggerConfig  {
                 .build();
     }
 	
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.any())
+                .build();
+    }
+
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope
+                = new AuthorizationScope("write", "write and read");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return newArrayList(
+                new SecurityReference("OAuth2", authorizationScopes));
+    }
+	
 	private List<AuthorizationScope> scopes() {
 		List<AuthorizationScope> list = new ArrayList<>();
 		list.add(new AuthorizationScope("write", "write and read"));
-		list.add(new AuthorizationScope("read", "read only"));
+		/*
+		list.add(new AuthorizationScope("read", "read only"));		
 		list.add(new AuthorizationScope("read_scope","Grants read access"));
 		list.add(new AuthorizationScope("write_scope","Grants write access"));
 		list.add(new AuthorizationScope("admin_scope","Grants read write and delete access"));
+		*/
 		return list;
     }	
 
-	@SuppressWarnings("deprecation")
 	@Bean
     public SecurityConfiguration securityInfo() {
-        return new SecurityConfiguration(clientId, clientSecret, "realm", clientId, "apiKey", ApiKeyVehicle.HEADER, "api_key", "");
-}
-	
+		return SecurityConfigurationBuilder.builder()
+		        .clientId(clientId)
+		        .clientSecret(clientSecret)
+		        .scopeSeparator(" ")
+		        .useBasicAuthenticationWithAccessCodeGrant(true)
+		        .build();
+	}
+
 }

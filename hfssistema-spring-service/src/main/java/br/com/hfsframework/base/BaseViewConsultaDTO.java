@@ -7,7 +7,6 @@
 package br.com.hfsframework.base;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ public abstract class BaseViewConsultaDTO<T, I extends Serializable, B extends I
 	private B businessController;
 
 	/** The lista entidade. */
-	private List<T> listaEntidade;
+	private Iterable<T> listaEntidade;
 
 	/** The entidade. */
 	@Inject
@@ -106,7 +105,7 @@ public abstract class BaseViewConsultaDTO<T, I extends Serializable, B extends I
 	 *
 	 * @return o the lista entidade
 	 */
-	public List<T> getListaEntidade() {
+	public Iterable<T> getListaEntidade() {
 		return this.listaEntidade;
 	}
 
@@ -116,7 +115,7 @@ public abstract class BaseViewConsultaDTO<T, I extends Serializable, B extends I
 	 * @param listaEntidade
 	 *            o novo the lista entidade
 	 */
-	public void setListaEntidade(List<T> listaEntidade) {
+	public void setListaEntidade(Iterable<T> listaEntidade) {
 		this.listaEntidade = listaEntidade;
 	}
 

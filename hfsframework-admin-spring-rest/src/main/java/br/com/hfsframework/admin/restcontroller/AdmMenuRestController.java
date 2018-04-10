@@ -1,5 +1,6 @@
 package br.com.hfsframework.admin.restcontroller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -27,11 +28,12 @@ public class AdmMenuRestController extends BaseRestController<AdmMenu, Long, Adm
 	@ApiOperation("Save Or Update Menu Drag And Drop")
 	@PutMapping(value = "/salvarOuAtualizarDragReordenando", 
 			params = { "idMenuPaiAntigo", "idMenuPaiNovo", "idMenuMover" })
-	public ResponseEntity<AdmMenu> salvarOuAtualizarDragReordenando(
+	public ResponseEntity<AdmMenu> salvarOuAtualizarDragReordenando(Principal principal, 
 			@RequestParam("idMenuPaiAntigo") Long idMenuPaiAntigo, 
 			@RequestParam("idMenuPaiNovo") Long idMenuPaiNovo,
 			@RequestParam("idMenuMover") Long idMenuMover) {
-
+		validateUser(principal);
+		
 		Optional<AdmMenu> menuPaiAntigo = servico.load(idMenuPaiAntigo);
 		Optional<AdmMenu> menuPaiNovo = servico.load(idMenuPaiNovo);
 		Optional<AdmMenu> menuMover = servico.load(idMenuMover);
@@ -48,7 +50,9 @@ public class AdmMenuRestController extends BaseRestController<AdmMenu, Long, Adm
 	
 	@ApiOperation("Save Or Update Menu")
 	@PostMapping("/salvarOuAtualizar")
-	public ResponseEntity<AdmMenu> salvarOuAtualizar(@Valid @RequestBody AdmMenu bean) {
+	public ResponseEntity<AdmMenu> salvarOuAtualizar(Principal principal, @Valid @RequestBody AdmMenu bean) {
+		validateUser(principal);
+		
 		Optional<AdmMenu> obj = servico.salvarOuAtualizar(bean);
 
 		if (!obj.isPresent()) {
@@ -65,7 +69,9 @@ public class AdmMenuRestController extends BaseRestController<AdmMenu, Long, Adm
 	
 	@ApiOperation("Delete Menu By idMenu")
 	@DeleteMapping("/apagarMenu/{id}")
-	public ResponseEntity<Void> apagar(@PathVariable Long idMenu) {
+	public ResponseEntity<Void> apagar(Principal principal, @PathVariable Long idMenu) {
+		validateUser(principal);
+		
 		Optional<AdmMenu> obj = servico.load(idMenu);
 
 		if (!obj.isPresent()) {

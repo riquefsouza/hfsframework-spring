@@ -9,10 +9,10 @@ package br.com.hfsframework.base.relatorio;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -37,7 +37,6 @@ public abstract class BaseViewRelatorioController
 
 	/** The lista tipo relatorio. */
 	private List<RelatorioTipoEnum> listaTipoRelatorio;
-	//private List<SelectItem> listaTipoRelatorio;
 
 	/** The tipo relatorio. */
 	private String tipoRelatorio;
@@ -60,37 +59,6 @@ public abstract class BaseViewRelatorioController
 	public void init() {
 		tipoRelatorio = RelatorioTipoEnum.PDF.name();
 		listaTipoRelatorio = Arrays.asList(RelatorioTipoEnum.values());
-		
-		/*
-		SelectItemGroup gDocumentos = new SelectItemGroup("Documentos");
-		gDocumentos.setSelectItems(new SelectItem[] {
-				new SelectItem(RelatorioTipoEnum.PDF.name(), RelatorioTipoEnum.PDF.getDescricao(), RelatorioTipoEnum.PDF.getDescricao()), 
-				new SelectItem(RelatorioTipoEnum.DOCX.name(), RelatorioTipoEnum.DOCX.getDescricao(), RelatorioTipoEnum.DOCX.getDescricao()),
-				new SelectItem(RelatorioTipoEnum.RTF.name(), RelatorioTipoEnum.RTF.getDescricao(), RelatorioTipoEnum.RTF.getDescricao()),
-				new SelectItem(RelatorioTipoEnum.ODT.name(), RelatorioTipoEnum.ODT.getDescricao(), RelatorioTipoEnum.ODT.getDescricao()) } );
-
-		SelectItemGroup gPlanilhas = new SelectItemGroup("Planilhas");
-		gPlanilhas.setSelectItems(new SelectItem[] {
-				//new SelectItem(RelatorioTipoEnum.XLS.name(), RelatorioTipoEnum.XLS.getDescricao(), RelatorioTipoEnum.XLS.getDescricao()), 
-				new SelectItem(RelatorioTipoEnum.XLSX.name(), RelatorioTipoEnum.XLSX.getDescricao(), RelatorioTipoEnum.XLSX.getDescricao()),
-				new SelectItem(RelatorioTipoEnum.ODS.name(), RelatorioTipoEnum.ODS.getDescricao(), RelatorioTipoEnum.ODS.getDescricao()) } );
-
-		SelectItemGroup gTextoPuro = new SelectItemGroup("Texto Puro");
-		gTextoPuro.setSelectItems(new SelectItem[] {
-				new SelectItem(RelatorioTipoEnum.CSV.name(), RelatorioTipoEnum.CSV.getDescricao(), RelatorioTipoEnum.CSV.getDescricao()),
-				new SelectItem(RelatorioTipoEnum.TXT.name(), RelatorioTipoEnum.TXT.getDescricao(), RelatorioTipoEnum.TXT.getDescricao()) } );
-
-		SelectItemGroup gOutros = new SelectItemGroup("Outros");
-		gOutros.setSelectItems(new SelectItem[] {
-				new SelectItem(RelatorioTipoEnum.PPTX.name(), RelatorioTipoEnum.PPTX.getDescricao(), RelatorioTipoEnum.PPTX.getDescricao()),
-				new SelectItem(RelatorioTipoEnum.HTML.name(), RelatorioTipoEnum.HTML.getDescricao(), RelatorioTipoEnum.HTML.getDescricao()) } );
-
-		listaTipoRelatorio = new ArrayList<SelectItem>();
-		listaTipoRelatorio.add(gDocumentos);
-		listaTipoRelatorio.add(gPlanilhas);
-		listaTipoRelatorio.add(gTextoPuro);
-		listaTipoRelatorio.add(gOutros);
-		*/		
 	}
 
 	/**
@@ -122,7 +90,7 @@ public abstract class BaseViewRelatorioController
 	 * @param forcarDownload
 	 *            the forcar download
 	 */
-	public void exportar(IBaseRelatorio relatorio, Collection<?> colecao, Map<String, Object> params,		
+	public void exportar(IBaseRelatorio relatorio, Iterable<?> colecao, Map<String, Object> params,		
 			boolean forcarDownload) {
 		exportar(relatorio, colecao, params, forcarDownload, true);
 	}
@@ -142,11 +110,11 @@ public abstract class BaseViewRelatorioController
 	 *            the renderizar
 	 * @return the byte[]
 	 */
-	public byte[] exportar(IBaseRelatorio relatorio, Collection<?> colecao, Map<String, Object> params,		
+	public byte[] exportar(IBaseRelatorio relatorio, Iterable<?> colecao, Map<String, Object> params,		
 			boolean forcarDownload, boolean renderizar) {
 		byte[] buffer = null;
 		
-		if (colecao!=null && !colecao.isEmpty()) {
+		if (colecao!=null) { // && !colecao.isEmpty()) {
 			RelatorioTipoEnum tipoRel = RelatorioTipoEnum.valueOf(tipoRelatorio);
 
 			buffer = relatorio.export(colecao, params, tipoRel);
@@ -221,6 +189,13 @@ public abstract class BaseViewRelatorioController
 	 */
 	public List<RelatorioTipoEnum> getListaTipoRelatorio() {
 		return listaTipoRelatorio;
+	}
+
+	public List<RelatorioTipoEnum> getListaTipoRelatorio(String grupo) {
+		return listaTipoRelatorio
+				.stream()
+				.filter(item -> item.getGrupo().equals(grupo))
+				.collect(Collectors.toList());
 	}
 
 	/**

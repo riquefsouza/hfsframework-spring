@@ -1,6 +1,7 @@
 package br.com.hfsframework.admin.restcontroller;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,9 @@ public class AdmFuncionarioRestController extends BaseRestController<AdmFunciona
 	//http://localhost:8080/admFuncionarios/findByMatriculaAndCPF?id=93203&cpf=02685748474
 	@ApiOperation("Find Funcionario By Matricula And CPF")
 	@GetMapping(value="/findByMatriculaAndCPF", params = {"id","cpf"})
-	public ResponseEntity<AdmFuncionario> findByMatriculaAndCPF(@RequestParam("id") Long id, @RequestParam("cpf") BigDecimal cpf) {
+	public ResponseEntity<AdmFuncionario> findByMatriculaAndCPF(Principal principal, @RequestParam("id") Long id, @RequestParam("cpf") BigDecimal cpf) {
+		validateUser(principal);
+		
 		Optional<AdmFuncionario> obj = servico.findByMatriculaAndCPF(id, cpf);
 
 		if (!obj.isPresent()) {
@@ -43,7 +46,8 @@ public class AdmFuncionarioRestController extends BaseRestController<AdmFunciona
 
 	@ApiOperation("Delete Funcionario By perfilSeq")
 	@DeleteMapping("/deleteByPerfil/{perfilSeq}")
-	public ResponseEntity<Void> deleteByPerfil(@PathVariable Long perfilSeq) {
+	public ResponseEntity<Void> deleteByPerfil(Principal principal, @PathVariable Long perfilSeq) {
+		validateUser(principal);
 		try {
 
 			admFuncionarioPerfilService.deleteByPerfil(perfilSeq);
@@ -56,7 +60,8 @@ public class AdmFuncionarioRestController extends BaseRestController<AdmFunciona
 
 	@ApiOperation("Delete Funcionarios")
 	@DeleteMapping("/deleteByFuncionarios/{funcionarios}")
-	public ResponseEntity<Void> deleteByFuncionarios(@PathVariable List<AdmFuncionario> funcionarios) {
+	public ResponseEntity<Void> deleteByFuncionarios(Principal principal, @PathVariable List<AdmFuncionario> funcionarios) {
+		validateUser(principal);
 		try {
 
 			admFuncionarioPerfilService.deleteByFuncionarios(funcionarios);

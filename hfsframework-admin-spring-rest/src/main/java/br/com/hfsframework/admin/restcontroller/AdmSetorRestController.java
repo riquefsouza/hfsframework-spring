@@ -1,5 +1,6 @@
 package br.com.hfsframework.admin.restcontroller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +21,16 @@ public class AdmSetorRestController
 	
 	@ApiOperation("Find AdmSetores By paiSetor")
 	@GetMapping("/findBySetorPai/{paiSetor}")
-	public Iterable<AdmSetor> findBySetorPai(@PathVariable String paiSetor){
+	public Iterable<AdmSetor> findBySetorPai(Principal principal, @PathVariable String paiSetor){
+		validateUser(principal);
 		return servico.findBySetorPai(paiSetor);
 	}
 	
 	@ApiOperation("Find Setores By paiSetor")
 	@GetMapping("/findSetoresPaisBySetor/{setor}")
-	public Iterable<String> findSetoresPaisBySetor(@PathVariable String setor){
+	public Iterable<String> findSetoresPaisBySetor(Principal principal, @PathVariable String setor){
 		List<String> lista = new ArrayList<String>();
-		
+		validateUser(principal);
 		servico.findSetoresPaisBySetor(setor, lista);
 		
 		return lista;

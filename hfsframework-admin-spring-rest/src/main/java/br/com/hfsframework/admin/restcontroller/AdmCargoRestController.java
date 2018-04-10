@@ -1,5 +1,6 @@
 package br.com.hfsframework.admin.restcontroller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,25 +33,29 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 
 	@ApiOperation("Find Cargo By codFuncionario")
 	@GetMapping("/findCargoByCodFuncionario/{codFuncionario}")
-	public Iterable<AdmCargo> findCargoByCodFuncionario(@PathVariable Long codFuncionario) {
+	public Iterable<AdmCargo> findCargoByCodFuncionario(Principal principal, @PathVariable Long codFuncionario) {
+		validateUser(principal);
 		return admCargoFuncionarioService.findCargoByCodFuncionario(codFuncionario);
 	}
 
 	@ApiOperation("Find Funcionario By codCargo")
 	@GetMapping("/findFuncionarioByCodCargo/{codCargo}")
-	public Iterable<AdmFuncionario> findFuncionarioByCodCargo(@PathVariable Long codCargo) {
+	public Iterable<AdmFuncionario> findFuncionarioByCodCargo(Principal principal, @PathVariable Long codCargo) {
+		validateUser(principal);
 		return admCargoFuncionarioService.findFuncionarioByCodCargo(codCargo);
 	}
 	
 	@ApiOperation("Find Perfil By codCargo")
 	@GetMapping("/findPerfilByCodCargo/{codCargo}")
-	public Iterable<AdmPerfil> findPerfilByCodCargo(@PathVariable Long codCargo) {
+	public Iterable<AdmPerfil> findPerfilByCodCargo(Principal principal, @PathVariable Long codCargo) {
+		validateUser(principal);
 		return admCargoPerfilService.findPerfilByCodCargo(codCargo);
 	}
 
 	@ApiOperation("Delete Cargo By perfilSeq")
 	@DeleteMapping("/deleteByPerfil/{perfilSeq}")
-	public ResponseEntity<Void> deleteByPerfil(@PathVariable Long perfilSeq) {
+	public ResponseEntity<Void> deleteByPerfil(Principal principal, @PathVariable Long perfilSeq) {
+		validateUser(principal);
 		try {
 			
 			admCargoPerfilService.deleteByPerfil(perfilSeq);
@@ -66,7 +71,8 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 	
 	@ApiOperation("Delete Cargos")
 	@DeleteMapping("/deleteByCargos/{cargos}")
-	public ResponseEntity<Void> deleteByCargos(@PathVariable List<AdmCargo> cargos) {
+	public ResponseEntity<Void> deleteByCargos(Principal principal, @PathVariable List<AdmCargo> cargos) {
+		validateUser(principal);
 		try {
 
 			admCargoPerfilService.deleteByCargos(cargos);

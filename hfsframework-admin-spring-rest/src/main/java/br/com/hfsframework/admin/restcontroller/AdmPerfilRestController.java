@@ -1,5 +1,6 @@
 package br.com.hfsframework.admin.restcontroller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -24,7 +25,9 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 
 	@ApiOperation("Get Perfils By idAdmFuncionario")
 	@GetMapping("/getPapeis/{idAdmFuncionario}")
-	public ResponseEntity<HashSet<AdmPerfil>> getPapeis(@PathVariable Long idAdmFuncionario) {
+	public ResponseEntity<HashSet<AdmPerfil>> getPapeis(Principal principal, @PathVariable Long idAdmFuncionario) {
+		validateUser(principal);
+		
 		HashSet<AdmPerfil> obj = servico.getPapeis(idAdmFuncionario);
 
 		if (!obj.isEmpty()) {
@@ -36,34 +39,39 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 
 	@ApiOperation("Get Permissoes By idAdmFuncionario")
 	@GetMapping("/getPermissao/{idAdmFuncionario}")
-	public Iterable<PermissaoVO> getPermissao(@PathVariable Long idAdmFuncionario) {
+	public Iterable<PermissaoVO> getPermissao(Principal principal, @PathVariable Long idAdmFuncionario) {
+		validateUser(principal);
 		return servico.getPermissao(idAdmFuncionario);
 	}
 
 	@ApiOperation("Get Admin Menus Pai By idAdmPerfil")
 	@GetMapping("/findAdminMenuPaiByPerfil/{idAdmPerfil}")
-	public Iterable<AdmMenu> findAdminMenuPaiByPerfil(@PathVariable Long idAdmPerfil) {
+	public Iterable<AdmMenu> findAdminMenuPaiByPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
+		validateUser(principal);
 		Optional<AdmPerfil> perfil = servico.load(idAdmPerfil);
 		return servico.findAdminMenuPaiByPerfil(perfil.get());
 	}
 
 	@ApiOperation("Get Menus Pai By idAdmPerfil")
 	@GetMapping("/findMenuPaiByPerfil/{idAdmPerfil}")
-	public Iterable<AdmMenu> findMenuPaiByPerfil(@PathVariable Long idAdmPerfil) {
+	public Iterable<AdmMenu> findMenuPaiByPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
+		validateUser(principal);
 		Optional<AdmPerfil> perfil = servico.load(idAdmPerfil);
 		return servico.findMenuPaiByPerfil(perfil.get());
 	}
 
 	@ApiOperation("Get Funcionarios By idAdmPerfil")
 	@GetMapping("/findFuncionariosPorPerfil/{idAdmPerfil}")
-	public Iterable<AdmFuncionario> findFuncionariosPorPerfil(@PathVariable Long idAdmPerfil) {
+	public Iterable<AdmFuncionario> findFuncionariosPorPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
+		validateUser(principal);
 		Optional<AdmPerfil> perfil = servico.load(idAdmPerfil);
 		return servico.findFuncionariosPorPerfil(perfil.get());
 	}
 
 	@ApiOperation("Get Cargos By idAdmPerfil")
 	@GetMapping("/findCargosPorPerfil/{idAdmPerfil}")
-	public Iterable<AdmCargo> findCargosPorPerfil(@PathVariable Long idAdmPerfil) {
+	public Iterable<AdmCargo> findCargosPorPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
+		validateUser(principal);
 		Optional<AdmPerfil> perfil = servico.load(idAdmPerfil);
 		return servico.findCargosPorPerfil(perfil.get());
 	}

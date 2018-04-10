@@ -1,5 +1,7 @@
 package br.com.hfsframework.admin.restcontroller;
 
+import java.security.Principal;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,9 @@ public class AdmParametroRestController extends BaseRestController<AdmParametro,
 
 	@ApiOperation("Get Valor Parametro By codigo")
 	@GetMapping("/getValorByCodigo/{codigo}")
-	public String getValorByCodigo(@PathVariable String codigo) {
+	public String getValorByCodigo(Principal principal, @PathVariable String codigo) {
+		validateUser(principal);
+		
 		return servico.getValorByCodigo(codigo);
 	}
 }

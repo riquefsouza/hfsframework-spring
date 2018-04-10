@@ -14,7 +14,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
          // @formatter:off
          http
-         .requestMatchers().antMatchers("/admUsuarios", "/admUsuarios/**")    
+         .requestMatchers().antMatchers(
+        		 "/admCargos", "/admCargos/**",
+        		 "/admFuncionalidades", "/admFuncionalidades/**",
+        		 "/admFuncionarios", "/admFuncionarios/**",
+        		 "/admLogColunas", "/admLogColunas/**",
+        		 "/admMenus", "/admMenus/**",
+        		 "/admPaginas", "/admPaginas/**",
+        		 "/admParametroCategorias", "/admParametroCategorias/**",
+        		 "/admParametros", "/admParametros/**",
+        		 "/admPerfis", "/admPerfis/**",
+        		 "/admSetores", "/admSetores/**",
+        		 "/admUsuarios", "/admUsuarios/**",
+        		 "/vwAdmLogs", "/vwAdmLogs/**",
+        		 "/vwAdmLogValores", "/vwAdmLogValores/**")    
          //.requestMatchers().antMatchers("*")
          .and()
          .authorizeRequests().anyRequest().access("#oauth2.hasScope('write')");

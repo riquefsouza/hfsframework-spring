@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -20,6 +21,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.hfsframework.converter.BooleanToStringConverter;
 import br.com.hfsframework.util.DataUtil;
 
 @Entity
@@ -39,6 +41,7 @@ public class AdmCargoFuncionario implements Serializable {
 
 	/** The chefe sepo. */
 	@Column(name = "CFN_CHEFE_SEPO")
+	@Convert(converter=BooleanToStringConverter.class)
 	private Boolean chefeSepo;
 
 	/** The data desligamento. */
@@ -61,14 +64,17 @@ public class AdmCargoFuncionario implements Serializable {
 
 	/** The diretor geral. */
 	@Column(name = "CFN_DIRETOR_GERAL")
+	@Convert(converter=BooleanToStringConverter.class)
 	private Boolean diretorGeral;
 
 	/** The presidente. */
 	@Column(name = "CFN_PRESIDENTE")
+	@Convert(converter=BooleanToStringConverter.class)
 	private Boolean presidente;
 
 	/** The responsavel orcamento. */
 	@Column(name = "CFN_RESPONSAVEL_ORCAMENTO")
+	@Convert(converter=BooleanToStringConverter.class)
 	private Boolean responsavelOrcamento;
 
 	/** The situacao. */

@@ -26,8 +26,6 @@ import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
  * @param <B>
  *            the generic type
  */
-//@Named
-//@ViewScoped
 @TratamentoErrosEsperados
 public abstract class BaseViewRelatorio<T extends Serializable, I extends Serializable, 
 	B extends BaseBusinessService<T, I, ? extends JpaRepository<T, I>>>

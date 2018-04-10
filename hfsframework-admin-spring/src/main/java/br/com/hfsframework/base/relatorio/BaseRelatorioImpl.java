@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -188,11 +190,13 @@ public class BaseRelatorioImpl implements IBaseRelatorio {
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.relatorio.IBaseRelatorio#prepare(java.util.Collection, java.util.Map)
 	 */
-	public void prepare(Collection<?> dataSource, Map<String, Object> param) {
+	public void prepare(Iterable<?> dataSource, Map<String, Object> param) {
 		this.log.info(RelatorioBundle.getString("preenchendo-relatorio"));
 		loadReport();
-		try {
-			this.print = JasperFillManager.fillReport(this.jasper, param, new JRBeanCollectionDataSource(dataSource));
+		try {			
+			Collection<?> source = StreamSupport.stream(dataSource.spliterator(), false)
+					.collect(Collectors.toList());			
+			this.print = JasperFillManager.fillReport(this.jasper, param, new JRBeanCollectionDataSource(source));
 		} catch (JRException e) {
 			throw new RelatorioException(log, RelatorioBundle.getString("problema-preenchendo-relatorio"), e);
 		}
@@ -257,7 +261,7 @@ public class BaseRelatorioImpl implements IBaseRelatorio {
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.relatorio.IBaseRelatorio#export(java.util.Collection, java.util.Map, br.com.hfsframework.base.relatorio.RelatorioTipoEnum)
 	 */
-	public byte[] export(Collection<?> dataSource, Map<String, Object> param, RelatorioTipoEnum type) {
+	public byte[] export(Iterable<?> dataSource, Map<String, Object> param, RelatorioTipoEnum type) {
 		prepare(dataSource, param);
 		return export(type);
 	}

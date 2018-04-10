@@ -142,7 +142,7 @@ public abstract class BaseViewSubCadastroDTO<P, T, I extends Serializable, B ext
 			if (id == null) {
 				this.businessController.insert(getEntidade());
 			} else {
-				setEntidade((T) this.businessController.update(getEntidade()));
+				setEntidade((T) this.businessController.update(getEntidade()).get());
 			}
 			
 			this.modoSalvo = true;

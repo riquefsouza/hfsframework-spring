@@ -7,7 +7,6 @@
 package br.com.hfsframework.base.relatorio;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JasperPrint;
@@ -46,7 +45,7 @@ public abstract interface IBaseRelatorio extends Serializable {
 	 * @param paramMap
 	 *            the param map
 	 */
-	public abstract void prepare(Collection<?> paramCollection, Map<String, Object> paramMap);
+	public abstract void prepare(Iterable<?> paramCollection, Map<String, Object> paramMap);
 
 	/**
 	 * Export.
@@ -59,7 +58,7 @@ public abstract interface IBaseRelatorio extends Serializable {
 	 *            the param type
 	 * @return the byte[]
 	 */
-	public abstract byte[] export(Collection<?> paramCollection, Map<String, Object> paramMap,
+	public abstract byte[] export(Iterable<?> paramCollection, Map<String, Object> paramMap,
 			RelatorioTipoEnum paramType);
 
 	/**

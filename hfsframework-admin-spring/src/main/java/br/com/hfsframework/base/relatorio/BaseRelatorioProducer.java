@@ -63,13 +63,11 @@ public class BaseRelatorioProducer {
     	/*
 		Field field = (Field) jp.getMember();
 		String path = DEFAULT_PATH + field.getName() + DEFAULT_EXTENSION;
-		*/
-		String path = DEFAULT_PATH + DEFAULT_EXTENSION;
-		/*
 		if (field.isAnnotationPresent(RelatorioPath.class)) {
 			path = DEFAULT_PATH + ((RelatorioPath) field.getAnnotation(RelatorioPath.class)).value() + DEFAULT_EXTENSION;
 		}
     	 */
+    	String path = "";
 		return create(path);
 	}
 
