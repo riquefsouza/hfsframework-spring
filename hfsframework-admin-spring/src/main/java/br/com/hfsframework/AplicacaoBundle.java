@@ -12,9 +12,6 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
-/**
- * The Class AplicacaoConfig.
- */
 @Component
 public class AplicacaoBundle implements Serializable {
 

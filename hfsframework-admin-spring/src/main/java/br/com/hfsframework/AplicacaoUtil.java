@@ -37,6 +37,8 @@ public final class AplicacaoUtil implements Serializable {
 	
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 	
+	public static int port;
+		
 	/**
 	 * Instantiates a new aplicacao util.
 	 */
@@ -91,5 +93,6 @@ public final class AplicacaoUtil implements Serializable {
 	 */
 	public void removeUsuarioAutenticado(){
 		getSessao().removeAttribute("usuarioAutenticado");
-	}	
+	}
+	
 }

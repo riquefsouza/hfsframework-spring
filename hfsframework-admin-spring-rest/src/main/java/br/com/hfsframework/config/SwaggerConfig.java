@@ -6,6 +6,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -45,7 +46,10 @@ public class SwaggerConfig  {
 
 	String clientSecret = "admin"; //"$2a$10$y7jArsSYCAJjIudWb6zbkuMQZxNFGePkmYJQM0ChB4slgwtUG9RLy"
 	
-	String oAuthServerUri = "http://localhost:8080";
+	//@Value("http://${server.address}:${server.port}")
+	@Value("${oauth.server.uri}:${server.port}")
+	String oAuthServerUri; // = "http://localhost:8080";
+	
 /*
 	@Bean
 	public Docket productApi() {

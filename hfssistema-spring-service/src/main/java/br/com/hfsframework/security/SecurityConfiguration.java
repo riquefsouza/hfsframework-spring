@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.hfsframework.AplicacaoBundle;
 import br.com.hfsframework.AplicacaoUtil;
@@ -72,19 +73,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				//.antMatchers("/built/**", "/main.css").permitAll()
 				.antMatchers("/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
+				//.antMatchers(HttpMethod.GET, "/").permitAll()
+				//.antMatchers(HttpMethod.GET, "/listarUsuario").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
-			.formLogin()
-				//.defaultSuccessUrl("/", true)
-				.loginPage("/login")
-				.permitAll()
-				.and()
+				//.requiresChannel().anyRequest().requiresSecure().and()
+				//.requiresChannel().anyRequest().requiresInsecure().and()
+			//.requiresChannel().antMatchers("/login*").requiresSecure().and()
+			.formLogin()				
+				.loginPage("/login").permitAll()
+				.defaultSuccessUrl("/").and()
 			//.httpBasic()
 				//.and()
 			//.csrf().disable()
 			.logout()
-				//.permitAll()
-				.logoutSuccessUrl("/");
+				//.permitAll()				
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login");
 	}
 
 }

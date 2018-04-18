@@ -278,7 +278,7 @@ values (23, 2);
 
 insert into ADM_USUARIO (usu_matricula, usu_login, usu_nome, usu_data, usu_cpf, usu_email, usu_ldap_dn, usu_senha,
 created_date,modified_date,created_by,modified_by)
-values (93203, 'henrique.souza', 'Henrique Figueiredo de Souza', to_date('17-07-2017 13:49:12', 'dd-mm-yyyy hh24:mi:ss'), 2685748474, 'riquefsouza@gmail.com', 
+values (93203, 'henrique.souza', 'Henrique Figueiredo de Souza', to_date('17-07-2017 13:49:12', 'dd-mm-yyyy hh24:mi:ss'), 63266661630, 'hfs@temp.com', 
 'CN=henrique.souza,OU=DIREM,OU=COAS,OU=SST,OU=TRT,DC=trtrio,DC=gov,DC=br','$2a$10$y7jArsSYCAJjIudWb6zbkuMQZxNFGePkmYJQM0ChB4slgwtUG9RLy',
 to_date('17-07-2017 13:49:12', 'dd-mm-yyyy hh24:mi:ss'),to_date('17-07-2017 13:49:12', 'dd-mm-yyyy hh24:mi:ss'),'Auditor criador','Auditor Modificador');
 
@@ -310,7 +310,7 @@ values (6, 'Produção', 'Define o ambiente onde o sistema está instalado. Este
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
 values (7, 'NOME_USUARIO', 'Define o atributo usado para efetuar login no sistema. Este parâmetro pode ser preenchido com: NOME_USUARIO ou CPF', 'ATRIBUTO_LOGIN', 2);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
-values (8, 'smtp.trt1.jus.br', 'Servidor SMTP para que o sistema envie e-mail.', 'SMTP_SERVIDOR', 3);
+values (8, 'smtp.com.br', 'Servidor SMTP para que o sistema envie e-mail.', 'SMTP_SERVIDOR', 3);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
 values (9, '25', 'Porta do servidor SMTP para que o sistema envie e-mail.', 'SMTP_PORTA', 3);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
@@ -318,9 +318,9 @@ values (10, null, 'Usuário para login no servidor SMTP.', 'SMTP_USERNAME', 3);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
 values (11, null, 'Senha para login no servidor SMTP.', 'SMTP_PASSWORD', 3);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
-values (12, 'sistema@trt1.jus.br', 'E-mail do sistema.', 'SMTP_EMAIL_FROM', 3);
+values (12, 'sistema@teste.com.br', 'E-mail do sistema.', 'SMTP_EMAIL_FROM', 3);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
-values (13, 'bravo.trtrio.gov.br', 'Servidor do Proxy.', 'PROXY_SERVIDOR', 4);
+values (13, 'teste.com.br', 'Servidor do Proxy.', 'PROXY_SERVIDOR', 4);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
 values (14, '8080', 'Porta do Proxy.', 'PROXY_PORTA', 4);
 
@@ -3211,11 +3211,10 @@ insert into ADM_SETOR (set_sigla, set_nome, set_pai, set_tipo)
 values ('GJ-JFGF', 'GAB JUIZ JORGE FERNANDO G DA FONTE', 'TP', 'GABINETE');
 
 insert into ADM_FUNCIONARIO (fun_codigo, fun_nome, fun_cpf, fun_email, fun_telefone, fun_celular, fun_set_sigla, fun_car_seq, fun_data_admissao, fun_data_saida, fun_ativo)
-values (93203, 'HENRIQUE FIGUEIREDO DE SOUZA', 2685748474, 'henrique.souza@trtrio.gov.br', '(21)4567-8456', '(21)9434-9345', 'DIREM', 15426, to_date('17-03-2014', 'dd-mm-yyyy'), null, 'S');
+values (93203, 'HENRIQUE FIGUEIREDO DE SOUZA', 63266661630, 'henrique.souza@com.br', '(21)3174-1958', '(11)95267-5198', 'DIREM', 15426, to_date('17-03-2014', 'dd-mm-yyyy'), null, 'S');
 
 insert into ADM_FUNCIONARIO_PERFIL (usp_prf_seq, usp_fun_codigo)
 values (2, 93203);
 
 insert into ADM_CARGO_FUNCIONARIO (cfn_data_exercicio, cfn_fun_codigo, cfn_car_seq, cfn_data_desligamento, cfn_data_posse, cfn_situacao, cfn_presidente, cfn_diretor_geral, cfn_responsavel_orcamento, cfn_chefe_sepo)
 values (to_date('17-03-2014', 'dd-mm-yyyy'), 93203, 15426, null, to_date('17-03-2014', 'dd-mm-yyyy'), 'E', 'N', 'N', 'N', 'N');
-

@@ -25,6 +25,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 
+import br.com.hfsframework.util.NetUtil;
+
 //import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 //import br.com.hfsframework.admin.model.AdmUsuario;
 
@@ -47,13 +49,16 @@ public class Aplicacao {
 		log.info("HFS Admin SpringFramework REST");
 		log.info("Desenvolvido por Henrique Figueiredo de Souza");
 		log.info("Versão 1.0 - 2018");
-		log.info("------------------------------------------------------------------------");						
+		log.info("------------------------------------------------------------------------");
+		
+		NetUtil.printIpHost();
 	}
 
 	// CORS
 	@Bean
 	FilterRegistrationBean<Filter> corsFilter(
-			@Value("${tagit.origin:http://localhost:9000}") String origin) {
+			@Value("${tagit.origin}") String origin) {
+			//@Value("${tagit.origin:http://localhost:9000}") String origin) {
 		return new FilterRegistrationBean<Filter>(new Filter() {
 			public void doFilter(ServletRequest req, ServletResponse res,
 					FilterChain chain) throws IOException, ServletException {

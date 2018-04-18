@@ -17,4 +17,5 @@ public class AplicacaoConfig {
     AuditorAware<String> auditorProvider() {
         return new AuditorAwareImpl();
     }
+	
 }

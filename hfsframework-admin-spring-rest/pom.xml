@@ -44,7 +44,15 @@
 			<version>1.0</version>
 			<type>jar</type>
 		</dependency>
-
+		<dependency>
+			<groupId>br.com</groupId>
+			<artifactId>hfsframework-admin-spring</artifactId>
+			<classifier>tests</classifier>
+			<type>test-jar</type>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
+    
 		<!-- #################### SPRING BOOT #################### -->
 <!-- 	
 		<dependency>
@@ -255,19 +263,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			 -->	
  		</plugins>
 	</build>
 
 	<repositories>
+		<!-- 
+		
+			mvn deploy:deploy-file -Durl=file:///C:/demoiselle3/workspace6/hfsframework-admin-spring-rest/repo -Dfile=hfsframework-admin-spring-1.0.jar 
+			-DgroupId=br.com -DartifactId=hfsframework-admin-spring -Dpackaging=jar -Dversion=1.0		
+		
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+		 -->	
 		<repository>
 			<id>spring-releases</id>
 			<name>Spring Releases</name>
