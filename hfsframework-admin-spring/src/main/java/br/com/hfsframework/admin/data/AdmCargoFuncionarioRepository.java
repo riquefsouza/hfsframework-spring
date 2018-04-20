@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.hfsframework.admin.model.AdmCargoFuncionario;
 import br.com.hfsframework.admin.model.AdmCargoFuncionarioPK;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmCargoFuncionarioRepository.
  */

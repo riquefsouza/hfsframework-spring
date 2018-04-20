@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.security;
 
 import java.util.Optional;
@@ -13,16 +19,29 @@ import org.springframework.stereotype.Component;
 import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 import br.com.hfsframework.admin.model.AdmUsuario;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UsuarioServicoDetalhes.
+ */
 @Component
 public class UsuarioServicoDetalhes implements UserDetailsService {
 
+	/** The repository. */
 	private final AdmUsuarioRepository repository;
 
+	/**
+	 * Instantiates a new usuario servico detalhes.
+	 *
+	 * @param repository the repository
+	 */
 	@Autowired
 	public UsuarioServicoDetalhes(AdmUsuarioRepository repository) {
 		this.repository = repository;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 		UserDetails user;

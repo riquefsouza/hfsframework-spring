@@ -33,6 +33,7 @@ import br.com.hfsframework.security.model.PerfilVO;
 import br.com.hfsframework.security.model.PermissaoVO;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmPerfilBC.
  */
@@ -54,6 +55,7 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	@Autowired
 	private AdmCargoService admCargoService;
 	
+	/** The adm funcionario perfil service. */
 	/* The adm funcionario perfil BC. */
 	@Autowired
 	private AdmFuncionarioPerfilService admFuncionarioPerfilService;
@@ -209,6 +211,12 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 		return (existe > 0);
 	}
 	
+	/**
+	 * Gets the papeis.
+	 *
+	 * @param idAdmFuncionario the id adm funcionario
+	 * @return the papeis
+	 */
 	public HashSet<AdmPerfil> getPapeis(Long idAdmFuncionario) {
 		HashSet<AdmPerfil> hs = new HashSet<AdmPerfil>();
 
@@ -231,8 +239,7 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	/**
 	 * Gets the permissao.
 	 *
-	 * @param usuarioAutenticado
-	 *            the usuario autenticado
+	 * @param idAdmFuncionario the id adm funcionario
 	 * @return the permissao
 	 */
 	public List<PermissaoVO> getPermissao(Long idAdmFuncionario) {

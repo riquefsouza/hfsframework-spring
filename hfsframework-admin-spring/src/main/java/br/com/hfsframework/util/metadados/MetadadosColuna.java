@@ -11,6 +11,7 @@ import java.sql.Types;
 
 import org.apache.commons.lang3.StringUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Metadados.
  */

@@ -12,6 +12,7 @@ import br.com.hfsframework.admin.data.AdmCargoRepository;
 import br.com.hfsframework.admin.model.AdmCargo;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmCargoBC.
  */

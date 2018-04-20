@@ -16,6 +16,7 @@ import br.com.hfsframework.admin.data.AdmFuncionarioRepository;
 import br.com.hfsframework.admin.model.AdmFuncionario;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmFuncionarioBC.
  */
@@ -25,6 +26,13 @@ public class AdmFuncionarioService extends BaseBusinessService<AdmFuncionario, L
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Find by matricula and CPF.
+	 *
+	 * @param id the id
+	 * @param cpf the cpf
+	 * @return the optional
+	 */
 	@Cacheable("padrao")
 	public Optional<AdmFuncionario> findByMatriculaAndCPF(Long id, BigDecimal cpf){
 		return repositorio.findByMatriculaAndCPF(id, cpf);

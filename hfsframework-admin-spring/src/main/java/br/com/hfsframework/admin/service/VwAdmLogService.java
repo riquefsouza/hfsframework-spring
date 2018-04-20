@@ -32,6 +32,7 @@ import br.com.hfsframework.admin.model.VwAdmLog;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.util.DataUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLogBC.
  */

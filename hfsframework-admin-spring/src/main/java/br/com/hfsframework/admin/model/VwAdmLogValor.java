@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLogValor.
  */

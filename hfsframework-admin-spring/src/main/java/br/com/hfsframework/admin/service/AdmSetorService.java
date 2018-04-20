@@ -14,6 +14,7 @@ import br.com.hfsframework.admin.data.AdmSetorRepository;
 import br.com.hfsframework.admin.model.AdmSetor;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmSetorBC.
  */

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.restcontroller;
 
 import java.security.Principal;
@@ -19,10 +25,21 @@ import br.com.hfsframework.base.BaseRestController;
 import br.com.hfsframework.security.model.PermissaoVO;
 import io.swagger.annotations.ApiOperation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmPerfilRestController.
+ */
 @RestController
 @RequestMapping("/admPerfis")
 public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long, AdmPerfilService> {
 
+	/**
+	 * Gets the papeis.
+	 *
+	 * @param principal the principal
+	 * @param idAdmFuncionario the id adm funcionario
+	 * @return the papeis
+	 */
 	@ApiOperation("Get Perfils By idAdmFuncionario")
 	@GetMapping("/getPapeis/{idAdmFuncionario}")
 	public ResponseEntity<HashSet<AdmPerfil>> getPapeis(Principal principal, @PathVariable Long idAdmFuncionario) {
@@ -37,6 +54,13 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 		return ResponseEntity.ok(obj);
 	}
 
+	/**
+	 * Gets the permissao.
+	 *
+	 * @param principal the principal
+	 * @param idAdmFuncionario the id adm funcionario
+	 * @return the permissao
+	 */
 	@ApiOperation("Get Permissoes By idAdmFuncionario")
 	@GetMapping("/getPermissao/{idAdmFuncionario}")
 	public Iterable<PermissaoVO> getPermissao(Principal principal, @PathVariable Long idAdmFuncionario) {
@@ -44,6 +68,13 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 		return servico.getPermissao(idAdmFuncionario);
 	}
 
+	/**
+	 * Find admin menu pai by perfil.
+	 *
+	 * @param principal the principal
+	 * @param idAdmPerfil the id adm perfil
+	 * @return the iterable
+	 */
 	@ApiOperation("Get Admin Menus Pai By idAdmPerfil")
 	@GetMapping("/findAdminMenuPaiByPerfil/{idAdmPerfil}")
 	public Iterable<AdmMenu> findAdminMenuPaiByPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
@@ -52,6 +83,13 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 		return servico.findAdminMenuPaiByPerfil(perfil.get());
 	}
 
+	/**
+	 * Find menu pai by perfil.
+	 *
+	 * @param principal the principal
+	 * @param idAdmPerfil the id adm perfil
+	 * @return the iterable
+	 */
 	@ApiOperation("Get Menus Pai By idAdmPerfil")
 	@GetMapping("/findMenuPaiByPerfil/{idAdmPerfil}")
 	public Iterable<AdmMenu> findMenuPaiByPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
@@ -60,6 +98,13 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 		return servico.findMenuPaiByPerfil(perfil.get());
 	}
 
+	/**
+	 * Find funcionarios por perfil.
+	 *
+	 * @param principal the principal
+	 * @param idAdmPerfil the id adm perfil
+	 * @return the iterable
+	 */
 	@ApiOperation("Get Funcionarios By idAdmPerfil")
 	@GetMapping("/findFuncionariosPorPerfil/{idAdmPerfil}")
 	public Iterable<AdmFuncionario> findFuncionariosPorPerfil(Principal principal, @PathVariable Long idAdmPerfil) {
@@ -68,6 +113,13 @@ public class AdmPerfilRestController extends BaseRestController<AdmPerfil, Long,
 		return servico.findFuncionariosPorPerfil(perfil.get());
 	}
 
+	/**
+	 * Find cargos por perfil.
+	 *
+	 * @param principal the principal
+	 * @param idAdmPerfil the id adm perfil
+	 * @return the iterable
+	 */
 	@ApiOperation("Get Cargos By idAdmPerfil")
 	@GetMapping("/findCargosPorPerfil/{idAdmPerfil}")
 	public Iterable<AdmCargo> findCargosPorPerfil(Principal principal, @PathVariable Long idAdmPerfil) {

@@ -22,6 +22,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -35,6 +37,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import br.com.hfsframework.admin.serializer.AdmParametroListSerializer;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The persistent class for the ADM_PARAMETRO_CATEGORIA database table.
  * 
@@ -68,6 +71,8 @@ public class AdmParametroCategoria implements Serializable {
 
 	/** The descricao. */
 	@NotNull
+	@NotBlank
+	@NotEmpty
 	@Column(name="PMC_DESCRICAO", unique = true)
 	private String descricao;
 

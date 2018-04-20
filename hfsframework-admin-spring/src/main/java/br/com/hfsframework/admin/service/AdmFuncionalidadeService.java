@@ -12,6 +12,7 @@ import br.com.hfsframework.admin.data.AdmFuncionalidadeRepository;
 import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmFuncionalidadeBC.
  */

@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.RandomBasedGenerator;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EntidadeCampo.
  */

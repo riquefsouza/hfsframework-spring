@@ -36,6 +36,7 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.TemplateNotFoundException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TemplateUtil.
  */
@@ -343,6 +344,18 @@ public class TemplateUtil implements Serializable {
 		return arquivo;
 	}
 
+	/**
+	 * Gerar C sharp.
+	 *
+	 * @param mu the mu
+	 * @param esquema the esquema
+	 * @param diretorioSaida the diretorio saida
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TemplateNotFoundException the template not found exception
+	 * @throws MalformedTemplateNameException the malformed template name exception
+	 * @throws ParseException the parse exception
+	 * @throws TemplateException the template exception
+	 */
 	public static void gerarCSharp(MetadadosUtil mu, String esquema, String diretorioSaida) throws IOException,
 			TemplateNotFoundException, MalformedTemplateNameException, ParseException, TemplateException {
 		Map<String, Object> parametros = new HashMap<String, Object>();

@@ -6,6 +6,7 @@
  */
 package br.com.hfsframework.template;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum TemplateEnum.
  */

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,9 +18,18 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MvcConfig.
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+	/**
+	 * Template resolver.
+	 *
+	 * @return the class loader template resolver
+	 */
 	@Bean
 	@Description("Thymeleaf template resolver serving HTML 5")
 	public ClassLoaderTemplateResolver templateResolver() {
@@ -30,6 +45,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		return templateResolver;
 	}
 
+	/**
+	 * Template engine.
+	 *
+	 * @return the spring template engine
+	 */
 	@Bean
 	@Description("Thymeleaf template engine with Spring integration")
 	public SpringTemplateEngine templateEngine() {
@@ -40,6 +60,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		return templateEngine;
 	}
 
+	/**
+	 * View resolver.
+	 *
+	 * @return the view resolver
+	 */
 	@Bean
 	@Description("Thymeleaf view resolver")
 	public ViewResolver viewResolver() {
@@ -52,6 +77,9 @@ public class MvcConfig implements WebMvcConfigurer {
 		return viewResolver;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry)
+	 */
 	public void addViewControllers(ViewControllerRegistry registry) {
 		// registry.addViewController("/index").setViewName("index");
 		// registry.addViewController("/").setViewName("index");
@@ -59,11 +87,17 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/login").setViewName("login");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
+	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#configureDefaultServletHandling(org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer)
+	 */
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

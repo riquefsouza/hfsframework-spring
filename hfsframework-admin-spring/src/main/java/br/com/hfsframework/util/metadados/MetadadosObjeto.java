@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Metadados.
  */
@@ -142,10 +143,20 @@ public class MetadadosObjeto implements Serializable {
 		return "\n" + esquema + "." + objeto + "(" + colunas + ");";
 	}
 
+	/**
+	 * Gets the nome colunas.
+	 *
+	 * @return the nome colunas
+	 */
 	public List<String> getNomeColunas() {
 		return nomeColunas;
 	}
 
+	/**
+	 * Sets the nome colunas.
+	 *
+	 * @param nomeColunas the new nome colunas
+	 */
 	public void setNomeColunas(List<String> nomeColunas) {
 		this.nomeColunas = nomeColunas;
 	}

@@ -55,7 +55,7 @@
 				<span class="glyphicon glyphicon-print"></span> Exportar
 			</button>
 			
-			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir uma nova categoria dos parâmetros de configuração" onclick="window.location.href='editarAdmParametroCategoria'">
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir uma nova categoria dos parâmetros de configuração" onclick="window.location.href='incluir'">
 				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
 			</button>
 		
@@ -76,12 +76,17 @@
 				class="table table-striped table-bordered" cellspacing="0" width="100%">
 			<thead>
 				<tr class="tema-principal">
+					<th hidden="true" >Id</th>
 					<th>Descrição</th>
 				</tr>
 			</thead>
 			<tbody>
-			 	<tr th:each="item : ${listaCategorias}">
-			        <td th:text="${item.descricao}"></td>
+			 	<tr th:each="item : ${listaBean}">
+			 		<!-- 
+			 		<td><a th:href="${(#mvc.url('APCC#editar').arg(0, item.id)).build()}"><span th:text="${item.descricao}"></span></a></td>
+			 		-->
+					<td hidden="true" th:text="${item.id}"></td>			 		 
+			 		<td th:text="${item.descricao}"></td>
 			    </tr>			
 			</tbody>
 		</table>

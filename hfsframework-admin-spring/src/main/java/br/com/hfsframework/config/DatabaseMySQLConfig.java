@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.config;
 
 import javax.sql.DataSource;
@@ -10,10 +16,19 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DatabaseMySQLConfig.
+ */
 @Configuration
 @Profile("dev-mysql")
 public class DatabaseMySQLConfig {
 	
+	/**
+	 * Data source.
+	 *
+	 * @return the data source
+	 */
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -24,6 +39,11 @@ public class DatabaseMySQLConfig {
 		return dataSource;
 	}
 
+	/**
+	 * Jpa vendor adapter.
+	 *
+	 * @return the jpa vendor adapter
+	 */
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();

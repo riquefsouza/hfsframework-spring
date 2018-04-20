@@ -34,6 +34,10 @@ import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmUsuarioService.
+ */
 @Service
 public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, AdmUsuarioRepository> {
 
@@ -44,9 +48,16 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	@Autowired
 	private EntityManager em;
 
+	/** The adm usuario ip service. */
 	@Autowired
 	private AdmUsuarioIpService admUsuarioIpService;
 	
+	/**
+	 * Find by login.
+	 *
+	 * @param login the login
+	 * @return the optional
+	 */
 	public Optional<AdmUsuario> findByLogin(String login){
 		return repositorio.findByLogin(login);
 	}
@@ -328,6 +339,11 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		return admUsuario;
 	}
 	
+	/**
+	 * Gets the lista usuario ips.
+	 *
+	 * @return the lista usuario ips
+	 */
 	public List<UsuarioVO> getListaUsuarioIps() {
 		List<UsuarioVO> lista = new ArrayList<UsuarioVO>();
 		UsuarioVO usuarioVO;

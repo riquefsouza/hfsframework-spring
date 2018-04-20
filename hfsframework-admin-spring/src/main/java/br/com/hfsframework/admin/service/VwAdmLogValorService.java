@@ -12,6 +12,7 @@ import br.com.hfsframework.admin.data.VwAdmLogValorRepository;
 import br.com.hfsframework.admin.model.VwAdmLogValor;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLogValorBC.
  */

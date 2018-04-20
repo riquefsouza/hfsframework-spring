@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.base;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -9,14 +15,30 @@ import java.lang.reflect.Method;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.util.ReflectionUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseResourceSupport.
+ *
+ * @param <T> the generic type
+ * @param <I> the generic type
+ * @param <C> the generic type
+ */
 public abstract class BaseResourceSupport<T, I extends Serializable, 
 	C extends BaseResourceRestController<T, I, ?, ?>>
 		extends ResourceSupport {
 
+	/** The Constant LIST_ALL. */
 	public static final String LIST_ALL = "listAll";
 
+	/** The bean. */
 	private final T bean;
 
+	/**
+	 * Instantiates a new base resource support.
+	 *
+	 * @param controller the controller
+	 * @param bean the bean
+	 */
 	public BaseResourceSupport(C controller, T bean) {
 		this.bean = bean;
 
@@ -27,6 +49,11 @@ public abstract class BaseResourceSupport<T, I extends Serializable,
 		this.add(linkTo(methodOn(controller.getClass()).listar()).withRel(LIST_ALL));
 	}
 
+	/**
+	 * Gets the bean.
+	 *
+	 * @return the bean
+	 */
 	public T getBean() {
 		return bean;
 	}

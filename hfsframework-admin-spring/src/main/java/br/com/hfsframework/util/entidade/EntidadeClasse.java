@@ -8,6 +8,7 @@ package br.com.hfsframework.util.entidade;
 
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EntidadeClasse.
  */

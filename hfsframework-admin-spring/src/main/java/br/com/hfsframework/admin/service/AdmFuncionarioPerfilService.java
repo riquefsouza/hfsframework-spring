@@ -19,6 +19,7 @@ import br.com.hfsframework.admin.model.AdmFuncionarioPerfilPK;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmFuncionarioPerfilBC.
  */
@@ -29,6 +30,12 @@ public class AdmFuncionarioPerfilService
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Delete by perfil.
+	 *
+	 * @param perfilSeq the perfil seq
+	 * @throws TransacaoException the transacao exception
+	 */
 	@Transactional
 	public void deleteByPerfil(Long perfilSeq) throws TransacaoException {
 		try {

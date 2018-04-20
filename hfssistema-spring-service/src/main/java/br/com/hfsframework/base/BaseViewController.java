@@ -23,6 +23,7 @@ import com.lowagie.text.DocumentException;
 
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewController.
  */
@@ -64,6 +65,11 @@ public abstract class BaseViewController {
 		return "/";
 	}
 
+	/**
+	 * Gerar mensagem erro.
+	 *
+	 * @param mensagem the mensagem
+	 */
 	/*
 	 * Gerar mensagem erro.
 	 *

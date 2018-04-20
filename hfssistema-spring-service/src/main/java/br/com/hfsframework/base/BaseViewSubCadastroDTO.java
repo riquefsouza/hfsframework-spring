@@ -16,8 +16,19 @@ import javax.inject.Inject;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseViewSubCadastroDTO.
+ *
+ * @param <P> the generic type
+ * @param <T> the generic type
+ * @param <I> the generic type
+ * @param <B> the generic type
+ * @param <L> the generic type
+ */
 public abstract class BaseViewSubCadastroDTO<P, T, I extends Serializable, B extends IBaseCrud<T, I>, L> extends BaseViewController implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The pagina editar. */

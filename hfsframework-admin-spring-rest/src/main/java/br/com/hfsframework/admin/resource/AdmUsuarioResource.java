@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -16,6 +22,10 @@ import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.restcontroller.AdmUsuarioRestController;
 import br.com.hfsframework.base.BaseResourceSupport;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmUsuarioResource.
+ */
 public class AdmUsuarioResource extends ResourceSupport { 
 
 	/*
@@ -26,8 +36,16 @@ public class AdmUsuarioResource extends ResourceSupport {
 	}
 	*/
 
+	/** The adm usuario. */
 	private final AdmUsuario admUsuario;
 
+	/**
+	 * Instantiates a new adm usuario resource.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param admUsuario the adm usuario
+	 */
 	public AdmUsuarioResource(AdmUsuarioRestController controller, Principal principal, AdmUsuario admUsuario) {
 		this.admUsuario = admUsuario;
 
@@ -35,10 +53,23 @@ public class AdmUsuarioResource extends ResourceSupport {
 		this.add(linkTo(methodOn(controller.getClass()).listar(principal)).withRel(BaseResourceSupport.LIST_ALL));
 	}
 
+	/**
+	 * Gets the adm usuario.
+	 *
+	 * @return the adm usuario
+	 */
 	public AdmUsuario getAdmUsuario() {
 		return admUsuario;
 	}
 
+	/**
+	 * Gets the lista.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param lista the lista
+	 * @return the lista
+	 */
 	public static Resources<AdmUsuarioResource> getLista(AdmUsuarioRestController controller, Principal principal, Iterable<AdmUsuario> lista){
 		Stream<AdmUsuario> stream = StreamSupport.stream(lista.spliterator(), false);
 		

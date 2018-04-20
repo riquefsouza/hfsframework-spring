@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.restcontroller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +13,9 @@ import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.service.AdmFuncionalidadeService;
 import br.com.hfsframework.base.BaseRestController;
 
+/**
+ * The Class AdmFuncionalidadeRestController.
+ */
 @RestController
 @RequestMapping("/admFuncionalidades")
 public class AdmFuncionalidadeRestController

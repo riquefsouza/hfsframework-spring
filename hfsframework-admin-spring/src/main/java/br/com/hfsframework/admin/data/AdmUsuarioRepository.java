@@ -23,6 +23,12 @@ import br.com.hfsframework.admin.model.AdmUsuario;
  */
 public interface AdmUsuarioRepository extends JpaRepository<AdmUsuario, Long> {
 
+	/**
+	 * Find by login.
+	 *
+	 * @param login the login
+	 * @return the optional
+	 */
 	@Query(name = "AdmUsuario.findByLogin")
 	Optional<AdmUsuario> findByLogin(String login);
 	

@@ -24,6 +24,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.hfsframework.converter.BooleanToStringConverter;
 import br.com.hfsframework.util.DataUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmCargoFuncionario.
+ */
 @Entity
 @Table(name = "ADM_CARGO_FUNCIONARIO")
 @NamedQueries({

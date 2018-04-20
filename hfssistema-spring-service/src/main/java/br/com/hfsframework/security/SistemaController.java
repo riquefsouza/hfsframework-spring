@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.security;
 
 import java.util.Optional;
@@ -15,12 +21,23 @@ import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.service.AdmUsuarioService;
 import br.com.hfsframework.security.model.UsuarioVO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SistemaController.
+ */
 @RestController
 public class SistemaController {
 
+	/** The adm usuario service. */
 	@Autowired
 	private AdmUsuarioService admUsuarioService;
 
+	/**
+	 * Sistema MB.
+	 *
+	 * @param request the request
+	 * @return the usuario VO
+	 */
 	@RequestMapping(value = "/sistemaMB", method = RequestMethod.GET)
 	public UsuarioVO sistemaMB(HttpServletRequest request) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

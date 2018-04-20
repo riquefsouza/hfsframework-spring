@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.restcontroller;
 
 import java.security.Principal;
@@ -21,16 +27,29 @@ import br.com.hfsframework.base.BaseRestController;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 import io.swagger.annotations.ApiOperation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmCargoRestController.
+ */
 @RestController
 @RequestMapping("/admCargos")
 public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, AdmCargoService> {
 
+	/** The adm cargo funcionario service. */
 	@Autowired
 	private AdmCargoFuncionarioService admCargoFuncionarioService;
 
+	/** The adm cargo perfil service. */
 	@Autowired
 	private AdmCargoPerfilService admCargoPerfilService;
 
+	/**
+	 * Find cargo by cod funcionario.
+	 *
+	 * @param principal the principal
+	 * @param codFuncionario the cod funcionario
+	 * @return the iterable
+	 */
 	@ApiOperation("Find Cargo By codFuncionario")
 	@GetMapping("/findCargoByCodFuncionario/{codFuncionario}")
 	public Iterable<AdmCargo> findCargoByCodFuncionario(Principal principal, @PathVariable Long codFuncionario) {
@@ -38,6 +57,13 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 		return admCargoFuncionarioService.findCargoByCodFuncionario(codFuncionario);
 	}
 
+	/**
+	 * Find funcionario by cod cargo.
+	 *
+	 * @param principal the principal
+	 * @param codCargo the cod cargo
+	 * @return the iterable
+	 */
 	@ApiOperation("Find Funcionario By codCargo")
 	@GetMapping("/findFuncionarioByCodCargo/{codCargo}")
 	public Iterable<AdmFuncionario> findFuncionarioByCodCargo(Principal principal, @PathVariable Long codCargo) {
@@ -45,6 +71,13 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 		return admCargoFuncionarioService.findFuncionarioByCodCargo(codCargo);
 	}
 	
+	/**
+	 * Find perfil by cod cargo.
+	 *
+	 * @param principal the principal
+	 * @param codCargo the cod cargo
+	 * @return the iterable
+	 */
 	@ApiOperation("Find Perfil By codCargo")
 	@GetMapping("/findPerfilByCodCargo/{codCargo}")
 	public Iterable<AdmPerfil> findPerfilByCodCargo(Principal principal, @PathVariable Long codCargo) {
@@ -52,6 +85,13 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 		return admCargoPerfilService.findPerfilByCodCargo(codCargo);
 	}
 
+	/**
+	 * Delete by perfil.
+	 *
+	 * @param principal the principal
+	 * @param perfilSeq the perfil seq
+	 * @return the response entity
+	 */
 	@ApiOperation("Delete Cargo By perfilSeq")
 	@DeleteMapping("/deleteByPerfil/{perfilSeq}")
 	public ResponseEntity<Void> deleteByPerfil(Principal principal, @PathVariable Long perfilSeq) {
@@ -69,6 +109,13 @@ public class AdmCargoRestController extends BaseRestController<AdmCargo, Long, A
 	//Map<String, String> varsMap
 	//MultiValueMap<String, String>
 	
+	/**
+	 * Delete by cargos.
+	 *
+	 * @param principal the principal
+	 * @param cargos the cargos
+	 * @return the response entity
+	 */
 	@ApiOperation("Delete Cargos")
 	@DeleteMapping("/deleteByCargos/{cargos}")
 	public ResponseEntity<Void> deleteByCargos(Principal principal, @PathVariable List<AdmCargo> cargos) {

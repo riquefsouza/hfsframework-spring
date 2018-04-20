@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewConsultaDTO.
  *

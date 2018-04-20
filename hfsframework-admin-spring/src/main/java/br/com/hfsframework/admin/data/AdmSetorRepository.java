@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.hfsframework.admin.model.AdmSetor;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmSetorRepository.
  */

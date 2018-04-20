@@ -18,6 +18,7 @@ import br.com.hfsframework.admin.data.AdmLogColunaRepository;
 import br.com.hfsframework.admin.model.AdmLogColuna;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmLogColunaBC.
  */

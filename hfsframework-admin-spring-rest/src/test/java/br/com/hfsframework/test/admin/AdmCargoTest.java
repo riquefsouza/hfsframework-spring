@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.test.admin;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -29,16 +35,27 @@ import br.com.hfsframework.Aplicacao;
 import br.com.hfsframework.admin.model.AdmCargo;
 import br.com.hfsframework.test.base.BaseTest;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmCargoTest.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Aplicacao.class)
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdmCargoTest extends BaseTest {
 	
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(AdmCargoTest.class);
 	
+    /** The adm cargo list. */
     private List<AdmCargo> admCargoList = new ArrayList<AdmCargo>();
 
+    /**
+     * Setup.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setup() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext)
@@ -260,6 +277,11 @@ public class AdmCargoTest extends BaseTest {
         
     }
 
+    /**
+     * A insert.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void a_insert() throws Exception {
     	this.admCargoList.stream().forEach(cargo -> 
@@ -280,6 +302,11 @@ public class AdmCargoTest extends BaseTest {
     	);
     }
 
+    /**
+     * B listar.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void b_listar() throws Exception {
         mockMvc.perform(get("/admCargos")
@@ -293,6 +320,11 @@ public class AdmCargoTest extends BaseTest {
                 .andExpect(jsonPath("$[1].nomeCargo", is(this.admCargoList.get(1).getNomeCargo())));
     }
 
+    /**
+     * C search.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void c_search() throws Exception {
     	this.admCargoList.stream().forEach(cargo -> 
@@ -311,6 +343,11 @@ public class AdmCargoTest extends BaseTest {
 	);
     }
     
+    /**
+     * D update.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void d_update() throws Exception {
     	this.admCargoList.stream().forEach(cargo -> 
@@ -328,6 +365,11 @@ public class AdmCargoTest extends BaseTest {
     	);
     }
 
+    /**
+     * E delete.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void e_delete() throws Exception {
     	this.admCargoList.stream().forEach(cargo -> 

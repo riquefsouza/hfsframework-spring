@@ -8,6 +8,7 @@ package br.com.hfsframework.base;
 
 import java.io.Serializable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IBaseViewRelatorio.
  */

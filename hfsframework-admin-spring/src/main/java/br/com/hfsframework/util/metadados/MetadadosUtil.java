@@ -18,6 +18,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MetadadosUtil.
+ */
 public class MetadadosUtil implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -26,17 +30,32 @@ public class MetadadosUtil implements Serializable {
 	/** The log. */
 	private Logger log;
 
+	/** The config. */
 	private MetadadosConfig config;
 
+	/**
+	 * Instantiates a new metadados util.
+	 */
 	public MetadadosUtil() {
 		super();
 		this.log = LogManager.getLogger(MetadadosUtil.class);
 	}
 
+	/**
+	 * Configurar.
+	 *
+	 * @param config the config
+	 */
 	public void configurar(MetadadosConfig config) {
 		this.config = config;
 	}
 
+	/**
+	 * Gets the metadados.
+	 *
+	 * @param sEsquema the s esquema
+	 * @return the metadados
+	 */
 	public Metadados getMetadados(String sEsquema) {
 		Metadados m = new Metadados();
 		MetadadosObjeto mo;

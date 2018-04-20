@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework;
 
 
@@ -27,9 +33,13 @@ import org.springframework.http.HttpStatus;
 
 import br.com.hfsframework.util.NetUtil;
 
+// TODO: Auto-generated Javadoc
 //import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 //import br.com.hfsframework.admin.model.AdmUsuario;
 
+/**
+ * The Class Aplicacao.
+ */
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
@@ -39,8 +49,14 @@ public class Aplicacao {
 	// curl -v POST http://127.0.0.1:8080/admCargos -H "Authorization: Bearer <oauth_token>""
 	
 	
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(Aplicacao.class);
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		SpringApplication.run(Aplicacao.class);
@@ -54,6 +70,12 @@ public class Aplicacao {
 		NetUtil.printIpHost();
 	}
 
+	/**
+	 * Cors filter.
+	 *
+	 * @param origin the origin
+	 * @return the filter registration bean
+	 */
 	// CORS
 	@Bean
 	FilterRegistrationBean<Filter> corsFilter(

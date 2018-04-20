@@ -1,9 +1,19 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AplicacaoRestMvcConfig.
+ */
 @Configuration
 public class AplicacaoRestMvcConfig extends RepositoryRestConfigurerAdapter {
 
@@ -20,6 +30,9 @@ public class AplicacaoRestMvcConfig extends RepositoryRestConfigurerAdapter {
 		returnBodyOnUpdate	change if a body should be returned on updating an entity
 	 */
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter#configureRepositoryRestConfiguration(org.springframework.data.rest.core.config.RepositoryRestConfiguration)
+	 */
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 		//config.setBasePath("/api");

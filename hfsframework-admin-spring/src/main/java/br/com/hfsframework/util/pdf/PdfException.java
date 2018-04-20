@@ -8,6 +8,7 @@ package br.com.hfsframework.util.pdf;
 
 import org.apache.logging.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PdfException.
  */

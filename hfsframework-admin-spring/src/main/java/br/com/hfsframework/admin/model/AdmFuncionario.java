@@ -32,6 +32,10 @@ import br.com.hfsframework.security.model.FuncionarioVO;
 import br.com.hfsframework.util.CPFCNPJUtil;
 import br.com.hfsframework.util.DataUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmFuncionario.
+ */
 @Entity
 @Table(name = "ADM_FUNCIONARIO")
 @NamedQuery(name = "AdmFuncionario.findByMatriculaAndCPF", query = "SELECT f FROM AdmFuncionario f WHERE f.id = ?1 AND f.cpf = ?2")

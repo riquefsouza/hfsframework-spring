@@ -10,7 +10,7 @@
 <div th:replace="private/menu :: menu"></div>
 
 <div class="tela-conteudo">
-	<form id="editarAdmParametroCategoria">
+	<form th:action="@{/admParametroCategoriaMB/salvar}" method="post" th:object="${bean}">
 		<div class="panel panel-default">
 			<div class="panel-heading" 
 				style="font-weight: bold;font-size: large;">
@@ -19,7 +19,7 @@
 			<div class="panel-body">			
 				<div class="form-actions">
 				
-					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração" onclick="window.location.href='listarAdmParametroCategoria'">
+					<button type="submit" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração">
 						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
 					</button>
 				
@@ -27,21 +27,28 @@
 						<span class="glyphicon glyphicon-star"></span> Limpar
 					</button>
 
-					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmParametroCategoria'">
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admParametroCategoriaMB/listar'">
 						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
 					</button>
 				</div>
 
+				<th:block th:include="mensagemValidacao"></th:block>
+				
 				<div class="row">
 					<div class="col-md-4 form-group">
 						<label for="descricao">Descrição:</label>
-						<input type="text" class="form-control" id="descricao" label="Descrição" maxlength="80">
+						<input type="hidden" class="form-control" id="id" name="id" th:value="${bean.id}">
+						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="80" th:value="${bean.descricao}">
+						<input type="hidden" class="form-control" id="ordem" name="ordem" th:value="${bean.ordem}">
+						<!--
+						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="80" th:field="*{descricao}">
+						--> 
 					</div>
 				</div>
 				
 			</div>
 		</div>
-	</form>
+	</form>	
 </div>
 
 </body>

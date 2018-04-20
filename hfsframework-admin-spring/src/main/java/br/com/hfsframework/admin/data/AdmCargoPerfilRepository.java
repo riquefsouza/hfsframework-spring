@@ -15,6 +15,7 @@ import br.com.hfsframework.admin.model.AdmCargoPerfil;
 import br.com.hfsframework.admin.model.AdmCargoPerfilPK;
 import br.com.hfsframework.admin.model.AdmPerfil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmCargoPerfilRepository.
  */

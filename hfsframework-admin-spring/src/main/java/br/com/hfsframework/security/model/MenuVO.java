@@ -14,26 +14,40 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuVO.
+ */
 @Component
 public class MenuVO implements Serializable, Comparable<MenuVO> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The id. */
 	private Long id;
 
+	/** The descricao. */
 	private String descricao;
 
+	/** The ordem. */
 	private Integer ordem;
 
+	/** The id funcionalidade. */
 	private Long idFuncionalidade;
 
+	/** The funcionalidade. */
 	private FuncionalidadeVO funcionalidade;
 
+	/** The menu pai. */
 	private MenuVO menuPai;
 
+	/** The sub menus. */
 	private List<MenuVO> subMenus;
 
+	/**
+	 * Instantiates a new menu VO.
+	 */
 	public MenuVO() {
 		this.subMenus = new ArrayList<MenuVO>();
 		limpar();

@@ -26,6 +26,14 @@ public class AdmUsuarioIpService extends BaseBusinessService<AdmUsuarioIp, AdmUs
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Update ativo by id.
+	 *
+	 * @param ativo the ativo
+	 * @param id the id
+	 * @return the int
+	 * @throws TransacaoException the transacao exception
+	 */
 	@Transactional
 	public int updateAtivoById(Boolean ativo, AdmUsuarioIpPK id) throws TransacaoException {
 		try {
@@ -35,6 +43,14 @@ public class AdmUsuarioIpService extends BaseBusinessService<AdmUsuarioIp, AdmUs
 		}
 	}
 	
+	/**
+	 * Update ativo by matricula.
+	 *
+	 * @param ativo the ativo
+	 * @param matricula the matricula
+	 * @return the int
+	 * @throws TransacaoException the transacao exception
+	 */
 	@Transactional
 	public int updateAtivoByMatricula(Boolean ativo, Long matricula) throws TransacaoException {
 		try {

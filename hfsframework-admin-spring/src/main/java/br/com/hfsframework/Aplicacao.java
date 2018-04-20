@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework;
 
 import org.slf4j.Logger;
@@ -9,13 +15,23 @@ import org.springframework.context.annotation.ComponentScan;
 
 import br.com.hfsframework.util.NetUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Aplicacao.
+ */
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
 public class Aplicacao {
 
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(Aplicacao.class);
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Aplicacao.class);
 

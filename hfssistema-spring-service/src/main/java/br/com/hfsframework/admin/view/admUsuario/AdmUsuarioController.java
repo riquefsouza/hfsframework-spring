@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.view.admUsuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,19 +12,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import br.com.hfsframework.admin.service.AdmUsuarioService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmUsuarioController.
+ */
 @Controller
 //@RequestMapping("/user.htm")
 //@SessionAttributes("user")
 public class AdmUsuarioController {
 
+	/** The adm usuario service. */
 	@Autowired
 	private AdmUsuarioService admUsuarioService;
 
+	/**
+	 * Pagina listar.
+	 *
+	 * @return the string
+	 */
 	@GetMapping("/listarAdmUsuario")
 	public String paginaListar() {
 		return "/private/admin/AdmUsuario/listarAdmUsuario";
 	}
 
+	/**
+	 * Pagina editar.
+	 *
+	 * @return the string
+	 */
 	@GetMapping("/editarAdmUsuario")
 	public String paginaEditar() {
 		return "/private/admin/AdmUsuario/editarAdmUsuario";

@@ -20,6 +20,7 @@ import br.com.hfsframework.admin.model.AdmPerfil;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmCargoPerfilBC.
  */

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -16,6 +22,10 @@ import br.com.hfsframework.admin.model.AdmLogColuna;
 import br.com.hfsframework.admin.restcontroller.AdmLogColunaRestController;
 import br.com.hfsframework.base.BaseResourceSupport;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmLogColunaResource.
+ */
 public class AdmLogColunaResource extends ResourceSupport { 
 
 	/*
@@ -26,8 +36,16 @@ public class AdmLogColunaResource extends ResourceSupport {
 	}
 	*/
 
+	/** The adm log coluna. */
 	private final AdmLogColuna admLogColuna;
 
+	/**
+	 * Instantiates a new adm log coluna resource.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param admLogColuna the adm log coluna
+	 */
 	public AdmLogColunaResource(AdmLogColunaRestController controller, Principal principal, AdmLogColuna admLogColuna) {
 		this.admLogColuna = admLogColuna;
 
@@ -35,10 +53,23 @@ public class AdmLogColunaResource extends ResourceSupport {
 		this.add(linkTo(methodOn(controller.getClass()).listar(principal)).withRel(BaseResourceSupport.LIST_ALL));
 	}
 
+	/**
+	 * Gets the adm log coluna.
+	 *
+	 * @return the adm log coluna
+	 */
 	public AdmLogColuna getAdmLogColuna() {
 		return admLogColuna;
 	}
 
+	/**
+	 * Gets the lista.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param lista the lista
+	 * @return the lista
+	 */
 	public static Resources<AdmLogColunaResource> getLista(AdmLogColunaRestController controller, Principal principal, Iterable<AdmLogColuna> lista){
 		Stream<AdmLogColuna> stream = StreamSupport.stream(lista.spliterator(), false);
 		

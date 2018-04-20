@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import br.com.hfsframework.util.exceptions.ErroEsperado;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TratamentoErrosEsperadosInterceptor.
  */
@@ -35,11 +36,9 @@ public class TratamentoErrosEsperadosInterceptor implements Serializable {
 	/**
 	 * Tratamento de erros esperados.
 	 *
-	 * @param invocation
-	 *            the invocation
+	 * @param invocation            the invocation
 	 * @return the object
-	 * @throws Exception
-	 *             the exception
+	 * @throws Throwable the throwable
 	 */
 	@Around("execution(* br.com.hfsframework.util.interceptors.TratamentoErrosEsperados.*(..))")
 	public Object tratamentoDeErrosEsperados(ProceedingJoinPoint invocation) throws Throwable {		

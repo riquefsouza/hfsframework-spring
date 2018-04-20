@@ -13,11 +13,17 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.hfsframework.admin.model.VwAdmLog;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface VwAdmLogRepository.
  */
 public interface VwAdmLogRepository extends JpaRepository<VwAdmLog, Long> {
 
+	/**
+	 * Find entidades.
+	 *
+	 * @return the list
+	 */
 	@Query(name = "VwAdmLog.findEntidades")
 	List<String> findEntidades();
 

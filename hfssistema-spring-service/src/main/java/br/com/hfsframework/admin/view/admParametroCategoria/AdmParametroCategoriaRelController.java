@@ -22,6 +22,7 @@ import br.com.hfsframework.base.relatorio.RelatorioPath;
 import br.com.hfsframework.base.relatorio.RelatorioTipoEnum;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmParametroCategoriaRelMB.
  */
@@ -61,6 +62,9 @@ public class AdmParametroCategoriaRelController
 		super.exportar(relatorio, getBusinessController().findAll(), params, forcarDownload);
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.relatorio.BaseViewRelatorioController#getListaTipoRelatorio(java.lang.String)
+	 */
 	@ModelAttribute("listaTipoRelatorio")
 	@Override
 	public List<RelatorioTipoEnum> getListaTipoRelatorio(String grupo) {

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.config;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -33,19 +39,28 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SwaggerConfig.
+ */
 @EnableSwagger2
 @PropertySource("classpath:application.properties")
 @Configuration
 public class SwaggerConfig  {
     
+	/** The service name. */
 	private String serviceName = "HFS Framework Admin";
 
+	/** The service desc. */
 	private String serviceDesc = "HFS Framework Admin using springframework";
 
+	/** The client id. */
 	String clientId = "admin-hfsframework";
 
+	/** The client secret. */
 	String clientSecret = "admin"; //"$2a$10$y7jArsSYCAJjIudWb6zbkuMQZxNFGePkmYJQM0ChB4slgwtUG9RLy"
 	
+	/** The o auth server uri. */
 	//@Value("http://${server.address}:${server.port}")
 	@Value("${oauth.server.uri}:${server.port}")
 	String oAuthServerUri; // = "http://localhost:8080";
@@ -86,7 +101,12 @@ public class SwaggerConfig  {
 	}
 */
 	
-	@Bean
+	/**
+ * Posts api.
+ *
+ * @return the docket
+ */
+@Bean
 	public Docket postsApi() {
 		return new Docket(DocumentationType.SWAGGER_2).groupName("HFSFramework Admin Spring Restful")
 				.apiInfo(apiInfo()).select().paths(postPaths())
@@ -98,19 +118,39 @@ public class SwaggerConfig  {
 				.securityContexts(newArrayList(securityContext()));
 	}
 
+	/**
+	 * Post paths.
+	 *
+	 * @return the predicate
+	 */
 	private Predicate<String> postPaths() {
 		return regex("/.*");
 	}   
 
+	/**
+	 * Spring boot actuator jmx paths.
+	 *
+	 * @return the predicate
+	 */
 	private Predicate<String> springBootActuatorJmxPaths() {
 		return regex("^/(?!env|restart|pause|resume|refresh).*$");
 	} 
 
 	
+	/**
+	 * Api info.
+	 *
+	 * @return the api info
+	 */
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title(serviceName).description(serviceDesc).build();
 	}	
 	
+	/**
+	 * Grant types.
+	 *
+	 * @return the list
+	 */
 	@Bean
 	List<GrantType> grantTypes() {
 		List<GrantType> grantTypes = new ArrayList<>();
@@ -121,6 +161,11 @@ public class SwaggerConfig  {
         return grantTypes;
 	}
 	
+	/**
+	 * Oauth.
+	 *
+	 * @return the security scheme
+	 */
 	@Bean
     SecurityScheme oauth() {
         return new OAuthBuilder()
@@ -130,6 +175,11 @@ public class SwaggerConfig  {
                 .build();
     }
 	
+    /**
+     * Security context.
+     *
+     * @return the security context
+     */
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
@@ -137,6 +187,11 @@ public class SwaggerConfig  {
                 .build();
     }
 
+    /**
+     * Default auth.
+     *
+     * @return the list
+     */
     private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope
                 = new AuthorizationScope("write", "write and read");
@@ -146,6 +201,11 @@ public class SwaggerConfig  {
                 new SecurityReference("OAuth2", authorizationScopes));
     }
 	
+	/**
+	 * Scopes.
+	 *
+	 * @return the list
+	 */
 	private List<AuthorizationScope> scopes() {
 		List<AuthorizationScope> list = new ArrayList<>();
 		list.add(new AuthorizationScope("write", "write and read"));
@@ -158,6 +218,11 @@ public class SwaggerConfig  {
 		return list;
     }	
 
+	/**
+	 * Security info.
+	 *
+	 * @return the security configuration
+	 */
 	@Bean
     public SecurityConfiguration securityInfo() {
 		return SecurityConfigurationBuilder.builder()

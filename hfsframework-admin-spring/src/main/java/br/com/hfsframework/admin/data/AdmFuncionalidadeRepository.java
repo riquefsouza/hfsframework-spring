@@ -15,6 +15,7 @@ import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmFuncionalidadeRepository.
  */
@@ -75,13 +76,11 @@ public interface AdmFuncionalidadeRepository extends JpaRepository<AdmFuncionali
 	/**
 	 * Find menus por funcionalidade.
 	 *
-	 * @param funcionalidade
-	 *            the funcionalidade
+	 * @param url the url
 	 * @return the list
-	 *
-	@Query(name = "AdmFuncionalidade.findMenusPorFuncionalidade")
-	List<AdmMenu> findMenusPorFuncionalidade(AdmFuncionalidade funcionalidade);
-	*/
+	 * @Query(name = "AdmFuncionalidade.findMenusPorFuncionalidade")
+	 * 	List<AdmMenu> findMenusPorFuncionalidade(AdmFuncionalidade funcionalidade);
+	 */
 
 	/**
 	 * Find perfis por URL.

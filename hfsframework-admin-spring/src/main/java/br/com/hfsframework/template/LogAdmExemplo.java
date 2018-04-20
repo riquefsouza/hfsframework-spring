@@ -20,8 +20,19 @@ import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LogAdmExemplo.
+ */
 public class LogAdmExemplo {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TemplateException the template exception
+	 */
 	public static void main(String[] args) throws IOException, TemplateException {
 		final LoggerContext ctx = PrivateManager.getContext();
 		ctx.reconfigure();
@@ -30,6 +41,15 @@ public class LogAdmExemplo {
 		gerarLogAdmPostgreSQL();
 	}
 
+	/**
+	 * Gerar log adm oracle.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TemplateNotFoundException the template not found exception
+	 * @throws MalformedTemplateNameException the malformed template name exception
+	 * @throws ParseException the parse exception
+	 * @throws TemplateException the template exception
+	 */
 	private static void gerarLogAdmOracle() throws IOException, TemplateNotFoundException,
 			MalformedTemplateNameException, ParseException, TemplateException {
 		MetadadosUtil mu = new MetadadosUtil();
@@ -57,6 +77,15 @@ public class LogAdmExemplo {
 		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_ORACLE.sql"), texto);
 	}
 
+	/**
+	 * Gerar log adm postgre SQL.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TemplateNotFoundException the template not found exception
+	 * @throws MalformedTemplateNameException the malformed template name exception
+	 * @throws ParseException the parse exception
+	 * @throws TemplateException the template exception
+	 */
 	private static void gerarLogAdmPostgreSQL() throws IOException, TemplateNotFoundException,
 			MalformedTemplateNameException, ParseException, TemplateException {
 		MetadadosUtil mu = new MetadadosUtil();
@@ -84,13 +113,29 @@ public class LogAdmExemplo {
 		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_POSTGRESQL.sql"), texto);
 	}
 
+	/**
+	 * The Class PrivateManager.
+	 */
 	private static class PrivateManager extends org.apache.logging.log4j.LogManager {
+		
+		/** The Constant FQCN. */
 		private static final String FQCN = LogManager.class.getName();
 
+		/**
+		 * Gets the context.
+		 *
+		 * @return the context
+		 */
 		public static LoggerContext getContext() {
 			return (LoggerContext) getContext(FQCN, false);
 		}
 
+		/**
+		 * Gets the logger.
+		 *
+		 * @param name the name
+		 * @return the logger
+		 */
 		public static org.apache.logging.log4j.Logger getLogger(final String name) {
 			return getLogger(FQCN, name);
 		}

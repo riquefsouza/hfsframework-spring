@@ -77,7 +77,7 @@ function hfsDatatablesSelecionar(nome, tabela) {
 	
 	tabela.on( 'select', function ( e, dt, type, indexes ) {
 		var linhaDados = tabela.rows( indexes ).data().toArray();
-		//alert( JSON.stringify( linhaDados ) );
+		//alert( JSON.stringify( linhaDados[0][0] ) );
 	});		
 		
 	tabela.columns().every( function () {
@@ -97,6 +97,21 @@ function hfsDatatablesOrdenar(nome) {
 	tabela.column( '0:visible' ).order( 'asc' ).draw();
 }
 
+function hfsDatatablesIncluir(nome) {
+	$('#alert-messages').hide();
+
+	var tabela = $('#tabela'+nome).DataTable();
+	var linhaDados = tabela.rows( { selected: true } ).data().toArray();
+	
+	if (linhaDados.length > 0) {
+		//return JSON.stringify( linhaDados );
+		//alert(JSON.stringify( linhaDados ));
+		window.location.href='incluir';
+	} else {
+		$('#alert-messages').show();
+	}	
+}
+
 function hfsDatatablesEditar(nome) {
 	$('#alert-messages').hide();
 
@@ -105,8 +120,8 @@ function hfsDatatablesEditar(nome) {
 	
 	if (linhaDados.length > 0) {
 		//return JSON.stringify( linhaDados );
-		alert(JSON.stringify( linhaDados ));
-		window.location.href='editar'+nome; //+'.html';
+		//alert(JSON.stringify( linhaDados ));
+		window.location.href='editar/'+linhaDados[0][0];
 	} else {
 		$('#alert-messages').show();
 	}	
@@ -135,6 +150,7 @@ function hfsDatatablesExcluir(nome) {
 				if (result){
 					var tabela = $('#tabela'+nome).DataTable();
 					tabela.row('.selected').remove().draw( false );
+					window.location.href='excluir/'+linhaDados[0][0];
 				}
 			}
 		});

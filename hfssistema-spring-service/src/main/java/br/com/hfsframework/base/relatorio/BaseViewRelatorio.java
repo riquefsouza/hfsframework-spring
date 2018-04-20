@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewRelatorio.
  *
@@ -44,6 +45,8 @@ public abstract class BaseViewRelatorio<T extends Serializable, I extends Serial
 
 	/**
 	 * Instantiates a new base view relatorio.
+	 *
+	 * @param entidade the entidade
 	 */
 	public BaseViewRelatorio(T entidade) {
 		super();

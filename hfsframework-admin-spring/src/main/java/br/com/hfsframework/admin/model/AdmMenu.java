@@ -38,6 +38,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import br.com.hfsframework.admin.serializer.AdmMenuListSerializer;
 import br.com.hfsframework.security.model.MenuVO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The persistent class for the ADM_MENU database table.
  * 

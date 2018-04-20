@@ -9,6 +9,7 @@ package br.com.hfsframework.admin.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmUsuarioIpPK.
  */

@@ -115,18 +115,22 @@ public class AdmUsuario implements Serializable {
 	@Transient
 	private String ip;
 	
+	/** The created date. */
 	@Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdDate;
  
+    /** The modified date. */
     @Column(name = "modified_date")
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    /** The created by. */
     @Column(name = "created_by")
     @CreatedBy
     private String createdBy;
  
+    /** The modified by. */
     @Column(name = "modified_by")
     @LastModifiedBy
     private String modifiedBy;
@@ -354,10 +358,20 @@ public class AdmUsuario implements Serializable {
 		return admUsuarioIp;
 	}
 
+	/**
+	 * Gets the ip.
+	 *
+	 * @return the ip
+	 */
 	public String getIp() {
 		return ip;
 	}
 
+	/**
+	 * Sets the ip.
+	 *
+	 * @param ip the new ip
+	 */
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
@@ -435,34 +449,74 @@ public class AdmUsuario implements Serializable {
 		return u;
 	}
 
+	/**
+	 * Gets the created date.
+	 *
+	 * @return the created date
+	 */
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
+	/**
+	 * Sets the created date.
+	 *
+	 * @param createdDate the new created date
+	 */
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
+	/**
+	 * Gets the modified date.
+	 *
+	 * @return the modified date
+	 */
 	public LocalDateTime getModifiedDate() {
 		return modifiedDate;
 	}
 
+	/**
+	 * Sets the modified date.
+	 *
+	 * @param modifiedDate the new modified date
+	 */
 	public void setModifiedDate(LocalDateTime modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 
+	/**
+	 * Gets the created by.
+	 *
+	 * @return the created by
+	 */
 	public String getCreatedBy() {
 		return createdBy;
 	}
 
+	/**
+	 * Sets the created by.
+	 *
+	 * @param createdBy the new created by
+	 */
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	/**
+	 * Gets the modified by.
+	 *
+	 * @return the modified by
+	 */
 	public String getModifiedBy() {
 		return modifiedBy;
 	}
 
+	/**
+	 * Sets the modified by.
+	 *
+	 * @param modifiedBy the new modified by
+	 */
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}

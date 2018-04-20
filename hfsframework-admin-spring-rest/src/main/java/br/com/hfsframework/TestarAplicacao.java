@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework;
 
 import java.util.ArrayList;
@@ -13,8 +19,17 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.hfsframework.util.interceptors.HeaderRequestInterceptor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestarAplicacao.
+ */
 public class TestarAplicacao {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		RestTemplateBuilder builder = new RestTemplateBuilder();		
 		RestTemplate restTemplate = builder.basicAuthorization("admin-hfsframework", "admin").build();

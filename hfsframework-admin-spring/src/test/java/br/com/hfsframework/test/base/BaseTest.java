@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.test.base;
 
 import static org.junit.Assert.assertNotNull;
@@ -23,24 +29,39 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseTest.
+ */
 public abstract class BaseTest {
 
+    /** The content type. */
     protected MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
             Charset.forName("UTF-8"));
     
+    /** The mock mvc. */
     protected MockMvc mockMvc;
     
+    /** The mapping jackson 2 http message converter. */
     protected HttpMessageConverter<Object> mappingJackson2HttpMessageConverter;
     
+    /** The web application context. */
     @Autowired
 	protected WebApplicationContext webApplicationContext;
     
+    /** The spring security filter chain. */
     @Autowired
     protected FilterChainProxy springSecurityFilterChain;
     
+    /** The access token. */
     protected String accessToken;
     
+    /**
+     * Sets the converters.
+     *
+     * @param converters the new converters
+     */
     @Autowired
     protected void setConverters(HttpMessageConverter<Object>[] converters) {
 
@@ -53,6 +74,13 @@ public abstract class BaseTest {
                 this.mappingJackson2HttpMessageConverter);
     }
     	
+	/**
+	 * Json.
+	 *
+	 * @param o the o
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	protected String json(Object o) throws IOException {
 	    MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 	    this.mappingJackson2HttpMessageConverter.write(
@@ -60,6 +88,14 @@ public abstract class BaseTest {
 	    return mockHttpOutputMessage.getBodyAsString();
 	}
 
+    /**
+     * Obtain access token.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the string
+     * @throws Exception the exception
+     */
     protected String obtainAccessToken(String username, String password) throws Exception {
   	  
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

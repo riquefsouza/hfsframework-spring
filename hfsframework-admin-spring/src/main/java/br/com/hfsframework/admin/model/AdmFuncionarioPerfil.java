@@ -9,6 +9,7 @@ package br.com.hfsframework.admin.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmFuncionarioPerfil.
  */
@@ -28,6 +29,7 @@ public class AdmFuncionarioPerfil implements Serializable {
 	private AdmFuncionarioPerfilPK id;
 
 	/* The adm perfil. */
+	/** The adm perfil. */
 	// bi-directional many-to-one association to AdmPerfil
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USP_PRF_SEQ", nullable=false, insertable = false, updatable = false)
@@ -67,6 +69,11 @@ public class AdmFuncionarioPerfil implements Serializable {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the adm perfil.
+	 *
+	 * @return the adm perfil
+	 */
 	/*
 	 * Pega o the adm perfil.
 	 *

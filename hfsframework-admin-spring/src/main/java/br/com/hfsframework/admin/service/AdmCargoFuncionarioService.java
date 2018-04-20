@@ -19,6 +19,7 @@ import br.com.hfsframework.admin.model.AdmCargoFuncionarioPK;
 import br.com.hfsframework.admin.model.AdmFuncionario;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmCargoFuncionarioBC.
  */

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.security;
 
 import org.springframework.context.annotation.Configuration;
@@ -6,10 +12,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ResourceServerConfig.
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
+    /* (non-Javadoc)
+     * @see org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+     */
     @Override 
     public void configure(HttpSecurity http) throws Exception {
          // @formatter:off
@@ -34,6 +47,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
          // @formatter:on
     }
 
+    /* (non-Javadoc)
+     * @see org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter#configure(org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer)
+     */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
          resources.resourceId(OAuth2Configuration.RESOURCE_ID);

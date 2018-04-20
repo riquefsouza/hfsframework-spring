@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.hfsframework.admin.model.AdmFuncionarioPerfil;
 import br.com.hfsframework.admin.model.AdmFuncionarioPerfilPK;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmFuncionarioPerfilRepository.
  */

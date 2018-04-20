@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewConsulta.
  *

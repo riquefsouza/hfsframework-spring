@@ -25,6 +25,7 @@ import br.com.hfsframework.base.BaseViewController;
 import br.com.hfsframework.util.pdf.PdfException;
 import br.com.hfsframework.util.pdf.PdfUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewRelatorioController.
  */
@@ -130,6 +131,15 @@ public abstract class BaseViewRelatorioController
 		return buffer;
 	}
 
+	/**
+	 * Exportar junto alternado.
+	 *
+	 * @param relatorio1 the relatorio 1
+	 * @param relatorio2 the relatorio 2
+	 * @param forcarDownload the forcar download
+	 * @param renderizar the renderizar
+	 * @return the byte[]
+	 */
 	public byte[] exportarJuntoAlternado(IBaseRelatorio relatorio1, IBaseRelatorio relatorio2,
 			boolean forcarDownload, boolean renderizar) {
 		byte[] buffer = null;
@@ -191,6 +201,12 @@ public abstract class BaseViewRelatorioController
 		return listaTipoRelatorio;
 	}
 
+	/**
+	 * Gets the lista tipo relatorio.
+	 *
+	 * @param grupo the grupo
+	 * @return the lista tipo relatorio
+	 */
 	public List<RelatorioTipoEnum> getListaTipoRelatorio(String grupo) {
 		return listaTipoRelatorio
 				.stream()

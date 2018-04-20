@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.base;
 
 import java.io.Serializable;
@@ -26,24 +32,52 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseResourceRestController.
+ *
+ * @param <T> the generic type
+ * @param <I> the generic type
+ * @param <S> the generic type
+ * @param <R> the generic type
+ */
 @Api
 public abstract class BaseResourceRestController<T, I extends Serializable, 
 	S extends BaseBusinessService<T, I, ? extends JpaRepository<T, I>>,
 	R extends ResourceSupport> {
 
+	/** The log. */
 	protected Logger log = LoggerFactory.getLogger(BaseResourceRestController.class);
 	
+	/** The servico. */
 	@Autowired
 	protected S servico;
 
+	/**
+	 * Search.
+	 *
+	 * @param id the id
+	 * @return the r
+	 */
 	@ApiOperation("Search with Resource by id")
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public abstract R search(@PathVariable(value="id") I id);
 
+	/**
+	 * Listar.
+	 *
+	 * @return the resources
+	 */
 	@ApiOperation("List all with Resource")
 	@GetMapping(produces = "application/json")
 	public abstract Resources<R> listar();
 
+	/**
+	 * Pages.
+	 *
+	 * @param p the p
+	 * @return the page
+	 */
 	@ApiOperation("Pages")
 	@GetMapping("/pages")
 	@ResponseBody
@@ -51,12 +85,25 @@ public abstract class BaseResourceRestController<T, I extends Serializable,
 		return servico.findAll(p);
 	}
 	
+	/**
+	 * Insert.
+	 *
+	 * @param bean the bean
+	 * @return the optional
+	 */
 	@ApiOperation("Insert bean")
 	@PostMapping
 	public Optional<T> insert(@Valid @RequestBody T bean) {
 		return servico.insert(bean);
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param id the id
+	 * @param bean the bean
+	 * @return the response entity
+	 */
 	@ApiOperation("Update bean")
 	@PutMapping("/{id}")
 	public ResponseEntity<T> update(@PathVariable I id, @Valid @RequestBody T bean) {
@@ -73,6 +120,12 @@ public abstract class BaseResourceRestController<T, I extends Serializable,
 		return ResponseEntity.ok(obj.get());
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@ApiOperation("Delete bean")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable I id) {

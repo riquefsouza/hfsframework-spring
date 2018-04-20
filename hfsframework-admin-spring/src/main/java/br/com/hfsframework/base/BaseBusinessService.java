@@ -21,6 +21,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.hfsframework.AplicacaoUtil;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseBusinessService.
+ *
+ * @param <T> the generic type
+ * @param <I> the generic type
+ * @param <C> the generic type
+ */
 public abstract class BaseBusinessService<T, I extends Serializable, C extends JpaRepository<T, I>>
 		implements IBaseCrud<T, I> {
 
@@ -63,6 +71,9 @@ public abstract class BaseBusinessService<T, I extends Serializable, C extends J
 		return repositorio.findAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseCrud#findAll(org.springframework.data.domain.Pageable)
+	 */
 	@Override
 	public Page<T> findAll(Pageable p) {
 		return repositorio.findAll(p);

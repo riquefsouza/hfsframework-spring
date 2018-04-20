@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LdapConfig.
  */

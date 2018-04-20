@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -16,6 +22,10 @@ import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.restcontroller.AdmFuncionalidadeRestController;
 import br.com.hfsframework.base.BaseResourceSupport;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmFuncionalidadeResource.
+ */
 public class AdmFuncionalidadeResource extends ResourceSupport { 
 
 	/*
@@ -26,8 +36,16 @@ public class AdmFuncionalidadeResource extends ResourceSupport {
 	}
 	*/
 
+	/** The adm funcionalidade. */
 	private final AdmFuncionalidade admFuncionalidade;
 
+	/**
+	 * Instantiates a new adm funcionalidade resource.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param admFuncionalidade the adm funcionalidade
+	 */
 	public AdmFuncionalidadeResource(AdmFuncionalidadeRestController controller, Principal principal, AdmFuncionalidade admFuncionalidade) {
 		this.admFuncionalidade = admFuncionalidade;
 
@@ -35,10 +53,23 @@ public class AdmFuncionalidadeResource extends ResourceSupport {
 		this.add(linkTo(methodOn(controller.getClass()).listar(principal)).withRel(BaseResourceSupport.LIST_ALL));
 	}
 
+	/**
+	 * Gets the adm funcionalidade.
+	 *
+	 * @return the adm funcionalidade
+	 */
 	public AdmFuncionalidade getAdmFuncionalidade() {
 		return admFuncionalidade;
 	}
 
+	/**
+	 * Gets the lista.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param lista the lista
+	 * @return the lista
+	 */
 	public static Resources<AdmFuncionalidadeResource> getLista(AdmFuncionalidadeRestController controller, Principal principal, Iterable<AdmFuncionalidade> lista){
 		Stream<AdmFuncionalidade> stream = StreamSupport.stream(lista.spliterator(), false);
 		

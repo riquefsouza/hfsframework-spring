@@ -44,6 +44,7 @@ import br.com.hfsframework.security.model.FuncionarioVO;
 import br.com.hfsframework.security.model.PaginaVO;
 import br.com.hfsframework.security.model.PerfilVO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The persistent class for the ADM_PERFIL database table.
  * 

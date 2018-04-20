@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DataUtil.
  */
@@ -86,6 +87,12 @@ public final class DataUtil implements Serializable {
 		return listaAno;
 	}
 
+	/**
+	 * Gets the local date from date.
+	 *
+	 * @param data the data
+	 * @return the local date from date
+	 */
 	public static LocalDate getLocalDateFromDate(Date data){
 	    GregorianCalendar gregorianCalendar = (GregorianCalendar) Calendar.getInstance();
 	    gregorianCalendar.setTime(data);
@@ -93,6 +100,13 @@ public final class DataUtil implements Serializable {
 	    return zonedDateTime.toLocalDate();	
 	}
 	
+	/**
+	 * Formatar.
+	 *
+	 * @param data the data
+	 * @param padrao the padrao
+	 * @return the string
+	 */
 	public static String Formatar(Date data, String padrao) {
 		if (data == null) {
 			return "";
@@ -105,6 +119,13 @@ public final class DataUtil implements Serializable {
 		return ld.format(formatador);		
 	}
 
+	/**
+	 * To long.
+	 *
+	 * @param data the data
+	 * @param padrao the padrao
+	 * @return the long
+	 */
 	public static Long toLong(Date data, String padrao) {
 		if (data == null) {
 			return null;

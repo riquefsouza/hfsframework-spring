@@ -15,19 +15,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseViewCadastro.
  *
- * @param <T>
- *            the generic type
- * @param <I>
- *            the generic type
- * @param <B>
- *            the generic type
- * @param <L>
- *            the generic type
- * @param <E>
- *            the element type
+ * @param <T>            the generic type
+ * @param <I>            the generic type
+ * @param <B>            the generic type
  */
 @TratamentoErrosEsperados
 public abstract class BaseViewCadastro<T extends Serializable, I extends Serializable, 
@@ -78,10 +72,9 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	/**
 	 * Instantiates a new base view cadastro.
 	 *
-	 * @param paginaListar
-	 *            the pagina listar
-	 * @param paginaEditar
-	 *            the pagina editar
+	 * @param entidade the entidade
+	 * @param paginaListar            the pagina listar
+	 * @param paginaEditar            the pagina editar
 	 */
 	public BaseViewCadastro(Optional<T> entidade, String paginaListar, String paginaEditar){
 		super();

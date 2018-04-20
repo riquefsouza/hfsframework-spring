@@ -12,6 +12,7 @@ import br.com.hfsframework.admin.data.AdmParametroRepository;
 import br.com.hfsframework.admin.model.AdmParametro;
 import br.com.hfsframework.base.BaseBusinessService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmParametroBC.
  */

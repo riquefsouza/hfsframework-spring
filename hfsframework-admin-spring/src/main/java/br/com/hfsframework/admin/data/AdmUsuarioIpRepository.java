@@ -19,10 +19,25 @@ import br.com.hfsframework.admin.model.AdmUsuarioIpPK;
  */
 public interface AdmUsuarioIpRepository extends JpaRepository<AdmUsuarioIp, AdmUsuarioIpPK> {
 
+	/**
+	 * Update ativo by id.
+	 *
+	 * @param ativo the ativo
+	 * @param matricula the matricula
+	 * @param ip the ip
+	 * @return the int
+	 */
 	@Modifying
 	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.matricula=?2 AND u.id.ip = ?3")
 	int updateAtivoById(Boolean ativo, Long matricula, String ip);
 	
+	/**
+	 * Update ativo by matricula.
+	 *
+	 * @param ativo the ativo
+	 * @param matricula the matricula
+	 * @return the int
+	 */
 	@Modifying
 	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.matricula=?2")
 	int updateAtivoByMatricula(Boolean ativo, Long matricula);

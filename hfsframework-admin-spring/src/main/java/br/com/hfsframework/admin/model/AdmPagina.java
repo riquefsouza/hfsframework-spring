@@ -37,6 +37,7 @@ import br.com.hfsframework.admin.serializer.AdmPerfilListSerializer;
 import br.com.hfsframework.security.model.PaginaVO;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The persistent class for the ADM_PAGINA database table.
  * 

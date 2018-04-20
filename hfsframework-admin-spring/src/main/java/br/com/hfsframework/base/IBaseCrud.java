@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IBaseCrud.
  *
@@ -49,6 +50,12 @@ public interface IBaseCrud<T, I extends Serializable> extends Serializable {
 	 */
 	Iterable<T> findAll();
 	
+	/**
+	 * Find all.
+	 *
+	 * @param p the p
+	 * @return the page
+	 */
 	Page<T> findAll(Pageable p);
 
 	/**

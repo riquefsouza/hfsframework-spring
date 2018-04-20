@@ -20,6 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.hfsframework.security.model.CargoVO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmCargo.
+ */
 @Entity
 @Table(name = "ADM_CARGO")
 @NamedQuery(name = "AdmCargo.findAll", query = "SELECT v FROM AdmCargo v")
@@ -70,6 +74,12 @@ public class AdmCargo implements Serializable {
 		limpar();
 	}
 
+	/**
+	 * Instantiates a new adm cargo.
+	 *
+	 * @param id the id
+	 * @param nomeCargo the nome cargo
+	 */
 	public AdmCargo(Long id, String nomeCargo) {
 		super();
 		this.id = id;
@@ -216,6 +226,9 @@ public class AdmCargo implements Serializable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AdmCargo [id=" + id + ", nomeCargo=" + nomeCargo + "]";

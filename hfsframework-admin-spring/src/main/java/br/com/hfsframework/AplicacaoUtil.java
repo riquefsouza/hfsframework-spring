@@ -18,6 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 
+// TODO: Auto-generated Javadoc
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -35,8 +36,10 @@ public final class AplicacaoUtil implements Serializable {
 	
 	public static final String REALM_NAME = "HFSFRAMEWORK-ADMIN";
 	
+	/** The Constant PASSWORD_ENCODER. */
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 	
+	/** The port. */
 	public static int port;
 		
 	/**

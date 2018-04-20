@@ -19,6 +19,7 @@ import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.security.model.MenuVO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AdmMenuBC.
  */

@@ -6,6 +6,7 @@
  */
 package br.com.hfsframework.base.relatorio;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum RelatorioTipoEnum.
  */
@@ -43,6 +44,7 @@ public enum RelatorioTipoEnum {
 	//HTML("Outros", "text/html", "Linguagem de Marcação de Hipertexto (.html)");
 	HTML("Outros", "application/zip", "Linguagem de Marcação de Hipertexto (.html)");
 	
+	/** The grupo. */
 	private String grupo;
 	
 	/** The tipo conteudo. */
@@ -54,10 +56,9 @@ public enum RelatorioTipoEnum {
 	/**
 	 * Instantiates a new relatorio tipo enum.
 	 *
-	 * @param tipoConteudo
-	 *            the tipo conteudo
-	 * @param descricao
-	 *            the descricao
+	 * @param grupo the grupo
+	 * @param tipoConteudo            the tipo conteudo
+	 * @param descricao            the descricao
 	 */
 	private RelatorioTipoEnum(String grupo, String tipoConteudo, String descricao) {
 		this.grupo = grupo;
@@ -65,6 +66,11 @@ public enum RelatorioTipoEnum {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Gets the grupo.
+	 *
+	 * @return the grupo
+	 */
 	public String getGrupo() {
 		return grupo;
 	}

@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +14,23 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebSecurityConfiguration.
+ */
 @Configuration
 class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
+	/** The user details service. */
 	@Autowired
 	private UsuarioServicoDetalhes userDetailsService;
 
 	//@Autowired
 	//AdmUsuarioService admUsuarioService;
 
+	/* (non-Javadoc)
+	 * @see org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter#init(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
+	 */
 	@Override
 	public void init(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService())
@@ -24,6 +38,11 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 			//.passwordEncoder(NoOpPasswordEncoder.getInstance());
 	}
 
+	/**
+	 * Password encoder.
+	 *
+	 * @return the b crypt password encoder
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -37,6 +56,11 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 	}
 	*/
 	
+	/**
+	 * User details service.
+	 *
+	 * @return the user details service
+	 */
 	@Bean
 	UserDetailsService userDetailsService() {
 		/*

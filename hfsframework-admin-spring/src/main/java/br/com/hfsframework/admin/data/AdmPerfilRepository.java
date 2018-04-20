@@ -16,6 +16,7 @@ import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmPerfilRepository.
  */

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.hfsframework.admin.model.AdmParametro;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface AdmParametroRepository.
  */

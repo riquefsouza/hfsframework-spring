@@ -10,6 +10,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseRelatorioProducer.
  */
@@ -50,8 +51,9 @@ public class BaseRelatorioProducer {
 	/**
 	 * Cria o.
 	 *
-	 * @param ip
-	 *            the ip
+	 * @param jp the jp
+	 * @param instance the instance
+	 * @param newValue the new value
 	 * @return the i base relatorio
 	 */
 	//@Produces

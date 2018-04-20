@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.restcontroller;
 
 import java.math.BigDecimal;
@@ -21,14 +27,27 @@ import br.com.hfsframework.base.BaseRestController;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 import io.swagger.annotations.ApiOperation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmFuncionarioRestController.
+ */
 @RestController
 @RequestMapping("/admFuncionarios")
 public class AdmFuncionarioRestController extends BaseRestController<AdmFuncionario, Long, AdmFuncionarioService> {
 
+	/** The adm funcionario perfil service. */
 	@Autowired
 	private AdmFuncionarioPerfilService admFuncionarioPerfilService;
 
 	//@GetMapping("/findByMatriculaAndCPF/{id}/{cpf}")
+	/**
+	 * Find by matricula and CPF.
+	 *
+	 * @param principal the principal
+	 * @param id the id
+	 * @param cpf the cpf
+	 * @return the response entity
+	 */
 	//http://localhost:8080/admFuncionarios/findByMatriculaAndCPF?id=93203&cpf=02685748474
 	@ApiOperation("Find Funcionario By Matricula And CPF")
 	@GetMapping(value="/findByMatriculaAndCPF", params = {"id","cpf"})
@@ -44,6 +63,13 @@ public class AdmFuncionarioRestController extends BaseRestController<AdmFunciona
 		return ResponseEntity.ok(obj.get());
 	}
 
+	/**
+	 * Delete by perfil.
+	 *
+	 * @param principal the principal
+	 * @param perfilSeq the perfil seq
+	 * @return the response entity
+	 */
 	@ApiOperation("Delete Funcionario By perfilSeq")
 	@DeleteMapping("/deleteByPerfil/{perfilSeq}")
 	public ResponseEntity<Void> deleteByPerfil(Principal principal, @PathVariable Long perfilSeq) {
@@ -58,6 +84,13 @@ public class AdmFuncionarioRestController extends BaseRestController<AdmFunciona
 		}
 	}
 
+	/**
+	 * Delete by funcionarios.
+	 *
+	 * @param principal the principal
+	 * @param funcionarios the funcionarios
+	 * @return the response entity
+	 */
 	@ApiOperation("Delete Funcionarios")
 	@DeleteMapping("/deleteByFuncionarios/{funcionarios}")
 	public ResponseEntity<Void> deleteByFuncionarios(Principal principal, @PathVariable List<AdmFuncionario> funcionarios) {

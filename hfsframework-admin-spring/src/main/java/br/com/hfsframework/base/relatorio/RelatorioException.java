@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 
 import br.com.hfsframework.util.ExcecaoUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RelatorioException.
  */

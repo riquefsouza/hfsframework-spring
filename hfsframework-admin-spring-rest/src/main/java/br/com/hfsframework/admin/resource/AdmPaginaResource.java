@@ -1,3 +1,9 @@
+/**
+ * <p><b>HFS Framework Spring</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2018
+ */
 package br.com.hfsframework.admin.resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -16,6 +22,10 @@ import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.restcontroller.AdmPaginaRestController;
 import br.com.hfsframework.base.BaseResourceSupport;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdmPaginaResource.
+ */
 public class AdmPaginaResource extends ResourceSupport { 
 
 	/*
@@ -26,8 +36,16 @@ public class AdmPaginaResource extends ResourceSupport {
 	}
 	*/
 
+	/** The adm pagina. */
 	private final AdmPagina admPagina;
 
+	/**
+	 * Instantiates a new adm pagina resource.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param admPagina the adm pagina
+	 */
 	public AdmPaginaResource(AdmPaginaRestController controller, Principal principal, AdmPagina admPagina) {
 		this.admPagina = admPagina;
 
@@ -35,10 +53,23 @@ public class AdmPaginaResource extends ResourceSupport {
 		this.add(linkTo(methodOn(controller.getClass()).listar(principal)).withRel(BaseResourceSupport.LIST_ALL));
 	}
 
+	/**
+	 * Gets the adm pagina.
+	 *
+	 * @return the adm pagina
+	 */
 	public AdmPagina getAdmPagina() {
 		return admPagina;
 	}
 
+	/**
+	 * Gets the lista.
+	 *
+	 * @param controller the controller
+	 * @param principal the principal
+	 * @param lista the lista
+	 * @return the lista
+	 */
 	public static Resources<AdmPaginaResource> getLista(AdmPaginaRestController controller, Principal principal, Iterable<AdmPagina> lista){
 		Stream<AdmPagina> stream = StreamSupport.stream(lista.spliterator(), false);
 		
