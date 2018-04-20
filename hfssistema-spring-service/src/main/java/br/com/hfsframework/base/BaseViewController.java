@@ -6,7 +6,6 @@
  */
 package br.com.hfsframework.base;
 
-import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.DocumentException;
 
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 
@@ -156,42 +152,6 @@ public abstract class BaseViewController {
 		//context.addMessage(clientId,
 				//new FacesMessage(FacesMessage.SEVERITY_WARN, null, mensagem));
 	}
-
-	/*
-	 * Adiciona o message info dialog.
-	 *
-	 * @param mensagem
-	 *            the mensagem
-	 *
-	public static void addMessageInfoDialog(String mensagem) {
-		RequestContext.getCurrentInstance()
-				.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", mensagem));
-	}
-
-	**
-	 * Adiciona o message alerta dialog.
-	 *
-	 * @param mensagem
-	 *            the mensagem
-	 *
-	public static void addMessageAlertaDialog(String mensagem) {
-		RequestContext.getCurrentInstance()
-				.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", mensagem));
-	}
-
-	**
-	 * Adiciona o message erro dialog.
-	 *
-	 * @param e
-	 *            the e
-	 * @param mensagem
-	 *            the mensagem
-	 *
-	public static void addMessageErroDialog(Exception e, String mensagem) {
-		RequestContext.getCurrentInstance()
-				.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", ExcecaoUtil.getErros(LogManager.getLogger(), e, mensagem)));
-	}
-	*/
 	
 	/**
 	 * Gets the sessao.
@@ -234,25 +194,6 @@ public abstract class BaseViewController {
 		log.info("]");
 	}
 	
-	/**
-	 * Pre process PDF.
-	 *
-	 * @param document
-	 *            the document
-	 * @param tituloRelatorio
-	 *            the titulo relatorio
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BadElementException
-	 *             the bad element exception
-	 * @throws DocumentException
-	 *             the document exception
-	 */
-	public void preProcessPDF(Object document, String tituloRelatorio) 
-			throws IOException, BadElementException, DocumentException {
-		//pdfUtils.preProcessaPDF(document, tituloRelatorio);
-	}
-
 	/**
 	 * Pega o the usuario autenticado.
 	 *

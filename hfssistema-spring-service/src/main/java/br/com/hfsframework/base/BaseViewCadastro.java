@@ -7,12 +7,23 @@
 package br.com.hfsframework.base;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
+import br.com.hfsframework.base.relatorio.RelatorioTipoEnum;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
@@ -31,6 +42,9 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The mapeamento. */
+	private String mapeamento;
+	
 	/** The pagina listar. */
 	private String paginaListar;
 	
@@ -45,8 +59,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	private Iterable<T> listaEntidade;
 
 	/** The entidade. */
-	//@Autowired
-	private Optional<T> entidade;
+	private T entidade;
 	
 	/** The modo incluir. */
 	private boolean modoIncluir;
@@ -75,8 +88,10 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * @param entidade the entidade
 	 * @param paginaListar            the pagina listar
 	 * @param paginaEditar            the pagina editar
+	 * @param mapeamento the mapeamento
 	 */
-	public BaseViewCadastro(Optional<T> entidade, String paginaListar, String paginaEditar){
+	public BaseViewCadastro(T entidade, String paginaListar, 
+			String paginaEditar, String mapeamento){
 		super();
 		this.modoIncluir = false;
 		this.modoSalvo = false;
@@ -84,6 +99,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 		this.entidade = entidade;
 		this.paginaListar = paginaListar;
 		this.paginaEditar = paginaEditar;
+		this.mapeamento = mapeamento;
 		
 		this.mostrarBtnIncluir = true;
 		this.mostrarBtnExcluir = true;
@@ -118,69 +134,103 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	}
 
 	/**
-	 * On incluir.
+	 * Gets the lista tipo relatorio.
 	 *
-	 * @param entidade
-	 *            the entidade
-	 * @return the string
+	 * @return the lista tipo relatorio
 	 */
-	protected String onIncluir(Optional<T> entidade) {
-		this.modoIncluir = true;
+	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
+		List<RelatorioGrupoVO> listaVO = new ArrayList<RelatorioGrupoVO>();
+		RelatorioGrupoVO grupoVO;
+		List<RelatorioTipoEnum> listaEnum = Arrays.asList(RelatorioTipoEnum.values());
+		List<RelatorioTipoEnum> subtipos;
 		
-		setEntidade(entidade);
-
-		return getPaginaEditar();
+		for (String grupo : RelatorioTipoEnum.getGrupos()) {
+			subtipos = listaEnum
+				.stream()
+				.filter(item -> item.getGrupo().equals(grupo))
+				.collect(Collectors.toList());
+			grupoVO = new RelatorioGrupoVO(grupo, subtipos);
+			listaVO.add(grupoVO);
+		}
+		
+		return listaVO;
 	}
-
+	
 	/**
-	 * On editar.
+	 * Exportar.
 	 *
-	 * @param entidade
-	 *            the entidade
 	 * @return the string
 	 */
-	public String onEditar(Optional<T> entidade) {
+	public String exportar()  {
+		 return "relatorio";
+	}
+	
+	/**
+	 * Listar.
+	 *
+	 * @return the model and view
+	 */
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView(paginaListar);
+		Iterable<T> lista = businessController.findAll();
+		mv.addObject("listaBean", lista);
+		return mv;
+	}
+	
+	/**
+	 * Incluir.
+	 *
+	 * @return the model and view
+	 */
+	public ModelAndView incluir(T entidade) {
+		this.modoIncluir = true;
+		setEntidade(entidade);
+		ModelAndView mv = new ModelAndView(getPaginaEditar());
+		mv.addObject("bean", this.entidade);
+		return mv;
+	}
+	
+	/**
+	 * Editar.
+	 *
+	 * @param id the id
+	 * @return the model and view
+	 */
+	public ModelAndView editar(I id) {
 		this.modoIncluir = false;
 		
+		/*
 		if (entidade == null) {
 			gerarMensagemErro(SELECIONAR_REGISTRO);
 			return "";
 		}
-		setEntidade(entidade);
-		return getPaginaEditar();
-	}
-
-	/**
-	 * Preparar para excluir.
-	 *
-	 * @param entidade
-	 *            the entidade
-	 */
-	public void prepararParaExcluir(Optional<T> entidade) {
-		if (entidade == null) {
-			gerarMensagemErro(SELECIONAR_REGISTRO);
-			return;
-		}
-		//RequestContext.getCurrentInstance().execute("PF('confirmation').show()");
+		*/
+		
+		Optional<T> bean = businessController.load(id);		
+		ModelAndView mv = new ModelAndView(getPaginaEditar());
+		mv.addObject("bean", bean.get());
+		setEntidade(bean.get());
+		return mv;
 	}
 
 	/**
 	 * Excluir.
 	 *
-	 * @param entidade
-	 *            the entidade
-	 * @param contemErro
-	 *            the contem erro
-	 * @param mensagemErro
-	 *            the mensagem erro
+	 * @param id the id
+	 * @param contemErro the contem erro
+	 * @param mensagemErro the mensagem erro
+	 * @return the string
 	 */
-	public void excluir(Optional<T> entidade, String contemErro, String mensagemErro) {
+	private RedirectView excluir(I id, String contemErro, String mensagemErro) {
+		/*
 		if (entidade == null) {
 			gerarMensagemErro(SELECIONAR_REGISTRO);
 			return;
 		}
+		*/
 		try {
-			businessController.delete(entidade.get());
+			Optional<T> bean = businessController.load(id);
+			businessController.delete(bean.get());
 			atualizaListaDataTable();
 		} catch (Exception e) {
 			if (e.getCause().toString().contains(contemErro)) {
@@ -188,74 +238,76 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			} else {
 				gerarMensagemErro(e, ERRO_DELETE);
 			}
-			return;
 		}
+			
+		return new RedirectView(getMapeamento()+"/listar");
 	}
 
 	/**
 	 * Excluir.
 	 *
-	 * @param entidade
-	 *            the entidade
+	 * @param id the id
 	 */
-	public void excluir(Optional<T> entidade) {
-		this.excluir(entidade, "", "");
+	public RedirectView excluir(I id) {
+		return this.excluir(id, "", "");
 	}
 	
-	/**
-	 * Cancelar edicao.
-	 *
-	 * @return the string
-	 */
-	public String cancelarEdicao() {
-		return getPaginaListar();
-	}
-
+	
 	/**
 	 * Salvar.
 	 *
-	 * @param id
-	 *            the id
-	 * @param descricao
-	 *            the descricao
-	 * @param contemErro
-	 *            the contem erro
-	 * @param mensagemErro
-	 *            the mensagem erro
-	 * @return the string
-	 */
-	protected String salvar(I id, String descricao, String contemErro, String mensagemErro) {
+	 * @param id the id
+	 * @param descricao the descricao
+	 * @param contemErro the contem erro
+	 * @param mensagemErro the mensagem erro
+	 * @param obj the obj
+	 * @param result the result
+	 * @param attributes the attributes
+	 * @return the redirect view
+	 */	
+	private RedirectView salvar(I id, String descricao, String contemErro, String mensagemErro, 
+			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
 		
 		
 		if (descricao!=null){
 			if (descricao.isEmpty()) {
 				gerarMensagemErro("Campo 'Descrição' não pode ser vazio.");
-				return null;
+				if (modoIncluir)
+					return new RedirectView(getMapeamento()+"/incluir");
+				else
+					return new RedirectView("/admParametroCategoriaMB/editar/{id}");
 			}
 			
 			if (modoIncluir){
 				if (this.businessController.existeNovo(descricao)){
 					gerarMensagemErro("Campo 'Descrição' já existe.");
-					return null;					
+					return new RedirectView(getMapeamento()+"/incluir");					
 				}
 			} else {				
 				if (this.businessController.existeAntigo(id, descricao)){
 					gerarMensagemErro("Campo 'Descrição' já existe.");
-					return null;										
+					return new RedirectView("/admParametroCategoriaMB/editar/{id}");										
 				}				
 			}
 		}
 		
+		if (result.hasErrors()){
+			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+			if (modoIncluir)
+				return new RedirectView(getMapeamento()+"/incluir");
+			else
+				return new RedirectView("/admParametroCategoriaMB/editar/{id}");
+		}
 		
 		try {
-			if (id == null) {
-				setEntidade(this.businessController.insert(getEntidade().get()));
-			} else {
-				setEntidade(this.businessController.update(getEntidade().get()));
-			}
+			if (id == null)
+				businessController.insert(obj);
+			else
+				businessController.update(obj);
 			
 			this.modoSalvo = true;
 			
+			attributes.addFlashAttribute("mensagem", "Salvo com sucesso!");
 		} catch (Exception e) {
 			this.modoSalvo = false;
 			
@@ -264,36 +316,55 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			} else {
 				gerarMensagemErro(e, ERRO_SALVAR);
 			}
-			return null;
+			if (modoIncluir)
+				return new RedirectView(getMapeamento()+"/incluir");
+			else
+				return new RedirectView("/admParametroCategoriaMB/editar/{id}");
 		}
 		atualizaListaDataTable();
+		
+		return new RedirectView(getMapeamento()+"/listar");
+	}
+	
+
+	/**
+	 * Salvar.
+	 *
+	 * @param id            the id
+	 * @param descricao            the descricao
+	 * @param obj the obj
+	 * @param result the result
+	 * @param attributes the attributes
+	 * @return the string
+	 */
+	protected RedirectView salvar(I id, String descricao,
+			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
+		return this.salvar(id, descricao, "", "", obj, result, attributes);
+	}
+
+	/**
+	 * Salvar.
+	 *
+	 * @param id            the id
+	 * @param obj the obj
+	 * @param result the result
+	 * @param attributes the attributes
+	 * @return the string
+	 */
+	protected RedirectView salvar(I id,
+			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
+		return this.salvar(id, null, "", "", obj, result, attributes);
+	}
+
+	/**
+	 * Cancelar edicao.
+	 *
+	 * @return the string
+	 */
+	public String cancelarEdicao() {
 		return getPaginaListar();
 	}
 	
-	/**
-	 * Salvar.
-	 *
-	 * @param id
-	 *            the id
-	 * @param descricao
-	 *            the descricao
-	 * @return the string
-	 */
-	protected String salvar(I id, String descricao) {
-		return this.salvar(id, descricao, "", "");
-	}
-
-	/**
-	 * Salvar.
-	 *
-	 * @param id
-	 *            the id
-	 * @return the string
-	 */
-	protected String salvar(I id) {
-		return this.salvar(id, null, "", "");
-	}
-
 	/**
 	 * Cancelar.
 	 *
@@ -308,7 +379,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 *
 	 * @return o the entidade
 	 */
-	public Optional<T> getEntidade() {
+	public T getEntidade() {
 		return this.entidade;
 	}
 
@@ -318,7 +389,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * @param entidade
 	 *            o novo the entidade
 	 */
-	public void setEntidade(Optional<T> entidade) {
+	public void setEntidade(T entidade) {
 		this.entidade = entidade;
 	}
 
@@ -337,7 +408,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * @param listaEntidade
 	 *            o novo the lista entidade
 	 */
-	public void setListaEntidade(List<T> listaEntidade) {
+	public void setListaEntidade(Iterable<T> listaEntidade) {
 		this.listaEntidade = listaEntidade;
 	}
 
@@ -461,6 +532,24 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 */
 	public void setMostrarBtnLimpar(boolean mostrarBtnLimpar) {
 		this.mostrarBtnLimpar = mostrarBtnLimpar;
+	}
+
+	/**
+	 * Gets the mapeamento.
+	 *
+	 * @return the mapeamento
+	 */
+	public String getMapeamento() {
+		return mapeamento;
+	}
+
+	/**
+	 * Sets the mapeamento.
+	 *
+	 * @param mapeamento the new mapeamento
+	 */
+	public void setMapeamento(String mapeamento) {
+		this.mapeamento = mapeamento;
 	}
 
 }

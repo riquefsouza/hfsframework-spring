@@ -65,7 +65,7 @@ public enum RelatorioTipoEnum {
 		this.tipoConteudo = tipoConteudo;
 		this.descricao = descricao;
 	}
-
+	
 	/**
 	 * Gets the grupo.
 	 *
@@ -93,4 +93,12 @@ public enum RelatorioTipoEnum {
 		return descricao;
 	}
 
+	/**
+	 * Gets the grupos.
+	 *
+	 * @return the grupos
+	 */
+	public static String[] getGrupos(){
+		return new String[] {"Documentos", "Planilhas", "Texto puro", "Outros"};
+	}
 }

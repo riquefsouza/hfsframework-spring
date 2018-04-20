@@ -6,23 +6,28 @@
  */
 package br.com.hfsframework.admin.view.admParametroCategoria;
 
-import java.util.Optional;
+import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.hfsframework.admin.model.AdmParametroCategoria;
 import br.com.hfsframework.admin.service.AdmParametroCategoriaService;
+import br.com.hfsframework.base.BaseViewCadastro;
+import br.com.hfsframework.base.IBaseViewCadastro;
+import br.com.hfsframework.base.IBaseViewRelatorio;
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
@@ -32,142 +37,124 @@ import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 @Controller
 @TratamentoErrosEsperados
 @RequestMapping("/admParametroCategoriaMB")
-public class AdmParametroCategoriaController {
+public class AdmParametroCategoriaController
+		extends BaseViewCadastro<AdmParametroCategoria, Long, AdmParametroCategoriaService>
+		implements IBaseViewCadastro<AdmParametroCategoria, Long>, IBaseViewRelatorio {
 
-	/** The service. */
-	@Autowired
-	private AdmParametroCategoriaService service;
-
-	private AdmParametroCategoria bean;
-	
-	/**
-	 * Pagina listar.
-	 *
-	 * @return the string
-	 */
-	public String paginaListar() {
-		return "/private/admin/admParametroCategoria/listarAdmParametroCategoria";
-	}
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Pagina editar.
-	 *
-	 * @return the string
+	 * Instantiates a new adm parametro categoria controller.
 	 */
-	public String paginaEditar() {
-		return "/private/admin/admParametroCategoria/editarAdmParametroCategoria";
+	public AdmParametroCategoriaController() {
+		super(new AdmParametroCategoria(),
+			"/private/admin/admParametroCategoria/listarAdmParametroCategoria",
+			"/private/admin/admParametroCategoria/editarAdmParametroCategoria", 
+			"/admParametroCategoriaMB");
 	}
-	
-	/*
-	@ModelAttribute("bean")
-	public AdmParametroCategoria novo() {
-		return new AdmParametroCategoria();
-	}
-	*/
-	
-	/*
-	@ModelAttribute("listaBean")
-	public Iterable<AdmParametroCategoria> listaBean() {		
-		return service.findAll();
-	}
-	*/
-	
-	/**
-	 * Listar.
-	 *
-	 * @return the model and view
+
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#init()
 	 */
+	//@PostConstruct
+	public void init() {
+		//atualizaListaDataTable();
+	}
+	
+	@Override
 	@GetMapping("/listar")
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView(paginaListar());
-		Iterable<AdmParametroCategoria> lista = service.findAll();
-		mv.addObject("listaBean", lista);
-		return mv;
+		return super.listar();
 	}
-
-	/**
-	 * Incluir.
-	 *
-	 * @return the model and view
+	
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#incluir()
 	 */
+	@Override
 	@GetMapping("/incluir")
 	public ModelAndView incluir() {
-		this.bean = new AdmParametroCategoria();		
-		ModelAndView mv = new ModelAndView(paginaEditar());
-		mv.addObject("bean", this.bean);
-		return mv;
+		return super.incluir(new AdmParametroCategoria());
 	}
-
-	/**
-	 * Editar.
-	 *
-	 * @param id the id
-	 * @return the model and view
-	 */
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Long id) {
-		Optional<AdmParametroCategoria> bean = service.load(id);		
-		ModelAndView mv = new ModelAndView(paginaEditar());
-		mv.addObject("bean", bean.get());
-		this.bean = bean.get();
-		return mv;
-	}
-
-	//@PostMapping("/editar/{id}")
-	//@RequestMapping(value="/editar", method=RequestMethod.POST)
-	/*
-	@PostMapping("/salvar")
-	public String salvar(AdmParametroCategoria bean) {
-
-		if (bean.getId() == null)
-			service.insert(bean);
-		else
-			service.update(bean);
-
-		return "redirect:/admParametroCategoriaMB/listar";			
-	}
-	*/
-	/*
-	@GetMapping("/salvar")
-	public ModelAndView getModelo(Model model, HttpServletRequest request) {
-		return new ModelAndView(paginaEditar(), "command", model);
-	}
-	*/
-	//Model model, @ModelAttribute("bean") 
-	@PostMapping("/salvar")
-	public RedirectView salvar(@Valid AdmParametroCategoria obj, 
-			BindingResult result, RedirectAttributes attributes) {
-		
-		if (result.hasErrors()){
-			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			//return "redirect:editar/{id}";
-			//return new RedirectView("/admParametroCategoriaMB/editar/{id}");
-			return new RedirectView("/admParametroCategoriaMB/incluir");
-		}
-		
-		if (bean.getId() == null)
-			service.insert(obj);
-		else
-			service.update(obj);
-		
-		attributes.addFlashAttribute("mensagem", "Salvo com sucesso!");
-		
-		//return "redirect:/admParametroCategoriaMB/listar";
-		return new RedirectView("/admParametroCategoriaMB/listar");
-	}
-
 	
-	/**
-	 * Excluir.
-	 *
-	 * @param id the id
-	 * @return the string
+	@Override
+	@GetMapping("/editar/{id}")	
+	public ModelAndView editar(@PathVariable("id") Long id) {
+		return super.editar(id);
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#salvar(java.lang.Object, org.springframework.validation.BindingResult, org.springframework.web.servlet.mvc.support.RedirectAttributes)
 	 */
+	@Override
+	@PostMapping("/salvar")
+	public RedirectView salvar(@Valid AdmParametroCategoria obj, BindingResult result, RedirectAttributes attributes) {
+		return super.salvar(obj.getId(), obj.getDescricao(), obj, result, attributes);
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.BaseViewCadastro#excluir(java.io.Serializable)
+	 */
+	@Override
 	@GetMapping("/excluir/{id}")
 	public RedirectView excluir(@PathVariable("id") Long id) {
-		Optional<AdmParametroCategoria> bean = service.load(id);
-		service.delete(bean.get());
-		//return "redirect:/admParametroCategoriaMB/listar";
-		return new RedirectView("/admParametroCategoriaMB/listar");
+		return super.excluir(id);
 	}
+
+	@Override
+	@ModelAttribute("listaTipoRelatorio")
+	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
+		return super.getListaTipoRelatorio();
+	}
+	
+	@Override
+	@GetMapping(value = "/exportar")
+	@ResponseBody
+	public String exportar()  {
+		return super.exportar();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getBean()
+	 */
+	@Override
+	public AdmParametroCategoria getBean() {
+		return super.getEntidade();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#setBean(java.lang.
+	 * Object)
+	 */
+	@Override
+	public void setBean(AdmParametroCategoria entidade) {
+		super.setEntidade(entidade);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
+	 */
+	@Override
+	public Iterable<AdmParametroCategoria> getListaBean() {
+		return super.getListaEntidade();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#setListaBean(java.util.
+	 * List)
+	 */
+	@Override
+	public void setListaBean(Iterable<AdmParametroCategoria> listaEntidade) {
+		super.setListaEntidade(listaEntidade);
+	}
+
 }

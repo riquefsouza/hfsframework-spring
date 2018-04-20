@@ -8,11 +8,10 @@ package br.com.hfsframework.base.relatorio;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -37,7 +36,7 @@ public abstract class BaseViewRelatorioController
 	private static final long serialVersionUID = 1L;
 
 	/** The lista tipo relatorio. */
-	private List<RelatorioTipoEnum> listaTipoRelatorio;
+	private List<RelatorioGrupoVO> listaTipoRelatorio;
 
 	/** The tipo relatorio. */
 	private String tipoRelatorio;
@@ -59,7 +58,7 @@ public abstract class BaseViewRelatorioController
 	@PostConstruct
 	public void init() {
 		tipoRelatorio = RelatorioTipoEnum.PDF.name();
-		listaTipoRelatorio = Arrays.asList(RelatorioTipoEnum.values());
+		listaTipoRelatorio = new ArrayList<RelatorioGrupoVO>();
 	}
 
 	/**
@@ -197,31 +196,8 @@ public abstract class BaseViewRelatorioController
 	 *
 	 * @return o the lista tipo relatorio
 	 */
-	public List<RelatorioTipoEnum> getListaTipoRelatorio() {
+	public Iterable<RelatorioGrupoVO> getListaTipoRelatorio() {
 		return listaTipoRelatorio;
-	}
-
-	/**
-	 * Gets the lista tipo relatorio.
-	 *
-	 * @param grupo the grupo
-	 * @return the lista tipo relatorio
-	 */
-	public List<RelatorioTipoEnum> getListaTipoRelatorio(String grupo) {
-		return listaTipoRelatorio
-				.stream()
-				.filter(item -> item.getGrupo().equals(grupo))
-				.collect(Collectors.toList());
-	}
-
-	/**
-	 * Atribui o the lista tipo relatorio.
-	 *
-	 * @param listaTipoRelatorio
-	 *            o novo the lista tipo relatorio
-	 */
-	public void setListaTipoRelatorio(List<RelatorioTipoEnum> listaTipoRelatorio) {
-		this.listaTipoRelatorio = listaTipoRelatorio;
 	}
 
 	/**

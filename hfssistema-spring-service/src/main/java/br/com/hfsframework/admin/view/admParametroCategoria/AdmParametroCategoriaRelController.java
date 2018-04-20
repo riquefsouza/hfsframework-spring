@@ -18,8 +18,8 @@ import br.com.hfsframework.admin.service.AdmParametroCategoriaService;
 import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.BaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.IBaseRelatorio;
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.relatorio.RelatorioPath;
-import br.com.hfsframework.base.relatorio.RelatorioTipoEnum;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
@@ -55,11 +55,12 @@ public class AdmParametroCategoriaRelController
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.IBaseViewRelatorio#exportar()
 	 */
-	public void exportar() {
+	public String exportar() {
 		Map<String, Object> params = getParametros();
 		params.put("PARAMETRO1", "");
 
 		super.exportar(relatorio, getBusinessController().findAll(), params, forcarDownload);
+		return "";
 	}
 
 	/* (non-Javadoc)
@@ -67,8 +68,8 @@ public class AdmParametroCategoriaRelController
 	 */
 	@ModelAttribute("listaTipoRelatorio")
 	@Override
-	public List<RelatorioTipoEnum> getListaTipoRelatorio(String grupo) {
-		return getListaTipoRelatorio(grupo);
+	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
+		return getListaTipoRelatorio();
 	}
 	
 	/**

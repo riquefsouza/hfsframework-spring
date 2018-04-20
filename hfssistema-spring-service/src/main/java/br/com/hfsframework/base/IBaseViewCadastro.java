@@ -6,21 +6,24 @@
  */
 package br.com.hfsframework.base;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.DocumentException;
+import javax.validation.Valid;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IBaseViewCadastro.
  *
- * @param <T>
- *            the generic type
+ * @param <T> the generic type
+ * @param <I> the generic type
  */
-public interface IBaseViewCadastro<T> extends Serializable {
+public interface IBaseViewCadastro<T, I> extends Serializable {
 
 	/**
 	 * Inicia o.
@@ -42,36 +45,48 @@ public interface IBaseViewCadastro<T> extends Serializable {
 	boolean isModoSalvo();
 
 	/**
+	 * Gets the pagina listar.
+	 *
+	 * @return the pagina listar
+	 */
+	String getPaginaListar();
+	
+	/**
+	 * Gets the pagina editar.
+	 *
+	 * @return the pagina editar
+	 */
+	String getPaginaEditar();
+	
+	/**
+	 * Listar.
+	 *
+	 * @return the model and view
+	 */
+	ModelAndView listar();
+	
+	/**
 	 * On incluir.
 	 *
 	 * @return the string
 	 */
-	String onIncluir();
+	ModelAndView incluir();
 
 	/**
 	 * On editar.
 	 *
-	 * @param entidade
-	 *            the entidade
+	 * @param id the id
 	 * @return the string
 	 */
-	String onEditar(T entidade);
-
-	/**
-	 * Preparar para excluir.
-	 *
-	 * @param entidade
-	 *            the entidade
-	 */
-	void prepararParaExcluir(T entidade);
+	ModelAndView editar(@PathVariable("id") I id);
 
 	/**
 	 * Excluir.
 	 *
-	 * @param entidade
-	 *            the entidade
+	 * @param id the id
+	 * @return the redirect view
 	 */
-	void excluir(T entidade);
+	RedirectView excluir(@PathVariable("id") I id);
 
 	/**
 	 * Cancelar edicao.
@@ -83,9 +98,12 @@ public interface IBaseViewCadastro<T> extends Serializable {
 	/**
 	 * Salvar.
 	 *
+	 * @param obj the obj
+	 * @param result the result
+	 * @param attributes the attributes
 	 * @return the string
 	 */
-	String salvar();
+	RedirectView salvar(@Valid T obj, BindingResult result, RedirectAttributes attributes);
 
 	/**
 	 * Cancelar.
@@ -93,7 +111,7 @@ public interface IBaseViewCadastro<T> extends Serializable {
 	 * @return the string
 	 */
 	String cancelar();
-
+	
 	/**
 	 * Gets the bean.
 	 *
@@ -114,7 +132,7 @@ public interface IBaseViewCadastro<T> extends Serializable {
 	 *
 	 * @return the lista bean
 	 */
-	List<T> getListaBean();
+	Iterable<T> getListaBean();
 
 	/**
 	 * Sets the lista bean.
@@ -122,20 +140,6 @@ public interface IBaseViewCadastro<T> extends Serializable {
 	 * @param listaEntidade
 	 *            the new lista bean
 	 */
-	void setListaBean(List<T> listaEntidade);
-
-	/**
-	 * Pre process PDF.
-	 *
-	 * @param document
-	 *            the document
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BadElementException
-	 *             the bad element exception
-	 * @throws DocumentException
-	 *             the document exception
-	 */
-	void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException;
+	void setListaBean(Iterable<T> listaEntidade);
 
 }

@@ -7,6 +7,9 @@
 package br.com.hfsframework.base;
 
 import java.io.Serializable;
+import java.util.List;
+
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -15,9 +18,16 @@ import java.io.Serializable;
 public interface IBaseViewRelatorio extends Serializable {
 
 	/**
+	 * Gets the lista tipo relatorio.
+	 *
+	 * @return the lista tipo relatorio
+	 */
+	List<RelatorioGrupoVO> getListaTipoRelatorio();
+	
+	/**
 	 * Exportar.
 	 */
-	void exportar();
+	String exportar();
 
 	/**
 	 * Cancelar.
