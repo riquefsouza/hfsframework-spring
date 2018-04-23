@@ -8,8 +8,10 @@ package br.com.hfsframework.admin.view.admParametroCategoria;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +26,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.hfsframework.admin.model.AdmParametroCategoria;
 import br.com.hfsframework.admin.service.AdmParametroCategoriaService;
-import br.com.hfsframework.base.BaseViewCadastro;
-import br.com.hfsframework.base.IBaseViewCadastro;
-import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
+import br.com.hfsframework.base.view.BaseViewCadastro;
+import br.com.hfsframework.base.view.IBaseViewCadastro;
+import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AdmParametroCategoriaController.
  */
@@ -44,6 +45,9 @@ public class AdmParametroCategoriaController
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
+	private AdmParametroCategoriaRelController rel;
+	
 	/**
 	 * Instantiates a new adm parametro categoria controller.
 	 */
@@ -57,9 +61,9 @@ public class AdmParametroCategoriaController
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.IBaseViewCadastro#init()
 	 */
-	//@PostConstruct
+	@PostConstruct
 	public void init() {
-		//atualizaListaDataTable();
+		atualizaListaDataTable();
 	}
 	
 	@Override
@@ -88,7 +92,8 @@ public class AdmParametroCategoriaController
 	 */
 	@Override
 	@PostMapping("/salvar")
-	public RedirectView salvar(@Valid AdmParametroCategoria obj, BindingResult result, RedirectAttributes attributes) {
+	public RedirectView salvar(@Valid AdmParametroCategoria obj, 
+			BindingResult result, RedirectAttributes attributes) {
 		return super.salvar(obj.getId(), obj.getDescricao(), obj, result, attributes);
 	}
 
@@ -104,14 +109,15 @@ public class AdmParametroCategoriaController
 	@Override
 	@ModelAttribute("listaTipoRelatorio")
 	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
-		return super.getListaTipoRelatorio();
+		return rel.getListaTipoRelatorio();
 	}
 	
 	@Override
-	@GetMapping(value = "/exportar")
 	@ResponseBody
-	public String exportar()  {
-		return super.exportar();
+	@GetMapping(value = "/exportar/{tipoRelatorio}/{forcarDownload}")
+	public String exportar(@PathVariable("tipoRelatorio") String tipoRelatorio, 
+			@PathVariable("forcarDownload") String forcarDownload)  {
+		return rel.exportar(tipoRelatorio, forcarDownload);
 	}
 	
 	/*

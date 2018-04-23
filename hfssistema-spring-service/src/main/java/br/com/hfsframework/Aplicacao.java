@@ -43,5 +43,5 @@ public class Aplicacao {
 		
 		NetUtil.printIpHost();
 	}
-
+	
 }

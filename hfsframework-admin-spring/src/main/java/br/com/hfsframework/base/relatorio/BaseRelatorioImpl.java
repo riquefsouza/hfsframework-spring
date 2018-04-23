@@ -33,6 +33,12 @@ public class BaseRelatorioImpl implements IBaseRelatorio {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The Constant DEFAULT_PATH. */
+	private static final String DEFAULT_PATH = "relatorios/";
+	
+	/** The Constant DEFAULT_EXTENSION. */
+	private static final String DEFAULT_EXTENSION = ".jasper";
+	
 	/** The log. */
 	private Logger log;
 	
@@ -53,7 +59,7 @@ public class BaseRelatorioImpl implements IBaseRelatorio {
 	 */
 	public BaseRelatorioImpl(String path) {
 		this.log = LoggerFactory.getLogger(BaseRelatorioImpl.class);
-		this.path = path;
+		this.path = DEFAULT_PATH + path + DEFAULT_EXTENSION;
 	}
 
 	/* (non-Javadoc)

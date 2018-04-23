@@ -6,78 +6,163 @@
  */
 package br.com.hfsframework.admin.view.admUsuario;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.service.AdmUsuarioService;
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
+import br.com.hfsframework.base.view.BaseViewCadastro;
+import br.com.hfsframework.base.view.IBaseViewCadastro;
+import br.com.hfsframework.base.view.IBaseViewRelatorio;
+import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AdmUsuarioController.
  */
 @Controller
-//@RequestMapping("/user.htm")
-//@SessionAttributes("user")
-public class AdmUsuarioController {
+@TratamentoErrosEsperados
+@RequestMapping("/admUsuarioMB")
+public class AdmUsuarioController
+		extends BaseViewCadastro<AdmUsuario, Long, AdmUsuarioService>
+		implements IBaseViewCadastro<AdmUsuario, Long>, IBaseViewRelatorio {
 
-	/** The adm usuario service. */
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
-	private AdmUsuarioService admUsuarioService;
-
+	private AdmUsuarioRelController rel;
+	
 	/**
-	 * Pagina listar.
-	 *
-	 * @return the string
+	 * Instantiates a new AdmUsuarioController.
 	 */
-	@GetMapping("/listarAdmUsuario")
-	public String paginaListar() {
-		return "/private/admin/AdmUsuario/listarAdmUsuario";
+	public AdmUsuarioController() {
+		super(new AdmUsuario(),
+			"/private/admin/admUsuario/listarAdmUsuario",
+			"/private/admin/admUsuario/editarAdmUsuario", 
+			"/admUsuarioMB");
 	}
 
-	/**
-	 * Pagina editar.
-	 *
-	 * @return the string
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#init()
 	 */
-	@GetMapping("/editarAdmUsuario")
-	public String paginaEditar() {
-		return "/private/admin/AdmUsuario/editarAdmUsuario";
+	@PostConstruct
+	public void init() {
+		atualizaListaDataTable();
+	}
+	
+	@Override
+	@GetMapping("/listar")
+	public ModelAndView listar() {
+		return super.listar();
+	}
+	
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#incluir()
+	 */
+	@Override
+	@GetMapping("/incluir")
+	public ModelAndView incluir() {
+		return super.incluir(new AdmUsuario());
+	}
+	
+	@Override
+	@GetMapping("/editar/{id}")	
+	public ModelAndView editar(@PathVariable("id") Long id) {
+		return super.editar(id);
 	}
 
-/*
-	@RequestMapping(value = "/editarAdmUsuario", method = RequestMethod.GET)
-	public String paginaEditar(HttpServletRequest request) {
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
-		if (ipAddress == null) {
-			ipAddress = request.getRemoteAddr();
-		}
-
-		return "/private/admin/AdmUsuario/editarAdmUsuario";
-	}
-	
-	
-	@ModelAttribute("countryList")
-	public List<Country> populateCountryList() {
-		return admUsuarioBC.getAllCountries();
-	}
-	
-	@ModelAttribute("communityList")
-	public List<Community> populateCommunityList() {
-		return admUsuarioBC.getAllCommunities();
-	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String showUserForm(ModelMap model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		return "userForm";
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.IBaseViewCadastro#salvar(java.lang.Object, 
+	 * org.springframework.validation.BindingResult, 
+	 * org.springframework.web.servlet.mvc.support.RedirectAttributes)
+	 */
+	@Override
+	@PostMapping("/salvar")
+	public RedirectView salvar(@Valid AdmUsuario obj, 
+			BindingResult result, RedirectAttributes attributes) {
+		return super.salvar(obj.getId(), obj, result, attributes);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String onSubmit(@ModelAttribute("user") User user) {
-		admUsuarioBC.add(user);
-		return "redirect:userSuccess.htm";
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.BaseViewCadastro#excluir(java.io.Serializable)
+	 */
+	@Override
+	@GetMapping("/excluir/{id}")
+	public RedirectView excluir(@PathVariable("id") Long id) {
+		return super.excluir(id);
 	}
-*/		
+
+	@Override
+	@ModelAttribute("listaTipoRelatorio")
+	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
+		return rel.getListaTipoRelatorio();
+	}
+	
+	@Override
+	@ResponseBody
+	@GetMapping(value = "/exportar/{tipoRelatorio}/{forcarDownload}")
+	public String exportar(@PathVariable("tipoRelatorio") String tipoRelatorio, 
+			@PathVariable("forcarDownload") String forcarDownload)  {
+		return rel.exportar(tipoRelatorio, forcarDownload);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getBean()
+	 */
+	@Override
+	public AdmUsuario getBean() {
+		return super.getEntidade();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#setBean(java.lang.
+	 * Object)
+	 */
+	@Override
+	public void setBean(AdmUsuario entidade) {
+		super.setEntidade(entidade);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
+	 */
+	@Override
+	public Iterable<AdmUsuario> getListaBean() {
+		return super.getListaEntidade();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#setListaBean(java.util.
+	 * List)
+	 */
+	@Override
+	public void setListaBean(Iterable<AdmUsuario> listaEntidade) {
+		super.setListaEntidade(listaEntidade);
+	}
+
 }

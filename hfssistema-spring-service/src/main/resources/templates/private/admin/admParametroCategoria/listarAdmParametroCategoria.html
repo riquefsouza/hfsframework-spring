@@ -29,21 +29,21 @@
 						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
 						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
 						 	<optgroup th:each="grupo : ${listaTipoRelatorio}" th:label="${grupo.grupo}">
-						 		<option th:each="opcao : ${grupo.tipos}" th:id="${opcao}">
+						 		<option th:each="opcao : ${grupo.tipos}" th:value="${opcao}">
 						 			<span th:text="${opcao.descricao}" th:remove="tag"></span>
 						 		</option>
 						    </optgroup>
 						</select>
 					</div>
 					<div class="col-md-3 form-group">
-						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload">Forçar Download</label>
 					</div>
 				</div>
 			</div>					
 		</div>
 
 		<div class="form-actions">
-			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar','_blank')">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
 				<span class="glyphicon glyphicon-print"></span> Exportar
 			</button>
 			

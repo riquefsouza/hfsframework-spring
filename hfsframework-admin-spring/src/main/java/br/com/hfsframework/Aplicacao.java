@@ -41,7 +41,7 @@ public class Aplicacao {
 		log.info("Versão 1.0 - 2018");
 		log.info("------------------------------------------------------------------------");
 
-		NetUtil.printIpHost();
+		NetUtil.printIpHost();	
 	}
 	
 }

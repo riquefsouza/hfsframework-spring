@@ -22,10 +22,10 @@ public enum TemplateEnum {
 	BC("business", "BC", "Business Controller"),
 	
 	/** The mb. */
-	MB("view", "MB", "Managed Bean"),
+	CadastroController("view", "Controller", "Controller"),
 	
 	/** The Rel MB. */
-	RelMB("view", "RelMB", "Managed Bean de Relatório"),
+	RelController("view", "RelController", "Controller de Relatório"),
 	
 	/** The Converter. */
 	Converter("converters", "Converter", "Converter"),

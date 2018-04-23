@@ -3,12 +3,16 @@
 	<property name="ireport.zoom" value="1.693421790161333"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<import value="org.apache.commons.codec.binary.Base64"/>
 	<parameter name="IMAGEM" class="java.lang.String"/>
 	<parameter name="PARAMETRO1" class="java.lang.String"/>
 	<field name="codigo" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
 	<field name="valor" class="java.lang.String"/>
 	<field name="admParametroCategoria.descricao" class="java.lang.String"/>
+	<variable name="logo" class="java.lang.String">
+		<initialValueExpression><![CDATA["iVBORw0KGgoAAAANSUhEUgAAAGQAAAA9CAYAAABbY8xrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADd0lEQVR4Xu2cMXKjMBRAv/cskCKzJ8AnwGlSbZsOl7jxDbZLg0vTbZsqTewTmBNkUhjfhZWEwAJLIMku/sB/M5o4BIFGT9L/Ak8WFQMINPySPwkkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkkBBkOAi5wG65gMXCoayPsi6rvVvqzzGV5Y7dsea41vz9zqI0bZDBdrcXUftmDZaX1jLbGZJ/DnXbtYPDTSGPachXUkII19NyGLz0CPNdsvJP/Ui+7GDZ6WB3vs/N3HZnxjFEN5KPsA43cIcLQfHx1S63zvBvnbhzqBJWlVe/KVFWlfIsE4dEU0+UhF15iLLKIl09z5J072ZsV+88wSHRnytKVGVjnWDAU4i58ZFFS8os0ta1kWmqq+uzljKrIk2d7gAwDLKRNnm1Z4B5LFlBCic2+FjnyQMNyrJ1OcO3/OhCkJ6AWYGbK3tG9skK6aTKMj3lndeX0nZc+aOPHcUG3nYjEYELZ0tGB1PSMMLsgnqQ/oPWSZRBuQ3rABw+34zyhmITMrFLGPQS76FxwpZtFgr2ENe/OjFRIRc4G9efANKTiJ1QnVIIgoAd4Ydf4I/JiKCATXg761TifX3dUyqu6MXDhdSjSWm4pgxuth7B8d1jHxHAy7CRLu2mkJf7ducqk5kh+UqRvsrlUTd4jOmHAjtyWMl72z6SMTG7GDIGX3b8pNSIgaE8h3OFhGioY0F5Df6usMws9JTycCF1hiGDpqHc7gdw0D7ZFZ2pBH+fKWOTLmuYzAxhO+OrdI8O5PuWNtlgnfmuxgKW0rbXdpg5Ps+0prlkxVvn5SZ87lbI/5qWHGXmsDLovviBUn60ZaIxJICn3/KjJUG/Ao8DFilTHW8OcEce0IGCeoNup873GlZ5bAzbB8XFyQppds2i7C0eYgRPoJ1UXMpoxnSBrw/NTjR5dX98whrsAcL3Ib7Pu1ss3rVo72Gu59MkByEeL4eUFpneGxiLItYsUF9s3snocL3PYPEcIBRDFPqZljfJwW6Z1EBCFPqZVpLdvngag00MbxkcEqISv17T1yiDbVq/aRxPaxNgC5RIIO5wIaB/rYEMmiHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICHIICGoAPgP+KRUV/wRnFcAAAAASUVORK5CYII="]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -30,7 +34,7 @@
 			</staticText>
 			<image>
 				<reportElement key="image" x="0" y="0" width="51" height="39" uuid="125a6c92-568b-49f2-a52b-890713395f51"/>
-				<imageExpression><![CDATA[$P{IMAGEM}]]></imageExpression>
+				<imageExpression><![CDATA[new ByteArrayInputStream(Base64.decodeBase64($V{logo}.getBytes()))]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true">
 				<reportElement key="textField" x="79" y="35" width="645" height="14" isRemoveLineWhenBlank="true" uuid="cc47ef18-2313-47e8-88cc-369843b191cd"/>

@@ -78,7 +78,7 @@ public class TemplateUtil implements Serializable {
 		Template templateModelo = configurar(caminhoModelo, modelo);
 
 		if (params.name().equals("listar") || params.name().equals("editar") || params.name().equals("reportar")) {
-			extensao = ".xhtml";
+			extensao = ".html";
 		}
 		if (params.name().equals("paisagem") || params.name().equals("retrato")) {
 			extensao = ".jrxml";

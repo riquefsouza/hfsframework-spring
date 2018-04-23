@@ -1,8 +1,8 @@
 /**
- * <p><b>HFS Framework</b></p>
+ * <p><b>HFS Framework Spring</b></p>
  * @author Henrique Figueiredo de Souza
  * @version 1.0
- * @since 2017
+ * @since 2018
  */
 package br.com.hfsframework.admin.view.admParametroCategoria;
 
@@ -10,16 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.hfsframework.admin.model.AdmParametroCategoria;
 import br.com.hfsframework.admin.service.AdmParametroCategoriaService;
-import br.com.hfsframework.base.IBaseViewRelatorio;
-import br.com.hfsframework.base.relatorio.BaseViewRelatorio;
+import br.com.hfsframework.base.relatorio.BaseRelatorioImpl;
 import br.com.hfsframework.base.relatorio.IBaseRelatorio;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
-import br.com.hfsframework.base.relatorio.RelatorioPath;
+import br.com.hfsframework.base.view.IBaseViewRelatorio;
+import br.com.hfsframework.base.view.relatorio.BaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
@@ -28,7 +26,6 @@ import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
  */
 @Controller
 @TratamentoErrosEsperados
-@RequestMapping("/admParametroCategoriaRelMB")
 public class AdmParametroCategoriaRelController 
 	extends BaseViewRelatorio<AdmParametroCategoria, Long, AdmParametroCategoriaService>
 		implements IBaseViewRelatorio {
@@ -40,8 +37,6 @@ public class AdmParametroCategoriaRelController
 	private Boolean forcarDownload;
 	
 	/** The relatorio. */
-	//@Autowired
-	@RelatorioPath("AdmParametroCategoria")
 	private IBaseRelatorio relatorio;
 
 	/**
@@ -55,21 +50,25 @@ public class AdmParametroCategoriaRelController
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.IBaseViewRelatorio#exportar()
 	 */
-	public String exportar() {
+	public String exportar(String tipoRelatorio, String forcarDownload) {		
+		this.setTipoRelatorio(tipoRelatorio);
+		this.setForcarDownload(Boolean.parseBoolean(forcarDownload));
+		
 		Map<String, Object> params = getParametros();
 		params.put("PARAMETRO1", "");
 
-		super.exportar(relatorio, getBusinessController().findAll(), params, forcarDownload);
+		relatorio = new BaseRelatorioImpl("AdmParametroCategoria");
+		
+		super.exportar(relatorio, getBusinessController().findAll(), params, this.forcarDownload);
 		return "";
 	}
 
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.relatorio.BaseViewRelatorioController#getListaTipoRelatorio(java.lang.String)
 	 */
-	@ModelAttribute("listaTipoRelatorio")
 	@Override
 	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
-		return getListaTipoRelatorio();
+		return super.getListaTipoRelatorio();
 	}
 	
 	/**
