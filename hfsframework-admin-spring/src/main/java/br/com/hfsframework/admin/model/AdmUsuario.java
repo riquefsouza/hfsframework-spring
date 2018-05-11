@@ -144,6 +144,33 @@ public class AdmUsuario implements Serializable {
 		limpar();
 	}
 
+	
+	/**
+	 * Instantiates a new adm usuario.
+	 *
+	 * @param id the id
+	 * @param cpf the cpf
+	 * @param data the data
+	 * @param email the email
+	 * @param ldapDN the ldap DN
+	 * @param login the login
+	 * @param nome the nome
+	 * @param senha the senha
+	 */
+	public AdmUsuario(Long id, String login, String nome, Date data, BigDecimal cpf, String email, String ldapDN,
+			String senha) {
+		super();
+		this.id = id;
+		this.cpf = cpf;
+		this.data = data;
+		this.email = email;
+		this.ldapDN = ldapDN;
+		this.login = login;
+		this.nome = nome;
+		this.senha = senha;
+	}
+
+
 	/**
 	 * Limpar.
 	 */

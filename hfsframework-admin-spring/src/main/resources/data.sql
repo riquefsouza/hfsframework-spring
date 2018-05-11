@@ -324,419 +324,213 @@ values (13, 'teste.com.br', 'Servidor do Proxy.', 'PROXY_SERVIDOR', 4);
 insert into ADM_PARAMETRO (par_seq, par_valor, par_descricao, par_codigo, par_pmc_seq)
 values (14, '8080', 'Porta do Proxy.', 'PROXY_PORTA', 4);
 
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15369, 'ANALISTA JUD - AESP(PSICOLOGIA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15385, 'ANALISTA JUD - AREA JUD(EXEC MANDAD)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15393, 'ANALISTA JUD - AREA ADM(ADMINISTR)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800707, 'ASSISTENTE ESPECIALIZADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801420, 'ASSISTENTE DE DIRETOR CJ-1');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800658, 'ASSISTENTE SECRETARIO apoio graco');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800425, 'ASSESSOR DA PRESIDENCIA ACE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801820, 'SUPERVISOR DA COMISSÃO DE INVENTÁRIO ALMOX PATRIM');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801240, 'ASSISTENTE DE SUPERVISOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15387, 'ANALISTA JUD - AREA JUD - OF JUSTICA AVAL FEDERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800605, 'ASSISTENTE DE DIRETOR DE SECRETARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15462, 'ANALISTA JUD - AESP (MEDICINA PSIQUIATRIA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801253, 'DIRETOR DA SECRETARIA-GERAL JUDICIÁRIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800232, 'SECRETARIO CALCULISTA DE VT');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801458, 'ASSISTENTE (VT)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800700, 'CHEFE DE POSTO AVANÇADO FC-6');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800690, 'ASSISTENTE DE CHEFE DE POSTO AVANÇADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801148, 'CHEFE DE GABINETE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802365, 'SECRETARIO DE AUDIENCIAS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801156, 'CHEFE DE DIVISAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801308, 'CHEFE DE SECAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800654, 'ASSISTENTE DE GABINETE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800443, 'ASSISTENTE ADMINISTRATIVO (gab)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800709, 'ASSISTENTE SECRETARIO (jurisp)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800710, 'ASSISTENTE SECRETARIO (socioamb)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800214, 'ASSISTENTE DE DIRETOR DE SECRETARIA  (VT)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800223, 'ASSISTENTE SECRETARIO DE JUIZ  (VT)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15456, 'TECNICO JUD - AESP (TECNO INFORMAÇÃO)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800225, 'ASSISTENTE DE JUIZ SUBSTITUTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801149, 'CHEFE DE GABINETE 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801157, 'CHEFE DE COMISSAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801306, 'ASSESSOR DE CONTRATAÇÃO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801307, 'ASSESSOR DE CONFORMIDADE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801310, 'ESPECIALISTA DE CONTRATAÇÃO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801311, 'ESPECIALISTA DE MANUTENÇÃO E INFRAESTRUTURA PREDIAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801825, 'SUPERVISOR (Ouvidoria)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15463, 'TECNICO JUD - AESP (ENFERMAGEM)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15441, 'ESTAGIARIO - NIVEL SUPERIOR 6H');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15407, 'ANALISTA JUD - AREA JUDICIARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15415, 'ANALISTA JUD - AREA ADMINISTRATIVA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15423, 'ANALISTA JUD - AREA ADM(PLANEJ)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15431, 'ESTAGIARIO - NIVEL MEDIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15440, 'ESTAGIARIO - NIVEL SUPERIOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (999997, 'CARGO FICTICIO - FUNCIONARIO INATIVO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801298, 'ASSISTENTE DE APOIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801300, 'ASSISTENTE TECNICO DE PAGAMENTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801303, 'ASSISTENTE DE DIRETOR GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801304, 'ASSESSOR JURIDICO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15386, 'OFICIAL DE JUSTICA AVALIADOR FEDERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800423, 'ASSESSOR DA PRESIDENCIA AIC');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15246, 'AGENTE DE SEGURANCA JUDICIARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15452, 'TECNICO JUD - AREA ADM - (TELEC E ELET)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15450, 'TECNICO JUD - AREA ADM - (SEGURANÇA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15451, 'TECNICO JUD - AREA ADM - (MECANICA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15453, 'TECNICO JUD - AREA ADM - (CARP E MARC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15454, 'TECNICO JUD - AREA ADM - ARTES GRÁFICAS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (9998, 'SERVIDOR REMOVIDO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1652, 'JUIZ CONVOCADO TRT');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1725, 'JUIZ DESIGNADO VT');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800079, 'AGENTE ESPECIALIZADO TURMA/GAB.');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802063, 'PRESIDENTE COMISSAO PERMANENTE AUDITORIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801407, 'DIRETOR DE SECRETARIA DE VT (JCJ)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800427, 'ASSISTENTE (FC-2)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15455, 'TECNICO JUD - AREA ADM - (TRANSPORTE)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15457, 'TECNICO JUD - AESP (OPERAÇÃO COMP)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15424, 'ANALISTA JUD - AREA ADM(CONTABILIDADE)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15425, 'ANALISTA JUD - AESP(MEDICINA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15426, 'ANALISTA JUD - AESP(TECNO INFORMAÇÃO)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800656, 'ASSISTENTE SECRETARIO - GRACO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800424, 'ASSESSOR DA PRESIDENCIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15461, 'ANALISTA JUD - AESP-(MEDICINA DO TRABALHO)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800657, 'ASSISTENTE SECRETARIO I');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800701, 'ANALISTA ESPECIALIZADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800702, 'ASSISTENTE DE JUIZ DIRETOR DE FORO DA CAPITAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800705, 'ANALISTA DE CONTROLE INTERNO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800708, 'SECRETARIO-GERAL DA PRESIDENCIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (507, 'DIRETOR GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (540, 'ESCRITURARIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (566, 'OFICIAL DE JUSTICA AVALIADOR PJ');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (574, 'SUPLENTE DE JUIZ DE JCJ');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (906, 'CHEFE DE SECRETARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (914, 'DIRETOR DE SECRETARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (922, 'DIR DISTRIB MANDADOS JUDICIAIS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (930, 'DEPOSITARIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (949, 'DISTRIBUIDOR DE FEITOS JUDICIAIS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1600, 'JUIZ CORREGEDOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1619, 'JUIZ VICE CORREGEDOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1627, 'JUIZ CLASSISTA TRT TRABALHADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1635, 'JUIZ CLASSISTA TRT EMPREGADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1651, 'JUIZ TOGADO TRT');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1724, 'JUIZ TITULAR DE VARA DO TRABALHO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (1759, 'JUIZ SUBSTITUTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2151, 'SECRETARIO GERAL DA PRESIDENCIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2453, 'SUPL JUIZ CLASS REP EMPREGADOS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2500, 'SUPL JUIZ CLASS REP EMPREGADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2526, 'SUPL JUIZ CLASS TRT TRABALHADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2534, 'SUPL JUIZ CLASS TRT EMPREGADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15458, 'ANALISTA JUD - AESP(ARQUIVOLOGIA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15459, 'ANALISTA JUD - AESP(ESTATISTICA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900030, 'ASSIST CHEFE SECRETARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900099, 'BIBLIOTECARIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900102, 'CEDIDO FC-01 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900110, 'CEDIDO FC-02 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900129, 'CEDIDO FC-03 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900137, 'CEDIDO FC-04 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900145, 'CEDIDO FC-05 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900153, 'CEDIDO FC-06 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900161, 'CEDIDO FC-07 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900170, 'CEDIDO FC-08 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900188, 'CEDIDO FC-09 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (900196, 'CEDIDO FC-10 CONTROLE SEC LEGISLACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15460, 'ANALISTA JUD - AESP-(MEDICINA CARDIOLOGIA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800045, 'COORDENADOR CJ-2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800166, 'ASSESSOR JURIDICO 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801823, 'SUPERVISOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800419, 'ASSESSOR DA PRESIDENCIA AJU');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800420, 'ASSESSOR DA PRESIDENCIA ACC');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801105, 'COORDENADOR CPL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800170, 'ASSISTENTE DA PRESIDENCIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (99999, 'COMISSIONADO SEM PROVIMENTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800974, 'ASSESSOR DA PRESIDENCIA II');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800421, 'ASSESSOR DA PRESIDENCIA ARR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801282, 'ESPECIALISTA DE CONTROLE INTERNO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800194, 'ASSESSOR DA PRESIDENCIA ACC 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801286, 'ESPECIALISTA EM TECNOLOGIA DA INFORMACAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801287, 'SUPERVISOR E');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801288, 'ASSISTENTE JURIDICO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801289, 'ASSISTENTE DE DIRETOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801290, 'ASSISTENTE DE COORDENADOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801291, 'ASSISTENTE DE COORDENADOR DE CPL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801292, 'ANALISTA DA AREA FINANCEIRA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801293, 'ANALISTA DE NEGOCIOS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800078, 'AGENTE ESPECIALIZADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800167, 'ASSESSOR DESEN CON QUAL SEG TEC INF');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800175, 'ASSESSOR DE APOIO EXTERNO E INSTITUC');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800418, 'ASSESSOR DA PRESIDENCIA 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800434, 'ASSESSOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800442, 'ASSISTENTE ADMINISTRATIVO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800477, 'ASSESSOR ADMINISTRATIVO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800493, 'ASSIST GERAL SECRET PRES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800507, 'ASSISTENTE DIRETOR GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800515, 'ASSISTENTE CHEFE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800566, 'ASSIST CHEFE DE DIVISAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800604, 'ASSIST DIR SECRETARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800620, 'ASSIST TEC ESPECIALIZADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800655, 'ASSISTENTE SECRETARIO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800930, 'ASSESSOR DA PRESIDENCIA COORDENADOR');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800957, 'CHEFE DE SECAO ESPECIALIZADA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800973, 'ASSESSOR DA PRESIDENCIA I');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800981, 'ASSESSOR DE PLANEJ E ORCAMENTO PRES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (800990, 'ASSESSOR TECNICO DE PLANEJ E ORCAMEN');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801007, 'CHEFE DE SEC DE TURMA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801058, 'CHEFE DE COORDENADORIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801252, 'DIRETOR-GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801350, 'DIRETOR DE DEPARTAMENTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801406, 'DIRETOR DE SECRETARIA 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801600, 'JUIZ CORREGEDOR 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (801619, 'JUIZ VICE CORREGEDOR 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802054, 'PRESIDENTE DO TRIBUNAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802151, 'SECRETARIO GERAL DA PRESIDENCIA 2');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802208, 'SECRETARIO DIRETOR GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802356, 'SECRETARIO TRIBUNAL PLENO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802380, 'SECRETARIO ESPEC CALCULISTA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802402, 'SUPERVISOR DE SETOR (extinta)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (802658, 'VICE PRESIDENTE DO TRIBUNAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2755, 'JUIZ CLASSISTA REP EMPREGADOS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (2801, 'JUIZ CLASSISTA REP EMPREGADORES');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (9873, 'CARGO EXTINTO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (9970, 'FUNCIONARIO ACOMPANHA CONJUGE');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (9997, 'SERVIDOR REQUISITADO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (10081, 'ASSESSOR DE JUIZ');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (12149, 'ASSESSOR DA PRESIDENCIA 3');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (12211, 'DIRETOR DE SERVICOS');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (12220, 'DIRETOR DE DIVISAO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (12300, 'SECRETARIO DO TRIBUNAL PLENO');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (12319, 'ASSESSOR DA CORREGEDORIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15008, 'TECNICO JUDICIARIO (AG ADMIN)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15016, 'TECNICO JUDICIARIO (AG SEG JUD)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15024, 'TECNICO JUDICIARIO (AG TELE ELET)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15032, 'ANALISTA JUDICIARIO (ANALIST SIST)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15040, 'TECNICO JUDICIARIO (ARTIF ART GRAF)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15059, 'TECNICO JUDICIARIO (ART CARP MARC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15067, 'TECNICO JUDICIARIO (ART ELET COM)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15075, 'TECNICO JUDICIARIO (ARTIF MECAN)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15083, 'ANALISTA JUDICIARIO (ASSIST SOC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15091, 'TECNICO JUDICIARIO (ATEND JUDIC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15105, 'TECNICO JUDICIARIO (AUX JUDIC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15113, 'ANALISTA JUDICIARIO (BIBLIOTEC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15121, 'ANALISTA JUDICIARIO (CONTADOR)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15130, 'ANALISTA JUDICIARIO (ENFERMEIRO)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15148, 'ANALISTA JUDICIARIO (MEDICO)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15156, 'ANALISTA JUDICIARIO (OF JUST AV)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15164, 'TECNICO JUDICIARIO (OPER COMP)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15180, 'ANALISTA JUDICIARIO (TECN ADM)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15199, 'ANALISTA JUDICIARIO (TECN JUDIC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15210, 'ASSESSOR DO DIRETOR GERAL');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15229, 'TECNICO JUD - AREA JUDICIARIA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15237, 'TECNICO JUD - AREA ADMINISTRATIVA');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15245, 'TECNICO JUD - SERV GER(TRANSP E SEG)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15253, 'TECNICO JUD - SERV GER(TELEC E ELET)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15261, 'TECNICO JUD - SERV GER(ARTES GRAFIC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15270, 'TECNICO JUD - SERV GER (CARP E MARC)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15288, 'TECNICO JUD - SERV GERAIS (MECANICA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15326, 'ANALISTA JUD - AESP (SERVICO SOCIAL)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15334, 'ANALISTA JUD - AESP(BIBLIOTECONOMIA)');
-insert into ADM_CARGO (car_seq, car_descricao)
-values (15350, 'ANALISTA JUD - AESP (ENFERMAGEM)');
 
+insert into ADM_CARGO (car_seq, car_descricao) values (1,'DIRETOR GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (2,'ESCRITURARIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (3,'OFICIAL DE JUSTICA AVALIADOR PJ');
+insert into ADM_CARGO (car_seq, car_descricao) values (4,'SUPLENTE DE JUIZ DE JCJ');
+insert into ADM_CARGO (car_seq, car_descricao) values (5,'CHEFE DE SECRETARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (6,'DIRETOR DE SECRETARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (7,'DIR DISTRIB MANDADOS JUDICIAIS');
+insert into ADM_CARGO (car_seq, car_descricao) values (8,'DEPOSITARIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (9,'DISTRIBUIDOR DE FEITOS JUDICIAIS');
+insert into ADM_CARGO (car_seq, car_descricao) values (10,'JUIZ CORREGEDOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (11,'JUIZ VICE CORREGEDOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (12,'JUIZ CLASSISTA TRT TRABALHADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (13,'JUIZ CLASSISTA TRT EMPREGADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (14,'JUIZ TOGADO TRT');
+insert into ADM_CARGO (car_seq, car_descricao) values (15,'JUIZ CONVOCADO TRT');
+insert into ADM_CARGO (car_seq, car_descricao) values (16,'JUIZ TITULAR DE VARA DO TRABALHO');
+insert into ADM_CARGO (car_seq, car_descricao) values (17,'JUIZ DESIGNADO VT');
+insert into ADM_CARGO (car_seq, car_descricao) values (18,'JUIZ SUBSTITUTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (19,'SECRETARIO GERAL DA PRESIDENCIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (20,'SUPL JUIZ CLASS REP EMPREGADOS');
+insert into ADM_CARGO (car_seq, car_descricao) values (21,'SUPL JUIZ CLASS REP EMPREGADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (22,'SUPL JUIZ CLASS TRT TRABALHADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (23,'SUPL JUIZ CLASS TRT EMPREGADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (24,'JUIZ CLASSISTA REP EMPREGADOS');
+insert into ADM_CARGO (car_seq, car_descricao) values (25,'JUIZ CLASSISTA REP EMPREGADORES');
+insert into ADM_CARGO (car_seq, car_descricao) values (26,'CARGO EXTINTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (27,'FUNCIONARIO ACOMPANHA CONJUGE');
+insert into ADM_CARGO (car_seq, car_descricao) values (28,'SERVIDOR REQUISITADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (29,'SERVIDOR REMOVIDO');
+insert into ADM_CARGO (car_seq, car_descricao) values (30,'ASSESSOR DE JUIZ');
+insert into ADM_CARGO (car_seq, car_descricao) values (31,'ASSESSOR DA PRESIDENCIA 3');
+insert into ADM_CARGO (car_seq, car_descricao) values (32,'DIRETOR DE SERVICOS');
+insert into ADM_CARGO (car_seq, car_descricao) values (33,'DIRETOR DE DIVISAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (34,'SECRETARIO DO TRIBUNAL PLENO');
+insert into ADM_CARGO (car_seq, car_descricao) values (35,'ASSESSOR DA CORREGEDORIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (36,'TECNICO JUDICIARIO (AG ADMIN)');
+insert into ADM_CARGO (car_seq, car_descricao) values (37,'TECNICO JUDICIARIO (AG SEG JUD)');
+insert into ADM_CARGO (car_seq, car_descricao) values (38,'TECNICO JUDICIARIO (AG TELE ELET)');
+insert into ADM_CARGO (car_seq, car_descricao) values (39,'ANALISTA JUDICIARIO (ANALIST SIST)');
+insert into ADM_CARGO (car_seq, car_descricao) values (40,'TECNICO JUDICIARIO (ARTIF ART GRAF)');
+insert into ADM_CARGO (car_seq, car_descricao) values (41,'TECNICO JUDICIARIO (ART CARP MARC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (42,'TECNICO JUDICIARIO (ART ELET COM)');
+insert into ADM_CARGO (car_seq, car_descricao) values (43,'TECNICO JUDICIARIO (ARTIF MECAN)');
+insert into ADM_CARGO (car_seq, car_descricao) values (44,'ANALISTA JUDICIARIO (ASSIST SOC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (45,'TECNICO JUDICIARIO (ATEND JUDIC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (46,'TECNICO JUDICIARIO (AUX JUDIC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (47,'ANALISTA JUDICIARIO (BIBLIOTEC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (48,'ANALISTA JUDICIARIO (CONTADOR)');
+insert into ADM_CARGO (car_seq, car_descricao) values (49,'ANALISTA JUDICIARIO (ENFERMEIRO)');
+insert into ADM_CARGO (car_seq, car_descricao) values (50,'ANALISTA JUDICIARIO (MEDICO)');
+insert into ADM_CARGO (car_seq, car_descricao) values (51,'ANALISTA JUDICIARIO (OF JUST AV)');
+insert into ADM_CARGO (car_seq, car_descricao) values (52,'TECNICO JUDICIARIO (OPER COMP)');
+insert into ADM_CARGO (car_seq, car_descricao) values (53,'ANALISTA JUDICIARIO (TECN ADM)');
+insert into ADM_CARGO (car_seq, car_descricao) values (54,'ANALISTA JUDICIARIO (TECN JUDIC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (55,'ASSESSOR DO DIRETOR GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (56,'TECNICO JUD - AREA JUDICIARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (57,'TECNICO JUD - AREA ADMINISTRATIVA');
+insert into ADM_CARGO (car_seq, car_descricao) values (58,'TECNICO JUD - SERV GER(TRANSP E SEG)');
+insert into ADM_CARGO (car_seq, car_descricao) values (59,'AGENTE DE SEGURANCA JUDICIARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (60,'TECNICO JUD - SERV GER(TELEC E ELET)');
+insert into ADM_CARGO (car_seq, car_descricao) values (61,'TECNICO JUD - SERV GER(ARTES GRAFIC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (62,'TECNICO JUD - SERV GER (CARP E MARC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (63,'TECNICO JUD - SERV GERAIS (MECANICA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (64,'ANALISTA JUD - AESP (SERVICO SOCIAL)');
+insert into ADM_CARGO (car_seq, car_descricao) values (65,'ANALISTA JUD - AESP(BIBLIOTECONOMIA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (66,'ANALISTA JUD - AESP (ENFERMAGEM)');
+insert into ADM_CARGO (car_seq, car_descricao) values (67,'ANALISTA JUD - AESP(PSICOLOGIA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (68,'ANALISTA JUD - AREA JUD(EXEC MANDAD)');
+insert into ADM_CARGO (car_seq, car_descricao) values (69,'OFICIAL DE JUSTICA AVALIADOR FEDERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (70,'ANALISTA JUD - AREA JUD - OF JUSTICA AVAL FEDERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (71,'ANALISTA JUD - AREA ADM(ADMINISTR)');
+insert into ADM_CARGO (car_seq, car_descricao) values (72,'ANALISTA JUD - AREA JUDICIARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (73,'ANALISTA JUD - AREA ADMINISTRATIVA');
+insert into ADM_CARGO (car_seq, car_descricao) values (74,'ANALISTA JUD - AREA ADM(PLANEJ)');
+insert into ADM_CARGO (car_seq, car_descricao) values (75,'ANALISTA JUD - AREA ADM(CONTABILIDADE)');
+insert into ADM_CARGO (car_seq, car_descricao) values (76,'ANALISTA JUD - AESP(MEDICINA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (77,'ANALISTA JUD - AESP(TECNO INFORMAÇÃO)');
+insert into ADM_CARGO (car_seq, car_descricao) values (78,'ESTAGIARIO - NIVEL MEDIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (79,'ESTAGIARIO - NIVEL SUPERIOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (80,'ESTAGIARIO - NIVEL SUPERIOR 6H');
+insert into ADM_CARGO (car_seq, car_descricao) values (81,'TECNICO JUD - AREA ADM - (SEGURANÇA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (82,'TECNICO JUD - AREA ADM - (MECANICA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (83,'TECNICO JUD - AREA ADM - (TELEC E ELET)');
+insert into ADM_CARGO (car_seq, car_descricao) values (84,'TECNICO JUD - AREA ADM - (CARP E MARC)');
+insert into ADM_CARGO (car_seq, car_descricao) values (85,'TECNICO JUD - AREA ADM - ARTES GRÁFICAS');
+insert into ADM_CARGO (car_seq, car_descricao) values (86,'TECNICO JUD - AREA ADM - (TRANSPORTE)');
+insert into ADM_CARGO (car_seq, car_descricao) values (87,'TECNICO JUD - AESP (TECNO INFORMAÇÃO)');
+insert into ADM_CARGO (car_seq, car_descricao) values (88,'TECNICO JUD - AESP (OPERAÇÃO COMP)');
+insert into ADM_CARGO (car_seq, car_descricao) values (89,'ANALISTA JUD - AESP(ARQUIVOLOGIA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (90,'ANALISTA JUD - AESP(ESTATISTICA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (91,'ANALISTA JUD - AESP-(MEDICINA CARDIOLOGIA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (92,'ANALISTA JUD - AESP-(MEDICINA DO TRABALHO)');
+insert into ADM_CARGO (car_seq, car_descricao) values (93,'ANALISTA JUD - AESP (MEDICINA PSIQUIATRIA)');
+insert into ADM_CARGO (car_seq, car_descricao) values (94,'TECNICO JUD - AESP (ENFERMAGEM)');
+insert into ADM_CARGO (car_seq, car_descricao) values (95,'COMISSIONADO SEM PROVIMENTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (96,'COORDENADOR CJ-2');
+insert into ADM_CARGO (car_seq, car_descricao) values (97,'AGENTE ESPECIALIZADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (98,'AGENTE ESPECIALIZADO TURMA/GAB.');
+insert into ADM_CARGO (car_seq, car_descricao) values (99,'ASSESSOR JURIDICO 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (100,'ASSESSOR DESEN CON QUAL SEG TEC INF');
+insert into ADM_CARGO (car_seq, car_descricao) values (101,'ASSISTENTE DA PRESIDENCIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (102,'ASSESSOR DE APOIO EXTERNO E INSTITUC');
+insert into ADM_CARGO (car_seq, car_descricao) values (103,'ASSESSOR DA PRESIDENCIA ACC 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (104,'ASSISTENTE DE DIRETOR DE SECRETARIA  (VT)');
+insert into ADM_CARGO (car_seq, car_descricao) values (105,'ASSISTENTE SECRETARIO DE JUIZ  (VT)');
+insert into ADM_CARGO (car_seq, car_descricao) values (106,'ASSISTENTE DE JUIZ SUBSTITUTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (107,'SECRETARIO CALCULISTA DE VT');
+insert into ADM_CARGO (car_seq, car_descricao) values (108,'ASSESSOR DA PRESIDENCIA 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (109,'ASSESSOR DA PRESIDENCIA AJU');
+insert into ADM_CARGO (car_seq, car_descricao) values (110,'ASSESSOR DA PRESIDENCIA ACC');
+insert into ADM_CARGO (car_seq, car_descricao) values (111,'ASSESSOR DA PRESIDENCIA ARR');
+insert into ADM_CARGO (car_seq, car_descricao) values (112,'ASSESSOR DA PRESIDENCIA AIC');
+insert into ADM_CARGO (car_seq, car_descricao) values (113,'ASSESSOR DA PRESIDENCIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (114,'ASSESSOR DA PRESIDENCIA ACE');
+insert into ADM_CARGO (car_seq, car_descricao) values (115,'ASSISTENTE (FC-2)');
+insert into ADM_CARGO (car_seq, car_descricao) values (116,'ASSESSOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (117,'ASSISTENTE ADMINISTRATIVO');
+insert into ADM_CARGO (car_seq, car_descricao) values (118,'ASSISTENTE ADMINISTRATIVO (gab)');
+insert into ADM_CARGO (car_seq, car_descricao) values (119,'ASSESSOR ADMINISTRATIVO');
+insert into ADM_CARGO (car_seq, car_descricao) values (120,'ASSIST GERAL SECRET PRES');
+insert into ADM_CARGO (car_seq, car_descricao) values (121,'ASSISTENTE DIRETOR GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (122,'ASSISTENTE CHEFE');
+insert into ADM_CARGO (car_seq, car_descricao) values (123,'ASSIST CHEFE DE DIVISAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (124,'ASSIST DIR SECRETARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (125,'ASSISTENTE DE DIRETOR DE SECRETARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (126,'ASSIST TEC ESPECIALIZADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (127,'ASSISTENTE DE GABINETE');
+insert into ADM_CARGO (car_seq, car_descricao) values (128,'ASSISTENTE SECRETARIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (129,'ASSISTENTE SECRETARIO - GRACO');
+insert into ADM_CARGO (car_seq, car_descricao) values (130,'ASSISTENTE SECRETARIO I');
+insert into ADM_CARGO (car_seq, car_descricao) values (131,'ASSISTENTE SECRETARIO apoio graco');
+insert into ADM_CARGO (car_seq, car_descricao) values (132,'ASSISTENTE DE CHEFE DE POSTO AVANÇADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (133,'CHEFE DE POSTO AVANÇADO FC-6');
+insert into ADM_CARGO (car_seq, car_descricao) values (134,'ANALISTA ESPECIALIZADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (135,'ASSISTENTE DE JUIZ DIRETOR DE FORO DA CAPITAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (136,'ANALISTA DE CONTROLE INTERNO');
+insert into ADM_CARGO (car_seq, car_descricao) values (137,'ASSISTENTE ESPECIALIZADO');
+insert into ADM_CARGO (car_seq, car_descricao) values (138,'SECRETARIO-GERAL DA PRESIDENCIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (139,'ASSISTENTE SECRETARIO (jurisp)');
+insert into ADM_CARGO (car_seq, car_descricao) values (140,'ASSISTENTE SECRETARIO (socioamb)');
+insert into ADM_CARGO (car_seq, car_descricao) values (141,'ASSESSOR DA PRESIDENCIA COORDENADOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (142,'CHEFE DE SECAO ESPECIALIZADA');
+insert into ADM_CARGO (car_seq, car_descricao) values (143,'ASSESSOR DA PRESIDENCIA I');
+insert into ADM_CARGO (car_seq, car_descricao) values (144,'ASSESSOR DA PRESIDENCIA II');
+insert into ADM_CARGO (car_seq, car_descricao) values (145,'ASSESSOR DE PLANEJ E ORCAMENTO PRES');
+insert into ADM_CARGO (car_seq, car_descricao) values (146,'ASSESSOR TECNICO DE PLANEJ E ORCAMEN');
+insert into ADM_CARGO (car_seq, car_descricao) values (147,'CHEFE DE SEC DE TURMA');
+insert into ADM_CARGO (car_seq, car_descricao) values (148,'CHEFE DE COORDENADORIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (149,'COORDENADOR CPL');
+insert into ADM_CARGO (car_seq, car_descricao) values (150,'CHEFE DE GABINETE');
+insert into ADM_CARGO (car_seq, car_descricao) values (151,'CHEFE DE GABINETE 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (152,'CHEFE DE DIVISAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (153,'CHEFE DE COMISSAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (154,'ASSISTENTE DE SUPERVISOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (155,'DIRETOR-GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (156,'DIRETOR DA SECRETARIA-GERAL JUDICIÁRIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (157,'ESPECIALISTA DE CONTROLE INTERNO');
+insert into ADM_CARGO (car_seq, car_descricao) values (158,'ESPECIALISTA EM TECNOLOGIA DA INFORMACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (159,'SUPERVISOR E');
+insert into ADM_CARGO (car_seq, car_descricao) values (160,'ASSISTENTE JURIDICO');
+insert into ADM_CARGO (car_seq, car_descricao) values (161,'ASSISTENTE DE DIRETOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (162,'ASSISTENTE DE COORDENADOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (163,'ASSISTENTE DE COORDENADOR DE CPL');
+insert into ADM_CARGO (car_seq, car_descricao) values (164,'ANALISTA DA AREA FINANCEIRA');
+insert into ADM_CARGO (car_seq, car_descricao) values (165,'ANALISTA DE NEGOCIOS');
+insert into ADM_CARGO (car_seq, car_descricao) values (166,'ASSISTENTE DE APOIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (167,'ASSISTENTE TECNICO DE PAGAMENTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (168,'ASSISTENTE DE DIRETOR GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (169,'ASSESSOR JURIDICO');
+insert into ADM_CARGO (car_seq, car_descricao) values (170,'ASSESSOR DE CONTRATAÇÃO');
+insert into ADM_CARGO (car_seq, car_descricao) values (171,'ASSESSOR DE CONFORMIDADE');
+insert into ADM_CARGO (car_seq, car_descricao) values (172,'CHEFE DE SECAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (173,'ESPECIALISTA DE CONTRATAÇÃO');
+insert into ADM_CARGO (car_seq, car_descricao) values (174,'ESPECIALISTA DE MANUTENÇÃO E INFRAESTRUTURA PREDIAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (175,'DIRETOR DE DEPARTAMENTO');
+insert into ADM_CARGO (car_seq, car_descricao) values (176,'DIRETOR DE SECRETARIA 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (177,'DIRETOR DE SECRETARIA DE VT (JCJ)');
+insert into ADM_CARGO (car_seq, car_descricao) values (178,'ASSISTENTE DE DIRETOR CJ-1');
+insert into ADM_CARGO (car_seq, car_descricao) values (179,'ASSISTENTE (VT)');
+insert into ADM_CARGO (car_seq, car_descricao) values (180,'JUIZ CORREGEDOR 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (181,'JUIZ VICE CORREGEDOR 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (182,'SUPERVISOR DA COMISSÃO DE INVENTÁRIO ALMOX PATRIM');
+insert into ADM_CARGO (car_seq, car_descricao) values (183,'SUPERVISOR');
+insert into ADM_CARGO (car_seq, car_descricao) values (184,'SUPERVISOR (Ouvidoria)');
+insert into ADM_CARGO (car_seq, car_descricao) values (185,'PRESIDENTE DO TRIBUNAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (186,'PRESIDENTE COMISSAO PERMANENTE AUDITORIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (187,'SECRETARIO GERAL DA PRESIDENCIA 2');
+insert into ADM_CARGO (car_seq, car_descricao) values (188,'SECRETARIO DIRETOR GERAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (189,'SECRETARIO TRIBUNAL PLENO');
+insert into ADM_CARGO (car_seq, car_descricao) values (190,'SECRETARIO DE AUDIENCIAS');
+insert into ADM_CARGO (car_seq, car_descricao) values (191,'SECRETARIO ESPEC CALCULISTA');
+insert into ADM_CARGO (car_seq, car_descricao) values (192,'SUPERVISOR DE SETOR (extinta)');
+insert into ADM_CARGO (car_seq, car_descricao) values (193,'VICE PRESIDENTE DO TRIBUNAL');
+insert into ADM_CARGO (car_seq, car_descricao) values (194,'ASSIST CHEFE SECRETARIA');
+insert into ADM_CARGO (car_seq, car_descricao) values (195,'BIBLIOTECARIO');
+insert into ADM_CARGO (car_seq, car_descricao) values (196,'CEDIDO FC-01 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (197,'CEDIDO FC-02 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (198,'CEDIDO FC-03 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (199,'CEDIDO FC-04 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (200,'CEDIDO FC-05 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (201,'CEDIDO FC-06 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (202,'CEDIDO FC-07 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (203,'CEDIDO FC-08 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (204,'CEDIDO FC-09 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (205,'CEDIDO FC-10 CONTROLE SEC LEGISLACAO');
+insert into ADM_CARGO (car_seq, car_descricao) values (206,'CARGO FICTICIO - FUNCIONARIO INATIVO');
 
 
 insert into ADM_SETOR (set_sigla, set_nome, set_pai, set_tipo)
@@ -3211,10 +3005,10 @@ insert into ADM_SETOR (set_sigla, set_nome, set_pai, set_tipo)
 values ('GJ-JFGF', 'GAB JUIZ JORGE FERNANDO G DA FONTE', 'TP', 'GABINETE');
 
 insert into ADM_FUNCIONARIO (fun_codigo, fun_nome, fun_cpf, fun_email, fun_telefone, fun_celular, fun_set_sigla, fun_car_seq, fun_data_admissao, fun_data_saida, fun_ativo)
-values (93203, 'HENRIQUE FIGUEIREDO DE SOUZA', 63266661630, 'henrique.souza@com.br', '(21)3174-1958', '(11)95267-5198', 'DIREM', 15426, to_date('17-03-2014', 'dd-mm-yyyy'), null, 'S');
+values (93203, 'HENRIQUE FIGUEIREDO DE SOUZA', 63266661630, 'henrique.souza@com.br', '(21)3174-1958', '(11)95267-5198', 'DIREM', 77, to_date('17-03-2014', 'dd-mm-yyyy'), null, 'S');
 
 insert into ADM_FUNCIONARIO_PERFIL (usp_prf_seq, usp_fun_codigo)
 values (2, 93203);
 
 insert into ADM_CARGO_FUNCIONARIO (cfn_data_exercicio, cfn_fun_codigo, cfn_car_seq, cfn_data_desligamento, cfn_data_posse, cfn_situacao, cfn_presidente, cfn_diretor_geral, cfn_responsavel_orcamento, cfn_chefe_sepo)
-values (to_date('17-03-2014', 'dd-mm-yyyy'), 93203, 15426, null, to_date('17-03-2014', 'dd-mm-yyyy'), 'E', 'N', 'N', 'N', 'N');
+values (to_date('17-03-2014', 'dd-mm-yyyy'), 93203, 77, null, to_date('17-03-2014', 'dd-mm-yyyy'), 'E', 'N', 'N', 'N', 'N');

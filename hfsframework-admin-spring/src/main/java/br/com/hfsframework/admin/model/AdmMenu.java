@@ -129,6 +129,15 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 		//this.vwAdmFuncionarios = new ArrayList<AdmFuncionarioDTO>();
 		limpar();
 	}
+		
+	public AdmMenu(Long id, String descricao, AdmMenu admMenuPai, Long idFuncionalidade, Integer ordem) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.ordem = ordem;
+		this.idFuncionalidade = idFuncionalidade;
+		this.admMenuPai = admMenuPai;
+	}
 
 	/**
 	 * Limpar.

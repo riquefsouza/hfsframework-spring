@@ -94,7 +94,14 @@ public class AdmParametroCategoria implements Serializable {
 		this.admParametros = new ArrayList<AdmParametro>();
 		limpar();
 	}
-	
+		
+	public AdmParametroCategoria(Long id, String descricao, Long ordem) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.ordem = ordem;
+	}
+
 	/**
 	 * Limpar.
 	 */

@@ -93,6 +93,24 @@ public class AdmParametro implements Serializable {
 	}
 	
 	/**
+	 * Instantiates a new adm parametro.
+	 *
+	 * @param id the id
+	 * @param valor the valor
+	 * @param descricao the descricao
+	 * @param codigo the codigo
+	 * @param idAdmParametroCategoria the id adm parametro categoria
+	 */
+	public AdmParametro(Long id, String valor, String descricao, String codigo, Long idAdmParametroCategoria) {
+		super();
+		this.id = id;
+		this.codigo = codigo;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.idAdmParametroCategoria = idAdmParametroCategoria;
+	}
+
+	/**
 	 * Limpar.
 	 */
 	public void limpar() {

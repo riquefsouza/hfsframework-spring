@@ -121,7 +121,27 @@ public class AdmFuncionario implements Serializable {
 		//this.admCargos = new ArrayList<AdmCargo>();
 		limpar();
 	}
+		
 	
+	public AdmFuncionario(Long id, String nome, BigDecimal cpf, String email, String telefone, 
+			String celular, String setor, Long codCargoPrincipal, Date dataAdmissao, Date dataSaida,
+			Boolean ativo) {
+		super();
+		this.id = id;
+		this.ativo = ativo;
+		this.celular = celular;
+		this.codCargoPrincipal = codCargoPrincipal;
+		this.cpf = cpf;
+		this.dataAdmissao = dataAdmissao;
+		this.dataSaida = dataSaida;
+		this.email = email;
+		this.nome = nome;
+		this.setor = setor;
+		this.telefone = telefone;
+	}
+
+
+
 	/**
 	 * Instantiates a new vw adm funcionario.
 	 *

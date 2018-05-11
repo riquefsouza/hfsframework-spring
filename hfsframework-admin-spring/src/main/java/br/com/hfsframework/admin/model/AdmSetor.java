@@ -55,6 +55,23 @@ public class AdmSetor implements Serializable {
 	 * Instantiates a new vw adm setor.
 	 */
 	public AdmSetor() {
+		super();
+	}
+		
+	/**
+	 * Instantiates a new adm setor.
+	 *
+	 * @param id the id
+	 * @param nomeSetor the nome setor
+	 * @param paiSetor the pai setor
+	 * @param tipoSetor the tipo setor
+	 */
+	public AdmSetor(String id, String nomeSetor, String paiSetor, String tipoSetor) {
+		super();
+		this.id = id;
+		this.nomeSetor = nomeSetor;
+		this.paiSetor = paiSetor;
+		this.tipoSetor = tipoSetor;
 	}
 
 	/**

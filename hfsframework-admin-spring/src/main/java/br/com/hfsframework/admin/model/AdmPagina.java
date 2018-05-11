@@ -108,7 +108,14 @@ public class AdmPagina implements Serializable {
 		this.admPerfils = new ArrayList<AdmPerfil>();
 		limpar();
 	}
-	
+			
+	public AdmPagina(Long id, String managedBean, String url) {
+		super();
+		this.id = id;
+		this.managedBean = managedBean;
+		this.url = url;
+	}
+
 	/**
 	 * Instantiates a new adm pagina.
 	 *

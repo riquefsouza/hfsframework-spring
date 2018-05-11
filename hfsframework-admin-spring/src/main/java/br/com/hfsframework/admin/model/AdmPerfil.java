@@ -151,6 +151,16 @@ public class AdmPerfil implements Serializable {
 		limpar();
 	}
 	
+	
+	public AdmPerfil(Long id, String descricao, Boolean administrador, Boolean geral) {
+		super();
+		this.id = id;
+		this.administrador = administrador;
+		this.descricao = descricao;
+		this.geral = geral;
+	}
+
+
 	/**
 	 * Instantiates a new adm perfil.
 	 *

@@ -128,6 +128,15 @@ public class AdmFuncionalidade implements Serializable {
 		limpar();
 	}
 	
+	
+	
+	public AdmFuncionalidade(Long id, String descricao, AdmPagina admPaginaInicial) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.admPaginaInicial = admPaginaInicial;
+	}
+
 	/**
 	 * Instantiates a new adm funcionalidade.
 	 *

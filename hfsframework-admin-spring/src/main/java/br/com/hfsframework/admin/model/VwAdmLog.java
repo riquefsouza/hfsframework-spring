@@ -109,7 +109,34 @@ public class VwAdmLog implements Serializable {
 		this.listaLogValor = new ArrayList<VwAdmLogValor>();
 		limpar();
 	}
-	
+			
+	/**
+	 * Instantiates a new vw adm log.
+	 *
+	 * @param id the id
+	 * @param usuario the usuario
+	 * @param data the data
+	 * @param dataNumero the data numero
+	 * @param operacao the operacao
+	 * @param ip the ip
+	 * @param entidade the entidade
+	 * @param tabela the tabela
+	 * @param chave the chave
+	 */
+	public VwAdmLog(Long id, String usuario, Date data, String operacao, String ip, 
+			String entidade, String tabela, String chave, Long dataNumero) {
+		super();
+		this.id = id;
+		this.usuario = usuario;
+		this.data = data;
+		this.dataNumero = dataNumero;
+		this.operacao = operacao;
+		this.ip = ip;
+		this.entidade = entidade;
+		this.tabela = tabela;
+		this.chave = chave;
+	}
+
 	/**
 	 * Limpar.
 	 */

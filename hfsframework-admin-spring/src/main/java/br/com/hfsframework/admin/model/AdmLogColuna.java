@@ -49,6 +49,20 @@ public class AdmLogColuna implements Serializable {
 	public AdmLogColuna() {
 		limpar();
 	}
+	
+	/**
+	 * Instantiates a new adm log coluna.
+	 *
+	 * @param nome the nome
+	 * @param nomeExibicao the nome exibicao
+	 * @param comando the comando
+	 */
+	public AdmLogColuna(String nome, String nomeExibicao, String comando) {
+		super();
+		this.nome = nome;
+		this.nomeExibicao = nomeExibicao;
+		this.comando = comando;
+	}
 
 	/**
 	 * Limpar.

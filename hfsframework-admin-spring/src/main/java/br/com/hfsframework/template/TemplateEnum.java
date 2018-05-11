@@ -43,7 +43,11 @@ public enum TemplateEnum {
 	retrato("relatorios", "Retrato", "Relatório de Orientação Retrato"),
 	
 	/** The paisagem. */
-	paisagem("relatorios", "Paisagem", "Relatório de Orientação Paisagem");
+	paisagem("relatorios", "Paisagem", "Relatório de Orientação Paisagem"),
+	
+	ServiceTest("test", "ServiceTest", "Service Test"),
+	
+	RestTest("test", "RestTest", "Rest Test");
 	
 	/** The diretorio. */
 	private String diretorio;

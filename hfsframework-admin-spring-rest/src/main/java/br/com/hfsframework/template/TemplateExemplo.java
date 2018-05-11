@@ -17,7 +17,6 @@ import freemarker.template.TemplateException;
 public class TemplateExemplo {
 
 	/** The Constant pacote. */
-	//private static final String pacote = "br.com.hfsframework.admin";
 	private static final String pacote = "br.com.hfsframework.test.admin";
 	
 	/**
@@ -31,9 +30,6 @@ public class TemplateExemplo {
 	 *             the template exception
 	 */
 	public static void main(String[] args) throws IOException, TemplateException {
-		//final SLF4JLoggerContext ctx = PrivateManager.getContext();
-        //ctx.reconfigure();
-
 		String[][] classes = {
 				//{"AdmCargo", "Long"},
 				{"AdmFuncionalidade", "Long"},
@@ -50,24 +46,12 @@ public class TemplateExemplo {
 				{"VwAdmLogValor", "Long"}
 		};
 		
-        String saida = "C:/Temp/destino";
+        String saida = "C:/VM";
         
         String caminhoModelo = "";
         //String caminhoModelo = "C:/demoiselle3/workspace/hfssistema/src/main/java/br/com/hfsframework/template";
         
-        TemplateUtil.gerarCodigoFonte(TemplateEnum.ServiceTest, caminhoModelo, pacote, classes, saida);
+        TemplateUtil.gerarCodigoFonte(TemplateEnum.RestTest, caminhoModelo, pacote, classes, saida);;
 	}
-/*	
-	private static class PrivateManager extends LogManager {
-        private static final String FQCN = org.apache.logging.log4j.LogManager.class.getName();
 
-        public static SLF4JLoggerContext getContext() {
-            return (SLF4JLoggerContext) getContext(FQCN, false);
-        }
-
-        public static org.apache.logging.log4j.Logger getLogger(final String name) {
-            return getLogger(FQCN, name);
-        }
-    }
-*/
 }

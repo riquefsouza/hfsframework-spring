@@ -6,7 +6,11 @@
  */
 package br.com.hfsframework.admin.view.admParametro;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -25,6 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.hfsframework.admin.model.AdmParametro;
+import br.com.hfsframework.admin.model.AdmParametroCategoria;
+import br.com.hfsframework.admin.service.AdmParametroCategoriaService;
 import br.com.hfsframework.admin.service.AdmParametroService;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewCadastro;
@@ -48,6 +54,13 @@ public class AdmParametroController
 	@Autowired
 	private AdmParametroRelController rel;
 	
+	/** The adm parametro categoria repository. */
+	@Autowired
+	private AdmParametroCategoriaService admParametroCategoriaService;
+
+	/** The lista adm parametro categoria. */
+	private List<AdmParametroCategoria> listaAdmParametroCategoria;
+	
 	/**
 	 * Instantiates a new AdmParametroController.
 	 */
@@ -56,6 +69,8 @@ public class AdmParametroController
 			"/private/admin/admParametro/listarAdmParametro",
 			"/private/admin/admParametro/editarAdmParametro", 
 			"/admParametroMB");
+		
+		listaAdmParametroCategoria = new ArrayList<AdmParametroCategoria>();
 	}
 
 	/* (non-Javadoc)
@@ -63,7 +78,23 @@ public class AdmParametroController
 	 */
 	@PostConstruct
 	public void init() {
+		listaAdmParametroCategoria = StreamSupport.stream(admParametroCategoriaService.findAll().spliterator(), false)
+				.collect(Collectors.toList());			
 		atualizaListaDataTable();
+
+		if (getBean().getAdmParametroCategoria() != null && listaAdmParametroCategoria.size() > 0) {
+			getBean().getAdmParametroCategoria().setId(listaAdmParametroCategoria.get(0).getId());
+			selectAdmParametroCategoria();
+		}
+	}
+	
+	/**
+	 * Select adm parametro categoria.
+	 */
+	public void selectAdmParametroCategoria() {
+		Optional<AdmParametroCategoria> admParametroCategoria = admParametroCategoriaService
+				.load(getBean().getAdmParametroCategoria().getId());
+		getBean().setAdmParametroCategoria(admParametroCategoria.get());
 	}
 	
 	@Override
@@ -96,6 +127,8 @@ public class AdmParametroController
 	@PostMapping("/salvar")
 	public RedirectView salvar(@Valid AdmParametro obj, 
 			BindingResult result, RedirectAttributes attributes) {
+		//getBean().setIdAdmParametroCategoria(getBean().getAdmParametroCategoria().getId());
+		getBean().getAdmParametroCategoria().setId(getBean().getIdAdmParametroCategoria());		
 		return super.salvar(obj.getId(), obj.getDescricao(), obj, result, attributes);
 	}
 
@@ -165,4 +198,24 @@ public class AdmParametroController
 		super.setListaEntidade(listaEntidade);
 	}
 
+	/**
+	 * Gets the lista adm parametro categoria.
+	 *
+	 * @return the lista adm parametro categoria
+	 */
+	@ModelAttribute("listaAdmParametroCategoria")
+	public List<AdmParametroCategoria> getListaAdmParametroCategoria() {
+		return listaAdmParametroCategoria;
+	}
+
+	/**
+	 * Sets the lista adm parametro categoria.
+	 *
+	 * @param listaAdmParametroCategoria
+	 *            the new lista adm parametro categoria
+	 */
+	public void setListaAdmParametroCategoria(List<AdmParametroCategoria> listaAdmParametroCategoria) {
+		this.listaAdmParametroCategoria = listaAdmParametroCategoria;
+	}
+	
 }

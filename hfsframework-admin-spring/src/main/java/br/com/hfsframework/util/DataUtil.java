@@ -8,6 +8,7 @@ package br.com.hfsframework.util;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -134,5 +135,24 @@ public final class DataUtil implements Serializable {
 			padrao = DATA_NUMERO_PADRAO;
 		}
 		return Long.parseLong(Formatar(data, padrao));
+	}
+	
+	/**
+	 * To date.
+	 *
+	 * @param data the data
+	 * @param padrao the padrao
+	 * @return the date
+	 */
+	public static Date toDate(String sdata, String padrao) {
+		if (sdata == null || sdata.isEmpty()) {
+			return null;
+		}
+		if (padrao.isEmpty()) {
+			padrao = DATA_HORA_PADRAO;
+		}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(padrao);
+		LocalDate dateTime = LocalDate.parse(sdata, formatter);
+		return Date.from(dateTime.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
 }

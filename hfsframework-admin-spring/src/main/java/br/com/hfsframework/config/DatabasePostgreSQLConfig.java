@@ -6,7 +6,6 @@
  */
 package br.com.hfsframework.config;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -30,11 +29,14 @@ public class DatabasePostgreSQLConfig {
 	 */
 	@Bean
     public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+        //URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+        //String username = dbUri.getUserInfo().split(":")[0];
+        //String password = dbUri.getUserInfo().split(":")[1];
+        //String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();		
+		String username = "postgres";
+		String password = "abcd1234";
+		String dbUrl = "jdbc:postgresql://localhost:5432/hfsbanco";
 
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(dbUrl);
