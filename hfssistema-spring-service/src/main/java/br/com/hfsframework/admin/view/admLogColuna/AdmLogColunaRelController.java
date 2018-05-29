@@ -4,15 +4,15 @@
  * @version 1.0
  * @since 2018
  */
-package br.com.hfsframework.admin.view.vwAdmLogValor;
+package br.com.hfsframework.admin.view.admLogColuna;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 
-import br.com.hfsframework.admin.model.VwAdmLogValor;
-import br.com.hfsframework.admin.service.VwAdmLogValorService;
+import br.com.hfsframework.admin.model.AdmLogColuna;
+import br.com.hfsframework.admin.service.AdmLogColunaService;
 import br.com.hfsframework.base.relatorio.BaseRelatorioImpl;
 import br.com.hfsframework.base.relatorio.IBaseRelatorio;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
@@ -22,12 +22,12 @@ import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class VwAdmLogValorRelMB.
+ * The Class AdmLogColunaRelMB.
  */
 @Controller
 @TratamentoErrosEsperados
-public class VwAdmLogValorRelController 
-	extends BaseViewRelatorio<VwAdmLogValor, Long, VwAdmLogValorService>
+public class AdmLogColunaRelController 
+	extends BaseViewRelatorio<AdmLogColuna, String, AdmLogColunaService>
 		implements IBaseViewRelatorio {
 
 	/** The Constant serialVersionUID. */
@@ -40,10 +40,10 @@ public class VwAdmLogValorRelController
 	private IBaseRelatorio relatorio;
 
 	/**
-	 * Instantiates a new VwAdmLogValor rel MB.
+	 * Instantiates a new AdmLogColuna rel MB.
 	 */
-	public VwAdmLogValorRelController() {
-		super(new VwAdmLogValor());
+	public AdmLogColunaRelController() {
+		super(new AdmLogColuna());
 		this.forcarDownload = false;
 	}
 	
@@ -57,7 +57,7 @@ public class VwAdmLogValorRelController
 		Map<String, Object> params = getParametros();
 		params.put("PARAMETRO1", "");
 
-		relatorio = new BaseRelatorioImpl("VwAdmLogValor");
+		relatorio = new BaseRelatorioImpl("AdmLogColuna");
 		
 		super.exportar(relatorio, getBusinessController().findAll(), params, this.forcarDownload);
 		return "";

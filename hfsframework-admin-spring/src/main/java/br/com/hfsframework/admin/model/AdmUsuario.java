@@ -43,6 +43,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import br.com.hfsframework.admin.serializer.AdmUsuarioIpListSerializer;
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.CPFCNPJUtil;
+import br.com.hfsframework.util.DataUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -234,6 +235,15 @@ public class AdmUsuario implements Serializable {
 		return this.data;
 	}
 
+	/**
+	 * Gets the data formatada.
+	 *
+	 * @return the data formatada
+	 */
+	public String getDataFormatada() {
+		return DataUtil.Formatar(this.data, DataUtil.DATA_HORA_PADRAO);
+	}
+	
 	/**
 	 * Atribui o the data.
 	 *
@@ -467,6 +477,7 @@ public class AdmUsuario implements Serializable {
 		u.setIp(ip);
 		u.setCpf(cpf);
 		u.setData(data);
+		u.setDataFormatada(getDataFormatada());
 		u.setEmail(email);
 		u.setLdapDN(ldapDN);
 		u.setLogin(login);

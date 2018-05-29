@@ -83,10 +83,14 @@ public class AdmFuncionalidade implements Serializable {
 	@Column(name="FUN_DESCRICAO", unique = true)
 	private String descricao;
 
+	/** The id adm pagina inicial. */
+	@Column(name = "FUN_PAG_SEQ", nullable=false)
+	private Long idAdmPaginaInicial;
+
 	/** The adm pagina inicial. */
 	//bi-directional many-to-one association to AdmPagina
 	@ManyToOne(optional = false, fetch=FetchType.EAGER)
-	@JoinColumn(name="FUN_PAG_SEQ", nullable=false)
+	@JoinColumn(name="FUN_PAG_SEQ", nullable=false, insertable = false, updatable = false)
 	private AdmPagina admPaginaInicial;
 
 	/** The adm paginas. */
@@ -201,6 +205,24 @@ public class AdmFuncionalidade implements Serializable {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Gets the id adm pagina inicial.
+	 *
+	 * @return the id adm pagina inicial
+	 */
+	public Long getIdAdmPaginaInicial() {
+		return idAdmPaginaInicial;
+	}
+
+	/**
+	 * Sets the id adm pagina inicial.
+	 *
+	 * @param idAdmPaginaInicial the new id adm pagina inicial
+	 */
+	public void setIdAdmPaginaInicial(Long idAdmPaginaInicial) {
+		this.idAdmPaginaInicial = idAdmPaginaInicial;
+	}
+	
 	/**
 	 * Pega o the adm pagina inicial.
 	 *

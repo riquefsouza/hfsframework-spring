@@ -23,6 +23,7 @@
 			},
 			callback: function (result) {
 				alert(result);
+				//document.getElementById("alterarSenha").submit(); 
 			}
 		});
 	}	
@@ -31,7 +32,7 @@
 <div th:replace="private/menu :: menu"></div>
 
 <div class="tela-conteudo">
-	<form id="alterarSenha" style="width: 550px">
+	<form id="alterarSenha" th:action="@{/alterarSenhaMB/salvar}" method="post" th:object="${bean}" style="width: 550px">
 		<div class="panel panel-default">
 			<div class="panel-heading" 
 				style="font-weight: bold;font-size: large;">
@@ -56,19 +57,19 @@
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="senhaAtual">Senha atual:</label>
-						<input type="password" class="form-control" id="senhaAtual" maxlength="128">
+						<input type="password" class="form-control" id="senhaAtual" maxlength="128" th:field="*{senhaAtual}">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="senhaNova">Nova senha:</label>
-						<input type="password" class="form-control" id="senhaNova" maxlength="128">
+						<input type="password" class="form-control" id="senhaNova" maxlength="128" th:field="*{senhaNova}">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="confirmaSenhaNova">Confirmar nova senha:</label>
-						<input type="password" class="form-control" id="confirmaSenhaNova" maxlength="128">
+						<input type="password" class="form-control" id="confirmaSenhaNova" maxlength="128" th:field="*{confirmaSenhaNova}">
 					</div>
 				</div>
 				

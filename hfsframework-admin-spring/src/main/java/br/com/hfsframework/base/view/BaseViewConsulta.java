@@ -7,9 +7,13 @@
 package br.com.hfsframework.base.view;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
@@ -46,7 +50,7 @@ public abstract class BaseViewConsulta<T, I extends Serializable,
 	private B businessController;
 
 	/** The lista entidade. */
-	private Iterable<T> listaEntidade;
+	private List<T> listaEntidade;
 
 	/** The entidade. */
 	private T entidade;
@@ -69,7 +73,9 @@ public abstract class BaseViewConsulta<T, I extends Serializable,
 	 * Atualiza lista data table.
 	 */
 	protected void atualizaListaDataTable() {
-		this.listaEntidade = businessController.findAll();
+		//this.listaEntidade = businessController.findAll();
+		this.listaEntidade = StreamSupport.stream(businessController.findAll().spliterator(), false)
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -78,8 +84,32 @@ public abstract class BaseViewConsulta<T, I extends Serializable,
 	 * @return o the pagina listar
 	 */
 	public String getPaginaListar() {
-		return (String) paginaListar;
+		return paginaListar;
 	}
+	
+	/**
+	 * Listar.
+	 *
+	 * @return the model and view
+	 */
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView(paginaListar);
+		Iterable<T> lista = businessController.findAll();
+		mv.addObject("listaBean", lista);
+		return mv;
+	}	
+
+	/**
+	 * Listar.
+	 *
+	 * @param lista the lista
+	 * @return the model and view
+	 */
+	public ModelAndView listar(Iterable<T> lista) {
+		ModelAndView mv = new ModelAndView(paginaListar);
+		mv.addObject("listaBean", lista);
+		return mv;
+	}	
 
 	/**
 	 * Cancelar.
@@ -114,7 +144,7 @@ public abstract class BaseViewConsulta<T, I extends Serializable,
 	 *
 	 * @return o the lista entidade
 	 */
-	public Iterable<T> getListaEntidade() {
+	public List<T> getListaEntidade() {
 		return this.listaEntidade;
 	}
 
@@ -124,7 +154,7 @@ public abstract class BaseViewConsulta<T, I extends Serializable,
 	 * @param listaEntidade
 	 *            o novo the lista entidade
 	 */
-	public void setListaEntidade(Iterable<T> listaEntidade) {
+	public void setListaEntidade(List<T> listaEntidade) {
 		this.listaEntidade = listaEntidade;
 	}
 

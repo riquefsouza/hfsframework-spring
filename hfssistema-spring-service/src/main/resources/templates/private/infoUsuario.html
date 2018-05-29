@@ -11,13 +11,21 @@
 		 $.ajax({
 		        url: "/sistemaMB"
 		    }).then(function(data) {
-		       $('.infoUsuario-nome').append(data.nome);
-		       $('.infoUsuario-ip').append(data.ip);
-		       $('.infoUsuario-matricula').append(data.matricula);
-		       $('.infoUsuario-login').append(data.login);
-		       $('.infoUsuario-cpf').append(data.cpf);
-		       $('.infoUsuario-data').append(data.data);
-		       $('.infoUsuario-email').append(data.email);
+				$('.infoUsuario-nome').empty();
+				$('.infoUsuario-ip').empty();
+				$('.infoUsuario-matricula').empty();
+				$('.infoUsuario-login').empty();
+				$('.infoUsuario-cpf').empty();
+				$('.infoUsuario-data').empty();
+				$('.infoUsuario-email').empty();
+				
+				$('.infoUsuario-nome').append(data.nome);
+				$('.infoUsuario-ip').append(data.ip);
+				$('.infoUsuario-matricula').append(data.matricula);
+				$('.infoUsuario-login').append(data.login);
+				$('.infoUsuario-cpf').append(data.cpfFormatado);
+				$('.infoUsuario-data').append(data.dataFormatada);
+				$('.infoUsuario-email').append(data.email);
 		    });        
 	});
 </script>

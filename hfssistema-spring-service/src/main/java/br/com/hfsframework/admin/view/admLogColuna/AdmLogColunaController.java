@@ -4,7 +4,7 @@
  * @version 1.0
  * @since 2018
  */
-package br.com.hfsframework.admin.view.vwAdmLogValor;
+package br.com.hfsframework.admin.view.admLogColuna;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.hfsframework.admin.model.VwAdmLogValor;
-import br.com.hfsframework.admin.service.VwAdmLogValorService;
+import br.com.hfsframework.admin.model.AdmLogColuna;
+import br.com.hfsframework.admin.service.AdmLogColunaService;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewCadastro;
 import br.com.hfsframework.base.view.IBaseViewCadastro;
@@ -33,29 +33,29 @@ import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 /**
- * The Class VwAdmLogValorController.
+ * The Class AdmLogColunaController.
  */
 @Controller
 @TratamentoErrosEsperados
-@RequestMapping("/vwAdmLogValorMB")
-public class VwAdmLogValorController
-		extends BaseViewCadastro<VwAdmLogValor, Long, VwAdmLogValorService>
-		implements IBaseViewCadastro<VwAdmLogValor, Long>, IBaseViewRelatorio {
+@RequestMapping("/admLogColunaMB")
+public class AdmLogColunaController
+		extends BaseViewCadastro<AdmLogColuna, String, AdmLogColunaService>
+		implements IBaseViewCadastro<AdmLogColuna, String>, IBaseViewRelatorio {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private VwAdmLogValorRelController rel;
+	private AdmLogColunaRelController rel;
 	
 	/**
-	 * Instantiates a new VwAdmLogValorController.
+	 * Instantiates a new AdmLogColunaController.
 	 */
-	public VwAdmLogValorController() {
-		super(new VwAdmLogValor(),
-			"/private/admin/vwAdmLogValor/listarVwAdmLogValor",
-			"/private/admin/vwAdmLogValor/editarVwAdmLogValor", 
-			"/vwAdmLogValorMB");
+	public AdmLogColunaController() {
+		super(new AdmLogColuna(),
+			"/private/admin/admLogColuna/listarAdmLogColuna",
+			"/private/admin/admLogColuna/editarAdmLogColuna", 
+			"/admLogColunaMB");
 	}
 
 	/* (non-Javadoc)
@@ -78,12 +78,12 @@ public class VwAdmLogValorController
 	@Override
 	@GetMapping("/incluir")
 	public ModelAndView incluir() {
-		return super.incluir(new VwAdmLogValor());
+		return super.incluir(new AdmLogColuna());
 	}
 	
 	@Override
 	@GetMapping("/editar/{id}")	
-	public ModelAndView editar(@PathVariable("id") Long id) {
+	public ModelAndView editar(@PathVariable("id") String id) {
 		return super.editar(id);
 	}
 
@@ -94,9 +94,9 @@ public class VwAdmLogValorController
 	 */
 	@Override
 	@PostMapping("/salvar")
-	public RedirectView salvar(@Valid VwAdmLogValor obj, 
+	public RedirectView salvar(@Valid AdmLogColuna obj, 
 			BindingResult result, RedirectAttributes attributes) {
-		return super.salvar(obj.getId(), obj, result, attributes);
+		return super.salvar(obj.getNome(), obj, result, attributes);
 	}
 
 	/* (non-Javadoc)
@@ -104,7 +104,7 @@ public class VwAdmLogValorController
 	 */
 	@Override
 	@GetMapping("/excluir/{id}")
-	public RedirectView excluir(@PathVariable("id") Long id) {
+	public RedirectView excluir(@PathVariable("id") String id) {
 		return super.excluir(id);
 	}
 
@@ -128,7 +128,7 @@ public class VwAdmLogValorController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getBean()
 	 */
 	@Override
-	public VwAdmLogValor getBean() {
+	public AdmLogColuna getBean() {
 		return super.getEntidade();
 	}
 
@@ -139,7 +139,7 @@ public class VwAdmLogValorController
 	 * Object)
 	 */
 	@Override
-	public void setBean(VwAdmLogValor entidade) {
+	public void setBean(AdmLogColuna entidade) {
 		super.setEntidade(entidade);
 	}
 
@@ -149,7 +149,7 @@ public class VwAdmLogValorController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
 	 */
 	@Override
-	public Iterable<VwAdmLogValor> getListaBean() {
+	public List<AdmLogColuna> getListaBean() {
 		return super.getListaEntidade();
 	}
 
@@ -161,7 +161,7 @@ public class VwAdmLogValorController
 	 * List)
 	 */
 	@Override
-	public void setListaBean(Iterable<VwAdmLogValor> listaEntidade) {
+	public void setListaBean(List<AdmLogColuna> listaEntidade) {
 		super.setListaEntidade(listaEntidade);
 	}
 

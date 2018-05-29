@@ -68,6 +68,7 @@ public class SistemaController {
 			usu.setIp(ipAddress);
 			usu.setCpf(admUsuario.get().getCpf());
 			usu.setData(admUsuario.get().getData());
+			usu.setDataFormatada(admUsuario.get().getDataFormatada());
 			usu.setEmail(admUsuario.get().getEmail());
 			usu.setNome(admUsuario.get().getNome());			
 		}

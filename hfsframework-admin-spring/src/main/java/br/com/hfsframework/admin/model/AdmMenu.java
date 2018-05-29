@@ -490,4 +490,27 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 		return m;
 	}
 	
+	/**
+	 * Gets the nome recursivo.
+	 *
+	 * @param m
+	 *            the m
+	 * @return the nome recursivo
+	 */
+	private String getNomeRecursivo(AdmMenu m) {
+		return m.getAdmFuncionalidade() == null ? m.getDescricao()
+				: m.getAdmMenuPai() != null ? getNomeRecursivo(m.getAdmMenuPai()) + " -> " + m.getDescricao() : "";
+	}
+	
+	/**
+	 * Gets the nome recursivo.
+	 *
+	 * @return the nome recursivo
+	 */
+	public String getNomeRecursivo() {
+		return this.getNomeRecursivo(this);
+	}
+
+	
+		
 }

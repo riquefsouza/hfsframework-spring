@@ -6,15 +6,22 @@
  */
 package br.com.hfsframework.admin.view.admPagina;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +31,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmPagina;
+import br.com.hfsframework.admin.model.AdmPerfil;
+import br.com.hfsframework.admin.service.AdmFuncionalidadeService;
 import br.com.hfsframework.admin.service.AdmPaginaService;
+import br.com.hfsframework.admin.service.AdmPerfilService;
+import br.com.hfsframework.base.BaseDualList;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewCadastro;
 import br.com.hfsframework.base.view.IBaseViewCadastro;
@@ -48,6 +60,20 @@ public class AdmPaginaController
 	@Autowired
 	private AdmPaginaRelController rel;
 	
+	@Autowired
+	private AdmPerfilService admPerfilService;
+
+	private BaseDualList<AdmPerfil> dualListAdmPerfil;
+
+	private List<AdmPerfil> listaAdmPerfil;
+	
+	@Autowired
+	private AdmFuncionalidadeService admFuncionalidadeService;
+
+	private BaseDualList<AdmFuncionalidade> dualListAdmFuncionalidade;
+
+	private List<AdmFuncionalidade> listaAdmFuncionalidade;
+	
 	/**
 	 * Instantiates a new AdmPaginaController.
 	 */
@@ -66,6 +92,30 @@ public class AdmPaginaController
 		atualizaListaDataTable();
 	}
 	
+	/**
+	 * Carregar adm perfis.
+	 */
+	private void carregarAdmPerfis() {
+		List<AdmPerfil> listaAdmPerfilSelecionado = this.getBean().getId() == null ? new ArrayList<AdmPerfil>()
+				: this.getBusinessController().getRepositorio().findPerfisPorPagina(this.getBean());
+		this.listaAdmPerfil = StreamSupport.stream(admPerfilService.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		this.listaAdmPerfil.removeAll(listaAdmPerfilSelecionado);
+		this.dualListAdmPerfil = new BaseDualList<AdmPerfil>(this.listaAdmPerfil, listaAdmPerfilSelecionado);
+	}
+
+	/**
+	 * Carregar adm funcionalidades.
+	 */
+	private void carregarAdmFuncionalidades() {
+		List<AdmFuncionalidade> listaAdmFuncionalidadeSelecionado = this.getBean().getId() == null ? new ArrayList<AdmFuncionalidade>()
+				: this.getBusinessController().getRepositorio().findFuncionalidadesPorPagina(this.getBean());
+		this.listaAdmFuncionalidade = StreamSupport.stream(admFuncionalidadeService.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		this.listaAdmFuncionalidade.removeAll(listaAdmFuncionalidadeSelecionado);
+		this.dualListAdmFuncionalidade = new BaseDualList<AdmFuncionalidade>(this.listaAdmFuncionalidade, listaAdmFuncionalidadeSelecionado);
+	}
+	
 	@Override
 	@GetMapping("/listar")
 	public ModelAndView listar() {
@@ -78,13 +128,26 @@ public class AdmPaginaController
 	@Override
 	@GetMapping("/incluir")
 	public ModelAndView incluir() {
+		this.listaAdmPerfil = StreamSupport.stream(admPerfilService.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+	    this.dualListAdmPerfil = new BaseDualList<AdmPerfil>(this.listaAdmPerfil, new ArrayList<AdmPerfil>());
+		
+		this.listaAdmFuncionalidade = StreamSupport.stream(admFuncionalidadeService.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+	    this.dualListAdmFuncionalidade = new BaseDualList<AdmFuncionalidade>(this.listaAdmFuncionalidade, new ArrayList<AdmFuncionalidade>());
+		
 		return super.incluir(new AdmPagina());
 	}
 	
 	@Override
 	@GetMapping("/editar/{id}")	
 	public ModelAndView editar(@PathVariable("id") Long id) {
-		return super.editar(id);
+		ModelAndView retorno = super.editar(id);		
+		if (!retorno.isEmpty()) {
+			carregarAdmPerfis();
+			carregarAdmFuncionalidades();
+		}
+		return retorno;		
 	}
 
 	/* (non-Javadoc)
@@ -96,6 +159,10 @@ public class AdmPaginaController
 	@PostMapping("/salvar")
 	public RedirectView salvar(@Valid AdmPagina obj, 
 			BindingResult result, RedirectAttributes attributes) {
+		
+		getBean().setAdmPerfils(this.dualListAdmPerfil.getTarget());
+		getBean().setAdmFuncionalidades(this.dualListAdmFuncionalidade.getTarget());
+		
 		return super.salvar(obj.getId(), obj, result, attributes);
 	}
 
@@ -149,7 +216,7 @@ public class AdmPaginaController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
 	 */
 	@Override
-	public Iterable<AdmPagina> getListaBean() {
+	public List<AdmPagina> getListaBean() {
 		return super.getListaEntidade();
 	}
 
@@ -161,8 +228,97 @@ public class AdmPaginaController
 	 * List)
 	 */
 	@Override
-	public void setListaBean(Iterable<AdmPagina> listaEntidade) {
+	public void setListaBean(List<AdmPagina> listaEntidade) {
 		super.setListaEntidade(listaEntidade);
 	}
 
+	/**
+	 * Pega o the dual list adm perfil.
+	 *
+	 * @return o the dual list adm perfil
+	 */
+	@ModelAttribute("dualListAdmPerfil")
+	public BaseDualList<AdmPerfil> getDualListAdmPerfil() {
+		return dualListAdmPerfil;
+	}
+
+	/**
+	 * Atribui o the dual list adm perfil.
+	 *
+	 * @param dualListAdmPerfil
+	 *            o novo the dual list adm perfil
+	 */
+	public void setDualListAdmPerfil(BaseDualList<AdmPerfil> dualListAdmPerfil) {
+		this.dualListAdmPerfil = dualListAdmPerfil;
+	}
+
+	/**
+	 * Pega o the dual list adm funcionalidade.
+	 *
+	 * @return o the dual list adm funcionalidade
+	 */
+	@ModelAttribute("dualListAdmFuncionalidade")
+	public BaseDualList<AdmFuncionalidade> getDualListAdmFuncionalidade() {
+		return dualListAdmFuncionalidade;
+	}
+		
+	/**
+	 * Atribui o the dual list adm funcionalidade.
+	 *
+	 * @param dualListAdmFuncionalidade
+	 *            o novo the dual list adm funcionalidade
+	 */
+	public void setDualListAdmFuncionalidade(BaseDualList<AdmFuncionalidade> dualListAdmFuncionalidade) {
+		this.dualListAdmFuncionalidade = dualListAdmFuncionalidade;
+	}
+
+	/**
+	 * Inits the binder.
+	 *
+	 * @param binder the binder
+	 */
+	@InitBinder
+	protected void initBinder(final WebDataBinder binder) {
+		//binder.registerCustomEditor(AdmPerfil.class, new AdmPerfilPropertyEditor());
+				
+		CustomCollectionEditor AdmPerfilCollector = new CustomCollectionEditor(List.class) {
+            @Override
+            protected Object convertElement(Object element) {
+                if (element instanceof String) {
+                    Long id = Long.parseLong((String) element);
+
+		            Optional<AdmPerfil> admPerfil = admPerfilService.load(Long.valueOf(id));
+		    		if (admPerfil.isPresent()) {            
+		    			return admPerfil;
+		    		} else {
+		    			return null;
+		    		}
+                }
+                //throw new RuntimeException(element);
+                return null;
+            }
+        };
+        binder.registerCustomEditor(List.class, "admPerfils", AdmPerfilCollector);
+		//binder.registerCustomEditor(List.class, "admPerfils", new AdmPerfilCollector(List.class));
+        
+		CustomCollectionEditor AdmFuncionalidadeCollector = new CustomCollectionEditor(List.class) {
+            @Override
+            protected Object convertElement(Object element) {
+                if (element instanceof String) {
+                    Long id = Long.parseLong((String) element);
+
+		            Optional<AdmFuncionalidade> admFuncionalidade = admFuncionalidadeService.load(Long.valueOf(id));
+		    		if (admFuncionalidade.isPresent()) {
+		    			return admFuncionalidade;
+		    		} else {
+		    			return null;
+		    		}
+                }
+                //throw new RuntimeException(element);
+                return null;
+            }
+        };
+        binder.registerCustomEditor(List.class, "admFuncionalidades", AdmFuncionalidadeCollector);
+	}
+	
 }

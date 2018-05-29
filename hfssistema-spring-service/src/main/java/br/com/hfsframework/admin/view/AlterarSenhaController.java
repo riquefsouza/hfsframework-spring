@@ -8,12 +8,17 @@ package br.com.hfsframework.admin.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AlterarSenhaController.
  */
 @Controller
+@TratamentoErrosEsperados
+@RequestMapping("/alterarSenhaMB")
 public class AlterarSenhaController {
 
 	/**

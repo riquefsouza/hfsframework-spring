@@ -149,7 +149,7 @@ public class AdmSetorController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
 	 */
 	@Override
-	public Iterable<AdmSetor> getListaBean() {
+	public List<AdmSetor> getListaBean() {
 		return super.getListaEntidade();
 	}
 
@@ -161,7 +161,7 @@ public class AdmSetorController
 	 * List)
 	 */
 	@Override
-	public void setListaBean(Iterable<AdmSetor> listaEntidade) {
+	public void setListaBean(List<AdmSetor> listaEntidade) {
 		super.setListaEntidade(listaEntidade);
 	}
 

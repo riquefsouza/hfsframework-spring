@@ -25,6 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.hfsframework.admin.model.AdmCargo;
+import br.com.hfsframework.admin.model.AdmFuncionario;
+import br.com.hfsframework.admin.model.AdmPerfil;
+import br.com.hfsframework.admin.service.AdmCargoFuncionarioService;
+import br.com.hfsframework.admin.service.AdmCargoPerfilService;
 import br.com.hfsframework.admin.service.AdmCargoService;
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewCadastro;
@@ -47,6 +51,12 @@ public class AdmCargoController
 
 	@Autowired
 	private AdmCargoRelController rel;
+	
+	@Autowired
+	private AdmCargoPerfilService admCargoPerfilService; 
+
+	@Autowired
+	private AdmCargoFuncionarioService admCargoFuncionarioService; 
 	
 	/**
 	 * Instantiates a new AdmCargoController.
@@ -149,7 +159,7 @@ public class AdmCargoController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
 	 */
 	@Override
-	public Iterable<AdmCargo> getListaBean() {
+	public List<AdmCargo> getListaBean() {
 		return super.getListaEntidade();
 	}
 
@@ -161,8 +171,32 @@ public class AdmCargoController
 	 * List)
 	 */
 	@Override
-	public void setListaBean(Iterable<AdmCargo> listaEntidade) {
+	public void setListaBean(List<AdmCargo> listaEntidade) {
 		super.setListaEntidade(listaEntidade);
+	}
+
+	/**
+	 * Gets the adm perfils.
+	 *
+	 * @return the adm perfils
+	 */
+	public List<AdmPerfil> getAdmPerfils(){
+		if (this.getBean()!=null && this.getBean().getId()!=null)
+			return admCargoPerfilService.findPerfilByCodCargo(this.getBean().getId());
+		else 
+			return null;
+	}
+	
+	/**
+	 * Gets the adm funcionarios.
+	 *
+	 * @return the adm funcionarios
+	 */
+	public List<AdmFuncionario> getAdmFuncionarios(){
+		if (this.getBean()!=null && this.getBean().getId()!=null)
+			return admCargoFuncionarioService.findFuncionarioByCodCargo(this.getBean().getId());
+		else 
+			return null;
 	}
 
 }

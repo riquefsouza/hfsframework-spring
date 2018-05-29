@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<th:block th:include="/private/admin/admCargo/admCargoPerfisDialog"></th:block>
+		
+<script>
+	$(document).ready(function(){
+		hfsDatatablesIniciar("AdmCargo", 1);
+		
+		$('#tabelaFuncionariosCargo').DataTable({
+			scrollY: "200px",
+			scrollCollapse: true,
+			paging: false,
+			select: {
+				style: 'single'
+			},
+			language: hfsDatatablesLinguagem()
+		});
+		
+	});
+	
+	$('#admCargoPerfisDialog').on('show.bs.modal', function(e) {
+	    var id = $(e.relatedTarget).data('id');
+	    //$(e.currentTarget).find('input[name="codCargo"]').val(id);
+		
+		 $.ajax({
+		        url: "/admCargos/findPerfilByCodCargo/"+id
+		    }).then(function(data) {
+			    var cmbPerfisCargo = $(e.currentTarget).find('select[name="cmbPerfisCargo"]');
+			    cmbPerfisCargo.empty();
+			    for (i = 0; i < data.length; i++) { 
+			    	cmbPerfisCargo.append($('<option>', { value : data[i].id }).text(data[i].descricao));
+			    }
+		    });        
+
+		 //tabelaFuncionariosCargo.DataTable().ajax.url( "/admCargos/findFuncionarioByCodCargo/"+id ).load();
+		 
+		 $.ajax({
+		        url: "/admCargos/findFuncionarioByCodCargo/"+id
+		    }).then(function(data) {
+		    	var tabelaFuncionariosCargo = $(e.currentTarget).find('table[id="tabelaFuncionariosCargo"]');
+		    	for (i = 0; i < data.length; i++) { 
+		    	    tabelaFuncionariosCargo.DataTable().row.add( [ data[i].nome ] );
+		    	}
+		    	tabelaFuncionariosCargo.DataTable().draw( false );
+		    });        
+	    
+	    
+	});
+	
+	$('#admCargoPerfisDialog').on('hide.bs.modal', function(e) {
+		var tabelaFuncionariosCargo = $(e.currentTarget).find('table[id="tabelaFuncionariosCargo"]');
+		tabelaFuncionariosCargo.DataTable().clear().draw( false );
+	});
+</script>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmCargo">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Cargos
+			</div>
+			<div class="panel-body">				
+				<div class="row">
+					<th:block th:include="/private/panelRelatorio"></th:block>					
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo cargo" onclick="window.location.href='incluir'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar um cargo" onclick="hfsDatatablesEditar('AdmCargo')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir um cargo" onclick="hfsDatatablesExcluir('AdmCargo')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+	
+		<table id="tabelaAdmCargo"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">				
+			<thead>
+				<tr class="tema-principal">
+					<th hidden="true" >Id</th>
+					<th>Descri&ccedil;&atilde;o</th>
+					<td></td>
+				</tr>	
+			</thead>
+			<tbody>
+			 	<tr th:each="item : ${listaBean}">
+					<td hidden="true" th:text="${item.id}"></td>					
+			 		<td th:text="${item.nomeCargo}"></td>
+			 		<td style="width:50px;text-align: center;">
+			 			<button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" th:data-id="${item.id}" data-target="#admCargoPerfisDialog">
+			 				<span class="glyphicon glyphicon-search" style="font-size:8px"></span>
+			 			</button>
+			 		</td>
+			    </tr>			
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

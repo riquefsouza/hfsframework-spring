@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form th:action="@{/admLogColunaMB/salvar}" method="post" th:object="${bean}">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Campos do Log
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="submit" class="btn btn-success" id="btnSalvar">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admLogColunaMB/listar'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="nomeCampo">Campo:</label>
+						<input type="text" class="form-control" id="nomeCampo" label="Campo" maxlength="30" th:field="*{nome}">
+					</div>
+				</div>	
+				<div class="row">	
+					<div class="col-md-4 form-group">
+						<label for="descricao">Descrição:</label>
+						<input type="text" class="form-control" id="descricao" label="Descrição" maxlength="100" th:field="*{nomeExibicao}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="comandoSQL">Comando SQL:</label>
+						<textarea class="form-control" id="comandoSQL" maxlength="4000" rows="6" style="resize: none;" th:field="*{comando}"></textarea>
+						<h6 class="pull-right" id="comandoSQL_countMessage"></h6>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+	$('#comandoSQL_countMessage').html($('#comandoSQL').attr('maxlength') + ' caracteres restantes.');
+
+	$('#comandoSQL').keyup(function() {
+		var textoMax = $('#comandoSQL').attr('maxlength');
+		var textoLength = $('#comandoSQL').val().length;
+		var textoRemaining = textoMax - textoLength;
+		
+		$('#comandoSQL_countMessage').html(textoRemaining + ' caracteres restantes.');
+	});
+</script>
+
+</body>
+</html>
+	

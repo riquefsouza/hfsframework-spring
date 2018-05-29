@@ -7,6 +7,7 @@
 package br.com.hfsframework.base.view;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -132,7 +133,7 @@ public interface IBaseViewCadastro<T, I> extends Serializable {
 	 *
 	 * @return the lista bean
 	 */
-	Iterable<T> getListaBean();
+	List<T> getListaBean();
 
 	/**
 	 * Sets the lista bean.
@@ -140,6 +141,6 @@ public interface IBaseViewCadastro<T, I> extends Serializable {
 	 * @param listaEntidade
 	 *            the new lista bean
 	 */
-	void setListaBean(Iterable<T> listaEntidade);
+	void setListaBean(List<T> listaEntidade);
 
 }

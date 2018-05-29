@@ -1,48 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-	<title>HFS Framework</title>
-	<meta charset="utf-8" />
-	<!-- <meta http-equiv="refresh" content="5" />	-->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
-	
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/jasny-bootstrap.min.css"/>
-	
-	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
-	
-	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
-	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
-	<script src="../../../resources/js/jquery.numeric.js"></script>
-
-	<script src="../../../resources/js/bootstrap.min.js"></script>
-	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
-	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
-	
-	<script src="../../../resources/js/bootbox.min.js"></script>
- 
-	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
-	<script src="../../../resources/js/sistema-session-timeout.js"></script>
-	
-	<script src="../../../resources/js/jasny-bootstrap.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
 </head>
 <body>
 
 <script>
 	$(document).ready(function(){
-        $("#menu").load("../../../private/menu.html");
+		$('#dataAdmissao').datepicker({
+			language: 'pt-BR',
+			format: 'dd/mm/yyyy'
+		});
+		$('#dataSaida').datepicker({
+			language: 'pt-BR',
+			format: 'dd/mm/yyyy'
+		});
+		
+		$('.limparBusca').click(function () {
+			$(this).prev().val('');
+		});
 	});
 </script>
 
-<div id="menu"></div>
+<div th:replace="private/menu :: menu"></div>
 
 <div class="tela-conteudo">
-	<form id="editarAdmFuncionario">
+	<form th:action="@{/admFuncionarioMB/salvar}" method="post" th:object="${bean}">
 		<div class="panel panel-default">
 			<div class="panel-heading" 
 				style="font-weight: bold;font-size: large;">
@@ -51,7 +36,7 @@
 			<div class="panel-body">			
 				<div class="form-actions">
 				
-					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar um cargo" onclick="window.location.href='listarAdmFuncionario.html'">
+					<button type="submit" class="btn btn-success" id="btnSalvar" label="Salvar um cargo">
 						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
 					</button>
 				
@@ -59,7 +44,7 @@
 						<span class="glyphicon glyphicon-star"></span> Limpar
 					</button>
 
-					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmFuncionario.html'">
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admFuncionarioMB/listar'">
 						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
 					</button>
 				</div>
@@ -67,36 +52,76 @@
 				<div class="row">
 					<div class="col-md-2 form-group">
 						<label for="matricula">Matrícula:</label>
-						<input type="text" class="form-control" id="matricula" label="Matrícula" maxlength="10">
+						<input type="text" class="form-control" id="matricula" label="Matrícula" maxlength="10" th:field="*{id}">
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="nome">Nome:</label>
-						<input type="text" class="form-control" id="nome" label="Nome" maxlength="255">
+						<input type="text" class="form-control" id="nome" label="Nome" maxlength="60" th:field="*{nome}">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-2 form-group">
 						<label for="cpf">CPF:</label>
-						<input type="text" class="form-control" id="cpf" label="CPF" data-mask="999.999.999-99" placeholder="digite o CPF">
+						<input type="text" class="form-control" id="cpf" label="CPF" 
+							data-mask="999.999.999-99" placeholder="digite o CPF" th:field="*{cpfFormatado}">
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="email">E-mail:</label>
-						<input type="text" class="form-control" id="email" label="E-mail" maxlength="255">
+						<input type="text" class="form-control" id="email" label="E-mail" maxlength="100" th:field="*{email}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="telefone">Telefone:</label>
+						<input type="text" class="form-control" id="telefone" label="telefone" maxlength="20" th:field="*{telefone}">
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="celular">Celular:</label>
+						<input type="text" class="form-control" id="celular" label="Celular" maxlength="20" th:field="*{celular}">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="dataAdmissao">Data de Admiss&atilde;o:</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="dataAdmissao" label="Data Admissão" placeholder="digite a data" 
+								data-mask="99/99/9999" data-date-format="dd/mm/yyyy" th:field="*{dataAdmissaoFormatada}">
+							<span class="limparBusca input-group-addon" style="cursor:pointer;"><i class="glyphicon glyphicon-remove-circle"></i></span>
+						</div>
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="dataSaida">Data de Sa&iacute;da:</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="dataSaida" label="Data de Saída" placeholder="digite a data" 
+								data-mask="99/99/9999" data-date-format="dd/mm/yyyy" th:field="*{dataSaidaFormatada}">
+							<span class="limparBusca input-group-addon" style="cursor:pointer;"><i class="glyphicon glyphicon-remove-circle"></i></span>
+						</div>
+					</div>						
+					<div class="col-md-2 form-group">
+						<div class="checkbox">
+						  <label>Ativo: <input type="checkbox" id="ativo" th:field="*{ativo}"></label>
+						</div>						
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col-md-4 form-group">
 						<label for="cmbSetor">Setor:</label>
-						<select class="form-control" id="cmbSetor" label="Setor">
-							<option id="item1">Setor 1</option>
+						<select class="form-control" id="cmbSetor" name="cmbSetor" label="Setor" th:field="*{setor}">
+					 		<option th:each="item : ${listaAdmSetor}" th:value="${item.id}"
+					 			th:selected="${item.id == bean.setor}" th:text="${item.nomeSetor}">
+					 		</option>
 						</select>
 					</div>
 					<div class="col-md-4 form-group">
 						<label for="cmbCargoPrincipal">Cargo Principal:</label>
-						<select class="form-control" id="cmbCargoPrincipal" label="Cargo Principal">
-							<option id="item1">Cargo Principal 1</option>
+						<select class="form-control" id="cmbCargoPrincipal" name="cmbCargoPrincipal" label="Cargo Principal" th:field="*{codCargoPrincipal}">
+					 		<option th:each="item : ${listaAdmCargo}" th:value="${item.id}"
+					 			th:selected="${item.id == bean.admCargoPrincipal.id}" th:text="${item.nomeCargo}">
+					 		</option>
 						</select>
 					</div>					
 				</div>

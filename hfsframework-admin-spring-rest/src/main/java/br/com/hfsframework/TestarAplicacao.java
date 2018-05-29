@@ -7,6 +7,7 @@
 package br.com.hfsframework;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.hfsframework.admin.model.AdmFuncionario;
 import br.com.hfsframework.util.interceptors.HeaderRequestInterceptor;
 
 // TODO: Auto-generated Javadoc
@@ -54,9 +56,27 @@ public class TestarAplicacao {
 		RestTemplate restTemplate2 = new RestTemplate();
 		restTemplate2.setInterceptors(interceptors);
 		
-        String admUsuario = restTemplate2.getForObject("http://localhost:8080/admUsuarios", String.class);
+        //String admUsuario = restTemplate2.getForObject("http://localhost:8080/admUsuarios", String.class);
 		//AdmUsuario admUsuario = restTemplate2.getForObject("http://localhost:8080/admUsuarios/93203", AdmUsuario.class);
-        System.out.println(admUsuario);
+        //System.out.println(admUsuario);
+		
+		//Iterable<UsuarioVO> lista = new ArrayList<>();		
+		//ResponseEntity<? extends ArrayList<User>> responseEntity = restTemplate.getForEntity(restEndPointUrl, (Class<? extends ArrayList<User>>)ArrayList.class, userId);		
+		//lista = restTemplate2.getForObject("http://localhost:8080/admUsuarios/getListaUsuarioIps", lista.getClass());
+		//UsuarioVO[] vetor = restTemplate2.getForObject("http://localhost:8080/admUsuarios/getListaUsuarioIps", UsuarioVO[].class);
+		//List<UsuarioVO> lista = Arrays.asList(vetor);
+	    
+		//for (UsuarioVO item : lista) {
+			//System.out.println(item.toString());
+		//}
+		
+		AdmFuncionario[] vetor = restTemplate2.getForObject("http://localhost:8080/admCargos/findFuncionarioByCodCargo/15426", AdmFuncionario[].class);
+		List<AdmFuncionario> lista = Arrays.asList(vetor);
+	    
+		for (AdmFuncionario item : lista) {
+			System.out.println(item.toString());
+		}
+		
 	}
 
 }

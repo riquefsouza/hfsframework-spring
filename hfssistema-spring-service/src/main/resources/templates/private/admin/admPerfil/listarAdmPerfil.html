@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+		hfsDatatablesIniciar("AdmPerfil");
+	});	
+</script>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmPerfil">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Perfil
+			</div>
+			<div class="panel-body">				
+				<div class="row">	
+					<th:block th:include="/private/panelRelatorio"></th:block>				
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" onclick="window.location.href='incluir'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" onclick="hfsDatatablesEditar('AdmPerfil')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" onclick="hfsDatatablesExcluir('AdmPerfil')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<table id="tabelaAdmPerfil"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">			
+			<col style="width: 160pt;" width="213">
+			<col style="width: 515pt;" width="687">
+			<thead>
+				<tr class="tema-principal">
+					<th hidden="true" >Id</th>
+					<th>Descri&ccedil;&atilde;o</th>
+					<th>Funcion&aacute;rios</th>
+				</tr>	
+			</thead>
+			<tbody>
+			 	<tr th:each="item : ${listaBean}">
+					<td hidden="true" th:text="${item.id}"></td>					
+			 		<td th:text="${item.descricao}"></td>
+			 		<td th:text="${item.admFuncionarios}"></td>
+			    </tr>			
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

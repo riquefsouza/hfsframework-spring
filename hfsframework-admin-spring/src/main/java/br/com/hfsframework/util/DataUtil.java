@@ -7,6 +7,7 @@
 package br.com.hfsframework.util;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -101,13 +102,7 @@ public final class DataUtil implements Serializable {
 	    return zonedDateTime.toLocalDate();	
 	}
 	
-	/**
-	 * Formatar.
-	 *
-	 * @param data the data
-	 * @param padrao the padrao
-	 * @return the string
-	 */
+	/*
 	public static String Formatar(Date data, String padrao) {
 		if (data == null) {
 			return "";
@@ -119,7 +114,26 @@ public final class DataUtil implements Serializable {
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern(padrao);
 		return ld.format(formatador);		
 	}
-
+	*/
+	
+	/**
+	 * Formatar.
+	 *
+	 * @param data the data
+	 * @param padrao the padrao
+	 * @return the string
+	 */
+	public static String Formatar(Date Data, String Padrao) {
+		if (Data == null) {
+			return "";
+		}
+		if (Padrao.isEmpty()) {
+			Padrao = DATA_PADRAO;
+		}
+		SimpleDateFormat formatD = new SimpleDateFormat(Padrao);
+		return formatD.format(Data).toLowerCase();
+	}
+	
 	/**
 	 * To long.
 	 *

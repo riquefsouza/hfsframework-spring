@@ -147,7 +147,7 @@ public class AdmParametroCategoriaController
 	 * @see br.jus.trt1.frameworkdirem.base.IBaseViewCadastro#getListaBean()
 	 */
 	@Override
-	public Iterable<AdmParametroCategoria> getListaBean() {
+	public List<AdmParametroCategoria> getListaBean() {
 		return super.getListaEntidade();
 	}
 
@@ -159,7 +159,7 @@ public class AdmParametroCategoriaController
 	 * List)
 	 */
 	@Override
-	public void setListaBean(Iterable<AdmParametroCategoria> listaEntidade) {
+	public void setListaBean(List<AdmParametroCategoria> listaEntidade) {
 		super.setListaEntidade(listaEntidade);
 	}
 

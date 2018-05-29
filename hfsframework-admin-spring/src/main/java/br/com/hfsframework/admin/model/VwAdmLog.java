@@ -26,6 +26,8 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import br.com.hfsframework.util.DataUtil;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLog.
@@ -116,12 +118,12 @@ public class VwAdmLog implements Serializable {
 	 * @param id the id
 	 * @param usuario the usuario
 	 * @param data the data
-	 * @param dataNumero the data numero
 	 * @param operacao the operacao
 	 * @param ip the ip
 	 * @param entidade the entidade
 	 * @param tabela the tabela
 	 * @param chave the chave
+	 * @param dataNumero the data numero
 	 */
 	public VwAdmLog(Long id, String usuario, Date data, String operacao, String ip, 
 			String entidade, String tabela, String chave, Long dataNumero) {
@@ -421,4 +423,58 @@ public class VwAdmLog implements Serializable {
 		this.listaLogValor = listaLogValor;
 	}
 
+	/**
+	 * Sets the data formatada.
+	 *
+	 * @param dataFormatada the new data formatada
+	 */
+	public void setDataFormatada(String dataFormatada) {
+		this.data = DataUtil.toDate(dataFormatada, DataUtil.DATA_HORA_PADRAO);
+	}
+	
+	/**
+	 * Gets the data formatada.
+	 *
+	 * @return the data formatada
+	 */
+	public String getDataFormatada() {
+		return DataUtil.Formatar(this.data, DataUtil.DATA_HORA_PADRAO);
+	}
+	
+	/**
+	 * Sets the data inicio formatada.
+	 *
+	 * @param dataInicioFormatada the new data inicio formatada
+	 */
+	public void setDataInicioFormatada(String dataInicioFormatada) {
+		this.dataInicio = DataUtil.toDate(dataInicioFormatada, DataUtil.DATA_PADRAO);
+	}
+	
+	/**
+	 * Gets the data inicio formatada.
+	 *
+	 * @return the data inicio formatada
+	 */
+	public String getDataInicioFormatada() {
+		return DataUtil.Formatar(this.dataInicio, DataUtil.DATA_PADRAO);
+	}
+	
+	/**
+	 * Sets the data fim formatada.
+	 *
+	 * @param dataFimFormatada the new data fim formatada
+	 */
+	public void setDataFimFormatada(String dataFimFormatada) {
+		this.dataFim = DataUtil.toDate(dataFimFormatada, DataUtil.DATA_PADRAO);
+	}
+	
+	/**
+	 * Gets the data fim formatada.
+	 *
+	 * @return the data fim formatada
+	 */
+	public String getDataFimFormatada() {
+		return DataUtil.Formatar(this.dataFim, DataUtil.DATA_PADRAO);
+	}
+	
 }

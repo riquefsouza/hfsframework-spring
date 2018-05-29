@@ -7,7 +7,10 @@
 package br.com.hfsframework.base.view;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
@@ -51,7 +54,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	private B businessController;
 
 	/** The lista entidade. */
-	private Iterable<T> listaEntidade;
+	private List<T> listaEntidade;
 
 	/** The entidade. */
 	private T entidade;
@@ -107,7 +110,9 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * Atualiza lista data table.
 	 */
 	protected void atualizaListaDataTable() {
-		this.listaEntidade = businessController.findAll();
+		//this.listaEntidade = businessController.findAll();
+		this.listaEntidade = StreamSupport.stream(businessController.findAll().spliterator(), false)
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -238,7 +243,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 				if (modoIncluir)
 					return new RedirectView(getMapeamento()+"/incluir");
 				else
-					return new RedirectView("/admParametroCategoriaMB/editar/{id}");
+					return new RedirectView(getMapeamento()+"/editar/{id}");
 			}
 			
 			if (modoIncluir){
@@ -249,7 +254,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			} else {				
 				if (this.businessController.existeAntigo(id, descricao)){
 					gerarMensagemErro("Campo 'Descrição' já existe.");
-					return new RedirectView("/admParametroCategoriaMB/editar/{id}");										
+					return new RedirectView(getMapeamento()+"/editar/{id}");										
 				}				
 			}
 		}
@@ -259,7 +264,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			if (modoIncluir)
 				return new RedirectView(getMapeamento()+"/incluir");
 			else
-				return new RedirectView("/admParametroCategoriaMB/editar/{id}");
+				return new RedirectView(getMapeamento()+"/editar/{id}");
 		}
 		
 		try {
@@ -282,7 +287,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			if (modoIncluir)
 				return new RedirectView(getMapeamento()+"/incluir");
 			else
-				return new RedirectView("/admParametroCategoriaMB/editar/{id}");
+				return new RedirectView(getMapeamento()+"/editar/{id}");
 		}
 		atualizaListaDataTable();
 		
@@ -361,7 +366,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 *
 	 * @return o the lista entidade
 	 */
-	public Iterable<T> getListaEntidade() {
+	public List<T> getListaEntidade() {
 		return this.listaEntidade;
 	}
 
@@ -371,7 +376,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * @param listaEntidade
 	 *            o novo the lista entidade
 	 */
-	public void setListaEntidade(Iterable<T> listaEntidade) {
+	public void setListaEntidade(List<T> listaEntidade) {
 		this.listaEntidade = listaEntidade;
 	}
 

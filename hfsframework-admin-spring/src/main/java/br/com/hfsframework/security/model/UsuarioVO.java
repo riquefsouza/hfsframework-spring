@@ -32,9 +32,12 @@ public class UsuarioVO implements Serializable {
 	
 	/** The cpf. */
 	private BigDecimal cpf;
-
+	
 	/** The data. */
 	private Date data;
+	
+	/** The data formatada. */
+	private String dataFormatada;
 
 	/** The email. */
 	private String email;
@@ -257,6 +260,23 @@ public class UsuarioVO implements Serializable {
 		}
 	}
 	
+	/**
+	 * Gets the data formatada.
+	 *
+	 * @return the data formatada
+	 */
+	public String getDataFormatada() {
+		return dataFormatada;
+	}
+
+	/**
+	 * Sets the data formatada.
+	 *
+	 * @param dataFormatada the new data formatada
+	 */
+	public void setDataFormatada(String dataFormatada) {
+		this.dataFormatada = dataFormatada;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -302,6 +322,5 @@ public class UsuarioVO implements Serializable {
 	public String toString() {
 		return nome;
 	}
-
 
 }

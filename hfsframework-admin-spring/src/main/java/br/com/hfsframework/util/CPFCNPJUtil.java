@@ -7,6 +7,7 @@
 package br.com.hfsframework.util;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 // TODO: Auto-generated Javadoc
@@ -194,4 +195,21 @@ public final class CPFCNPJUtil implements Serializable {
 		sum = 11 - sum % 11;
 		return sum > 9 ? 0 : sum;
 	}
+	
+	/**
+	 * Desformat CP for CPNJ.
+	 *
+	 * @param value the value
+	 * @return the big decimal
+	 */
+	public static BigDecimal desformatCPForCPNJ(String value) {
+		if (value == null || value.isEmpty()) {
+			throw new IllegalArgumentException(VALUE_CANNOT_BE_NULL_OR_EMPTY);
+		}
+		String saida = value.replaceAll(".", "");
+		saida = saida.replaceAll("-", "");
+		saida = saida.replaceAll("/", "");
+		return new BigDecimal(saida);
+	}
+
 }

@@ -112,7 +112,7 @@ public class AdmFuncionario implements Serializable {
 	
 	//@Transient
 	//private List<AdmCargoDTO> admCargos;
-	
+
 	/**
 	 * Instantiates a new adm funcionario.
 	 */
@@ -266,6 +266,24 @@ public class AdmFuncionario implements Serializable {
 	}
 
 	/**
+	 * Sets the data admissao formatada.
+	 *
+	 * @param dataAdmissaoFormatada the new data admissao formatada
+	 */
+	public void setDataAdmissaoFormatada(String dataAdmissaoFormatada) {
+		this.dataAdmissao = DataUtil.toDate(dataAdmissaoFormatada, DataUtil.DATA_PADRAO);
+	}
+
+	/**
+	 * Gets the data admissao formatada.
+	 *
+	 * @return the data admissao formatada
+	 */
+	public String getDataAdmissaoFormatada() {
+		return DataUtil.Formatar(this.dataAdmissao, DataUtil.DATA_PADRAO);
+	}
+	
+	/**
 	 * Pega o the data saida.
 	 *
 	 * @return o the data saida
@@ -284,6 +302,24 @@ public class AdmFuncionario implements Serializable {
 		this.dataSaida = dataSaida;
 	}
 
+	/**
+	 * Sets the data saida formatada.
+	 *
+	 * @param dataSaidaFormatada the new data saida formatada
+	 */
+	public void setDataSaidaFormatada(String dataSaidaFormatada) {
+		this.dataSaida = DataUtil.toDate(dataSaidaFormatada, DataUtil.DATA_PADRAO);
+	}
+	
+	/**
+	 * Gets the data saida formatada.
+	 *
+	 * @return the data saida formatada
+	 */
+	public String getDataSaidaFormatada() {
+		return DataUtil.Formatar(this.dataSaida, DataUtil.DATA_PADRAO);
+	}
+	
 	/**
 	 * Pega o the email.
 	 *
@@ -449,6 +485,15 @@ public class AdmFuncionario implements Serializable {
 			return this.cpf.toString();
 		}
 	}
+	
+	/**
+	 * Sets the cpf formatado.
+	 *
+	 * @param cpfFormatado the new cpf formatado
+	 */
+	public void setCpfFormatado(String cpfFormatado) {
+		this.cpf = CPFCNPJUtil.desformatCPForCPNJ(cpfFormatado);
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -522,5 +567,6 @@ public class AdmFuncionario implements Serializable {
 		 */
 		return f;		
 	}
+
 	
 }

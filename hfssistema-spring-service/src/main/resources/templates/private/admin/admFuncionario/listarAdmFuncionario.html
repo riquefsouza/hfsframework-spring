@@ -7,30 +7,61 @@
 </head>
 <body>
 
+<th:block th:include="/private/admin/admFuncionario/admFuncionarioCargosDialog"></th:block>
+
 <script>
 	$(document).ready(function(){
-		//$("#admFuncionarioPerfisDlg").load("admFuncionarioCargosDialog.html");
-		//hfsDatatablesIniciar("AdmFuncionario", 6);
-		
-		var tabela = $('#tabelaAdmFuncionario').DataTable({
-			searching: true,
-			ordering:  true,	
-			dom: '<"top"lp>rt<"bottom"i><"clear">',
-			pagingType: "full_numbers",
-			select: {
-				style: 'single'
-			},
-			lengthMenu: [10, 20, 50, 80, 100],
-			language: hfsDatatablesLinguagem(),
-			columnDefs: [ { orderable: false, targets: 6 } ],
-			processing: true,
-			//ajax: "http://localhost:8080/api/admFuncionarios/?page=1&size=1",
-			ajax: "/sistemaMB"
-		});
-		
-		//hfsDatatablesSelecionar("AdmFuncionario", tabela);
-		
+		hfsDatatablesIniciar("AdmFuncionario", 6);
 	});
+	
+	$('#admFuncionarioCargosDialog').on('show.bs.modal', function(e) {
+	    var id = $(e.relatedTarget).data('id');
+	    	    
+		 $.ajax({
+		        url: "/admFuncionarios/"+id
+		    }).then(function(data) {
+		    	//var tabelaFuncionario = $(e.currentTarget).find('table[id="tabelaFuncionario"]');
+		    	$("#tabelaFuncionarioDlg-matricula").empty();
+		    	$("#tabelaFuncionarioDlg-nome").empty();
+		    	$("#tabelaFuncionarioDlg-cpf").empty();
+		    	$("#tabelaFuncionarioDlg-email").empty();
+		    	$("#tabelaFuncionarioDlg-telefone").empty();
+		    	$("#tabelaFuncionarioDlg-celular").empty();
+		    	$("#tabelaFuncionarioDlg-setor").empty();
+		    	$("#tabelaFuncionarioDlg-cargoPrincipal").empty();
+		    	$("#tabelaFuncionarioDlg-dataAdmissao").empty();
+		    	$("#tabelaFuncionarioDlg-dataSaida").empty();
+		    			    	
+		    	$("#tabelaFuncionarioDlg-matricula").append(data.id);
+		    	$("#tabelaFuncionarioDlg-nome").append(data.nome);
+		    	$("#tabelaFuncionarioDlg-cpf").append(data.cpfFormatado);
+		    	$("#tabelaFuncionarioDlg-email").append(data.email);
+		    	$("#tabelaFuncionarioDlg-telefone").append(data.telefone);
+		    	$("#tabelaFuncionarioDlg-celular").append(data.celular);
+		    	$("#tabelaFuncionarioDlg-setor").append(data.setor);
+		    	$("#tabelaFuncionarioDlg-cargoPrincipal").append(data.admCargoPrincipal.nomeCargo);
+		    	$("#tabelaFuncionarioDlg-dataAdmissao").append(data.dataAdmissaoFormatada);
+		    	$("#tabelaFuncionarioDlg-dataSaida").append(data.dataSaidaFormatada);
+		    });        
+	    	    
+	    
+		 $.ajax({
+		        url: "/admCargos/findCargoByCodFuncionario/"+id
+		    }).then(function(data) {
+			    var cmbCargosFuncionario = $(e.currentTarget).find('select[name="cmbCargosFuncionario"]');
+			    cmbCargosFuncionario.empty();
+			    for (i = 0; i < data.length; i++) { 
+			    	cmbCargosFuncionario.append($('<option>', { value : data[i].id }).text(data[i].nomeCargo));
+			    }
+		    });        
+	    
+	});
+	
+	$('#admFuncionarioCargosDialog').on('hide.bs.modal', function(e) {
+		//var tabelaFuncionario = $(e.currentTarget).find('table[id="tabelaFuncionario"]');
+		//tabelaFuncionario.DataTable().clear().draw( false );
+	});
+	
 </script>
 
 <div th:replace="private/menu :: menu"></div>
@@ -44,44 +75,18 @@
 				Administrar os Funcionários
 			</div>
 			<div class="panel-body">				
-				<div class="row">					
-					<div class="col-md-3 form-group">		
-						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
-						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
-							<optgroup label="Documentos">
-								<option id="PDF">Portable Document Format (.pdf)</option>
-								<option id="DOCX">Microsoft Word XML (.docx)</option>
-								<option id="RTF">Rich Text Format (.rtf)</option>
-								<option id="ODT">OpenDocument Text (.odt)</option>
-							</optgroup>
-							<optgroup label="Planilhas">
-								<option id="XLS">Microsoft Excel (.xls)</option>
-								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
-								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
-							</optgroup>
-							<optgroup label="Texto puro">
-								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
-								<option id="TXT">Somente Texto (.txt)</option>
-							</optgroup>
-							<optgroup label="Outros">
-								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
-								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
-							</optgroup>								
-						</select>
-					</div>
-					<div class="col-md-3 form-group">
-						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
-					</div>
+				<div class="row">
+					<th:block th:include="/private/panelRelatorio"></th:block>
 				</div>
 			</div>					
 		</div>
 
 		<div class="form-actions">
-			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
 				<span class="glyphicon glyphicon-print"></span> Exportar
 			</button>
 			
-			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo cargo" onclick="window.location.href='editarAdmFuncionario.html'">
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo cargo" onclick="window.location.href='incluir'">
 				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
 			</button>
 		
@@ -93,15 +98,14 @@
 				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
 			</button>
 
-			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
 				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
 			</button>
 		</div>
-
-		<div id="admFuncionarioPerfisDlg"></div>	
 		
 		<table id="tabelaAdmFuncionario"
-			class="table table-striped table-bordered" cellspacing="0" width="100%">				
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">				
 			<thead>
 				<tr class="tema-principal">
 				  <th>Matr&iacute;cula</th>
@@ -113,6 +117,21 @@
 				  <td></td>
 				</tr>	
 			</thead>
+			<tbody>
+			 	<tr th:each="item : ${listaBean}">
+					<td th:text="${item.id}"></td>					
+			 		<td th:text="${item.nome}"></td>
+			 		<td th:text="${item.cpfFormatado}"></td>
+			 		<td th:text="${item.email}"></td>
+			 		<td th:text="${item.setor}"></td>
+			 		<td th:text="${item.admCargoPrincipal.nomeCargo}"></td>
+			 		<td style="width:50px;text-align: center;">
+			 			<button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" th:data-id="${item.id}" data-target="#admFuncionarioCargosDialog">
+			 				<span class="glyphicon glyphicon-search" style="font-size:8px"></span>
+			 			</button>
+			 		</td>
+			    </tr>			
+			</tbody>
 		</table>
 			
 	</form>

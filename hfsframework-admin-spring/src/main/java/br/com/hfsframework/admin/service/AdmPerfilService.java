@@ -69,7 +69,7 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	 */
 	@Override
 	public Optional<AdmPerfil> load(Long id) {
-		Optional<AdmPerfil> item = this.load(id);
+		Optional<AdmPerfil> item = super.load(id);
 		item.get().setAdmFuncionarios(this.findFuncionariosPorPerfil(item.get()));
 		item.get().setAdmCargos(this.findCargosPorPerfil(item.get()));
 		return item;
