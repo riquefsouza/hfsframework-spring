@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,10 +135,10 @@ public class TemplateUtil implements Serializable {
 			if (params.name().equals("listar") || params.name().equals("editar") || params.name().equals("reportar")
 					|| params.name().equals("paisagem") || params.name().equals("retrato")) {
 
-				texto = FileUtils.readFileToString(arquivo);
+				texto = FileUtils.readFileToString(arquivo, StandardCharsets.UTF_8);
 				texto = texto.replace("\\{", "{");
 				texto = texto.replace("\\}", "}");
-				FileUtils.writeStringToFile(arquivo, texto);
+				FileUtils.writeStringToFile(arquivo, texto, StandardCharsets.UTF_8);
 			}
 
 		}

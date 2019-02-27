@@ -8,6 +8,7 @@ package br.com.hfsframework.template;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -70,11 +71,11 @@ public class LogAdmExemplo {
 		String texto = "";
 		for (int i = 1; i <= 7; i++) {
 			arquivo = TemplateUtil.gerarAdmLog(mu, "hfsbanco", "", modelo, i, "c:/temp/blob/logOracle" + i + ".sql");
-			texto += FileUtils.readFileToString(arquivo);
+			texto += FileUtils.readFileToString(arquivo, StandardCharsets.UTF_8);
 			// arquivo.delete();
 			texto += "\n/*--------------------------------------------------------------------------------------------------------------------*/\n\n";
 		}
-		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_ORACLE.sql"), texto);
+		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_ORACLE.sql"), texto, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -106,11 +107,11 @@ public class LogAdmExemplo {
 		String texto = "";
 		for (int i = 1; i <= 8; i++) {
 			arquivo = TemplateUtil.gerarAdmLog(mu, "public", "", modelo, i, "c:/temp/blob/logPostgreSQL" + i + ".sql");
-			texto += FileUtils.readFileToString(arquivo);
+			texto += FileUtils.readFileToString(arquivo, StandardCharsets.UTF_8);
 			// arquivo.delete();
 			texto += "\n/*--------------------------------------------------------------------------------------------------------------------*/\n\n";
 		}
-		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_POSTGRESQL.sql"), texto);
+		FileUtils.writeStringToFile(new File("c:/temp/blob/SQL_LOG_POSTGRESQL.sql"), texto, StandardCharsets.UTF_8);
 	}
 
 	/**

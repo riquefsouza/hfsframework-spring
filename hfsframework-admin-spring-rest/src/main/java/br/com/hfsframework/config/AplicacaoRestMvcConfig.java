@@ -8,14 +8,14 @@ package br.com.hfsframework.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AplicacaoRestMvcConfig.
  */
 @Configuration
-public class AplicacaoRestMvcConfig extends RepositoryRestConfigurerAdapter {
+public class AplicacaoRestMvcConfig implements RepositoryRestConfigurer {
 
 	/*
 		Name				Description

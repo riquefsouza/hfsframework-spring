@@ -36,7 +36,7 @@ public class DatabasePostgreSQLConfig {
         //String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();		
 		String username = "postgres";
 		String password = "abcd1234";
-		String dbUrl = "jdbc:postgresql://localhost:5432/hfsbanco";
+		String dbUrl = "jdbc:postgresql://localhost:5432/hfsbanco_spring";
 
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(dbUrl);

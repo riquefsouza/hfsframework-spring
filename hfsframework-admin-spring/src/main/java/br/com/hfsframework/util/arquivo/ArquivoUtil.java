@@ -9,6 +9,7 @@ package br.com.hfsframework.util.arquivo;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -49,7 +50,7 @@ public final class ArquivoUtil implements Serializable {
 					sb.append("\n");
 				}
 
-				rlfr = new ReversedLinesFileReader(file);
+				rlfr = new ReversedLinesFileReader(file, StandardCharsets.UTF_8);
 				while ((linha = rlfr.readLine()) != null) {
 					sb.insert(total, linha);
 
@@ -111,7 +112,7 @@ public final class ArquivoUtil implements Serializable {
 					lista.add(vo);
 				}
 				
-				rlfr = new ReversedLinesFileReader(file);
+				rlfr = new ReversedLinesFileReader(file, StandardCharsets.UTF_8);
 				while ((linha = rlfr.readLine()) != null) {
 					vo = new VisualizarArqLogServidorVO(linha);
 					lista.set(total, vo);

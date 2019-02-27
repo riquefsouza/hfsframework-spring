@@ -123,8 +123,8 @@ public class BaseRelatorioExporter {
 				exporterTXT.setExporterInput(new SimpleExporterInput(print));
 				exporterTXT.setExporterOutput(new SimpleWriterExporterOutput(outputStream));
 				SimpleTextReportConfiguration txtReportConfiguration = new SimpleTextReportConfiguration();
-				txtReportConfiguration.setCharWidth(new Float(7.238F));
-				txtReportConfiguration.setCharHeight(new Float(13.948F));
+				txtReportConfiguration.setCharWidth(7.238F);
+				txtReportConfiguration.setCharHeight(13.948F);
 				txtReportConfiguration.setPageWidthInChars(80);
 				txtReportConfiguration.setPageHeightInChars(40);
 				exporterTXT.setConfiguration(txtReportConfiguration);

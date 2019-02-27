@@ -34,7 +34,7 @@ public class TestarAplicacao {
 	 */
 	public static void main(String args[]) {
 		RestTemplateBuilder builder = new RestTemplateBuilder();		
-		RestTemplate restTemplate = builder.basicAuthorization("admin-hfsframework", "admin").build();
+		RestTemplate restTemplate = builder.basicAuthentication("admin-hfsframework", "admin").build();
 		
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("username", "henrique.souza");
