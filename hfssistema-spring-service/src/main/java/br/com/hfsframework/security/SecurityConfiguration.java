@@ -44,8 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
 	 */
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
 		if (aplicacaoBundle.isHabilitarLDAP()) {
 			String surl = ldapBundle.getLdapTipoConexao().toLowerCase()+"://"+ldapBundle.getLdapServer()+":"+ldapBundle.getLdapPorta();
 			

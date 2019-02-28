@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class LdapConfig.
+ * The Class LdapBundle.
  */
 @Component
 public class LdapBundle implements Serializable {

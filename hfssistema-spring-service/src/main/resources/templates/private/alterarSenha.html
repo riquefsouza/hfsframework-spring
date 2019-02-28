@@ -22,8 +22,9 @@
 				}
 			},
 			callback: function (result) {
-				alert(result);
-				//document.getElementById("alterarSenha").submit(); 
+				if (result){
+					document.getElementById("alterarSenha").submit();
+				}
 			}
 		});
 	}	

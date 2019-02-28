@@ -136,6 +136,15 @@ public class AdmUsuario implements Serializable {
     @LastModifiedBy
     private String modifiedBy;
     
+    @Transient
+	private String senhaAtual;
+	
+	@Transient
+	private String senhaNova;
+	
+	@Transient
+	private String confirmaSenhaNova;
+    
 	/**
 	 * Instantiates a new adm usuario.
 	 */
@@ -559,4 +568,32 @@ public class AdmUsuario implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-}
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}
+
+
+	public String getSenhaNova() {
+		return senhaNova;
+	}
+
+
+	public void setSenhaNova(String senhaNova) {
+		this.senhaNova = senhaNova;
+	}
+
+
+	public String getConfirmaSenhaNova() {
+		return confirmaSenhaNova;
+	}
+
+
+	public void setConfirmaSenhaNova(String confirmaSenhaNova) {
+		this.confirmaSenhaNova = confirmaSenhaNova;
+	}
+ }

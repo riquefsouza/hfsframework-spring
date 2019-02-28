@@ -26,6 +26,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -98,7 +101,8 @@ public class AdmPerfil implements Serializable {
 
 	//@JsonIgnore
 	@JsonSerialize(using = AdmFuncionalidadeListSerializer.class)
-	@ManyToMany(fetch = FetchType.LAZY) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(fetch = FetchType.EAGER) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinTable(name = "ADM_FUNCIONALIDADE_PERFIL", joinColumns = {
 			@JoinColumn(name = "FPL_PRF_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "FPL_FUN_SEQ") })
 	private List<AdmFuncionalidade> admFuncionalidades;
@@ -106,7 +110,8 @@ public class AdmPerfil implements Serializable {
 	/** The adm paginas. */
 	//@JsonIgnore
 	@JsonSerialize(using = AdmPaginaListSerializer.class)
-	@ManyToMany(fetch = FetchType.LAZY) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(fetch = FetchType.EAGER) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinTable(name = "ADM_PAGINA_PERFIL", joinColumns = { 
 			@JoinColumn(name = "PGL_PRF_SEQ") }, inverseJoinColumns = {	@JoinColumn(name = "PGL_PAG_SEQ") })
 	private List<AdmPagina> admPaginas;
@@ -114,7 +119,8 @@ public class AdmPerfil implements Serializable {
 	/** The adm cargos. */
 	//@JsonIgnore
 	@JsonSerialize(using = AdmCargoListSerializer.class)
-	@ManyToMany(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ADM_CARGO_PERFIL", joinColumns = {
 			@JoinColumn(name = "CGP_PRF_SEQ") }, inverseJoinColumns = {
 					@JoinColumn(name = "CGP_CAR_SEQ", referencedColumnName = "CAR_SEQ") })				
@@ -123,7 +129,8 @@ public class AdmPerfil implements Serializable {
 	/** The adm funcionarios. */
 	//@JsonIgnore
 	@JsonSerialize(using = AdmFuncionarioListSerializer.class)
-	@ManyToMany(fetch = FetchType.LAZY) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(fetch = FetchType.EAGER) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinTable(name = "ADM_FUNCIONARIO_PERFIL", joinColumns = {
 			@JoinColumn(name = "USP_PRF_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "USP_FUN_CODIGO") })
 	private List<AdmFuncionario> admFuncionarios;

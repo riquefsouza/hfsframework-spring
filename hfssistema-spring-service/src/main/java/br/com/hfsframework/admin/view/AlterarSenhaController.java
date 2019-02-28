@@ -12,6 +12,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewConsulta;
 import br.com.hfsframework.base.view.IBaseViewConsulta;
 import br.com.hfsframework.base.view.IBaseViewRelatorio;
+import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 
 // TODO: Auto-generated Javadoc
@@ -75,18 +77,37 @@ public class AlterarSenhaController extends BaseViewConsulta<AdmUsuario, Long, A
 		return mv;
 	}
 	
+	public boolean prepararParaSalvar(AdmUsuario obj, RedirectAttributes attributes) {
+		if ((obj.getSenhaNova() == null && obj.getConfirmaSenhaNova() == null && obj.getSenhaAtual() == null)
+				|| (obj.getSenhaNova().equals("") && obj.getConfirmaSenhaNova().equals("") && obj.getSenhaAtual().equals(""))) {
+			attributes.addFlashAttribute("mensagem", "Por favor, preencha todos os campos");
+		} else if ((obj.getSenhaNova() == null && obj.getConfirmaSenhaNova() == null)
+				|| (obj.getSenhaNova().equals("") && obj.getConfirmaSenhaNova().equals(""))) {
+			attributes.addFlashAttribute("mensagem", "Por favor, preencha todos os campos");
+		} else {
+			String senha = BCrypt.hashpw(obj.getSenhaAtual(), BCrypt.gensalt());
+			
+			if (senha.equals(getUsuarioAutenticado().getUsuario().getSenha())) {
+
+				if (obj.getSenhaNova().equals(obj.getConfirmaSenhaNova())) {
+					return true;
+				} else {
+					attributes.addFlashAttribute("mensagem", "Senha nova e confirma senha não confere.");
+				}
+			} else {
+				attributes.addFlashAttribute("mensagem", "Senha atual não confere.");
+			}
+		}
+		return false;
+	}
+	
 	@PostMapping("/salvar")
 	public RedirectView salvar(@Valid AdmUsuario obj, 
 			BindingResult result, RedirectAttributes attributes) {
 		
-		/*
-		if (descricao!=null){
-			if (descricao.isEmpty()) {
-				gerarMensagemErro("Campo 'Descrição' não pode ser vazio.");
-				return new RedirectView(getMapeamento()+"/listar");
-			}			
+		if (prepararParaSalvar(obj, attributes)){
+			return new RedirectView(getMapeamento()+"/listar");
 		}
-		*/
 		
 		if (result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
@@ -94,12 +115,18 @@ public class AlterarSenhaController extends BaseViewConsulta<AdmUsuario, Long, A
 		}
 		
 		try {
-			if (obj.getId() == null)
-				getBusinessController().insert(obj);
-			else
-				getBusinessController().update(obj);
+			String senha = BCrypt.hashpw(obj.getConfirmaSenhaNova(), BCrypt.gensalt());
 			
-			attributes.addFlashAttribute("mensagem", "Salvo com sucesso!");
+			UsuarioAutenticadoVO usuarioAut = getUsuarioAutenticado();
+			usuarioAut.getUsuario().setSenha(senha);
+			
+			
+			getBusinessController().updateSenha(usuarioAut.getUsuario().getSenha(), 
+					usuarioAut.getUsuario().getLogin());
+			
+			setUsuarioAutenticado(usuarioAut);
+			
+			attributes.addFlashAttribute("mensagem", "Senha alterada!");
 		} catch (Exception e) {
 			gerarMensagemErro(e, ERRO_SALVAR);
 			return new RedirectView(getMapeamento()+"/listar");

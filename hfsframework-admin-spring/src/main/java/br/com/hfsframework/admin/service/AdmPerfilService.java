@@ -31,6 +31,7 @@ import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.PerfilVO;
 import br.com.hfsframework.security.model.PermissaoVO;
+import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
 // TODO: Auto-generated Javadoc
@@ -236,18 +237,16 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 		return hs;
 	}
 
-	/**
-	 * Gets the permissao.
-	 *
-	 * @param idAdmFuncionario the id adm funcionario
-	 * @return the permissao
-	 */
+	public List<PermissaoVO> getPermissao(UsuarioAutenticadoVO usuarioAutenticado){
+		AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());
+		return getPermissao(admFuncionario.getId());
+	}
+	
 	public List<PermissaoVO> getPermissao(Long idAdmFuncionario) {
 		List<PermissaoVO> lista = new ArrayList<PermissaoVO>();
 		PermissaoVO permissao;
 		List<AdmPagina> paginasFuncionalidade;
 		
-		//AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());
 		Iterable<AdmPerfil> perfis = repositorio.findPerfisPorFuncionario(idAdmFuncionario);
 		perfis = setAdmFuncionarioCargo(perfis);
 		

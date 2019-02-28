@@ -26,13 +26,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import br.com.hfsframework.AplicacaoBundle;
+import br.com.hfsframework.AplicacaoUtil;
 import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.model.AdmUsuarioIp;
 import br.com.hfsframework.admin.model.AdmUsuarioIpPK;
 import br.com.hfsframework.base.BaseBusinessService;
+import br.com.hfsframework.security.model.MenuVO;
+import br.com.hfsframework.security.model.PaginaVO;
+import br.com.hfsframework.security.model.PermissaoVO;
+import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.exceptions.TransacaoException;
+import br.com.hfsframework.util.ldap.LdapBundle;
+import br.com.hfsframework.util.ldap.LdapUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -51,6 +59,31 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	/** The adm usuario ip service. */
 	@Autowired
 	private AdmUsuarioIpService admUsuarioIpService;
+	
+	@Autowired
+	private LdapUtil ldapUtil;
+	
+	@Autowired
+	private AdmPerfilService admPerfilService;
+
+	/** The vw adm funcionario Service. */
+	@Autowired
+	private AdmFuncionarioService admFuncionarioService;
+
+	/** The aplicacao config. */
+	@Autowired
+	private AplicacaoBundle aplicacaoBundle;
+
+	/** The aplicacao util. */
+	@Autowired
+	private AplicacaoUtil aplicacaoUtil;
+
+	/** The usuario autenticado. */
+	@Autowired
+	protected UsuarioAutenticadoVO usuarioAutenticado;
+	
+	/** The usuario logado. */
+	private AdmUsuario usuarioLogado;
 	
 	/**
 	 * Find by login.
@@ -359,4 +392,168 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		
 		return lista;
 	}
+	
+	
+	public boolean autenticar(Optional<AdmUsuario> admUsuario) throws Exception {
+		if (aplicacaoBundle.isHabilitarLDAP()) {
+			if (autenticarViaLDAP(admUsuario)) {
+				setPropriedades(admUsuario.get().getLogin());
+				return true;
+			}
+		} else {
+			if (autenticarViaBanco(admUsuario)) {
+				setPropriedades(admUsuario.get().getLogin());
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	private void setPropriedades(String login) throws Exception {
+		this.usuarioAutenticado.setUserName(login);
+		if (!aplicacaoUtil.isDebugMode() && aplicacaoBundle.isHabilitarControlePerfil()) {
+			
+			if (aplicacaoBundle.isHabilitarLDAP()) 
+				this.usuarioAutenticado.setFuncionario(admFuncionarioService.load(ldapUtil.getMatricula()).get().toFuncionarioVO());
+			else
+				this.usuarioAutenticado.setFuncionario(admFuncionarioService.load(usuarioLogado.getId()).get().toFuncionarioVO());
+				
+			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getFuncionario().getNome());
+			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getFuncionario().getEmail());
+			this.usuarioAutenticado.setListaPermissao(admPerfilService.getPermissao(usuarioAutenticado));
+
+			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
+				this.usuarioAutenticado.setListaMenus(
+						admPerfilService.findMenuPaiByPerfil(
+								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+				
+				this.usuarioAutenticado.setListaAdminMenus(
+						admPerfilService.findAdminMenuPaiByPerfil(
+								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+			}
+			
+			//try {
+				if (aplicacaoBundle.isHabilitarLDAP()) {
+					this.usuarioAutenticado.setUsuario(this.getUsuario(ldapUtil.getMatricula(),
+						ldapUtil.getLogin(), ldapUtil.getNome(),
+						this.usuarioAutenticado.getFuncionario().getCpf(),
+						ldapUtil.getEmail(), ldapUtil.getLdapDN()).get().toUsuarioVO());
+				} else {
+					this.usuarioAutenticado.setUsuario(this.getUsuario(usuarioAutenticado.getFuncionario().getId(),
+							usuarioLogado.getLogin(), usuarioAutenticado.getFuncionario().getNome(),
+							this.usuarioAutenticado.getFuncionario().getCpf(),
+							usuarioAutenticado.getFuncionario().getEmail(), "").get().toUsuarioVO());
+				}
+					
+				aplicacaoUtil.setUsuarioAutenticado(this.usuarioAutenticado);
+			/*	
+			} catch (Exception e) {
+				gerarMensagemErro(e, e.getMessage());
+			}
+			*/
+			
+			this.log.info(this.usuarioAutenticado.getUserName() + " : Setor: "
+					+ this.usuarioAutenticado.getFuncionario().getSetor() + ", Perfis: "
+					+ this.usuarioAutenticado.getListaPermissao().toString());
+			mostrarPerfilURL();
+			mostrarMenus();
+		}
+	}
+
+	/**
+	 * Mostrar perfil URL.
+	 */
+	public void mostrarPerfilURL() {
+		for (PermissaoVO permissao : this.usuarioAutenticado.getListaPermissao()) {
+			for (PaginaVO pagFuncionalidade : permissao.getPaginasFuncionalidade()) {
+				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Funcionalidade Pagina inicial URL: "
+						+ pagFuncionalidade.getUrl());
+			}
+			for (PaginaVO admPagina : permissao.getPaginas()) {
+				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Pagina URL: " + admPagina.getUrl());
+			}
+		}
+	}
+
+	/**
+	 * Mostrar menus.
+	 */
+	public void mostrarMenus() {		
+		for (MenuVO menu : this.usuarioAutenticado.getListaMenus()) {
+			log.info("Menu: " + menu.toString());
+		}
+		for (MenuVO menu : this.usuarioAutenticado.getListaAdminMenus()) {
+			log.info("Menu Admin: " + menu.toString());
+		}		
+	}
+	
+	/**
+	 * Gets the lista menus.
+	 *
+	 * @return the lista menus
+	 */
+	public List<MenuVO> getListaMenus() {
+		return this.usuarioAutenticado.getListaMenus();
+	}
+
+	/**
+	 * Gets the lista admin menus.
+	 *
+	 * @return the lista admin menus
+	 */
+	public List<MenuVO> getListaAdminMenus() {
+		return this.usuarioAutenticado.getListaAdminMenus();
+	}
+
+	/**
+	 * Gets the pagina.
+	 *
+	 * @param idMenu
+	 *            the id menu
+	 * @return the pagina
+	 */
+	public PaginaVO getPagina(Long idMenu) {
+		return this.usuarioAutenticado.getPaginaByMenu(idMenu);
+	}
+	
+	private boolean autenticarViaBanco(Optional<AdmUsuario> admUsuario) {
+		if (!aplicacaoUtil.isDebugMode()) {
+			
+			//String csenha = DigestUtils.shaHex(senha);
+			
+			//if (!login.isEmpty() && !csenha.isEmpty()) {
+			if (admUsuario.isPresent()) {
+				//usuarioLogado = this.login(login, csenha);
+				usuarioLogado = admUsuario.get();
+				return (usuarioLogado!=null);
+			}
+		} else {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean autenticarViaLDAP(Optional<AdmUsuario> admUsuario) {
+		if (!aplicacaoUtil.isDebugMode()) {
+			//if (!login.isEmpty() && !senha.isEmpty()) {
+			if (admUsuario.isPresent()) {
+				LdapBundle config = new LdapBundle();
+				log.info(config.toString());
+				ldapUtil.configurar(config);
+				ldapUtil.setListaLdapAtributo(ldapUtil.getAtributos(admUsuario.get().getLogin()));
+				
+				return ldapUtil.login(admUsuario.get().getLogin(), admUsuario.get().getSenha());
+			}
+		} else {
+			return true;
+		}
+
+		return false;
+	}
+	
+	public UsuarioAutenticadoVO getUsuarioAutenticado() {
+		return usuarioAutenticado;
+	}
+	
 }

@@ -16,8 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 import br.com.hfsframework.admin.model.AdmUsuario;
+import br.com.hfsframework.admin.service.AdmUsuarioService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,7 +27,7 @@ import br.com.hfsframework.admin.model.AdmUsuario;
 public class UsuarioServicoDetalhes implements UserDetailsService {
 
 	/** The repository. */
-	private final AdmUsuarioRepository repository;
+	private final AdmUsuarioService admUsuarioService;
 
 	/**
 	 * Instantiates a new usuario servico detalhes.
@@ -35,8 +35,8 @@ public class UsuarioServicoDetalhes implements UserDetailsService {
 	 * @param repository the repository
 	 */
 	@Autowired
-	public UsuarioServicoDetalhes(AdmUsuarioRepository repository) {
-		this.repository = repository;
+	public UsuarioServicoDetalhes(AdmUsuarioService admUsuarioService) {
+		this.admUsuarioService = admUsuarioService;
 	}
 
 	/* (non-Javadoc)
@@ -45,7 +45,7 @@ public class UsuarioServicoDetalhes implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 		UserDetails user;
-		Optional<AdmUsuario> admUsuario = this.repository.findByLogin(name);
+		Optional<AdmUsuario> admUsuario = this.admUsuarioService.findByLogin(name);
 		
 		if (!admUsuario.isPresent()) {
 			throw new UsernameNotFoundException("Usuário ou senha inválidos");
@@ -59,6 +59,12 @@ public class UsuarioServicoDetalhes implements UserDetailsService {
 		
 		user = new User(admUsuario.get().getLogin(), admUsuario.get().getSenha(),
 				AuthorityUtils.createAuthorityList(roles));
+				
+		try {
+			admUsuarioService.autenticar(admUsuario);
+		} catch (Exception e) {
+			throw new UsernameNotFoundException(e.getMessage());
+		}
 		
 		return user;
 	}
