@@ -13,7 +13,7 @@
 
 	<cache name="padrao"
 		maxEntriesLocalHeap="10000"
-		maxEntriesLocalDisk="1000"
+		maxEntriesLocalDisk="15000"
 		eternal="false"
 		diskSpoolBufferSizeMB="20"
 		timeToIdleSeconds="300" timeToLiveSeconds="600"
