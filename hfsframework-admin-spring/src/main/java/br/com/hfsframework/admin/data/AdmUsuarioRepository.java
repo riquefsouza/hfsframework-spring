@@ -93,7 +93,7 @@ public interface AdmUsuarioRepository extends JpaRepository<AdmUsuario, Long> {
 	 * @return the list
 	 */
 	@Query(name = "AdmUsuario.setLoginPostgreSQL", nativeQuery = true)
-	List<Object> setLoginPostgreSQL(String login);
+	String setLoginPostgreSQL(String login);
 	
 	/**
 	 * Sets the IP postgre SQL.
@@ -102,5 +102,11 @@ public interface AdmUsuarioRepository extends JpaRepository<AdmUsuario, Long> {
 	 * @return the list
 	 */
 	@Query(name = "AdmUsuario.setIPPostgreSQL", nativeQuery = true)
-	List<Object> setIPPostgreSQL(String ip);
+	String setIPPostgreSQL(String ip);
+
+	/*
+	@Query(name = "AdmUsuario.setOracleLoginAndIP", nativeQuery = true)
+	void setOracleLoginAndIP(String login, String ip);
+	*/
+			
 }

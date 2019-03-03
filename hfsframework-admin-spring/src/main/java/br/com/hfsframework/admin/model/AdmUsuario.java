@@ -59,9 +59,19 @@ import br.com.hfsframework.util.DataUtil;
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "AdmUsuario.findIPByOracle", query = "SELECT SYS_CONTEXT('USERENV', 'IP_ADDRESS', 15) FROM DUAL"),
 	@NamedNativeQuery(name = "AdmUsuario.findIPByPostgreSQL", query = "SELECT substr(CAST(inet_client_addr() AS VARCHAR),1,strpos(CAST(inet_client_addr() AS VARCHAR),'/')-1)"),
-	@NamedNativeQuery(name = "AdmUsuario.setLoginPostgreSQL", query = "select set_config('myvars.usuario_login', ?1, false)"),
+	@NamedNativeQuery(name = "AdmUsuario.setLoginPostgreSQL", query = "select set_config('myvars.usuario_login', ?1, false)" ),
 	@NamedNativeQuery(name = "AdmUsuario.setIPPostgreSQL", query = "select set_config('myvars.usuario_ip', ?1, false)")
 })
+/*
+@NamedStoredProcedureQueries({
+		@NamedStoredProcedureQuery(name = "AdmUsuario.setOracleLoginAndIP", procedureName = "pkg_adm.setar_usuario_ip",
+				// resultClasses = { LoginModel.class },
+				parameters = { @StoredProcedureParameter(name = "login", type = String.class, mode = ParameterMode.IN),
+						@StoredProcedureParameter(name = "senha", type = String.class, mode = ParameterMode.IN) })
+
+})
+*/
+
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @EntityListeners(AuditingEntityListener.class)
 public class AdmUsuario implements Serializable {

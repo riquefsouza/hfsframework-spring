@@ -7,20 +7,17 @@
 package br.com.hfsframework.admin.service;
 
 import java.math.BigDecimal;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.jdbc.ReturningWork;
+import org.hibernate.boot.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -33,6 +30,7 @@ import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.model.AdmUsuarioIp;
 import br.com.hfsframework.admin.model.AdmUsuarioIpPK;
 import br.com.hfsframework.base.BaseBusinessService;
+import br.com.hfsframework.config.MetadataExtractorIntegrator;
 import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.PaginaVO;
 import br.com.hfsframework.security.model.PermissaoVO;
@@ -174,8 +172,8 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 * @return the string
 	 */
 	public String setLoginPostgreSQL(String login) {
-		List<Object> lista = repositorio.setLoginPostgreSQL(login);
-		return lista.get(0).toString();
+		String retorno = repositorio.setLoginPostgreSQL(login);
+		return retorno;		
 	}
 
 	/**
@@ -186,8 +184,8 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 * @return the string
 	 */
 	public String setIPPostgreSQL(String ip) {
-		List<Object> lista = repositorio.setIPPostgreSQL(ip);
-		return lista.get(0).toString();
+		String retorno = repositorio.setIPPostgreSQL(ip);
+		return retorno;
 	}
 
 	/**
@@ -199,6 +197,23 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 */
 	public String findBanco() throws TransacaoException {
 		String retorno = "";
+		
+		Metadata metadata = MetadataExtractorIntegrator.INSTANCE.getMetadata();
+		
+		String dialeto = metadata.getDatabase().getDialect().toString();
+		
+		
+		if (dialeto.indexOf("Oracle") != -1) {
+			retorno = "Oracle";
+		}
+		if (dialeto.indexOf("PostgreSQL") != -1) {
+			retorno = "PostgreSQL";
+		}
+		if (dialeto.indexOf("mysql") != -1) {
+			retorno = "MySQL";
+		}
+		
+		/*
 		final SQLException[] erro = new SQLException[1];
 
 		if (em.isOpen()) {
@@ -239,11 +254,12 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 				}
 			}
 		}
+		*/
 
 		return retorno;
 	}
 
-	/**
+	/*
 	 * Atribui o oracle login and IP.
 	 *
 	 * @param login
@@ -253,7 +269,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 * @return true, if successful
 	 * @throws TransacaoException
 	 *             the transacao exception
-	 */
+	 *
 	public boolean setOracleLoginAndIP(String login, String ip) throws TransacaoException {
 		Integer retorno = -1;
 		final SQLException[] erro = new SQLException[1];
@@ -292,7 +308,25 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 
 		return (retorno == 0);
 	}
+	*/
+	
+	public boolean setOracleLoginAndIP(String login, String ip) throws TransacaoException {
+		int retorno = -1;
+		try {
+			StoredProcedureQuery query = em.createStoredProcedureQuery("pkg_adm.setar_usuario_ip");
+			
+			query.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+			query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
 
+			query.setParameter(1, login);
+			query.setParameter(2, ip);
+
+			retorno = query.executeUpdate();
+		} catch (Exception e) {
+			throw new TransacaoException(e);
+		}
+		return (retorno > 0);
+	}
 
 	/**
 	 * Gets the usuario.
@@ -337,7 +371,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 			usuario.setCpf(cpf);
 			usuario.setEmail(email);
 			usuario.setLdapDN(ldapDN);
-			this.insert(usuario);
+			//this.insert(usuario);
 		} 
 		/*
 		else {
@@ -351,7 +385,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		admUsuarioIpService.updateAtivoByMatricula(false, matricula);
 		
 		Optional<AdmUsuarioIp> admUsuarioIp = admUsuarioIpService.load(admUsuarioIpPK);
-		if (admUsuarioIp.isPresent()) {
+		if (!admUsuarioIp.isPresent()) {
 			AdmUsuarioIp usuarioIp = new AdmUsuarioIp();
 			usuarioIp.setId(admUsuarioIpPK);
 			usuarioIp.setAtivo(true);
