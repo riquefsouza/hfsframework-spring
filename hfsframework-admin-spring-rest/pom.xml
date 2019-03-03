@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfsframework-admin-spring-rest</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<name>HFS Framework Admin Spring Restful</name>
 	<description>HFS Framework Admin Spring Restful</description>
 	
@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>hfsframework-admin-spring</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
@@ -50,7 +50,7 @@
 			<artifactId>hfsframework-admin-spring</artifactId>
 			<classifier>tests</classifier>
 			<type>test-jar</type>
-			<version>1.0</version>
+			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
     

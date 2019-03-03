@@ -38,7 +38,7 @@ public class Aplicacao {
 		log.info("------------------------------------------------------------------------");
 		log.info("HFS Sistema Spring Service");
 		log.info("Desenvolvido por Henrique Figueiredo de Souza");
-		log.info("Versão 1.0 - 2018");
+		log.info("Versão 1.0.1 - 2019");
 		log.info("------------------------------------------------------------------------");
 		
 		NetUtil.printIpHost();

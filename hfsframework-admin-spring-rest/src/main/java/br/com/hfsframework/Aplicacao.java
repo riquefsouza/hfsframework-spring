@@ -62,9 +62,9 @@ public class Aplicacao {
 		SpringApplication.run(Aplicacao.class);
 		
 		log.info("------------------------------------------------------------------------");
-		log.info("HFS Admin SpringFramework REST");
+		log.info("HFS Framework Admin Spring REST");
 		log.info("Desenvolvido por Henrique Figueiredo de Souza");
-		log.info("Versão 1.0 - 2018");
+		log.info("Versão 1.0.1 - 2019");
 		log.info("------------------------------------------------------------------------");
 		
 		NetUtil.printIpHost();
