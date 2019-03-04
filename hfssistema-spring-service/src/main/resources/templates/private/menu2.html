@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<body>
+	
+<div th:fragment="menu2">	
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+	  <a class="navbar-brand" href="/">HFS Framework</a>
+    </div>
+    <ul class="nav navbar-nav">
+	  <li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrativo<span class="caret"></span></a>
+		<ul class="dropdown-menu">
+		  <li><a href="/admParametroCategoriaMB/listar">Categoria dos Parâmetros de Configuração</a></li>
+		  <li><a href="/admParametroMB/listar">Parâmetros de Configuração</a></li>	          
+		  <li><a href="/admPerfilMB/listar">Administrar Perfil</a></li>
+		  <li role="separator" class="divider"></li>
+		  <li><a href="/admFuncionalidadeMB/listar">Administrar Funcionalidade</a></li>
+		  <li><a href="/admPaginaMB/listar">Administrar Página</a></li>	          
+		  <li><a href="/admMenuMB/listar">Administrar Menu</a></li>
+		  <li role="separator" class="divider"></li>
+		  <li><a href="/admCargoMB/listar">Administrar os Cargos</a></li>
+		  <li><a href="/admFuncionarioMB/listar">Administrar os Funcionários</a></li>
+		  <li><a href="/admSetorMB/listar">Administrar os Setores</a></li>
+		  <li><a href="/admUsuarioMB/listar">Visualizar os Usuários</a></li>
+		  <li><a href="/vwAdmLogMB/listar">Visualizar os Logs de Auditoria</a></li>
+		  <li><a href="/admLogColunaMB/listar">Administrar os Campos do Log de Auditoria</a></li>
+		  <li><a href="/visualizarArqLogServidorMB/listar">Visualizar Arquivo de Log do Servidor</a></li>
+		</ul>
+	  </li>
+	  <li><a href="/alterarSenhaMB/listar">Alterar Senha</a></li>
+	  <li><a href="/logout"><img class="imagem-inverte" src="/img/sair.png" alt="Sair" />Sair</a></li>
+    </ul>
+	
+	<ul class="nav navbar-nav pull-right"
+		style="display: inline-block; padding-top: 15px; font-size: 90%">
+		<li>
+				<small> 
+					<span id="informacoes-usuario" style="color: lightgray">Sessão expira: 
+						<span id="dialog-countdown-geral"></span>
+						<i class="glyphicon glyphicon-user"></i> 
+						<a data-toggle="modal" data-target="#infoUsuarioDialog" style="cursor: pointer; cursor: hand; text-decoration: none;">henrique.souza</a>
+					</span>
+				</small>
+			
+			</li>
+	</ul>
+	
+  </div>
+</nav>
+
+<div class="tela-conteudo">
+	<div class="alert alert-danger alert-dismissable fade in" id="alert-messages" style="display:none;">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Favor selecionar um registro da tabela para proceder esta ação.</strong>
+	</div>
+</div>
+
+<div th:replace="sessionTimeOut :: sessaoSistema"></div>
+	
+<div th:replace="private/infoUsuario :: infoUsuario"></div>
+
+</div>
+	
+</body>
+</html>

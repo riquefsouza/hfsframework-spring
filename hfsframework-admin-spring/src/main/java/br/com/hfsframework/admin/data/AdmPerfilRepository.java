@@ -147,4 +147,45 @@ public interface AdmPerfilRepository extends JpaRepository<AdmPerfil, Long> {
 	 */
 	@Query(name="AdmPerfil.findMenuByPerfil")
 	List<AdmMenu> findMenuByPerfil(AdmPerfil perfil, AdmMenu menuPai);
+	
+	/**
+	 * Find admin menu pai by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	@Query(name="AdmPerfil.findAdminMenuPaiByIdPerfis")
+	List<AdmMenu> findAdminMenuPaiByIdPerfis(List<Long> listaIdPerfil);
+
+	/**
+	 * Find menu pai by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	@Query(name="AdmPerfil.findMenuPaiByIdPerfis")
+	List<AdmMenu> findMenuPaiByIdPerfis(List<Long> listaIdPerfil);
+
+	/**
+	 * Find admin menu by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @param menuPai the menu pai
+	 * @return the list
+	 */
+	@Query(name="AdmPerfil.findAdminMenuByIdPerfis")
+	List<AdmMenu> findAdminMenuByIdPerfis(List<Long> listaIdPerfil, AdmMenu menuPai);
+	
+	/**
+	 * Find menu by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @param menuPai the menu pai
+	 * @return the list
+	 */
+	@Query(name="AdmPerfil.findMenuByIdPerfis")
+	List<AdmMenu> findMenuByIdPerfis(List<Long> listaIdPerfil, AdmMenu menuPai);
+
+	List<AdmPerfil> findByGeral(Boolean geral);
+	
 }

@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 
 // TODO: Auto-generated Javadoc
@@ -139,6 +140,41 @@ public abstract class BaseViewController {
 	}
 	
 	/**
+	 * Adiciona o message info dialog.
+	 *
+	 * @param mensagem
+	 *            the mensagem
+	 */
+	public static void addMessageInfoDialog(String mensagem) {
+		//RequestContext.getCurrentInstance()
+			//	.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", mensagem));
+	}
+
+	/**
+	 * Adiciona o message alerta dialog.
+	 *
+	 * @param mensagem
+	 *            the mensagem
+	 */
+	public static void addMessageAlertaDialog(String mensagem) {
+		//RequestContext.getCurrentInstance()
+			//	.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", mensagem));
+	}
+
+	/**
+	 * Adiciona o message erro dialog.
+	 *
+	 * @param e
+	 *            the e
+	 * @param mensagem
+	 *            the mensagem
+	 */
+	public static void addMessageErroDialog(Exception e, String mensagem) {
+		//RequestContext.getCurrentInstance()
+			//	.showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", ExcecaoUtil.getErros(LogManager.getLogger(), e, mensagem)));
+	}
+	
+	/**
 	 * Gets the sessao.
 	 *
 	 * @return the sessao
@@ -198,4 +234,21 @@ public abstract class BaseViewController {
 		getSessao().setAttribute("usuarioAutenticado", usu);
 	}
 	
+	private String getIdMenu() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();		
+		Map<String, String[]> params = attr.getRequest().getParameterMap();
+		String[] sIdMenu = params.get("id");
+		if (sIdMenu != null && sIdMenu.length > 0 && !sIdMenu[0].isEmpty()) {
+			return sIdMenu[0];
+		}
+		return "";
+	}
+	
+	public MenuVO getMenuAtual(){
+		String idMenu = getIdMenu();
+		if (!idMenu.isEmpty())
+			return getUsuarioAutenticado().getMenu(idMenu);
+		else 
+			return null;
+	}	
 }

@@ -9,6 +9,7 @@ package br.com.hfsframework.base.view;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -201,11 +202,17 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			businessController.delete(bean.get());
 			atualizaListaDataTable();
 		} catch (Exception e) {
-			if (e.getCause().toString().contains(contemErro)) {
-				gerarMensagemErro(e, ERRO_DELETE + mensagemErro);
-			} else {
-				gerarMensagemErro(e, ERRO_DELETE);
-			}
+	        if (!contemErro.isEmpty() && !mensagemErro.isEmpty()){
+	            if (e.getCause().toString().contains(contemErro)) {
+	                //gerarMensagemErro(e, ERRO_DELETE + mensagemErro);
+	                addMessageAlertaDialog(mensagemErro);
+	            }                
+	        } else if (!mensagemErro.isEmpty()){
+	            addMessageAlertaDialog(mensagemErro);
+	        } else {
+	            gerarMensagemErro(e, ERRO_DELETE);
+	        }
+	        //return;
 		}
 			
 		return new RedirectView(getMapeamento()+"/listar");
@@ -231,10 +238,11 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 * @param obj the obj
 	 * @param result the result
 	 * @param attributes the attributes
+	 * @param fnc the fnc
 	 * @return the redirect view
 	 */	
 	private RedirectView salvar(I id, String descricao, String contemErro, String mensagemErro, 
-			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
+			@Valid T obj, BindingResult result, RedirectAttributes attributes, Callable<String> fnc) {
 		
 		
 		if (descricao!=null){
@@ -273,6 +281,10 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 			else
 				businessController.update(obj);
 			
+			if (fnc!=null){
+				fnc.call();
+			}
+			
 			this.modoSalvo = true;
 			
 			attributes.addFlashAttribute("mensagem", "Salvo com sucesso!");
@@ -307,7 +319,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 */
 	protected RedirectView salvar(I id, String descricao,
 			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
-		return this.salvar(id, descricao, "", "", obj, result, attributes);
+		return this.salvar(id, descricao, "", "", obj, result, attributes, null);
 	}
 
 	/**
@@ -321,7 +333,7 @@ public abstract class BaseViewCadastro<T extends Serializable, I extends Seriali
 	 */
 	protected RedirectView salvar(I id,
 			@Valid T obj, BindingResult result, RedirectAttributes attributes) {
-		return this.salvar(id, null, "", "", obj, result, attributes);
+		return this.salvar(id, null, "", "", obj, result, attributes, null);
 	}
 
 	/**

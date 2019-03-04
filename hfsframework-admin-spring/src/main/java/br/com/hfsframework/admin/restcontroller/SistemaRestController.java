@@ -6,6 +6,8 @@
  */
 package br.com.hfsframework.admin.restcontroller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.hfsframework.AplicacaoBundle;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.service.AdmUsuarioService;
+import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.UsuarioVO;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -34,6 +38,9 @@ public class SistemaRestController {
 	@Autowired
 	private AdmUsuarioService admUsuarioService;
 
+	@Autowired
+	private AplicacaoBundle aplicacaoBundle;
+	
 	/**
 	 * Sistema MB.
 	 *
@@ -76,5 +83,21 @@ public class SistemaRestController {
 		}
 		
 		return usu;
+	}
+	
+	@RequestMapping(value = "/sistemaMenus", method = RequestMethod.GET)
+	public MenuVO[] getMenus() {
+		List<MenuVO> lista = new ArrayList<MenuVO>();
+		
+		admUsuarioService.getListaMenus().forEach(item -> lista.add(item));
+		
+		if (aplicacaoBundle.isMostrarMenuAdministrativo()) {
+			admUsuarioService.getListaAdminMenus().forEach(item -> lista.add(item));
+		}
+		
+		MenuVO[] itemsArray = new MenuVO[lista.size()];
+        itemsArray = lista.toArray(itemsArray);
+        
+		return itemsArray;
 	}
 }

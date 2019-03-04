@@ -370,4 +370,54 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 		listaCod.forEach(item -> lista.add(admCargoService.load(item).get()));
 		return lista;
 	}
+	
+	/**
+	 * Find menu pai by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	public List<AdmMenu> findMenuPaiByIdPerfis(List<Long> listaIdPerfil){
+		List<AdmMenu> lista = repositorio.findMenuPaiByIdPerfis(listaIdPerfil);
+		for (AdmMenu admMenu : lista) {
+			admMenu.setAdmSubMenus(repositorio.findMenuByIdPerfis(listaIdPerfil, admMenu));
+		}
+		return lista;
+	}
+	
+	/**
+	 * Find menu pai by perfil.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	public List<MenuVO> findMenuPaiByPerfil(List<Long> listaIdPerfil){
+		List<AdmMenu> listaMenuPai = this.findMenuPaiByIdPerfis(listaIdPerfil);
+		return admMenuService.toListaMenuVO(listaMenuPai);		
+	}
+
+	/**
+	 * Find admin menu pai by id perfis.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	public List<AdmMenu> findAdminMenuPaiByIdPerfis(List<Long> listaIdPerfil){
+		List<AdmMenu> lista = repositorio.findAdminMenuPaiByIdPerfis(listaIdPerfil);
+		for (AdmMenu admMenu : lista) {
+			admMenu.setAdmSubMenus(repositorio.findAdminMenuByIdPerfis(listaIdPerfil, admMenu));
+		}
+		return lista;
+	}
+	
+	/**
+	 * Find admin menu pai by perfil.
+	 *
+	 * @param listaIdPerfil the lista id perfil
+	 * @return the list
+	 */
+	public List<MenuVO> findAdminMenuPaiByPerfil(List<Long> listaIdPerfil){
+		List<AdmMenu> listaAdminMenuPai = this.findAdminMenuPaiByIdPerfis(listaIdPerfil);						
+		return admMenuService.toListaMenuVO(listaAdminMenuPai);
+	}		
 }

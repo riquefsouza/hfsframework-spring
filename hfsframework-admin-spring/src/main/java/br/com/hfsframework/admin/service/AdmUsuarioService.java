@@ -83,6 +83,9 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	/** The usuario logado. */
 	private AdmUsuario usuarioLogado;
 	
+	@Autowired
+	private ModoTesteService modoTesteService;
+	
 	/**
 	 * Find by login.
 	 *
@@ -458,13 +461,20 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 			this.usuarioAutenticado.setListaPermissao(admPerfilService.getPermissao(usuarioAutenticado));
 
 			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
+				
+				List<Long> listaIdPerfis = new ArrayList<Long>();
+				for (PermissaoVO permissao: this.usuarioAutenticado.getListaPermissao()) {
+					listaIdPerfis.add(permissao.getPerfil().getId());
+				}
+
 				this.usuarioAutenticado.setListaMenus(
-						admPerfilService.findMenuPaiByPerfil(
-								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+						admPerfilService.findMenuPaiByPerfil(listaIdPerfis));
 				
 				this.usuarioAutenticado.setListaAdminMenus(
-						admPerfilService.findAdminMenuPaiByPerfil(
-								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+						admPerfilService.findAdminMenuPaiByPerfil(listaIdPerfis));
+				
+			} else {
+				throw new Exception("Usuário sem perfil associado!");
 			}
 			
 			//try {
@@ -479,6 +489,8 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 							this.usuarioAutenticado.getFuncionario().getCpf(),
 							usuarioAutenticado.getFuncionario().getEmail(), "").get().toUsuarioVO());
 				}
+				
+				this.usuarioAutenticado = modoTesteService.iniciar(this.usuarioAutenticado);
 					
 				aplicacaoUtil.setUsuarioAutenticado(this.usuarioAutenticado);
 			/*	

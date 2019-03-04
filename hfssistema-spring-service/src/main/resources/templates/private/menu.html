@@ -7,34 +7,48 @@
 	
 <div th:fragment="menu">	
 
+<script>
+	$(document).ready(function(){
+		 $.ajax({
+		        url: "/sistemaMenus"
+		    }).then(function(listaMenus) {
+		    	var menus = "";
+		    	var submenu = "";
+		    	
+		    	//var html = $('#barraNavegacao').html();
+				$('#barraNavegacao').empty();
+				
+				for (i=0; i < listaMenus.length; i++){
+					
+					menus += "<li class='dropdown'>";
+					menus += "	<a class='dropdown-toggle' data-toggle='dropdown' href='#'>"+listaMenus[i].descricao+"<span class='caret'></span></a>";
+					menus += "	<ul class='dropdown-menu'>";
+					
+					for (j=0; j < listaMenus[i].subMenus.length; j++){
+						submenu = listaMenus[i].subMenus[j];
+						menus += "	  <li><a href='/"+submenu.url+"?id="+submenu.id+"'>"+submenu.descricao+"</a></li>";
+					}
+					
+					menus += "	</ul>";
+					menus += "</li>";					
+				}
+				
+				menus += "<li><a href='/alterarSenhaMB/listar'>Alterar Senha</a></li>";
+				menus += "<li><a href='/logout'><img class='imagem-inverte' src='/img/sair.png' alt='Sair' />Sair</a></li>";					
+												
+				$('#barraNavegacao').append(menus);
+				
+		    });        
+	});
+</script>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
 	  <a class="navbar-brand" href="/">HFS Framework</a>
     </div>
-    <ul class="nav navbar-nav">
-	  <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrativo<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-		  <li><a href="/admParametroCategoriaMB/listar">Categoria dos Parâmetros de Configuração</a></li>
-		  <li><a href="/admParametroMB/listar">Parâmetros de Configuração</a></li>	          
-		  <li><a href="/admPerfilMB/listar">Administrar Perfil</a></li>
-		  <li role="separator" class="divider"></li>
-		  <li><a href="/admFuncionalidadeMB/listar">Administrar Funcionalidade</a></li>
-		  <li><a href="/admPaginaMB/listar">Administrar Página</a></li>	          
-		  <li><a href="/admMenuMB/listar">Administrar Menu</a></li>
-		  <li role="separator" class="divider"></li>
-		  <li><a href="/admCargoMB/listar">Administrar os Cargos</a></li>
-		  <li><a href="/admFuncionarioMB/listar">Administrar os Funcionários</a></li>
-		  <li><a href="/admSetorMB/listar">Administrar os Setores</a></li>
-		  <li><a href="/admUsuarioMB/listar">Visualizar os Usuários</a></li>
-		  <li><a href="/vwAdmLogMB/listar">Visualizar os Logs de Auditoria</a></li>
-		  <li><a href="/admLogColunaMB/listar">Administrar os Campos do Log de Auditoria</a></li>
-		  <li><a href="/visualizarArqLogServidorMB/listar">Visualizar Arquivo de Log do Servidor</a></li>
-		</ul>
-	  </li>
-	  <li><a href="/alterarSenhaMB/listar">Alterar Senha</a></li>
-	  <li><a href="/logout"><img class="imagem-inverte" src="/img/sair.png" alt="Sair" />Sair</a></li>
+    <ul class="nav navbar-nav" id="barraNavegacao" >
+
     </ul>
 	
 	<ul class="nav navbar-nav pull-right"
