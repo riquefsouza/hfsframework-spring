@@ -19,11 +19,13 @@ import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.base.view.relatorio.BaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import springfox.documentation.annotations.ApiIgnore;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLogRelMB.
  */
+@ApiIgnore
 @Controller
 @TratamentoErrosEsperados
 public class VwAdmLogRelController 

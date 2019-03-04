@@ -27,11 +27,13 @@ import br.com.hfsframework.base.view.IBaseViewConsulta;
 import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import springfox.documentation.annotations.ApiIgnore;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AdmUsuarioController.
  */
+@ApiIgnore
 @Controller
 @TratamentoErrosEsperados
 @RequestMapping("/admUsuarioMB")

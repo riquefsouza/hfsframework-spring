@@ -4,7 +4,7 @@
  * @version 1.0
  * @since 2018
  */
-package br.com.hfsframework.security;
+package br.com.hfsframework.admin.restcontroller;
 
 import java.util.Optional;
 
@@ -20,13 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.service.AdmUsuarioService;
 import br.com.hfsframework.security.model.UsuarioVO;
+import springfox.documentation.annotations.ApiIgnore;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SistemaController.
+ * The Class SistemaRestController.
  */
+@ApiIgnore
 @RestController
-public class SistemaController {
+public class SistemaRestController {
 
 	/** The adm usuario service. */
 	@Autowired

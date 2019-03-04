@@ -43,10 +43,12 @@ import br.com.hfsframework.base.view.BaseViewCadastro;
 import br.com.hfsframework.base.view.IBaseViewCadastro;
 import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * The Class AdmPaginaController.
  */
+@ApiIgnore
 @Controller
 @TratamentoErrosEsperados
 @RequestMapping("/admPaginaMB")

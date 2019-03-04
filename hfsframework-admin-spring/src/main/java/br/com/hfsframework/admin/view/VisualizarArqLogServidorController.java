@@ -18,11 +18,13 @@ import org.springframework.web.servlet.view.RedirectView;
 import br.com.hfsframework.base.view.BaseViewController;
 import br.com.hfsframework.util.arquivo.ArquivoUtil;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import springfox.documentation.annotations.ApiIgnore;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class VisualizarArqLogServidorController.
  */
+@ApiIgnore
 @Controller
 @TratamentoErrosEsperados
 @RequestMapping("/visualizarArqLogServidorMB")

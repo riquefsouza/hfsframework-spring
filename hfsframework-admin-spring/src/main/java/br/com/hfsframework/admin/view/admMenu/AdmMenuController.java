@@ -34,10 +34,12 @@ import br.com.hfsframework.base.view.BaseViewConsulta;
 import br.com.hfsframework.base.view.IBaseViewConsulta;
 import br.com.hfsframework.base.view.IBaseViewRelatorio;
 import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * The Class AdmMenuController.
  */
+@ApiIgnore
 @Controller
 @TratamentoErrosEsperados
 @RequestMapping("/admMenuMB")
