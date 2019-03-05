@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -61,7 +62,7 @@ public class VisualizarArqLogServidorController extends BaseViewController imple
 	 */
 	@PostMapping("/pesquisar")
 	public RedirectView onPesquisar(Integer numeroLinhas) {
-		String arquivoServerLog = System.getProperty("jboss.server.log.dir") + "/server.log";
+		String arquivoServerLog = System.getProperty("tomcat.server.log.dir") + "/server.log";
 		File arquivoLog = new File(arquivoServerLog);
 		if (arquivoLog.exists()) {
 			this.conteudoArquivoLog = ArquivoUtil.lerNumeroLinhas(arquivoLog, getNumeroLinhas().intValue());
@@ -106,6 +107,7 @@ public class VisualizarArqLogServidorController extends BaseViewController imple
 	 *
 	 * @return the numero linhas
 	 */
+	@ModelAttribute("numeroLinhas")
 	public Integer getNumeroLinhas() {
 		return numeroLinhas;
 	}
@@ -125,6 +127,7 @@ public class VisualizarArqLogServidorController extends BaseViewController imple
 	 *
 	 * @return the conteudo arquivo log
 	 */
+	@ModelAttribute("conteudoArquivoLog")
 	public String getConteudoArquivoLog() {
 		return conteudoArquivoLog;
 	}
