@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import br.com.hfsframework.admin.model.AdmCargo;
-import br.com.hfsframework.admin.model.AdmSetor;
 import br.com.hfsframework.admin.model.ModoTesteVO;
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.JSONListConverter;
@@ -30,12 +28,6 @@ public class ModoTesteService implements Serializable {
 
 	@Autowired
 	private AdmParametroService admParametroService;
-	
-	@Autowired
-	private AdmCargoService admCargoService;
-
-	@Autowired
-	private AdmSetorService admSetorService;
 	
 	@Autowired
 	private JSONListConverter<ModoTesteVO> conv;
@@ -89,17 +81,6 @@ public class ModoTesteService implements Serializable {
 		
 		if (mtvo.isPresent()){
 			usuario.setModoTeste(true);
-			
-			Optional<AdmSetor> setor = admSetorService.load(mtvo.get().getSetor());
-			if (setor.isPresent()){
-				usuario.getFuncionario().setSetor(setor.get().getId());	
-			}
-			
-			Optional<AdmCargo> cargo = admCargoService.load(mtvo.get().getCargo());
-			if (cargo.isPresent()){
-				usuario.getFuncionario().setCodCargoPrincipal(cargo.get().getId());
-				usuario.getFuncionario().setCargoPrincipal(cargo.get().toCargoVO());
-			}			
 		}
 		
 		return usuario;

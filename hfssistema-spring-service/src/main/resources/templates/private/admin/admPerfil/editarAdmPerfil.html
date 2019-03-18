@@ -10,9 +10,7 @@
 <script>
 	$(document).ready(function(){
 		hfsPickListIniciar("pagina");
-		hfsPickListIniciar("funcionalidade");
-		hfsPickListIniciar("funcionarios");
-		hfsPickListIniciar("cargos");
+		hfsPickListIniciar("usuarios");
 	});
 </script>
 
@@ -50,12 +48,80 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<div class="row">
-							<label class="checkbox-inline" for="geral"><input type="checkbox" id="geral" th:field="*{geral}">Todos os Funcionários</label>
+							<label class="checkbox-inline" for="geral"><input type="checkbox" id="geral" th:field="*{geral}">Todos os Usuários</label>
 						</div>
 						<div class="row">
 							<label class="checkbox-inline" for="admin"><input type="checkbox" id="admin" th:field="*{administrador}">Administradores do Sistema</label>
 						</div>
 					</div>
+				</div>
+
+				<div class="row">
+				
+					<!--  pickList_usuarios -->
+					<div class="col-md-5" id="pickList_usuarios">
+						<div class="row">
+							<div class="col-md-11">
+								<label style="width:100%;" class="tema-principal">Usuário(s) do Perfil:</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_usuarios" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>								
+							</div>
+							<div class="col-md-1">
+								
+							</div>
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_usuarios" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height: 5px">
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<label for="pickListValor1_usuarios" style="width:100%;" class="tema-principal">Disponíveis</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_usuarios">
+							 		<option th:each="item : ${dualListAdmUsuario.source}" th:value="${item.id}" th:text="${item.nome}">
+							 		</option>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<div style="height: 50px"></div>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_usuarios">
+										<span class="glyphicon glyphicon-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_usuarios">
+										<span class="glyphicon glyphicon-fast-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnRemover_usuarios">
+										<span class="glyphicon glyphicon-backward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_usuarios">
+										<span class="glyphicon glyphicon-fast-backward"></span>
+									</button>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<label for="pickListValor2_usuarios" style="width:100%;" class="tema-principal">Autorizadas</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_usuarios" th:field="*{admUsuarios}">
+							 		<option th:each="item : ${dualListAdmUsuario.target}" th:value="${item.id}" th:text="${item.nome}" th:field="*{admUsuarios}">
+							 		</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="row" style="height: 20px">
 				</div>
 
 				<div class="row">
@@ -120,197 +186,7 @@
 							</div>
 						</div>
 					</div>
-
-					<!--  pickList_funcionalidade -->
-					<div class="col-md-5" id="pickList_funcionalidade">
-						<div class="row">
-							<div class="col-md-11">
-								<label style="width:100%;" class="tema-principal">Funcionalidade(s) do Perfil:</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_funcionalidade" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>								
-							</div>
-							<div class="col-md-1">
-								
-							</div>
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_funcionalidade" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="row" style="height: 5px">
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<label for="pickListValor1_funcionalidade" style="width:100%;" class="tema-principal">Disponíveis</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_funcionalidade">
-							 		<option th:each="item : ${dualListAdmFuncionalidade.source}" th:value="${item.id}" th:text="${item.descricao}">
-							 		</option>
-								</select>
-							</div>
-							<div class="col-md-1">
-								<div style="height: 50px"></div>
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_funcionalidade">
-										<span class="glyphicon glyphicon-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_funcionalidade">
-										<span class="glyphicon glyphicon-fast-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnRemover_funcionalidade">
-										<span class="glyphicon glyphicon-backward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_funcionalidade">
-										<span class="glyphicon glyphicon-fast-backward"></span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<label for="pickListValor2_funcionalidade" style="width:100%;" class="tema-principal">Autorizadas</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_funcionalidade" th:field="*{admFuncionalidades}">
-							 		<option th:each="item : ${dualListAdmFuncionalidade.target}" th:value="${item.id}" th:text="${item.descricao}" th:field="*{admFuncionalidades}">
-							 		</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-
-				<div class="row" style="height: 20px">
-				</div>
-
-				<div class="row">
 				
-					<!--  pickList_funcionarios -->
-					<div class="col-md-5" id="pickList_funcionarios">
-						<div class="row">
-							<div class="col-md-11">
-								<label style="width:100%;" class="tema-principal">Funcionário(s) do Perfil:</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_funcionarios" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>								
-							</div>
-							<div class="col-md-1">
-								
-							</div>
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_funcionarios" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="row" style="height: 5px">
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<label for="pickListValor1_funcionarios" style="width:100%;" class="tema-principal">Disponíveis</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_funcionarios">
-							 		<option th:each="item : ${dualListAdmFuncionario.source}" th:value="${item.id}" th:text="${item.nome}">
-							 		</option>
-								</select>
-							</div>
-							<div class="col-md-1">
-								<div style="height: 50px"></div>
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_funcionarios">
-										<span class="glyphicon glyphicon-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_funcionarios">
-										<span class="glyphicon glyphicon-fast-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnRemover_funcionarios">
-										<span class="glyphicon glyphicon-backward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_funcionarios">
-										<span class="glyphicon glyphicon-fast-backward"></span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<label for="pickListValor2_funcionarios" style="width:100%;" class="tema-principal">Autorizadas</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_funcionarios" th:field="*{admFuncionarios}">
-							 		<option th:each="item : ${dualListAdmFuncionario.target}" th:value="${item.id}" th:text="${item.nome}" th:field="*{admFuncionarios}">
-							 		</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					
-					<!--  pickList_cargos -->
-					<div class="col-md-5" id="pickList_cargos">
-						<div class="row">
-							<div class="col-md-11">
-								<label style="width:100%;" class="tema-principal">Cargo(s) do(s) Funcionário(s) do Perfil:</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_cargos" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>								
-							</div>
-							<div class="col-md-1">
-								
-							</div>
-							<div class="col-md-5">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_cargos" placeholder="Pesquisar...">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="row" style="height: 5px">
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<label for="pickListValor1_cargos" style="width:100%;" class="tema-principal">Disponíveis</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_cargos">
-							 		<option th:each="item : ${dualListAdmCargo.source}" th:value="${item.id}" th:text="${item.nomeCargo}">
-							 		</option>
-								</select>
-							</div>
-							<div class="col-md-1">
-								<div style="height: 50px"></div>
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_cargos">
-										<span class="glyphicon glyphicon-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_cargos">
-										<span class="glyphicon glyphicon-fast-forward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnRemover_cargos">
-										<span class="glyphicon glyphicon-backward"></span>
-									</button>
-									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_cargos">
-										<span class="glyphicon glyphicon-fast-backward"></span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<label for="pickListValor2_cargos" style="width:100%;" class="tema-principal">Autorizadas</label>
-								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_cargos" th:field="*{admCargos}">
-							 		<option th:each="item : ${dualListAdmCargo.target}" th:value="${item.id}" th:text="${item.descricao}" th:field="*{admCargos}">
-							 		</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					
 				</div>
 				
 			</div>

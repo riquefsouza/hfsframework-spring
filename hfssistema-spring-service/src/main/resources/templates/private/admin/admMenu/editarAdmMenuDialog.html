@@ -11,9 +11,9 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-12 form-group">
-						<label for="cmbFuncionalidade">Funcionalidade:</label>
-						<select class="form-control" id="cmbFuncionalidade" name="cmbFuncionalidade" th:field="${novoItemMenu.admFuncionalidade}">
-					 		<option th:each="item : ${listaAdmFuncionalidade}" th:value="${item.id}" th:text="${item.descricao}">
+						<label for="cmbPagina">Página:</label>
+						<select class="form-control" id="cmbPagina" name="cmbPagina" th:field="${novoItemMenu.admPagina}">
+					 		<option th:each="item : ${listaAdmPagina}" th:value="${item.id}" th:text="${item.descricao}">
 					 		</option>
 						</select>
 					</div>
@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-md-12 form-group">
 						<label for="cmbMenuPai">Menu Pai:</label>
-						<select class="form-control" id="cmbFuncionalidade" name="cmbFuncionalidade" th:field="${novoItemMenu.admMenuPai}">
+						<select class="form-control" id="cmbMenuPai" name="cmbMenuPai" th:field="${novoItemMenu.admMenuPai}">
 					 		<option th:each="item : ${listaMenusPai}" th:value="${item.id}" th:text="${item.nomeRecursivo}">
 					 		</option>
 						</select>

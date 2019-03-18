@@ -11,7 +11,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
 
@@ -62,15 +61,5 @@ public interface AdmPaginaRepository extends JpaRepository<AdmPagina, Long> {
 	 */
 	@Query(name = "AdmPagina.findPerfisPorPagina")
 	List<AdmPerfil> findPerfisPorPagina(AdmPagina pagina);
-
-	/**
-	 * Find funcionalidades por pagina.
-	 *
-	 * @param pagina
-	 *            the pagina
-	 * @return the list
-	 */
-	@Query(name = "AdmPagina.findFuncionalidadesPorPagina")
-	List<AdmFuncionalidade> findFuncionalidadesPorPagina(AdmPagina pagina);
 
 }

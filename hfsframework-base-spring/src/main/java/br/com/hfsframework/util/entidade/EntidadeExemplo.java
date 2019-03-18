@@ -37,7 +37,7 @@ public class EntidadeExemplo {
         //List<EntidadeClasse> listaEntidade;
         
 		String[][] classes = {
-				{"AdmCargo", "Long"},
+				{"AdmPagina", "Long"},
 				{"AdmUsuario", "Long"}
 		};
 

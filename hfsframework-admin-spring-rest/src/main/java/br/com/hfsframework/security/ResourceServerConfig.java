@@ -28,16 +28,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
          // @formatter:off
          http
          .requestMatchers().antMatchers(
-        		 "/admCargos", "/admCargos/**",
-        		 "/admFuncionalidades", "/admFuncionalidades/**",
-        		 "/admFuncionarios", "/admFuncionarios/**",
-        		 "/admLogColunas", "/admLogColunas/**",
         		 "/admMenus", "/admMenus/**",
         		 "/admPaginas", "/admPaginas/**",
         		 "/admParametroCategorias", "/admParametroCategorias/**",
         		 "/admParametros", "/admParametros/**",
         		 "/admPerfis", "/admPerfis/**",
-        		 "/admSetores", "/admSetores/**",
         		 "/admUsuarios", "/admUsuarios/**",
         		 "/vwAdmLogs", "/vwAdmLogs/**",
         		 "/vwAdmLogValores", "/vwAdmLogValores/**")    

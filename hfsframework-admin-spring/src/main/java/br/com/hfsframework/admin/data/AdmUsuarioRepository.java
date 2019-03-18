@@ -7,7 +7,6 @@
 package br.com.hfsframework.admin.data;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,18 +45,16 @@ public interface AdmUsuarioRepository extends JpaRepository<AdmUsuario, Long> {
 	 * Update by login.
 	 *
 	 * @param cpf the cpf
-	 * @param data the data
 	 * @param email the email
 	 * @param ldapDN the ldap DN
 	 * @param nome the nome
-	 * @param matricula the matricula
+	 * @param id the id
 	 * @param login the login
 	 * @return the int
 	 */
 	@Modifying
-	@Query("UPDATE AdmUsuario as u SET u.cpf=?1, u.data=?2, u.email=?3, u.ldapDN=?4, u.nome=?5 WHERE u.id=?6 AND u.login = ?7")
-	int updateByLogin(BigDecimal cpf, Date data, String email, String ldapDN, String nome, 
-			Long matricula, String login);
+	@Query("UPDATE AdmUsuario as u SET u.cpf=?1, u.email=?2, u.ldapDN=?3, u.nome=?4 WHERE u.id=?5 AND u.login = ?6")
+	int updateByLogin(BigDecimal cpf, String email, String ldapDN, String nome,	Long id, String login);
 
 	/**
 	 * Update senha.

@@ -15,17 +15,12 @@ import org.junit.runners.Suite;
  * The Class ApplicationTest.
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-	AdmCargoServiceTest.class,
-	AdmFuncionalidadeRestTest.class,
-	AdmFuncionarioRestTest.class,
-	AdmLogColunaRestTest.class,			
+@Suite.SuiteClasses({	
 	AdmMenuRestTest.class,
 	AdmPaginaRestTest.class,
 	AdmParametroRestTest.class,
 	AdmParametroCategoriaRestTest.class,
 	AdmPerfilRestTest.class,
-	AdmSetorRestTest.class,
 	AdmUsuarioRestTest.class,
 	VwAdmLogRestTest.class,
 	VwAdmLogValorRestTest.class

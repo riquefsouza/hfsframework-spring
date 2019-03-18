@@ -47,46 +47,8 @@ public interface VwAdmLogRepository extends JpaRepository<VwAdmLog, Long> {
 	 * @return the list
 	 */
 	@Query(name = "VwAdmLog.findByFiltros")
-	List<VwAdmLog> findByFiltros(String entidade, String usuario, String ip, String operacao, String chave,
+	List<VwAdmLog> findByFiltros(String entidade, String usuario, 
+			String ip, String operacao, String chave,
 			Long dataInicio, Long dataFim);
-
-	/**
-	 * Checa se é contem chave.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @param id
-	 *            the id
-	 * @param chave
-	 *            the chave
-	 * @param valor
-	 *            the valor
-	 * @return the object
-	 */
-	@Query(name = "VwAdmLog.isContemChave" , nativeQuery = true)
-	Object isContemChave(String tabela, long id, String chave, String valor);
-
-	/**
-	 * Detalhar.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @param id
-	 *            the id
-	 * @return the list
-	 */
-	@Query(name = "VwAdmLog.detalhar" , nativeQuery = true)
-	List<Object> detalhar(String tabela, String id);
-
-	/**
-	 * Primary keys.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @return the list
-	 */
-	@Query(name = "VwAdmLog.primaryKeys" , nativeQuery = true)
-	List<Object> primaryKeys(String tabela);
-	
 	
 }

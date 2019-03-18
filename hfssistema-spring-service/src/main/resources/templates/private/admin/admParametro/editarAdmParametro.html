@@ -50,9 +50,13 @@
 						<label for="codigo">Código:</label>
 						<input type="text" class="form-control" id="codigo" name="codigo" maxlength="10" th:value="${bean.codigo}">
 					</div>
+				</div>
+					
+				<div class="row">	
 					<div class="col-md-8 form-group">
 						<label for="valor">Valor:</label>
-						<input type="text" class="form-control" id="valor" name="valor" maxlength="3000" th:value="${bean.valor}">
+						<textarea class="form-control" id="valor" name="valor" rows="6" maxlength="3000" th:field="*{valor}">
+						</textarea>
 					</div>
 				</div>
 				

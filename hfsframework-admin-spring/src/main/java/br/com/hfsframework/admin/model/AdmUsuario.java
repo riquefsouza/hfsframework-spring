@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,15 +17,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
@@ -43,7 +43,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import br.com.hfsframework.admin.serializer.AdmUsuarioIpListSerializer;
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.CPFCNPJUtil;
-import br.com.hfsframework.util.DataUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -79,19 +78,16 @@ public class AdmUsuario implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The matricula. */
+	/** The id. */
 	@Id
-	@Column(name = "USU_MATRICULA")
+	@SequenceGenerator(name="ADM_USUARIO_ID_GENERATOR", sequenceName="ADM_USUARIO_SEQ", initialValue=1, allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADM_USUARIO_ID_GENERATOR")	
+	@Column(name = "USU_SEQ")
 	private Long id;
 
 	/** The cpf. */
 	@Column(name = "USU_CPF")
 	private BigDecimal cpf;
-
-	/** The data. */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "USU_DATA")
-	private Date data;
 
 	/** The email. */
 	@Column(name = "USU_EMAIL")
@@ -122,10 +118,6 @@ public class AdmUsuario implements Serializable {
 	@Fetch(FetchMode.SUBSELECT)
 	private List<AdmUsuarioIp> admUsuarioIps;
 	
-	/** The ip. */
-	@Transient
-	private String ip;
-	
 	/** The created date. */
 	@Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
@@ -146,12 +138,20 @@ public class AdmUsuario implements Serializable {
     @LastModifiedBy
     private String modifiedBy;
     
+	/** The ip. */
+    @JsonIgnore
+	@Transient
+	private String ip;
+	
+    @JsonIgnore
     @Transient
 	private String senhaAtual;
 	
+    @JsonIgnore
 	@Transient
 	private String senhaNova;
 	
+	@JsonIgnore
 	@Transient
 	private String confirmaSenhaNova;
     
@@ -170,19 +170,17 @@ public class AdmUsuario implements Serializable {
 	 *
 	 * @param id the id
 	 * @param cpf the cpf
-	 * @param data the data
 	 * @param email the email
 	 * @param ldapDN the ldap DN
 	 * @param login the login
 	 * @param nome the nome
 	 * @param senha the senha
 	 */
-	public AdmUsuario(Long id, String login, String nome, Date data, BigDecimal cpf, String email, String ldapDN,
+	public AdmUsuario(Long id, String login, String nome, BigDecimal cpf, String email, String ldapDN,
 			String senha) {
 		super();
 		this.id = id;
 		this.cpf = cpf;
-		this.data = data;
 		this.email = email;
 		this.ldapDN = ldapDN;
 		this.login = login;
@@ -190,14 +188,29 @@ public class AdmUsuario implements Serializable {
 		this.senha = senha;
 	}
 
-
+	/**
+	 * Instantiates a new adm usuario.
+	 *
+	 * @param u the u
+	 */
+	public AdmUsuario(UsuarioVO u) {
+		this();
+		
+		this.id = u.getId();
+		this.cpf = u.getCpf();
+		this.email = u.getEmail();
+		this.ldapDN = u.getLdapDN();
+		this.login = u.getLogin();
+		this.nome = u.getNome();
+		this.senha = u.getSenha();
+	}
+	
 	/**
 	 * Limpar.
 	 */
 	public void limpar() {
 		this.id = 0L;
 		this.cpf = BigDecimal.ZERO;
-		this.data = new Date();
 		this.email = "";
 		this.ldapDN = "";
 		this.login = "";
@@ -243,34 +256,6 @@ public class AdmUsuario implements Serializable {
 	 */
 	public void setCpf(BigDecimal cpf) {
 		this.cpf = cpf;
-	}
-
-	/**
-	 * Pega o the data.
-	 *
-	 * @return o the data
-	 */
-	public Date getData() {
-		return this.data;
-	}
-
-	/**
-	 * Gets the data formatada.
-	 *
-	 * @return the data formatada
-	 */
-	public String getDataFormatada() {
-		return DataUtil.Formatar(this.data, DataUtil.DATA_HORA_PADRAO);
-	}
-	
-	/**
-	 * Atribui o the data.
-	 *
-	 * @param data
-	 *            o novo the data
-	 */
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	/**
@@ -492,11 +477,9 @@ public class AdmUsuario implements Serializable {
 	public UsuarioVO toUsuarioVO(){
 		UsuarioVO u = new UsuarioVO();
 
-		u.setMatricula(this.getId());
+		u.setId(this.getId());
 		u.setIp(ip);
 		u.setCpf(cpf);
-		u.setData(data);
-		u.setDataFormatada(getDataFormatada());
 		u.setEmail(email);
 		u.setLdapDN(ldapDN);
 		u.setLogin(login);

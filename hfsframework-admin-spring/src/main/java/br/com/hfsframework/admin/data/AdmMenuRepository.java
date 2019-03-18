@@ -11,9 +11,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
-import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.admin.model.AdmPagina;
+import br.com.hfsframework.admin.model.AdmMenu;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -72,14 +71,14 @@ public interface AdmMenuRepository extends JpaRepository<AdmMenu, Long> {
 	List<AdmMenu> findMenuRaiz(String nomeItemMenu);
 	
 	/**
-	 * Count menu by funcionalidade.
+	 * Count menu by pagina.
 	 *
-	 * @param funcionalidade
-	 *            the funcionalidade
+	 * @param pagina
+	 *            the pagina
 	 * @return the integer
 	 */
-	@Query(name="AdmMenu.countMenuByFuncionalidade")
-	Integer countMenuByFuncionalidade(AdmFuncionalidade funcionalidade);
+	@Query(name="AdmMenu.countMenuByPagina") 
+	Integer countMenuByPagina(AdmPagina pagina);
 	
 	/**
 	 * Find menus filhos.
@@ -94,43 +93,34 @@ public interface AdmMenuRepository extends JpaRepository<AdmMenu, Long> {
 	/**
 	 * Find admin menu pai by cod funcionario.
 	 *
-	 * @param funcionalidade
-	 *            the funcionalidade
+	 * @param pagina
+	 *            the pagina
 	 * @return the list
 	 */
-	@Query(name="AdmMenu.findAdminMenuPaiByFuncionalidade")
-	List<AdmMenu> findAdminMenuPaiByCodFuncionario(AdmFuncionalidade funcionalidade);
+	@Query(name="AdmMenu.findAdminMenuPaiByPagina")
+	List<AdmMenu> findAdminMenuPaiByCodFuncionario(AdmPagina pagina);
 
 	/**
 	 * Find menu pai by cod funcionario.
 	 *
-	 * @param funcionalidade
-	 *            the funcionalidade
+	 * @param pagina
+	 *            the pagina
 	 * @return the list
 	 */
-	@Query(name="AdmMenu.findMenuPaiByFuncionalidade")
-	List<AdmMenu> findMenuPaiByCodFuncionario(AdmFuncionalidade funcionalidade);
+	@Query(name="AdmMenu.findMenuPaiByPagina")
+	List<AdmMenu> findMenuPaiByCodFuncionario(AdmPagina pagina);
 	
 	/**
 	 * Find pagina by menu.
 	 *
-	 * @param funcionalidade
-	 *            the funcionalidade
+	 * @param pagina
+	 *            the pagina
 	 * @param idMenu
 	 *            the id menu
 	 * @return the adm pagina
 	 */
 	@Query(name="AdmMenu.findPaginaByMenu")
-	AdmPagina findPaginaByMenu(AdmFuncionalidade funcionalidade, Long idMenu);
+	AdmPagina findPaginaByMenu(AdmPagina pagina, Long idMenu);
 	
-	/*
-	 * Find funcionarios por menu.
-	 *
-	 * @param menu
-	 *            the menu
-	 * @return the list
-	 */
-	//@Query(name = "AdmMenu.findFuncionariosPorMenu")
-	//List<AdmFuncionarioDTO> findFuncionariosPorMenu(AdmMenu menu);
-	
+
 }

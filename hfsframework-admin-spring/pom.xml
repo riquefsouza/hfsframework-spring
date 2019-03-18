@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfsframework-admin-spring</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>HFS Framework Admin Spring</name>
 	<description>HFS Framework Admin Spring</description>
 	
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>hfsframework-base-spring</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 			<type>jar</type>
 		</dependency>
 

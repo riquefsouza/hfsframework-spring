@@ -25,12 +25,6 @@ public class PermissaoVO implements Serializable {
 	/** The perfil. */
 	private PerfilVO perfil;
 	
-	/** The funcionalidades. */
-	private List<FuncionalidadeVO> funcionalidades;
-	
-	/** The paginas funcionalidade. */
-	private List<PaginaVO> paginasFuncionalidade;
-	
 	/** The paginas. */
 	private List<PaginaVO> paginas;
 
@@ -39,11 +33,7 @@ public class PermissaoVO implements Serializable {
 	 */
 	public PermissaoVO() {
 		super();
-
-		this.funcionalidades = new ArrayList<FuncionalidadeVO>();
-		this.paginasFuncionalidade = new ArrayList<PaginaVO>();
 		this.paginas = new ArrayList<PaginaVO>();
-
 		limpar();
 	}
 
@@ -52,8 +42,6 @@ public class PermissaoVO implements Serializable {
 	 */
 	public void limpar() {
 		this.perfil = new PerfilVO();
-		this.funcionalidades.clear();
-		this.paginasFuncionalidade.clear();
 		this.paginas.clear();
 	}
 
@@ -74,44 +62,6 @@ public class PermissaoVO implements Serializable {
 	 */
 	public void setPerfil(PerfilVO perfil) {
 		this.perfil = perfil;
-	}
-
-	/**
-	 * Pega o the funcionalidades.
-	 *
-	 * @return o the funcionalidades
-	 */
-	public List<FuncionalidadeVO> getFuncionalidades() {
-		return funcionalidades;
-	}
-
-	/**
-	 * Atribui o the funcionalidades.
-	 *
-	 * @param funcionalidades
-	 *            o novo the funcionalidades
-	 */
-	public void setFuncionalidades(List<FuncionalidadeVO> funcionalidades) {
-		this.funcionalidades = funcionalidades;
-	}
-
-	/**
-	 * Pega o the paginas funcionalidade.
-	 *
-	 * @return o the paginas funcionalidade
-	 */
-	public List<PaginaVO> getPaginasFuncionalidade() {
-		return paginasFuncionalidade;
-	}
-
-	/**
-	 * Atribui o the paginas funcionalidade.
-	 *
-	 * @param paginasFuncionalidade
-	 *            o novo the paginas funcionalidade
-	 */
-	public void setPaginasFuncionalidade(List<PaginaVO> paginasFuncionalidade) {
-		this.paginasFuncionalidade = paginasFuncionalidade;
 	}
 
 	/**
@@ -138,8 +88,7 @@ public class PermissaoVO implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PermissaoVO [perfil=" + perfil + ", funcionalidades=" + funcionalidades + ", paginasFuncionalidade="
-				+ paginasFuncionalidade + ", paginas=" + paginas + "]";
+		return "PermissaoVO [perfil=" + perfil + ", paginas=" + paginas + "]";
 	}
 
 

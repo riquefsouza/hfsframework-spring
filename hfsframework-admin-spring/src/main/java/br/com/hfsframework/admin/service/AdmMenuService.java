@@ -21,7 +21,7 @@ import br.com.hfsframework.security.model.MenuVO;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AdmMenuBC.
+ * The Class AdmMenuService.
  */
 @Service
 public class AdmMenuService extends BaseBusinessService<AdmMenu, Long, AdmMenuRepository> {

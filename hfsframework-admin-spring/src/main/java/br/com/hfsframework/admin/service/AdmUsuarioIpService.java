@@ -37,26 +37,26 @@ public class AdmUsuarioIpService extends BaseBusinessService<AdmUsuarioIp, AdmUs
 	@Transactional
 	public int updateAtivoById(Boolean ativo, AdmUsuarioIpPK id) throws TransacaoException {
 		try {
-			return repositorio.updateAtivoById(ativo, id.getMatricula(), id.getIp());
+			return repositorio.updateAtivoById(ativo, id.getUsuarioSeq(), id.getIp());
 		} catch (Exception e) {
 			throw new TransacaoException(log, ERRO_UPDATE + e.getMessage(), e);
 		}
 	}
 	
 	/**
-	 * Update ativo by matricula.
+	 * Update ativo by idUsuario.
 	 *
 	 * @param ativo the ativo
-	 * @param matricula the matricula
+	 * @param idUsuario the idUsuario
 	 * @return the int
 	 * @throws TransacaoException the transacao exception
 	 */
 	@Transactional
-	public int updateAtivoByMatricula(Boolean ativo, Long matricula) throws TransacaoException {
+	public int updateAtivoByIdUsuario(Boolean ativo, Long idUsuario) throws TransacaoException {
 		try {
-			return repositorio.updateAtivoByMatricula(ativo, matricula);
+			return repositorio.updateAtivoByIdUsuario(ativo, idUsuario);
 		} catch (Exception e) {
 			throw new TransacaoException(log, ERRO_UPDATE + e.getMessage(), e);
 		}
-	}	
+	}
 }

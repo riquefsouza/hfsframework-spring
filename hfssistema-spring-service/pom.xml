@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfssistema-spring-service</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>HFS Sistema Spring Service</name>
 	<description>build with spring + bootstrap</description>
 
@@ -31,16 +31,16 @@
 	
 		<dependency>
 			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
-			<version>1.0.1</version>
+			<artifactId>hfsframework-admin-spring-web</artifactId>
+			<version>1.0.2</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
+			<artifactId>hfsframework-admin-spring-web</artifactId>
 			<classifier>tests</classifier>
 			<type>test-jar</type>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 			<scope>test</scope>
 		</dependency>
 

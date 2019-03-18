@@ -14,7 +14,7 @@ import br.com.hfsframework.base.BaseBusinessService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AdmPaginaBC.
+ * The Class AdmPaginaService.
  */
 @Service
 public class AdmPaginaService extends BaseBusinessService<AdmPagina, Long, AdmPaginaRepository> {

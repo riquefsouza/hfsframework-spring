@@ -21,15 +21,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.hfsframework.admin.serializer.AdmFuncionalidadeListSerializer;
 import br.com.hfsframework.admin.serializer.AdmPerfilListSerializer;
 import br.com.hfsframework.security.model.PaginaVO;
 
@@ -45,8 +50,7 @@ import br.com.hfsframework.security.model.PaginaVO;
 	@NamedQuery(name = "AdmPagina.getDescricaoById", query = "SELECT c.url FROM AdmPagina c WHERE c.id = ?1"),
 	@NamedQuery(name = "AdmPagina.countNovo", query = "SELECT COUNT(c) FROM AdmPagina c WHERE LOWER(c.url) = ?1"),
 	@NamedQuery(name = "AdmPagina.countAntigo", query = "SELECT COUNT(c) FROM AdmPagina c WHERE LOWER(c.url) <> ?1 AND LOWER(c.url) = ?2"),	
-	@NamedQuery(name = "AdmPagina.findPerfisPorPagina", query="SELECT distinct p FROM AdmPagina pag inner join pag.admPerfils p where pag = ?1"),
-	@NamedQuery(name = "AdmPagina.findFuncionalidadesPorPagina", query="SELECT distinct f FROM AdmPagina pag inner join pag.admFuncionalidades f where pag = ?1"),
+	@NamedQuery(name = "AdmPagina.findPerfisPorPagina", query="SELECT distinct p FROM AdmPagina pag inner join pag.admPerfils p where pag = ?1")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmPagina implements Serializable {
@@ -56,28 +60,24 @@ public class AdmPagina implements Serializable {
 
 	/** The id. */
 	@Id
-	@SequenceGenerator(name="ADM_PAGINA_ID_GENERATOR", sequenceName="adm_pagina_seq", initialValue=1, allocationSize=1)
+	@SequenceGenerator(name="ADM_PAGINA_ID_GENERATOR", sequenceName="ADM_PAGINA_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADM_PAGINA_ID_GENERATOR")
 	@Column(name="PAG_SEQ")
 	private Long id;
 
-	/** The managed bean. */
-	@Column(name="PAG_MB")
-	private String managedBean;
+	/** The descricao. */
+	@NotNull
+	@NotBlank
+	@NotEmpty
+	@Column(name="PAG_DESCRICAO", unique = true)
+	private String descricao;
 
 	/** The url. */
 	@NotNull
+	@NotBlank
+	@NotEmpty	
 	@Column(name="PAG_URL", unique = true)
 	private String url;
-
-	/** The adm funcionalidades. */
-	//bi-directional many-to-many association to AdmFuncionalidade
-	//@JsonIgnore
-	@JsonSerialize(using = AdmFuncionalidadeListSerializer.class)
-	@ManyToMany(fetch = FetchType.LAZY) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-	@JoinTable(name="ADM_FUNCIONALIDADE_PAGINA", joinColumns={
-			@JoinColumn(name="FPG_PAG_SEQ")}, inverseJoinColumns={@JoinColumn(name="FPG_FUN_SEQ")})
-	private List<AdmFuncionalidade> admFuncionalidades;
 
 	/** The adm perfils. */ 
 	//bi-directional many-to-many association to AdmPerfil
@@ -89,20 +89,25 @@ public class AdmPagina implements Serializable {
 			@JoinColumn(name = "PGL_PAG_SEQ") }, inverseJoinColumns = {@JoinColumn(name = "PGL_PRF_SEQ") })
 	private List<AdmPerfil> admPerfils;
 	
-
+	/** The adm menus. */
+	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "admPagina", fetch = FetchType.EAGER)	
+	private List<AdmMenu> admMenus;	
+	
 	/**
 	 * Instantiates a new adm pagina.
 	 */
 	public AdmPagina() {
-		this.admFuncionalidades = new ArrayList<AdmFuncionalidade>();
+		super();
 		this.admPerfils = new ArrayList<AdmPerfil>();
+		this.admMenus = new ArrayList<AdmMenu>();
 		limpar();
 	}
-			
-	public AdmPagina(Long id, String managedBean, String url) {
+	
+	public AdmPagina(Long id, String url, String descricao) {
 		super();
 		this.id = id;
-		this.managedBean = managedBean;
+		this.descricao = descricao;
 		this.url = url;
 	}
 
@@ -116,7 +121,7 @@ public class AdmPagina implements Serializable {
 		this();
 		
 		this.id = p.getId();
-		this.managedBean = p.getManagedBean();
+		this.descricao = p.getDescricao();
 		this.url = p.getUrl();
 	}
 	
@@ -125,10 +130,10 @@ public class AdmPagina implements Serializable {
 	 */
 	public void limpar() {
 		this.id = null;
-		this.managedBean = null;
+		this.descricao = null;
 		this.url = null;
-		this.admFuncionalidades.clear();
 		this.admPerfils.clear();
+		this.admMenus.clear();
 	}
 
 	/**
@@ -151,22 +156,22 @@ public class AdmPagina implements Serializable {
 	}
 
 	/**
-	 * Pega o the managed bean.
+	 * Pega o the descricao.
 	 *
-	 * @return o the managed bean
+	 * @return o the descricao
 	 */
-	public String getManagedBean() {
-		return this.managedBean;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
 	/**
-	 * Atribui o the managed bean.
+	 * Atribui o the descricao.
 	 *
-	 * @param managedBean
-	 *            o novo the managed bean
+	 * @param descricao
+	 *            o novo the descricao
 	 */
-	public void setManagedBean(String managedBean) {
-		this.managedBean = managedBean;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	/**
@@ -186,53 +191,6 @@ public class AdmPagina implements Serializable {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	/**
-	 * Pega o the adm funcionalidades.
-	 *
-	 * @return o the adm funcionalidades
-	 */
-	public List<AdmFuncionalidade> getAdmFuncionalidades() {
-		return this.admFuncionalidades;
-	}
-
-	/**
-	 * Atribui o the adm funcionalidades.
-	 *
-	 * @param admFuncionalidades
-	 *            o novo the adm funcionalidades
-	 */
-	public void setAdmFuncionalidades(List<AdmFuncionalidade> admFuncionalidades) {
-		this.admFuncionalidades = admFuncionalidades;
-	}
-
-	/**
-	 * Adiciona o adm funcionalidades 1.
-	 *
-	 * @param admFuncionalidades
-	 *            the adm funcionalidades
-	 * @return the adm funcionalidade
-	 */
-	public AdmFuncionalidade addAdmFuncionalidades(AdmFuncionalidade admFuncionalidades) {
-		getAdmFuncionalidades().add(admFuncionalidades);
-		admFuncionalidades.setAdmPaginaInicial(this);
-
-		return admFuncionalidades;
-	}
-
-	/**
-	 * Remove o adm funcionalidades.
-	 *
-	 * @param admFuncionalidades
-	 *            the adm funcionalidades
-	 * @return the adm funcionalidade
-	 */
-	public AdmFuncionalidade removeAdmFuncionalidades(AdmFuncionalidade admFuncionalidades) {
-		getAdmFuncionalidades().remove(admFuncionalidades);
-		admFuncionalidades.setAdmPaginaInicial(null);
-
-		return admFuncionalidades;
 	}
 
 	/**
@@ -317,20 +275,9 @@ public class AdmPagina implements Serializable {
 	 */
 	public PaginaVO toPaginaVO(){
 		PaginaVO p = new PaginaVO();
-
 		p.setId(id);
-		p.setManagedBean(managedBean);
+		p.setDescricao(descricao);
 		p.setUrl(url);
-
-		/*
-		for (AdmFuncionalidade admFuncionalidade : admFuncionalidades) {
-			p.getFuncionalidades().add(admFuncionalidade.toFuncionalidadeVO());
-		}
-		for (AdmPerfil admPerfil : admPerfils) {
-			p.getPerfils().add(admPerfil.toPerfilVO());
-		}
-		*/
-
 		return p;
 	}
 }

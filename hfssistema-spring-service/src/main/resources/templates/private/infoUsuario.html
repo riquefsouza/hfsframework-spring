@@ -13,18 +13,14 @@
 		    }).then(function(data) {
 				$('.infoUsuario-nome').empty();
 				$('.infoUsuario-ip').empty();
-				$('.infoUsuario-matricula').empty();
 				$('.infoUsuario-login').empty();
 				$('.infoUsuario-cpf').empty();
-				$('.infoUsuario-data').empty();
 				$('.infoUsuario-email').empty();
 				
 				$('.infoUsuario-nome').append(data.nome);
 				$('.infoUsuario-ip').append(data.ip);
-				$('.infoUsuario-matricula').append(data.matricula);
 				$('.infoUsuario-login').append(data.login);
 				$('.infoUsuario-cpf').append(data.cpfFormatado);
-				$('.infoUsuario-data').append(data.dataFormatada);
 				$('.infoUsuario-email').append(data.email);
 		    });        
 	});
@@ -53,20 +49,12 @@
 						<td class="infoUsuario-ip"></td>
 					</tr>
 					<tr>
-						<td style="font-weight: bold;">Matrícula:</td>
-						<td class="infoUsuario-matricula"></td>
-					</tr>
-					<tr>
 						<td style="font-weight: bold;">Login:</td>
 						<td class="infoUsuario-login"></td>
 					</tr>
 					<tr>
 						<td style="font-weight: bold;">CPF:</td>
 						<td class="infoUsuario-cpf"></td>
-					</tr>
-					<tr>
-						<td style="font-weight: bold;">Data Primeiro Login:</td>
-						<td class="infoUsuario-data"></td>
 					</tr>
 					<tr>
 						<td style="font-weight: bold;">E-mail:</td>

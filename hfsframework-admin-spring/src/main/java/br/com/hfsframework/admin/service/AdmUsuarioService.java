@@ -8,7 +8,6 @@ package br.com.hfsframework.admin.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,10 +62,9 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	
 	@Autowired
 	private AdmPerfilService admPerfilService;
-
-	/** The vw adm funcionario Service. */
+	
 	@Autowired
-	private AdmFuncionarioService admFuncionarioService;
+	private AdmUsuarioService admUsuarioService;	
 
 	/** The aplicacao config. */
 	@Autowired
@@ -111,7 +109,6 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 * Update by login.
 	 *
 	 * @param cpf the cpf
-	 * @param data the data
 	 * @param email the email
 	 * @param ldapDN the ldap DN
 	 * @param nome the nome
@@ -121,10 +118,10 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 * @throws TransacaoException the transacao exception
 	 */
 	@Transactional
-	public int updateByLogin(BigDecimal cpf, Date data, String email, String ldapDN, String nome, 
+	public int updateByLogin(BigDecimal cpf, String email, String ldapDN, String nome, 
 			Long matricula, String login) throws TransacaoException {
 		try {
-			return repositorio.updateByLogin(cpf, data, email, ldapDN, nome, matricula, login);
+			return repositorio.updateByLogin(cpf, email, ldapDN, nome, matricula, login);
 		} catch (Exception e) {
 			throw new TransacaoException(log, ERRO_UPDATE + e.getMessage(), e);
 		}
@@ -334,8 +331,8 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	/**
 	 * Gets the usuario.
 	 *
-	 * @param matricula
-	 *            the matricula
+	 * @param id
+	 *            the id
 	 * @param login
 	 *            the login
 	 * @param nome
@@ -351,7 +348,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 *             the transacao exception
 	 */
 	@Transactional
-	public Optional<AdmUsuario> getUsuario(Long matricula, String login, String nome, 
+	public Optional<AdmUsuario> getUsuario(Long id, String login, String nome, 
 			BigDecimal cpf, String email, String ldapDN) throws TransacaoException {
 		AdmUsuarioIpPK admUsuarioIpPK = new AdmUsuarioIpPK();
 		
@@ -362,15 +359,14 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		}
 		
 		admUsuarioIpPK.setIp(ipAddress);
-		admUsuarioIpPK.setMatricula(matricula);
+		admUsuarioIpPK.setUsuarioSeq(id);
 
-		Optional<AdmUsuario> admUsuario = this.load(matricula);
+		Optional<AdmUsuario> admUsuario = this.load(id);
 		if (admUsuario.isPresent()) {
 			AdmUsuario usuario = new AdmUsuario();
-			usuario.setId(matricula);
+			usuario.setId(id);
 			usuario.setLogin(login);
 			usuario.setNome(nome);
-			usuario.setData(new Date());
 			usuario.setCpf(cpf);
 			usuario.setEmail(email);
 			usuario.setLdapDN(ldapDN);
@@ -385,7 +381,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		
 		admUsuario.get().setIp(admUsuarioIpPK.getIp());
 		
-		admUsuarioIpService.updateAtivoByMatricula(false, matricula);
+		admUsuarioIpService.updateAtivoByIdUsuario(false, id);
 		
 		Optional<AdmUsuarioIp> admUsuarioIp = admUsuarioIpService.load(admUsuarioIpPK);
 		if (!admUsuarioIp.isPresent()) {
@@ -399,10 +395,10 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		
 		String banco = findBanco();
 		if (banco.equals("Oracle")) {
-			setOracleLoginAndIP(admUsuarioIpPK.getMatricula().toString(), admUsuarioIpPK.getIp());
+			setOracleLoginAndIP(admUsuarioIpPK.getUsuarioSeq().toString(), admUsuarioIpPK.getIp());
 		}
 		if (banco.equals("PostgreSQL")) {
-			setLoginPostgreSQL(admUsuarioIpPK.getMatricula().toString());
+			setLoginPostgreSQL(admUsuarioIpPK.getUsuarioSeq().toString());
 			setIPPostgreSQL(admUsuarioIpPK.getIp());
 		}
 
@@ -452,12 +448,12 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 		if (!aplicacaoUtil.isDebugMode() && aplicacaoBundle.isHabilitarControlePerfil()) {
 			
 			if (aplicacaoBundle.isHabilitarLDAP()) 
-				this.usuarioAutenticado.setFuncionario(admFuncionarioService.load(ldapUtil.getMatricula()).get().toFuncionarioVO());
+				this.usuarioAutenticado.setUsuario(admUsuarioService.load(ldapUtil.getMatricula()).get().toUsuarioVO());
 			else
-				this.usuarioAutenticado.setFuncionario(admFuncionarioService.load(usuarioLogado.getId()).get().toFuncionarioVO());
+				this.usuarioAutenticado.setUsuario(admUsuarioService.load(usuarioLogado.getId()).get().toUsuarioVO());
 				
-			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getFuncionario().getNome());
-			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getFuncionario().getEmail());
+			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getUsuario().getNome());
+			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getUsuario().getEmail());
 			this.usuarioAutenticado.setListaPermissao(admPerfilService.getPermissao(usuarioAutenticado));
 
 			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
@@ -481,13 +477,13 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 				if (aplicacaoBundle.isHabilitarLDAP()) {
 					this.usuarioAutenticado.setUsuario(this.getUsuario(ldapUtil.getMatricula(),
 						ldapUtil.getLogin(), ldapUtil.getNome(),
-						this.usuarioAutenticado.getFuncionario().getCpf(),
+						this.usuarioAutenticado.getUsuario().getCpf(),
 						ldapUtil.getEmail(), ldapUtil.getLdapDN()).get().toUsuarioVO());
 				} else {
-					this.usuarioAutenticado.setUsuario(this.getUsuario(usuarioAutenticado.getFuncionario().getId(),
-							usuarioLogado.getLogin(), usuarioAutenticado.getFuncionario().getNome(),
-							this.usuarioAutenticado.getFuncionario().getCpf(),
-							usuarioAutenticado.getFuncionario().getEmail(), "").get().toUsuarioVO());
+					this.usuarioAutenticado.setUsuario(this.getUsuario(usuarioAutenticado.getUsuario().getId(),
+							usuarioLogado.getLogin(), usuarioAutenticado.getUsuario().getNome(),
+							this.usuarioAutenticado.getUsuario().getCpf(),
+							usuarioAutenticado.getUsuario().getEmail(), "").get().toUsuarioVO());
 				}
 				
 				this.usuarioAutenticado = modoTesteService.iniciar(this.usuarioAutenticado);
@@ -499,8 +495,7 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 			}
 			*/
 			
-			this.log.info(this.usuarioAutenticado.getUserName() + " : Setor: "
-					+ this.usuarioAutenticado.getFuncionario().getSetor() + ", Perfis: "
+			this.log.info(this.usuarioAutenticado.getUserName() + ", Perfis: "
 					+ this.usuarioAutenticado.getListaPermissao().toString());
 			mostrarPerfilURL();
 			mostrarMenus();
@@ -512,10 +507,6 @@ public class AdmUsuarioService extends BaseBusinessService<AdmUsuario, Long, Adm
 	 */
 	public void mostrarPerfilURL() {
 		for (PermissaoVO permissao : this.usuarioAutenticado.getListaPermissao()) {
-			for (PaginaVO pagFuncionalidade : permissao.getPaginasFuncionalidade()) {
-				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Funcionalidade Pagina inicial URL: "
-						+ pagFuncionalidade.getUrl());
-			}
 			for (PaginaVO admPagina : permissao.getPaginas()) {
 				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Pagina URL: " + admPagina.getUrl());
 			}

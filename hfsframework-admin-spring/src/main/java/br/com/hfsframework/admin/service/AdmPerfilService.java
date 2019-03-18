@@ -17,16 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.hfsframework.admin.data.AdmPerfilRepository;
-import br.com.hfsframework.admin.model.AdmCargo;
-import br.com.hfsframework.admin.model.AdmCargoPerfil;
-import br.com.hfsframework.admin.model.AdmCargoPerfilPK;
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
-import br.com.hfsframework.admin.model.AdmFuncionario;
-import br.com.hfsframework.admin.model.AdmFuncionarioPerfil;
-import br.com.hfsframework.admin.model.AdmFuncionarioPerfilPK;
 import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
+import br.com.hfsframework.admin.model.AdmUsuario;
+import br.com.hfsframework.admin.model.AdmUsuarioPerfil;
+import br.com.hfsframework.admin.model.AdmUsuarioPerfilPK;
 import br.com.hfsframework.base.BaseBusinessService;
 import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.PerfilVO;
@@ -36,7 +32,7 @@ import br.com.hfsframework.util.exceptions.TransacaoException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AdmPerfilBC.
+ * The Class AdmPerfilService.
  */
 @Service
 public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPerfilRepository> {
@@ -44,26 +40,14 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The adm menu BC. */
 	@Autowired
 	private AdmMenuService admMenuService;
 	
-	/** The adm funcionario BC. */
 	@Autowired
-	private AdmFuncionarioService admFuncionarioService;
+	private AdmUsuarioService admUsuarioService;
 	
-	/** The adm cargo BC. */
 	@Autowired
-	private AdmCargoService admCargoService;
-	
-	/** The adm funcionario perfil service. */
-	/* The adm funcionario perfil BC. */
-	@Autowired
-	private AdmFuncionarioPerfilService admFuncionarioPerfilService;
-
-	/** The adm cargo perfil BC. */
-	@Autowired
-	private AdmCargoPerfilService admCargoPerfilService;
+	private AdmUsuarioPerfilService admUsuarioPerfilService;
 
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.BaseBusinessService#load(java.io.Serializable)
@@ -71,22 +55,20 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	@Override
 	public Optional<AdmPerfil> load(Long id) {
 		Optional<AdmPerfil> item = super.load(id);
-		item.get().setAdmFuncionarios(this.findFuncionariosPorPerfil(item.get()));
-		item.get().setAdmCargos(this.findCargosPorPerfil(item.get()));
+		item.get().setAdmUsuarios(this.findUsuariosPorPerfil(item.get()));
 		return item;
 	}
 	
 	/**
-	 * Atribui o adm funcionario cargo.
+	 * Atribui o adm usuario cargo.
 	 *
 	 * @param lista
 	 *            the lista
 	 * @return the list
 	 */
-	private Iterable<AdmPerfil> setAdmFuncionarioCargo(Iterable<AdmPerfil> lista) {
+	private Iterable<AdmPerfil> setAdmUsuarioCargo(Iterable<AdmPerfil> lista) {
 		for (AdmPerfil item : lista) {
-			item.setAdmFuncionarios(this.findFuncionariosPorPerfil(item));
-			item.setAdmCargos(this.findCargosPorPerfil(item));
+			item.setAdmUsuarios(this.findUsuariosPorPerfil(item));
 		}
 		
 		return lista;
@@ -98,46 +80,30 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	@Override
 	public Iterable<AdmPerfil> findAll() {
 		Iterable<AdmPerfil> lista = super.findAll();		
-		return setAdmFuncionarioCargo(lista);
+		return setAdmUsuarioCargo(lista);
 	}
 	
 	/**
-	 * Atribui o cargos funcionarios.
+	 * Atribui o cargos usuarios.
 	 *
 	 * @param bean
 	 *            the bean
 	 */
-	private void setCargosFuncionarios(Optional<AdmPerfil> bean) {
-		AdmCargoPerfil admCargoPerfil; 
-		AdmCargoPerfilPK admCargoPerfilPK;
-		
-		for (AdmCargo cargo : bean.get().getAdmCargos()) {
+	private void setPerfisUsuarios(Optional<AdmPerfil> bean) {
+		AdmUsuarioPerfil admUsuarioPerfil; 
+		AdmUsuarioPerfilPK admUsuarioPerfilPK;
 
-			admCargoPerfilPK = new AdmCargoPerfilPK();
-			admCargoPerfilPK.setPerfilSeq(bean.get().getId());
-			admCargoPerfilPK.setCodCargo(cargo.getId());
+		for (AdmUsuario usuario : bean.get().getAdmUsuarios()) {
 			
-			admCargoPerfil = new AdmCargoPerfil();
-			admCargoPerfil.setId(admCargoPerfilPK);
-			admCargoPerfil.setAdmPerfil(bean.get());
+			admUsuarioPerfilPK = new AdmUsuarioPerfilPK();
+			admUsuarioPerfilPK.setPerfilSeq(bean.get().getId());
+			admUsuarioPerfilPK.setUsuarioSeq(usuario.getId());
 			
-			admCargoPerfilService.insert(admCargoPerfil);
-		}
-
-		AdmFuncionarioPerfil admFuncionarioPerfil; 
-		AdmFuncionarioPerfilPK admFuncionarioPerfilPK;
-
-		for (AdmFuncionario funcionario : bean.get().getAdmFuncionarios()) {
+			admUsuarioPerfil = new AdmUsuarioPerfil();
+			admUsuarioPerfil.setId(admUsuarioPerfilPK);
+			admUsuarioPerfil.setAdmPerfil(bean.get());
 			
-			admFuncionarioPerfilPK = new AdmFuncionarioPerfilPK();
-			admFuncionarioPerfilPK.setPerfilSeq(bean.get().getId());
-			admFuncionarioPerfilPK.setCodFuncionario(funcionario.getId());
-			
-			admFuncionarioPerfil = new AdmFuncionarioPerfil();
-			admFuncionarioPerfil.setId(admFuncionarioPerfilPK);
-			admFuncionarioPerfil.setAdmPerfil(bean.get());
-			
-			admFuncionarioPerfilService.insert(admFuncionarioPerfil);
+			admUsuarioPerfilService.insert(admUsuarioPerfil);
 		}
 	}
 
@@ -148,8 +114,7 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	@Transactional
 	public void delete(AdmPerfil bean) throws TransacaoException {
 		super.delete(bean);		
-		admCargoPerfilService.deleteByPerfil(bean.getId());
-		admFuncionarioPerfilService.deleteByPerfil(bean.getId());
+		admUsuarioPerfilService.deleteByPerfil(bean.getId());
 	}
 
 
@@ -161,7 +126,7 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	public Optional<AdmPerfil> insert(AdmPerfil bean) throws TransacaoException {
 		Optional<AdmPerfil> novo = super.insert(bean);
 		if (novo.isPresent()) {
-			setCargosFuncionarios(novo);
+			setPerfisUsuarios(novo);
 		}
 		return novo;
 	}
@@ -173,15 +138,9 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	@Transactional
 	public Optional<AdmPerfil> update(AdmPerfil bean) throws TransacaoException {
 		Optional<AdmPerfil> alterado = super.update(bean);
-
-		admCargoPerfilService.deleteByPerfil(bean.getId());
-		admFuncionarioPerfilService.deleteByPerfil(bean.getId());
-		
-		//admCargoPerfilBC.deleteByCargos(bean.getAdmCargos());
-		admFuncionarioPerfilService.deleteByFuncionarios(bean.getAdmFuncionarios());
-		
-		setCargosFuncionarios(Optional.of(bean));
-		
+		admUsuarioPerfilService.deleteByPerfil(bean.getId());
+		admUsuarioPerfilService.deleteByUsuarios(bean.getAdmUsuarios());
+		setPerfisUsuarios(Optional.of(bean));	
 		return alterado;
 	}	
 	
@@ -215,15 +174,15 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	/**
 	 * Gets the papeis.
 	 *
-	 * @param idAdmFuncionario the id adm funcionario
+	 * @param idAdmUsuario the id adm usuario
 	 * @return the papeis
 	 */
-	public HashSet<AdmPerfil> getPapeis(Long idAdmFuncionario) {
+	public HashSet<AdmPerfil> getPapeis(Long idAdmUsuario) {
 		HashSet<AdmPerfil> hs = new HashSet<AdmPerfil>();
 
-		//AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());		
-		Iterable<AdmPerfil> lst = repositorio.findPerfisPorFuncionario(idAdmFuncionario);		
-		lst = setAdmFuncionarioCargo(lst);
+		//AdmUsuario admUsuario = new AdmUsuario(usuarioAutenticado.getUsuario());		
+		Iterable<AdmPerfil> lst = repositorio.findPerfisPorUsuario(idAdmUsuario);		
+		lst = setAdmUsuarioCargo(lst);
 		/*
 		for (AdmPerfil g : lst) {
 			hs.add(g);
@@ -238,35 +197,21 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	}
 
 	public List<PermissaoVO> getPermissao(UsuarioAutenticadoVO usuarioAutenticado){
-		AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());
-		return getPermissao(admFuncionario.getId());
+		AdmUsuario admUsuario = new AdmUsuario(usuarioAutenticado.getUsuario());
+		return getPermissao(admUsuario.getId());
 	}
 	
-	public List<PermissaoVO> getPermissao(Long idAdmFuncionario) {
+	public List<PermissaoVO> getPermissao(Long idAdmUsuario) {
 		List<PermissaoVO> lista = new ArrayList<PermissaoVO>();
 		PermissaoVO permissao;
-		List<AdmPagina> paginasFuncionalidade;
 		
-		Iterable<AdmPerfil> perfis = repositorio.findPerfisPorFuncionario(idAdmFuncionario);
-		perfis = setAdmFuncionarioCargo(perfis);
+		Iterable<AdmPerfil> perfis = repositorio.findPerfisPorUsuario(idAdmUsuario);
+		perfis = setAdmUsuarioCargo(perfis);
 		
 		for (AdmPerfil perfil : perfis) {
 			permissao = new PermissaoVO();
 			permissao.setPerfil(perfil.toPerfilVO());
-
-			for (AdmFuncionalidade admFuncionalidade : perfil.getAdmFuncionalidades()) {
-				permissao.getFuncionalidades().add(admFuncionalidade.toFuncionalidadeVO());	
-			}
-			
-			paginasFuncionalidade = new ArrayList<AdmPagina>();
-			for (AdmFuncionalidade admFuncionalidade : perfil.getAdmFuncionalidades()) {
-				paginasFuncionalidade.add(admFuncionalidade.getAdmPaginaInicial());	
-			}
-			
-			for (AdmPagina admPaginaFunc : paginasFuncionalidade) {
-				permissao.getPaginasFuncionalidade().add(admPaginaFunc.toPaginaVO());	
-			}
-			
+		
 			for (AdmPagina admPagina : perfil.getAdmPaginas()) {
 				permissao.getPaginas().add(admPagina.toPaginaVO());
 			}
@@ -334,40 +279,21 @@ public class AdmPerfilService extends BaseBusinessService<AdmPerfil, Long, AdmPe
 	}
 	
 	/**
-	 * Find funcionarios por perfil.
+	 * Find usuarios por perfil.
 	 *
 	 * @param perfil
 	 *            the perfil
 	 * @return the list
 	 */
-	public List<AdmFuncionario> findFuncionariosPorPerfil(AdmPerfil perfil){
-		List<AdmFuncionario> lista = new ArrayList<AdmFuncionario>();
-		Iterable<Long> listaCod = repositorio.findFuncionariosPorPerfil(perfil);
+	public List<AdmUsuario> findUsuariosPorPerfil(AdmPerfil perfil){
+		List<AdmUsuario> lista = new ArrayList<AdmUsuario>();
+		Iterable<Long> listaCod = repositorio.findUsuariosPorPerfil(perfil);
 		/*
 		for (Long item : listaCod) {
-			lista.add(admFuncionarioBC.load(item));
+			lista.add(admUsuarioBC.load(item));
 		}
 		*/
-		listaCod.forEach(item -> lista.add(admFuncionarioService.load(item).get()));
-		return lista;
-	}
-	
-	/**
-	 * Find cargos por perfil.
-	 *
-	 * @param perfil
-	 *            the perfil
-	 * @return the list
-	 */
-	public List<AdmCargo> findCargosPorPerfil(AdmPerfil perfil){
-		List<AdmCargo> lista = new ArrayList<AdmCargo>();
-		Iterable<Long> listaCod = repositorio.findCargosPorPerfil(perfil);
-		/*
-		for (Long item : listaCod) {
-			lista.add(admCargoBC.load(item));
-		}
-		*/
-		listaCod.forEach(item -> lista.add(admCargoService.load(item).get()));
+		listaCod.forEach(item -> lista.add(admUsuarioService.load(item).get()));
 		return lista;
 	}
 	

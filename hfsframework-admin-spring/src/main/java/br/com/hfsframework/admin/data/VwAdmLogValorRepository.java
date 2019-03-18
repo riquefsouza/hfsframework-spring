@@ -22,24 +22,18 @@ public interface VwAdmLogValorRepository extends JpaRepository<VwAdmLogValor, Lo
 	/**
 	 * Find by filtros.
 	 *
-	 * @param usuario
-	 *            the usuario
-	 * @param dataNumero
-	 *            the data numero
-	 * @param operacao
-	 *            the operacao
-	 * @param ip
-	 *            the ip
-	 * @param entidade
-	 *            the entidade
-	 * @param tabela
-	 *            the tabela
-	 * @param chave
-	 *            the chave
+	 * @param usuario    the usuario
+	 * @param dataNumero the data numero
+	 * @param operacao   the operacao
+	 * @param ip         the ip
+	 * @param entidade   the entidade
+	 * @param tabela     the tabela
+	 * @param chave      the chave
 	 * @return the list
 	 */
 	@Query(name = "VwAdmLogValor.findByFiltros")
-	List<VwAdmLogValor> findByFiltros(String usuario, Long dataNumero, String operacao, String ip, String entidade,
+	List<VwAdmLogValor> findByFiltros(String usuario, Long dataNumero, 
+			String operacao, String ip, String entidade,
 			String tabela, String chave);
 
 }

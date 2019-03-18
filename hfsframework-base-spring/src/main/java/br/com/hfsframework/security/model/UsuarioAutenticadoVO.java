@@ -12,18 +12,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-// TODO: Auto-generated Javadoc
-//import javax.enterprise.context.SessionScoped;
-//import javax.inject.Named;
-
-//import br.com.hfsframework.AplicacaoUtil;
-
 /**
  * The Class UsuarioAutenticadoVO.
  */
 
-//@Named("usuarioAutenticado")
-//@SessionScoped
 @Component
 public class UsuarioAutenticadoVO implements Serializable {
 
@@ -48,9 +40,6 @@ public class UsuarioAutenticadoVO implements Serializable {
 	/** The lista admin menus. */
 	private List<MenuVO> listaAdminMenus;
 	
-	/** The funcionario. */
-	private FuncionarioVO funcionario;
-	
 	/** The usuario. */
 	private UsuarioVO usuario;
 	
@@ -63,7 +52,6 @@ public class UsuarioAutenticadoVO implements Serializable {
 		super();
 		
 		this.listaPermissao = new ArrayList<PermissaoVO>();
-		this.funcionario = new FuncionarioVO();
 		this.usuario = new UsuarioVO();
 		this.listaMenus = new ArrayList<MenuVO>();
 		this.listaAdminMenus = new ArrayList<MenuVO>();
@@ -83,7 +71,6 @@ public class UsuarioAutenticadoVO implements Serializable {
 		this.listaPermissao.clear();
 		this.listaMenus.clear();
 		this.listaAdminMenus.clear();		
-		this.funcionario.limpar();
 		this.usuario.limpar();
 	}
 		
@@ -115,25 +102,6 @@ public class UsuarioAutenticadoVO implements Serializable {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	/**
-	 * Pega o the funcionario.
-	 *
-	 * @return o the funcionario
-	 */
-	public FuncionarioVO getFuncionario() {
-		return funcionario;
-	}
-
-	/**
-	 * Atribui o the funcionario.
-	 *
-	 * @param funcionario
-	 *            o novo the funcionario
-	 */
-	public void setFuncionario(FuncionarioVO funcionario) {
-		this.funcionario = funcionario;
 	}
 
 	/* (non-Javadoc)
@@ -409,14 +377,14 @@ public class UsuarioAutenticadoVO implements Serializable {
 		
 		if (listaMenus!= null && !listaMenus.isEmpty()){
 			for (MenuVO admMenu : listaMenus) {
-				admPagina = admMenu.getFuncionalidade().getPaginaInicial();
+				admPagina = admMenu.getPagina();
 				break;
 			}			
 		}
 		
 		if (listaAdminMenus!= null && !listaAdminMenus.isEmpty()){
 			for (MenuVO admMenu : listaAdminMenus) {
-				admPagina = admMenu.getFuncionalidade().getPaginaInicial();
+				admPagina = admMenu.getPagina();
 				break;
 			}			
 		}
@@ -450,11 +418,6 @@ public class UsuarioAutenticadoVO implements Serializable {
 		}
 
 		for (PermissaoVO permissao : this.getListaPermissao()) {
-			for (PaginaVO pagFuncionalidade : permissao.getPaginasFuncionalidade()) {
-				if (pagFuncionalidade.getUrl().equals(url)) {
-					return true;
-				}
-			}
 			for (PaginaVO admPagina : permissao.getPaginas()) {
 				if (admPagina.getUrl().equals(url)) {
 					return true;
@@ -472,7 +435,7 @@ public class UsuarioAutenticadoVO implements Serializable {
 	public String toString() {
 		return "UsuarioAutenticadoVO [userName=" + userName + ", displayName=" + displayName + ", email=" + email
 				+ ", listaPermissao=" + listaPermissao + ", listaMenus=" + listaMenus + ", listaAdminMenus="
-				+ listaAdminMenus + ", funcionario=" + funcionario + ", usuario=" + usuario + "]";
+				+ listaAdminMenus + ", usuario=" + usuario + "]";
 	}
 
 	public MenuVO getMenu(String sidMenu){

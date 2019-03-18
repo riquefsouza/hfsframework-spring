@@ -19,9 +19,9 @@ public class AdmUsuarioIpPK implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The matricula. */
-	@Column(name = "UIP_MATRICULA")
-	private Long matricula;
+	/** The usuarioSeq. */
+	@Column(name = "UIP_USU_SEQ")
+	private Long usuarioSeq;
 
 	/** The ip. */
 	@Column(name = "UIP_IP")
@@ -39,27 +39,27 @@ public class AdmUsuarioIpPK implements Serializable {
 	 * Limpar.
 	 */
 	public void limpar() {
-		this.matricula = 0L;
+		this.usuarioSeq = 0L;
 		this.ip = "";
 	}
 
 	/**
-	 * Gets the matricula.
+	 * Gets the usuario seq.
 	 *
-	 * @return the matricula
+	 * @return the usuario seq
 	 */
-	public Long getMatricula() {
-		return this.matricula;
+	public Long getUsuarioSeq() {
+		return usuarioSeq;
 	}
 
 	/**
-	 * Sets the matricula.
+	 * Sets the usuario seq.
 	 *
-	 * @param matricula
-	 *            the new matricula
+	 * @param usuarioSeq
+	 *            the new usuario seq
 	 */
-	public void setMatricula(Long matricula) {
-		this.matricula = matricula;
+	public void setUsuarioSeq(Long usuarioSeq) {
+		this.usuarioSeq = usuarioSeq;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class AdmUsuarioIpPK implements Serializable {
 			return false;
 		}
 		AdmUsuarioIpPK castOther = (AdmUsuarioIpPK) other;
-		return (this.matricula == castOther.matricula) && this.ip.equals(castOther.ip);
+		return (this.usuarioSeq == castOther.usuarioSeq) && this.ip.equals(castOther.ip);
 	}
 
 	/* (non-Javadoc)
@@ -101,7 +101,7 @@ public class AdmUsuarioIpPK implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + ((int) (this.matricula ^ (this.matricula >>> 32)));
+		hash = hash * prime + ((int) (this.usuarioSeq ^ (this.usuarioSeq >>> 32)));
 		hash = hash * prime + this.ip.hashCode();
 
 		return hash;

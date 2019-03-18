@@ -8,6 +8,8 @@ package br.com.hfsframework.template;
 
 import java.io.IOException;
 
+import br.com.hfsframework.template.TemplateEnum;
+import br.com.hfsframework.template.TemplateUtil;
 import freemarker.template.TemplateException;
 
 // TODO: Auto-generated Javadoc
@@ -30,17 +32,12 @@ public class TemplateExemplo {
 	 *             the template exception
 	 */
 	public static void main(String[] args) throws IOException, TemplateException {
-		String[][] classes = {
-				{"AdmCargo", "Long"},
-				{"AdmFuncionalidade", "Long"},
-				{"AdmFuncionario", "Long"},
-				{"AdmLogColuna", "String"},				
+		String[][] classes = {		
 				{"AdmMenu", "Long"},
 				{"AdmPagina", "Long"},
 				{"AdmParametro", "Long"},
-				//{"AdmParametroCategoria", "Long"},
+				{"AdmParametroCategoria", "Long"},
 				{"AdmPerfil", "Long"},
-				{"AdmSetor", "String"},
 				{"AdmUsuario", "Long"},
 				{"VwAdmLog", "Long"},
 				{"VwAdmLogValor", "Long"}

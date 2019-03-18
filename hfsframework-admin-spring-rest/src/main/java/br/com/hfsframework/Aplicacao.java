@@ -46,7 +46,7 @@ import br.com.hfsframework.util.NetUtil;
 public class Aplicacao {
 
 	// curl -X POST -vu admin-hfsframework:dd933575-d277-4f08-88d9-2021769b1ca5 http://localhost:8080/oauth/token -H "Accept: application/json" -d "password=admin&username=henrique.souza&grant_type=password&scope=write&client_secret=123456&client_id=admin-hfsframework"
-	// curl -v POST http://127.0.0.1:8080/admCargos -H "Authorization: Bearer <oauth_token>""
+	// curl -v POST http://127.0.0.1:8080/admUsuarios -H "Authorization: Bearer <oauth_token>""
 	
 	
 	/** The Constant log. */
@@ -64,7 +64,7 @@ public class Aplicacao {
 		log.info("------------------------------------------------------------------------");
 		log.info("HFS Framework Admin Spring REST");
 		log.info("Desenvolvido por Henrique Figueiredo de Souza");
-		log.info("Versão 1.0.1 - 2019");
+		log.info("Versão 1.0.2 - 2019");
 		log.info("------------------------------------------------------------------------");
 		
 		NetUtil.printIpHost();

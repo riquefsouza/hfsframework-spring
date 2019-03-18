@@ -24,6 +24,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -33,16 +35,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.hfsframework.admin.serializer.AdmCargoListSerializer;
-import br.com.hfsframework.admin.serializer.AdmFuncionalidadeListSerializer;
-import br.com.hfsframework.admin.serializer.AdmFuncionarioListSerializer;
+import br.com.hfsframework.admin.serializer.AdmUsuarioListSerializer;
 import br.com.hfsframework.admin.serializer.AdmPaginaListSerializer;
 import br.com.hfsframework.converter.BooleanToStringConverter;
-import br.com.hfsframework.security.model.CargoVO;
-import br.com.hfsframework.security.model.FuncionalidadeVO;
-import br.com.hfsframework.security.model.FuncionarioVO;
 import br.com.hfsframework.security.model.PaginaVO;
 import br.com.hfsframework.security.model.PerfilVO;
+import br.com.hfsframework.security.model.UsuarioVO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,19 +53,17 @@ import br.com.hfsframework.security.model.PerfilVO;
 	@NamedQuery(name = "AdmPerfil.getDescricaoById", query = "SELECT c.descricao FROM AdmPerfil c WHERE c.id = ?1"),
 	@NamedQuery(name = "AdmPerfil.countNovo", query = "SELECT COUNT(c) FROM AdmPerfil c WHERE LOWER(c.descricao) = ?1"),
 	@NamedQuery(name = "AdmPerfil.countAntigo", query = "SELECT COUNT(c) FROM AdmPerfil c WHERE LOWER(c.descricao) <> ?1 AND LOWER(c.descricao) = ?2"),
-	@NamedQuery(name = "AdmPerfil.findCargosPorPerfil", query = "SELECT distinct cp.id.codCargo FROM AdmPerfil p, AdmCargoPerfil cp where p.id = cp.id.perfilSeq AND p = ?1"),
 	@NamedQuery(name = "AdmPerfil.findPaginasPorPerfil", query = "SELECT distinct pag FROM AdmPerfil p inner join p.admPaginas pag where p = ?1"),
-	@NamedQuery(name = "AdmPerfil.findFuncionariosPorPerfil", query = "SELECT distinct fp.id.codFuncionario FROM AdmPerfil p, AdmFuncionarioPerfil fp where p.id = fp.id.perfilSeq AND p = ?1"),
-	@NamedQuery(name = "AdmPerfil.findFuncionalidadesPorPerfil", query = "SELECT distinct f FROM AdmPerfil p inner join p.admFuncionalidades f  where p = ?1"),
-	@NamedQuery(name = "AdmPerfil.findPerfisPorFuncionario", query = "SELECT distinct p FROM AdmPerfil p, AdmFuncionarioPerfil fp where p.id = fp.id.perfilSeq AND fp.id.codFuncionario = ?1"),	
-	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmPerfil.findAdminMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
-	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 14) ORDER BY t.ordem, t.id"),
-	@NamedQuery(name = "AdmPerfil.findAdminMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem")		
+	@NamedQuery(name = "AdmPerfil.findUsuariosPorPerfil", query = "SELECT distinct fp.id.usuarioSeq FROM AdmPerfil p, AdmUsuarioPerfil fp where p.id = fp.id.perfilSeq AND p = ?1"),
+	@NamedQuery(name = "AdmPerfil.findPerfisPorUsuario", query = "SELECT distinct p FROM AdmPerfil p, AdmUsuarioPerfil fp where p.id = fp.id.perfilSeq AND fp.id.usuarioSeq = ?1"),	
+	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 9) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 9) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 9 AND m.admMenuPai = ?2 ORDER BY m.ordem, m.id"),
+	@NamedQuery(name = "AdmPerfil.findMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 9 AND m.admMenuPai = ?2 ORDER BY m.ordem, m.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 9) ORDER BY t.id, t.ordem"),
+	@NamedQuery(name = "AdmPerfil.findMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 9) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 9 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
+	@NamedQuery(name = "AdmPerfil.findMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 9 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem")			
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmPerfil implements Serializable {
@@ -89,6 +85,8 @@ public class AdmPerfil implements Serializable {
 
 	/** The descricao. */
 	@NotNull
+	@NotBlank
+	@NotEmpty	
 	@Column(name = "PRF_DESCRICAO", unique = true)
 	private String descricao;
 
@@ -96,20 +94,6 @@ public class AdmPerfil implements Serializable {
 	@Convert(converter = BooleanToStringConverter.class)
 	@Column(name = "PRF_GERAL")
 	private Boolean geral;
-
-	/** The adm cargo perfils. */
-	// bi-directional many-to-one association to AdmCargoPerfil
-	//@Fetch(FetchMode.SUBSELECT)
-	//@OneToMany(mappedBy = "admPerfil", fetch = FetchType.LAZY) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})	
-	//private List<AdmCargoPerfil> admCargoPerfils;
-
-	//@JsonIgnore
-	@JsonSerialize(using = AdmFuncionalidadeListSerializer.class)
-	@Fetch(FetchMode.SUBSELECT)
-	@ManyToMany(fetch = FetchType.EAGER) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-	@JoinTable(name = "ADM_FUNCIONALIDADE_PERFIL", joinColumns = {
-			@JoinColumn(name = "FPL_PRF_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "FPL_FUN_SEQ") })
-	private List<AdmFuncionalidade> admFuncionalidades;
 
 	/** The adm paginas. */
 	//@JsonIgnore
@@ -120,24 +104,14 @@ public class AdmPerfil implements Serializable {
 			@JoinColumn(name = "PGL_PRF_SEQ") }, inverseJoinColumns = {	@JoinColumn(name = "PGL_PAG_SEQ") })
 	private List<AdmPagina> admPaginas;
 	
-	/** The adm cargos. */
-	//@JsonIgnore
-	@JsonSerialize(using = AdmCargoListSerializer.class)
-	@Fetch(FetchMode.SUBSELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "ADM_CARGO_PERFIL", joinColumns = {
-			@JoinColumn(name = "CGP_PRF_SEQ") }, inverseJoinColumns = {
-					@JoinColumn(name = "CGP_CAR_SEQ", referencedColumnName = "CAR_SEQ") })				
-	private List<AdmCargo> admCargos;
-	
 	/** The adm funcionarios. */
 	//@JsonIgnore
-	@JsonSerialize(using = AdmFuncionarioListSerializer.class)
+	@JsonSerialize(using = AdmUsuarioListSerializer.class)
 	@Fetch(FetchMode.SUBSELECT)
 	@ManyToMany(fetch = FetchType.EAGER) //, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-	@JoinTable(name = "ADM_FUNCIONARIO_PERFIL", joinColumns = {
-			@JoinColumn(name = "USP_PRF_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "USP_FUN_CODIGO") })
-	private List<AdmFuncionario> admFuncionarios;
+	@JoinTable(name = "ADM_USUARIO_PERFIL", joinColumns = {
+			@JoinColumn(name = "USP_PRF_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "USP_USU_SEQ") })
+	private List<AdmUsuario> admUsuarios;
 		
 
 	/**
@@ -145,18 +119,11 @@ public class AdmPerfil implements Serializable {
 	 */
 	public AdmPerfil() {
 		super();
-		//this.admCargoPerfils = new ArrayList<AdmCargoPerfil>();
-		this.admFuncionalidades = new ArrayList<AdmFuncionalidade>();
 		this.admPaginas = new ArrayList<AdmPagina>();
-		this.admFuncionarios = new ArrayList<AdmFuncionario>();
-		this.admCargos = new ArrayList<AdmCargo>();
-		/*
-		this.admFuncionarioPerfils = new ArrayList<AdmFuncionarioPerfil>();						
-		*/
+		this.admUsuarios = new ArrayList<AdmUsuario>();
 		limpar();
 	}
-	
-	
+		
 	public AdmPerfil(Long id, String descricao, Boolean administrador, Boolean geral) {
 		super();
 		this.id = id;
@@ -164,7 +131,6 @@ public class AdmPerfil implements Serializable {
 		this.descricao = descricao;
 		this.geral = geral;
 	}
-
 
 	/**
 	 * Instantiates a new adm perfil.
@@ -179,18 +145,11 @@ public class AdmPerfil implements Serializable {
 		this.administrador = p.getAdministrador();
 		this.descricao = p.getDescricao();
 		this.geral = p.getGeral();
-		
-		for (FuncionalidadeVO funcionalidade : p.getFuncionalidades()) {
-			this.admFuncionalidades.add(new AdmFuncionalidade(funcionalidade));	
-		}
 		for (PaginaVO pagina : p.getPaginas()) {
 			this.admPaginas.add(new AdmPagina(pagina));	
 		}
-		for (FuncionarioVO funcionario : p.getFuncionarios()) {
-			this.admFuncionarios.add(new AdmFuncionario(funcionario));	
-		}
-		for (CargoVO cargo : p.getCargos()) {
-			this.admCargos.add(new AdmCargo(cargo));	
+		for (UsuarioVO usuario : p.getUsuarios()) {
+			this.admUsuarios.add(new AdmUsuario(usuario));	
 		}
 	}
 
@@ -202,12 +161,8 @@ public class AdmPerfil implements Serializable {
 		this.administrador = null;
 		this.descricao = null;
 		this.geral = null;
-		//this.admCargoPerfils.clear();
-		this.admFuncionalidades.clear();
 		this.admPaginas.clear();
-		this.admFuncionarios.clear();
-		this.admCargos.clear();
-		//this.admFuncionarioPerfils.clear();		
+		this.admUsuarios.clear();		
 	}
 
 	/**
@@ -286,121 +241,6 @@ public class AdmPerfil implements Serializable {
 		this.geral = geral;
 	}
 
-	/*
-	 * Pega o the adm cargo perfils.
-	 *
-	 * @return o the adm cargo perfils
-	 *
-	public List<AdmCargoPerfil> getAdmCargoPerfils() {
-		return this.admCargoPerfils;
-	}
-
-	**
-	 * Atribui o the adm cargo perfils.
-	 *
-	 * @param admCargoPerfils
-	 *            o novo the adm cargo perfils
-	 * 
-	public void setAdmCargoPerfils(List<AdmCargoPerfil> admCargoPerfils) {
-		this.admCargoPerfils = admCargoPerfils;
-	}
-	
-
-	**
-	 * Adiciona o adm cargo perfil.
-	 *
-	 * @param admCargoPerfil
-	 *            the adm cargo perfil
-	 * @return the adm cargo perfil
-	 *
-	public AdmCargoPerfil addAdmCargoPerfil(AdmCargoPerfil admCargoPerfil) {
-		getAdmCargoPerfils().add(admCargoPerfil);
-		admCargoPerfil.setAdmPerfil(this);
-
-		return admCargoPerfil;
-	}
-
-	**
-	 * Remove o adm cargo perfil.
-	 *
-	 * @param admCargoPerfil
-	 *            the adm cargo perfil
-	 * @return the adm cargo perfil
-	 *
-	public AdmCargoPerfil removeAdmCargoPerfil(AdmCargoPerfil admCargoPerfil) {
-		getAdmCargoPerfils().remove(admCargoPerfil);
-		admCargoPerfil.setAdmPerfil(null);
-
-		return admCargoPerfil;
-	}
-	*/
-	
-	/**
-	 * Pega o the adm cargo perfils.
-	 *
-	 * @return o the adm cargo perfils
-	 */
-	public List<AdmFuncionalidade> getAdmFuncionalidades() {
-		return this.admFuncionalidades;
-	}
-
-	/**
-	 * Atribui o the adm cargo perfils.
-	 *
-	 * @param admFuncionalidades
-	 *            o novo the adm cargo perfils
-	 */
-	public void setAdmFuncionalidades(List<AdmFuncionalidade> admFuncionalidades) {
-		this.admFuncionalidades = admFuncionalidades;
-	}
-
-	/*
-	 * Pega o the adm funcionario perfils.
-	 *
-	 * @return o the adm funcionario perfils
-	 *
-	public List<AdmFuncionarioPerfil> getAdmFuncionarioPerfils() {
-		return this.admFuncionarioPerfils;
-	}
-
-	/**
-	 * Atribui o the adm funcionario perfils.
-	 *
-	 * @param admFuncionarioPerfils
-	 *            o novo the adm funcionario perfils
-	 *
-	public void setAdmFuncionarioPerfils(List<AdmFuncionarioPerfil> admFuncionarioPerfils) {
-		this.admFuncionarioPerfils = admFuncionarioPerfils;
-	}
-
-	/**
-	 * Adiciona o adm funcionario perfil.
-	 *
-	 * @param admFuncionarioPerfil
-	 *            the adm funcionario perfil
-	 * @return the adm funcionario perfil
-	 *
-	public AdmFuncionarioPerfil addAdmFuncionarioPerfil(AdmFuncionarioPerfil admFuncionarioPerfil) {
-		getAdmFuncionarioPerfils().add(admFuncionarioPerfil);
-		admFuncionarioPerfil.setAdmPerfil(this);
-
-		return admFuncionarioPerfil;
-	}
-
-	/**
-	 * Remove o adm funcionario perfil.
-	 *
-	 * @param admFuncionarioPerfil
-	 *            the adm funcionario perfil
-	 * @return the adm funcionario perfil
-	 *
-	public AdmFuncionarioPerfil removeAdmFuncionarioPerfil(AdmFuncionarioPerfil admFuncionarioPerfil) {
-		getAdmFuncionarioPerfils().remove(admFuncionarioPerfil);
-		admFuncionarioPerfil.setAdmPerfil(null);
-
-		return admFuncionarioPerfil;
-	}
-*/
 	/**
 	 * Pega o the adm paginas.
 	 *
@@ -421,41 +261,22 @@ public class AdmPerfil implements Serializable {
 	}
 
 	/**
-	 * Gets the adm cargos.
+	 * Gets the adm usuarios.
 	 *
-	 * @return the adm cargos
+	 * @return the adm usuarios
 	 */
-	public List<AdmCargo> getAdmCargos() {
-		return this.admCargos;
+	public List<AdmUsuario> getAdmUsuarios() {
+		return admUsuarios;
 	}
 
 	/**
-	 * Sets the adm cargos.
+	 * Sets the adm usuarios.
 	 *
-	 * @param admCargos
-	 *            the new adm cargos
+	 * @param admUsuarios
+	 *            the new adm usuarios
 	 */
-	public void setAdmCargos(List<AdmCargo> admCargos) {
-		this.admCargos = admCargos;
-	}
-	
-	/**
-	 * Gets the adm funcionarios.
-	 *
-	 * @return the adm funcionarios
-	 */
-	public List<AdmFuncionario> getAdmFuncionarios() {
-		return admFuncionarios;
-	}
-
-	/**
-	 * Sets the adm funcionarios.
-	 *
-	 * @param admFuncionarios
-	 *            the new adm funcionarios
-	 */
-	public void setAdmFuncionarios(List<AdmFuncionario> admFuncionarios) {
-		this.admFuncionarios = admFuncionarios;
+	public void setAdmUsuarios(List<AdmUsuario> admUsuarios) {
+		this.admUsuarios = admUsuarios;
 	}
 	
 
@@ -505,28 +326,16 @@ public class AdmPerfil implements Serializable {
 	 */
 	public PerfilVO toPerfilVO(){
 		PerfilVO p = new PerfilVO();
-		
 		p.setId(id);
 		p.setAdministrador(administrador);
 		p.setDescricao(descricao);
 		p.setGeral(geral);
-
-		for (AdmFuncionalidade admFuncionalidade : admFuncionalidades) {
-			p.getFuncionalidades().add(admFuncionalidade.toFuncionalidadeVO());	
-		}
-		
 		for (AdmPagina admPagina : admPaginas) {
 			p.getPaginas().add(admPagina.toPaginaVO());
 		}
-
-		for (AdmFuncionario admFuncionario : admFuncionarios) {
-			p.getFuncionarios().add(admFuncionario.toFuncionarioVO());
+		for (AdmUsuario admUsuario : admUsuarios) {
+			p.getUsuarios().add(admUsuario.toUsuarioVO());
 		}
-		
-		for (AdmCargo admCargo : admCargos) {
-			p.getCargos().add(admCargo.toCargoVO());
-		}
-		
 		return p;
 	}
 }

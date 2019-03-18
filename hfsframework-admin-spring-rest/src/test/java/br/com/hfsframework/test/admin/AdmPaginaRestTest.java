@@ -64,29 +64,22 @@ public class AdmPaginaRestTest extends BaseTest {
         accessToken = obtainAccessToken("henrique.souza", "admin");
         
         
-        admPaginaList.add(new AdmPagina(1L,"admin/admParametroCategoria/listarAdmParametroCategoria.xhtml", "br.com.hfsframework.admin.view.admParametroCategoria.AdmParametroCategoriaMB"));
-        admPaginaList.add(new AdmPagina(2L,"admin/admParametroCategoria/editarAdmParametroCategoria.xhtml", "br.com.hfsframework.admin.view.admParametroCategoria.AdmParametroCategoriaMB"));
-        admPaginaList.add(new AdmPagina(3L,"admin/admParametro/listarAdmParametro.xhtml", "br.com.hfsframework.admin.view.admParametro.AdmParametroMB"));
-        admPaginaList.add(new AdmPagina(4L,"admin/admParametro/editarAdmParametro.xhtml", "br.com.hfsframework.admin.view.admParametro.AdmParametroMB"));
-        admPaginaList.add(new AdmPagina(5L,"admin/admPerfil/listarAdmPerfil.xhtml", "br.com.hfsframework.admin.view.admPerfil.AdmPerfilMB"));
-        admPaginaList.add(new AdmPagina(6L,"admin/admPerfil/editarAdmPerfil.xhtml", "br.com.hfsframework.admin.view.admPerfil.AdmPerfilMB"));
-        admPaginaList.add(new AdmPagina(7L,"admin/admFuncionalidade/listarAdmFuncionalidade.xhtml", "br.com.hfsframework.admin.view.admFuncionalidade.AdmFuncionalidadeMB"));
-        admPaginaList.add(new AdmPagina(8L,"admin/admFuncionalidade/editarAdmFuncionalidade.xhtml", "br.com.hfsframework.admin.view.admFuncionalidade.AdmFuncionalidadeMB"));
-        admPaginaList.add(new AdmPagina(9L,"admin/admPagina/listarAdmPagina.xhtml", "br.com.hfsframework.admin.view.admPagina.AdmPaginaMB"));
-        admPaginaList.add(new AdmPagina(10L,"admin/admPagina/editarAdmPagina.xhtml", "br.com.hfsframework.admin.view.admPagina.AdmPaginaMB"));
-        admPaginaList.add(new AdmPagina(11L,"admin/admMenu/listarAdmMenu.xhtml", "br.com.hfsframework.admin.view.admMenu.AdmMenuMB"));
-        admPaginaList.add(new AdmPagina(12L,"admin/admMenu/editarAdmMenu.xhtml", "br.com.hfsframework.admin.view.admMenu.AdmMenuMB"));
-        admPaginaList.add(new AdmPagina(13L,"admin/admCargo/listarAdmCargo.xhtml", "br.com.hfsframework.admin.view.admCargo.AdmCargoMB"));
-        admPaginaList.add(new AdmPagina(14L,"admin/admCargo/editarAdmCargo.xhtml", "br.com.hfsframework.admin.view.admCargo.AdmCargoMB"));
-        admPaginaList.add(new AdmPagina(15L,"admin/admFuncionario/listarAdmFuncionario.xhtml", "br.com.hfsframework.admin.view.admFuncionario.AdmFuncionarioMB"));
-        admPaginaList.add(new AdmPagina(16L,"admin/admFuncionario/editarAdmFuncionario.xhtml", "br.com.hfsframework.admin.view.admFuncionario.AdmFuncionarioMB"));
-        admPaginaList.add(new AdmPagina(17L,"admin/admSetor/listarAdmSetor.xhtml", "br.com.hfsframework.admin.view.admSetor.AdmSetorMB"));
-        admPaginaList.add(new AdmPagina(18L,"admin/admSetor/editarAdmSetor.xhtml", "br.com.hfsframework.admin.view.admSetor.AdmSetorMB"));
-        admPaginaList.add(new AdmPagina(19L,"admin/admUsuario/listarAdmUsuario.xhtml", "br.com.hfsframework.admin.view.admUsuario.AdmUsuarioMB"));
-        admPaginaList.add(new AdmPagina(20L,"admin/vwAdmLog/listarVwAdmLog.xhtml", "br.com.hfsframework.admin.view.vwAdmLog.VwAdmLogMB"));
-        admPaginaList.add(new AdmPagina(21L,"admin/admLogColuna/listarAdmLogColuna.xhtml", "br.com.hfsframework.admin.view.admLogColuna.AdmLogColunaMB"));
-        admPaginaList.add(new AdmPagina(22L,"admin/admLogColuna/editarAdmLogColuna.xhtml", "br.com.hfsframework.admin.view.admLogColuna.AdmLogColunaMB"));
-        admPaginaList.add(new AdmPagina(23L,"admin/visualizarArqLogServidor.xhtml", "br.com.hfsframework.admin.view.VisualizarArqLogServidorMB"));
+        admPaginaList.add(new AdmPagina(1L,"admin/admParametroCategoria/listarAdmParametroCategoria.xhtml", "Categoria dos Parâmetros de Configuração (Administrativo)"));
+        admPaginaList.add(new AdmPagina(2L,"admin/admParametroCategoria/editarAdmParametroCategoria.xhtml", "Editar Categoria dos Parâmetros de Configuração (Administrativo)"));
+        admPaginaList.add(new AdmPagina(3L,"admin/admParametro/listarAdmParametro.xhtml", "Parâmetros de Configuração (Administrativo)"));
+        admPaginaList.add(new AdmPagina(4L,"admin/admParametro/editarAdmParametro.xhtml", "Editar Parâmetros de Configuração (Administrativo)"));
+        admPaginaList.add(new AdmPagina(5L,"admin/admPerfil/listarAdmPerfil.xhtml", "Administrar Perfil (Administrativo)"));
+        admPaginaList.add(new AdmPagina(6L,"admin/admPerfil/editarAdmPerfil.xhtml", "Editar Administrar Perfil (Administrativo)"));
+        admPaginaList.add(new AdmPagina(7L,"admin/admPagina/listarAdmPagina.xhtml", "Administrar Página (Administrativo)"));
+        admPaginaList.add(new AdmPagina(8L,"admin/admPagina/editarAdmPagina.xhtml", "Editar Administrar Página (Administrativo)"));
+        admPaginaList.add(new AdmPagina(9L,"admin/admMenu/listarAdmMenu.xhtml", "Administrar Menu (Administrativo)"));
+        admPaginaList.add(new AdmPagina(10L,"admin/admMenu/editarAdmMenu.xhtml", "Editar Administrar Menu (Administrativo)"));
+        admPaginaList.add(new AdmPagina(11L,"admin/admUsuario/listarAdmUsuario.xhtml", "Administrar Usuário (Administrativo)"));
+        admPaginaList.add(new AdmPagina(12L,"admin/admUsuario/editarAdmUsuario.xhtml", "Editar Administrar Usuário (Administrativo)"));
+        admPaginaList.add(new AdmPagina(13L,"admin/vwAdmLog/listarVwAdmLog.xhtml", "Visualizar os Logs de Auditoria (Administrativo)"));
+        admPaginaList.add(new AdmPagina(16L,"admin/visualizarArqLogServidor.xhtml", "Visualizar Arquivo de Log do Servidor (Administrativo)"));
+        admPaginaList.add(new AdmPagina(17L,"alterarSenha.xhtml", "Alterar Senha"));
+
 
     }
 
@@ -106,7 +99,7 @@ public class AdmPaginaRestTest extends BaseTest {
 					        .contentType(contentType))
 					        .andExpect(status().isOk());
 					
-					log.info(bean.getId() + " - " + bean.getManagedBean() + " - " + bean.getUrl());
+					log.info(bean.getId() + " - " + bean.getDescricao() + " - " + bean.getUrl());
 					
 				} catch (Exception e) {
 					log.error(e.getMessage());
@@ -128,10 +121,10 @@ public class AdmPaginaRestTest extends BaseTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(this.admPaginaList.size())))
                 .andExpect(jsonPath("$[0].id", is(this.admPaginaList.get(0).getId().intValue())))
-                .andExpect(jsonPath("$[0].managedBean", is(this.admPaginaList.get(0).getManagedBean())))
+                .andExpect(jsonPath("$[0].descricao", is(this.admPaginaList.get(0).getDescricao())))
                 .andExpect(jsonPath("$[0].url", is(this.admPaginaList.get(0).getUrl())))
                 .andExpect(jsonPath("$[1].id", is(this.admPaginaList.get(1).getId().intValue())))
-                .andExpect(jsonPath("$[1].managedBean", is(this.admPaginaList.get(1).getManagedBean())))
+                .andExpect(jsonPath("$[1].descricao", is(this.admPaginaList.get(1).getDescricao())))
         		.andExpect(jsonPath("$[1].url", is(this.admPaginaList.get(1).getUrl())));
     }
 
@@ -150,7 +143,7 @@ public class AdmPaginaRestTest extends BaseTest {
 		                .andExpect(status().isOk())
 		                .andExpect(content().contentType(contentType))
 		                .andExpect(jsonPath("$.id", is(bean.getId().intValue())))
-		                .andExpect(jsonPath("$.managedBean", is(bean.getManagedBean())))
+		                .andExpect(jsonPath("$.descricao", is(bean.getDescricao())))
 		                .andExpect(jsonPath("$.url", is(bean.getUrl())));
 			} catch (Exception e) {
 				log.error(e.getMessage());

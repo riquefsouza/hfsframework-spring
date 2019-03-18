@@ -61,14 +61,14 @@
 				<tr class="tema-principal">
 					<th hidden="true" >Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
-					<th>Funcion&aacute;rios</th>
+					<th>Usu&aacute;rios</th>
 				</tr>	
 			</thead>
 			<tbody>
 			 	<tr th:each="item : ${listaBean}">
 					<td hidden="true" th:text="${item.id}"></td>					
 			 		<td th:text="${item.descricao}"></td>
-			 		<td th:text="${item.admFuncionarios}"></td>
+			 		<td th:text="${item.admUsuarios}"></td>
 			    </tr>			
 			</tbody>
 		</table>

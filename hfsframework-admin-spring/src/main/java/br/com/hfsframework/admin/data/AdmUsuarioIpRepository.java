@@ -23,22 +23,22 @@ public interface AdmUsuarioIpRepository extends JpaRepository<AdmUsuarioIp, AdmU
 	 * Update ativo by id.
 	 *
 	 * @param ativo the ativo
-	 * @param matricula the matricula
+	 * @param idUsuario the idUsuario
 	 * @param ip the ip
 	 * @return the int
 	 */
 	@Modifying
-	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.matricula=?2 AND u.id.ip = ?3")
-	int updateAtivoById(Boolean ativo, Long matricula, String ip);
+	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.usuarioSeq=?2 AND u.id.ip = ?3")
+	int updateAtivoById(Boolean ativo, Long idUsuario, String ip);
 	
 	/**
-	 * Update ativo by matricula.
+	 * Update ativo by idUsuario.
 	 *
 	 * @param ativo the ativo
-	 * @param matricula the matricula
+	 * @param idUsuario the idUsuario
 	 * @return the int
 	 */
 	@Modifying
-	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.matricula=?2")
-	int updateAtivoByMatricula(Boolean ativo, Long matricula);
+	@Query("UPDATE AdmUsuarioIp as u SET u.ativo=?1 WHERE u.id.usuarioSeq=?2")
+	int updateAtivoByIdUsuario(Boolean ativo, Long idUsuario);
 }

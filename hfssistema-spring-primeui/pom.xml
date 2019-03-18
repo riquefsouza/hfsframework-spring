@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfssistema-spring-primeui</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.2</version>
 	<name>HFS Sistema Spring PrimeUI</name>
 	<description>HFS Sistema Spring PrimeUI</description>
 	
@@ -30,31 +30,14 @@
 	
 	<dependencies>
 	
-		<dependency>
-			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
-			<version>1.0.1</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
-			<classifier>tests</classifier>
-			<type>test-jar</type>
-			<version>1.0.1</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- #################### SPRING BOOT #################### -->
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.thymeleaf.extras</groupId>
-		    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-		    <version>3.0.4.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,8 +52,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
-    
+		    
 		<!-- #################### TEST #################### -->
 
 		<dependency>
@@ -82,7 +64,7 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency>		
 		<dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>

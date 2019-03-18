@@ -34,26 +34,18 @@ public class PerfilVO implements Serializable {
 	/** The geral. */
 	private Boolean geral;
 
-	/** The funcionalidades. */
-	private List<FuncionalidadeVO> funcionalidades;
-
 	/** The paginas. */
 	private List<PaginaVO> paginas;
 	
-	/** The cargos. */
-	private List<CargoVO> cargos;
-	
-	/** The funcionarios. */
-	private List<FuncionarioVO> funcionarios;
+	/** The usuarios. */
+	private List<UsuarioVO> usuarios;
 		
 	/**
 	 * Instantiates a new perfil VO.
 	 */
 	public PerfilVO() {
-		this.funcionalidades = new ArrayList<FuncionalidadeVO>();
 		this.paginas = new ArrayList<PaginaVO>();
-		this.funcionarios = new ArrayList<FuncionarioVO>();
-		this.cargos = new ArrayList<CargoVO>();
+		this.usuarios = new ArrayList<UsuarioVO>();
 		limpar();
 	}
 
@@ -65,10 +57,8 @@ public class PerfilVO implements Serializable {
 		this.administrador = null;
 		this.descricao = null;
 		this.geral = null;
-		this.funcionalidades.clear();
 		this.paginas.clear();
-		this.funcionarios.clear();
-		this.cargos.clear();
+		this.usuarios.clear();
 	}
 
 	/**
@@ -148,25 +138,6 @@ public class PerfilVO implements Serializable {
 	}
 
 	/**
-	 * Gets the funcionalidades.
-	 *
-	 * @return the funcionalidades
-	 */
-	public List<FuncionalidadeVO> getFuncionalidades() {
-		return funcionalidades;
-	}
-
-	/**
-	 * Sets the funcionalidades.
-	 *
-	 * @param funcionalidades
-	 *            the new funcionalidades
-	 */
-	public void setFuncionalidades(List<FuncionalidadeVO> funcionalidades) {
-		this.funcionalidades = funcionalidades;
-	}
-
-	/**
 	 * Gets the paginas.
 	 *
 	 * @return the paginas
@@ -186,41 +157,22 @@ public class PerfilVO implements Serializable {
 	}
 
 	/**
-	 * Gets the cargos.
+	 * Gets the usuarios.
 	 *
-	 * @return the cargos
+	 * @return the usuarios
 	 */
-	public List<CargoVO> getCargos() {
-		return cargos;
+	public List<UsuarioVO> getUsuarios() {
+		return usuarios;
 	}
 
 	/**
-	 * Sets the cargos.
+	 * Sets the usuarios.
 	 *
-	 * @param cargos
-	 *            the new cargos
+	 * @param usuarios
+	 *            the new usuarios
 	 */
-	public void setCargos(List<CargoVO> cargos) {
-		this.cargos = cargos;
-	}
-
-	/**
-	 * Gets the funcionarios.
-	 *
-	 * @return the funcionarios
-	 */
-	public List<FuncionarioVO> getFuncionarios() {
-		return funcionarios;
-	}
-
-	/**
-	 * Sets the funcionarios.
-	 *
-	 * @param funcionarios
-	 *            the new funcionarios
-	 */
-	public void setFuncionarios(List<FuncionarioVO> funcionarios) {
-		this.funcionarios = funcionarios;
+	public void setUsuarios(List<UsuarioVO> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	/* (non-Javadoc)

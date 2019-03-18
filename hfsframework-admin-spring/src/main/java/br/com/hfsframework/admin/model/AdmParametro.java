@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -58,6 +60,8 @@ public class AdmParametro implements Serializable {
 
 	/** The descricao. */
 	@NotNull
+	@NotBlank
+	@NotEmpty	
 	@Column(name="PAR_DESCRICAO", unique = true)
 	private String descricao;
 

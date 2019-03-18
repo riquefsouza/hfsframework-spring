@@ -27,11 +27,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.GrantType;
-//import springfox.documentation.service.AuthorizationCodeGrant;
 import springfox.documentation.service.ResourceOwnerPasswordCredentialsGrant;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.SecurityScheme;
-//import springfox.documentation.service.TokenEndpoint;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -158,6 +156,11 @@ public class SwaggerConfig  {
         //TokenEndpoint tokenEndpoint = new TokenEndpoint(oAuthServerUri+"/oauth/token", "token");
 		//grantTypes.add(new AuthorizationCodeGrant(tokenRequestEndpoint, tokenEndpoint));
         grantTypes.add(new ResourceOwnerPasswordCredentialsGrant(oAuthServerUri+"/oauth/token"));
+		//grantTypes.add(new ClientCredentialsGrant(oAuthServerUri+"/oauth/token"));
+		
+		//LoginEndpoint loginEndpoint = new LoginEndpoint(url);
+		//grantTypes.add(new ImplicitGrant(loginEndpoint, tokenName));
+				
         return grantTypes;
 	}
 	

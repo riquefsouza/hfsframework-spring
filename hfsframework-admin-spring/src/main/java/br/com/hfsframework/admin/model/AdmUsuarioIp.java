@@ -42,7 +42,7 @@ public class AdmUsuarioIp implements Serializable {
 	/** The adm perfil. */
 	// bi-directional many-to-one association to AdmUsuario
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "UIP_MATRICULA", nullable=false, insertable = false, updatable = false)
+	@JoinColumn(name = "UIP_USU_SEQ", nullable=false, insertable = false, updatable = false)
 	private AdmUsuario admUsuario;
 
 	/**

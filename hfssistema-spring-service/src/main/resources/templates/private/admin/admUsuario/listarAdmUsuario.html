@@ -21,7 +21,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading" 
 				style="font-weight: bold;font-size: large;">
-				Visualizar os Usuários
+				Administrar Usuário
 			</div>
 			<div class="panel-body">				
 				<div class="row">
@@ -35,6 +35,18 @@
 				<span class="glyphicon glyphicon-print"></span> Exportar
 			</button>
 			
+			<button type="button" class="btn btn-success" id="btnIncluir" onclick="window.location.href='incluir'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" onclick="hfsDatatablesEditar('AdmUsuario')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" onclick="hfsDatatablesExcluir('AdmUsuario')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+						
 			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
 				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
 			</button>
@@ -46,22 +58,18 @@
 				
 			<thead>
 				<tr class="tema-principal">
-				  <th>Matr&iacute;cula</th>
-				  <th>IP</th>
-				  <th>Login</th>
-				  <th>Nome</th>
-				  <th>Data</th>
-				  <th>CPF</th>
-				  <th>E-mail</th>
+					<th hidden="true" >Id</th>
+					<th>Login</th>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>E-mail</th>
 				</tr>	
 			</thead>
 			<tbody>
 			 	<tr th:each="item : ${listaUsuarioVO}">
-					<td th:text="${item.matricula}"></td>			 		 
-			 		<td th:text="${item.ip}"></td>
+			 		<td hidden="true" th:text="${item.id}"></td>
 			 		<td th:text="${item.login}"></td>
 			 		<td th:text="${item.nome}"></td>
-			 		<td th:text="${item.dataFormatada}"></td>
 			 		<td th:text="${item.cpfFormatado}"></td>
 			 		<td th:text="${item.email}"></td>
 			    </tr>			

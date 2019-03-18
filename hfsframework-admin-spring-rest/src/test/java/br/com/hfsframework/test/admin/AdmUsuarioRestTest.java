@@ -35,7 +35,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import br.com.hfsframework.Aplicacao;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.test.base.BaseTest;
-import br.com.hfsframework.util.DataUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -65,8 +64,7 @@ public class AdmUsuarioRestTest extends BaseTest {
         
         accessToken = obtainAccessToken("henrique.souza", "admin");
         
-        admUsuarioList.add(new AdmUsuario(93203L,"henrique.souza","Henrique Figueiredo de Souza", 
-        		DataUtil.toDate("17/07/2017 00:00:00",DataUtil.DATA_HORA_PADRAO),
+        admUsuarioList.add(new AdmUsuario(93203L,"henrique.souza","Henrique Figueiredo de Souza",         		
         		new BigDecimal("2685748474"),"riquefsouza@gmail.com","","7ce0359f12857f2a90c7de465f40a95f01cb5da9"));
     }
 

@@ -18,7 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.hfsframework.admin.model.AdmFuncionario;
+import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.interceptors.HeaderRequestInterceptor;
 
 // TODO: Auto-generated Javadoc
@@ -37,7 +37,7 @@ public class TestarAplicacao {
 		RestTemplate restTemplate = builder.basicAuthentication("admin-hfsframework", "admin").build();
 		
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
-		request.set("username", "henrique.souza");
+		request.set("username", "henrique");
 		request.set("password", "admin");
 		request.set("grant_type", "password");
 		//request.set("scope", "write");
@@ -70,11 +70,11 @@ public class TestarAplicacao {
 			//System.out.println(item.toString());
 		//}
 		
-		AdmFuncionario[] vetor = restTemplate2.getForObject("http://localhost:8080/admCargos/findFuncionarioByCodCargo/15426", AdmFuncionario[].class);
-		List<AdmFuncionario> lista = Arrays.asList(vetor);
+		UsuarioVO[] vetor = restTemplate2.getForObject("http://localhost:8080/admUsuarios/getListaUsuarioIps", UsuarioVO[].class);
+		List<UsuarioVO> lista = Arrays.asList(vetor);
 	    
-		for (AdmFuncionario item : lista) {
-			System.out.println(item.toString());
+		for (UsuarioVO item : lista) {
+			System.out.println(item.getLogin() + " - " + item.getIp());
 		}
 		
 	}

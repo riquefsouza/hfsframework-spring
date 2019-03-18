@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form th:action="@{/admUsuarioMB/salvar}" method="post" th:object="${bean}">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Usuário
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="submit" class="btn btn-success" id="btnSalvar" >
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admUsuarioMB/listar'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="login">Login:</label>
+						<input type="hidden" class="form-control" id="id" name="id" th:value="${bean.id}">
+						<input type="text" class="form-control" id="login" name="login" required="required" maxlength="60" th:value="${bean.login}">
+						<!--
+						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="80" th:field="*{descricao}">
+						--> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label for="nome">Nome:</label>
+						<input type="text" class="form-control" id="nome" name="nome" required="required" maxlength="60" th:value="${bean.nome}">
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="cpf">CPF:</label>
+						<input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" th:value="${bean.cpf}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 form-group">
+						<label for="email">Email:</label>
+						<input type="text" class="form-control" id="email" name="email" maxlength="255" th:value="${bean.email}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 form-group">
+						<label for="ldapDN">LDAP DN:</label>
+						<input type="text" class="form-control" id="ldapDN" name="ldapDN" maxlength="255" th:value="${bean.ldapDN}">
+					</div>
+				</div>				
+								
+			</div>
+		</div>
+	</form>	
+</div>
+
+</body>
+</html>
+	

@@ -30,17 +30,12 @@ public class TemplateExemplo {
 	 *             the template exception
 	 */
 	public static void main(String[] args) throws IOException, TemplateException {
-		String[][] classes = {
-				//{"AdmCargo", "Long"},
-				{"AdmFuncionalidade", "Long"},
-				{"AdmFuncionario", "Long"},
-				{"AdmLogColuna", "String"},				
+		String[][] classes = {		
 				{"AdmMenu", "Long"},
 				{"AdmPagina", "Long"},
 				{"AdmParametro", "Long"},
 				{"AdmParametroCategoria", "Long"},
 				{"AdmPerfil", "Long"},
-				{"AdmSetor", "String"},
 				{"AdmUsuario", "Long"},
 				{"VwAdmLog", "Long"},
 				{"VwAdmLogValor", "Long"}

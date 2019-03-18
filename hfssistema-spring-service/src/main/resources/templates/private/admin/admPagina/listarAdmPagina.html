@@ -62,7 +62,7 @@
 				<tr class="tema-principal">
 					<th hidden="true" >Id</th>
 					<th>P&aacute;gina</th>
-					<th>Classe da P&aacute;gina</th>
+					<th>Descri&ccedil;&atilde;o</th>
 					<th>Perfil(s) da P&aacute;gina</th>
 				</tr>	
 			</thead>
@@ -70,7 +70,7 @@
 			 	<tr th:each="item : ${listaBean}">
 					<td hidden="true" th:text="${item.id}"></td>					
 			 		<td th:text="${item.url}"></td>
-			 		<td th:text="${item.managedBean}"></td>
+			 		<td th:text="${item.descricao}"></td>
 			 		<td th:text="${item.perfisPagina}"></td>
 			    </tr>			
 			</tbody>

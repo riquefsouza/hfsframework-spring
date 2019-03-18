@@ -74,16 +74,11 @@ public class AdmMenuRestTest extends BaseTest {
         admMenuList.add(new AdmMenu(2L,"Categoria dos Parâmetros de Configuração (Administrativo)",service.load(1L).get(),1L,2));
         admMenuList.add(new AdmMenu(3L,"Parâmetros de Configuração (Administrativo)",service.load(1L).get(),3L,3));
         admMenuList.add(new AdmMenu(4L,"Administrar Perfil (Administrativo)",service.load(1L).get(),5L,4));
-        admMenuList.add(new AdmMenu(5L,"Administrar Funcionalidade (Administrativo)",service.load(1L).get(),7L,5));
-        admMenuList.add(new AdmMenu(6L,"Administrar Página (Administrativo)",service.load(1L).get(),9L,6));
-        admMenuList.add(new AdmMenu(7L,"Administrar Menu (Administrativo)",service.load(1L).get(),11L,7));
-        admMenuList.add(new AdmMenu(8L,"Administrar os Cargos (Administrativo)",service.load(1L).get(),13L,8));
-        admMenuList.add(new AdmMenu(9L,"Administrar os Funcionários (Administrativo)",service.load(1L).get(),15L,9));
-        admMenuList.add(new AdmMenu(10L,"Administrar os Setores (Administrativo)",service.load(1L).get(),17L,10));
-        admMenuList.add(new AdmMenu(11L,"Visualizar os Usuários (Administrativo)",service.load(1L).get(),19L,11));
-        admMenuList.add(new AdmMenu(12L,"Visualizar os Logs de Auditoria (Administrativo)",service.load(1L).get(),20L,12));
-        admMenuList.add(new AdmMenu(13L,"Administrar os Campos do Log de Auditoria (Administrativo)",service.load(1L).get(),21L,13));
-        admMenuList.add(new AdmMenu(14L,"Visualizar Arquivo de Log do Servidor (Administrativo)",service.load(1L).get(),22L,14));       
+        admMenuList.add(new AdmMenu(5L,"Administrar Página (Administrativo)",service.load(1L).get(),9L,5));
+        admMenuList.add(new AdmMenu(6L,"Administrar Menu (Administrativo)",service.load(1L).get(),11L,6));
+        admMenuList.add(new AdmMenu(7L,"Administrar os Usuários (Administrativo)",service.load(1L).get(),19L,7));
+        admMenuList.add(new AdmMenu(8L,"Visualizar os Logs de Auditoria (Administrativo)",service.load(1L).get(),20L,12));
+        admMenuList.add(new AdmMenu(9L,"Visualizar Arquivo de Log do Servidor (Administrativo)",service.load(1L).get(),22L,14));       
     }
 
     /**

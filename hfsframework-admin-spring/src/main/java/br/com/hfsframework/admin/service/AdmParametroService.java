@@ -14,7 +14,7 @@ import br.com.hfsframework.base.BaseBusinessService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AdmParametroBC.
+ * The Class AdmParametroService.
  */
 @Service
 public class AdmParametroService extends BaseBusinessService<AdmParametro, Long, AdmParametroRepository> {

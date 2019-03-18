@@ -34,17 +34,12 @@ public class TemplateExemplo {
 		//final SLF4JLoggerContext ctx = PrivateManager.getContext();
         //ctx.reconfigure();
 
-		String[][] classes = {
-				//{"AdmCargo", "Long"},
-				{"AdmFuncionalidade", "Long"},
-				{"AdmFuncionario", "Long"},
-				{"AdmLogColuna", "String"},				
+		String[][] classes = {	
 				{"AdmMenu", "Long"},
 				{"AdmPagina", "Long"},
 				{"AdmParametro", "Long"},
 				{"AdmParametroCategoria", "Long"},
 				{"AdmPerfil", "Long"},
-				{"AdmSetor", "String"},
 				{"AdmUsuario", "Long"},
 				{"VwAdmLog", "Long"},
 				{"VwAdmLogValor", "Long"}
