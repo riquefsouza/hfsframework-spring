@@ -20,9 +20,6 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class VwAdmLogValor.
@@ -36,7 +33,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 			+ "AND v.entidade = ?5 AND v.tabela = ?6 AND v.chave = ?7 "
 			+ "ORDER BY v.dataNumero DESC, v.coluna ASC")	
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class VwAdmLogValor implements Serializable {
 
 	/** The Constant serialVersionUID. */

@@ -31,12 +31,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.hfsframework.admin.serializer.AdmUsuarioListSerializer;
 import br.com.hfsframework.admin.serializer.AdmPaginaListSerializer;
+import br.com.hfsframework.admin.serializer.AdmUsuarioListSerializer;
 import br.com.hfsframework.converter.BooleanToStringConverter;
 import br.com.hfsframework.security.model.PaginaVO;
 import br.com.hfsframework.security.model.PerfilVO;
@@ -65,7 +63,7 @@ import br.com.hfsframework.security.model.UsuarioVO;
 	@NamedQuery(name = "AdmPerfil.findAdminMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 9 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
 	@NamedQuery(name = "AdmPerfil.findMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admPaginas f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 9 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem")			
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmPerfil implements Serializable {
 
 	/** The Constant serialVersionUID. */

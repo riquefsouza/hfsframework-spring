@@ -31,8 +31,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.hfsframework.admin.serializer.AdmPerfilListSerializer;
@@ -52,7 +50,7 @@ import br.com.hfsframework.security.model.PaginaVO;
 	@NamedQuery(name = "AdmPagina.countAntigo", query = "SELECT COUNT(c) FROM AdmPagina c WHERE LOWER(c.url) <> ?1 AND LOWER(c.url) = ?2"),	
 	@NamedQuery(name = "AdmPagina.findPerfisPorPagina", query="SELECT distinct p FROM AdmPagina pag inner join pag.admPerfils p where pag = ?1")
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmPagina implements Serializable {
 	
 	/** The Constant serialVersionUID. */

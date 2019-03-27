@@ -28,8 +28,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.hfsframework.admin.serializer.AdmParametroListSerializer;
@@ -47,7 +45,7 @@ import br.com.hfsframework.admin.serializer.AdmParametroListSerializer;
 	@NamedQuery(name = "AdmParametroCategoria.countNovo", query = "SELECT COUNT(c) FROM AdmParametroCategoria c WHERE LOWER(c.descricao) = ?1"),
 	@NamedQuery(name = "AdmParametroCategoria.countAntigo", query = "SELECT COUNT(c) FROM AdmParametroCategoria c WHERE LOWER(c.descricao) <> ?1 AND LOWER(c.descricao) = ?2")
 })	
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmParametroCategoria implements Serializable {
 	
 	/** The Constant serialVersionUID. */

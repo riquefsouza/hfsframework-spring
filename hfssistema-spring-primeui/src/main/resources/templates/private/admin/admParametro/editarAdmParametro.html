@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form th:action="@{/admParametroMB/salvar}" method="post" th:object="${bean}">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Parâmetros de Configuração
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="submit" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admParametroMB/listar'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<input type="hidden" class="form-control" id="id" name="id" th:value="${bean.id}">
+
+				<div class="row">					
+					<div class="col-md-4 form-group">		
+						<label for="categoria">Categoria do Parâmetro:</label>
+						<select class="form-control" id="categoria" name="categoria" label="Categoria do Parâmetro" th:field="*{idAdmParametroCategoria}">
+					 		<option th:each="item : ${listaAdmParametroCategoria}" th:value="${item.id}"
+					 			th:selected="${item.id == bean.admParametroCategoria.id}" th:text="${item.descricao}">
+					 		</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="codigo">Código:</label>
+						<input type="text" class="form-control" id="codigo" name="codigo" maxlength="10" th:value="${bean.codigo}">
+					</div>
+					<div class="col-md-8 form-group">
+						<label for="valor">Valor:</label>
+						<input type="text" class="form-control" id="valor" name="valor" maxlength="3000" th:value="${bean.valor}">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="descricao">Descrição:</label>
+						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="255" th:value="${bean.descricao}">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
+	

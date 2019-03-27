@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<th:block th:include="/private/admin/admMenu/editarAdmMenuDialog"></th:block>
+
+<script>
+	$(document).ready(function(){
+        var menuDados = [
+          {
+            text: 'Administrativo',
+            nodes: [
+              { text: 'Categoria dos Parâmetros de Configuração (Administrativo)'},
+              { text: 'Parâmetros de Configuração (Administrativo)'},
+              { text: 'Administrar Perfil (Administrativo)'},
+              { text: 'Administrar Funcionalidade (Administrativo)'},
+              { text: 'Administrar Página (Administrativo)'},
+              { text: 'Administrar Menu (Administrativo)'},
+              { text: 'Visualizar os Cargos (Administrativo)'},
+              { text: 'Visualizar os Funcionários (Administrativo)'},
+              { text: 'Visualizar os Setores (Administrativo)'},
+              { text: 'Visualizar os Usuários (Administrativo)'},
+              { text: 'Visualizar os Logs de Auditoria (Administrativo)'},
+              { text: 'Administrar os Campos do Log de Auditoria (Administrativo)'},
+              { text: 'Visualizar Arquivo de Log do Servidor (Administrativo)'}
+            ]
+          },
+          {
+            text: 'Consultas SIGEO',
+            nodes: [
+              { text: 'Consulta de Credor (SIGEO)'},
+              { text: 'Consulta de Setor (SIGEO)'},
+              { text: 'Consulta de Fiscal (SIGEO)'},
+              { text: 'Consulta de Funcionário (SIGEO)'}
+			]
+          },
+          {
+            text: 'Orçamento',
+            nodes: [
+              { text: 'Painel de Aquisições e contratações'},
+              { text: 'Gerar Planilha'},
+              { text: 'Cadastro de Orçamento'},
+              { text: 'Visualizar Orçamento'},
+              { text: 'Abas (visões) primárias'},
+              { text: 'Tipos de despesa'},
+              { text: 'Classificação de processos e empenhos'}
+            ]
+          }
+		];
+		
+		
+		$('#arvoreMenu').treeview({
+			levels: 1,
+			showBorder: false,
+			data: menuDados,
+			multiSelect: false,
+			onNodeSelected: function(event, node) {
+				alert(node.text);
+			}
+		});
+		  
+	});
+	
+	function prepararParaExcluir() {
+		bootbox.confirm({
+			message: "Confirma exclusão?",
+			buttons: {
+				confirm: {
+					label: 'Sim',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: 'Não',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				alert('Resultado: ' + result);
+			}
+		});
+	}	
+</script>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmMenu">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Menu
+			</div>
+			<div class="panel-body">				
+				<div class="row">
+					<th:block th:include="/private/panelRelatorio"></th:block>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" data-toggle="modal" data-target="#editarAdmMenuDialog">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" data-toggle="modal" data-target="#editarAdmMenuDialog">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" onclick="prepararParaExcluir()">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<div class="row">
+			<div class="tela-conteudo">
+				<h4>Menu Superior do Sistema:</h4>
+				<div id="arvoreMenu" class=""></div>
+			</div>	
+		</div>
+		
+	</form>
+</div>
+
+</body>
+</html>

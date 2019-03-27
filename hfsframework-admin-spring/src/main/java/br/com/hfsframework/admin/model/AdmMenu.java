@@ -29,8 +29,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.hfsframework.admin.serializer.AdmMenuListSerializer;
@@ -55,7 +53,7 @@ import br.com.hfsframework.security.model.MenuVO;
 	@NamedQuery(name = "AdmMenu.findMenuPaiByPagina", query="SELECT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmMenu m WHERE m.admPagina = ?1 AND m.admMenuPai IS NULL AND m.id > 9) ORDER BY t.id, t.ordem"),
 	@NamedQuery(name = "AdmMenu.findPaginaByMenu", query="SELECT m.admPagina FROM AdmMenu m WHERE m.admPagina = ?1 AND m.id = ?2")	
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 
 	/** The Constant serialVersionUID. */

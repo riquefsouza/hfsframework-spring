@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form th:action="@{/visualizarArqLogServidorMB/pesquisar}" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Visualizar Arquivo de Log do Servidor
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="numeroLinhasLog">Número de Linhas do Log:</label>
+						<div class="input-group spinner" style="width: 80%;">
+							<input type="text" class="form-control" id="numeroLinhasLog" label="Número de Linhas do Log" value="100" th:field="${numeroLinhas}">
+							<div class="input-group-btn-vertical">
+								<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+								<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+							</div>
+						</div>
+					</div>
+					<th:block th:include="/private/panelRelatorio"></th:block>			
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="submit" class="btn btn-info" id="btnPesquisar">
+				<span class="glyphicon glyphicon-search"></span> Pesquisar
+			</button>
+
+			<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos" onclick="window.location.href='limpar'">
+				<span class="glyphicon glyphicon-star"></span> Limpar
+			</button>
+			
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+		
+		<pre style="width:100%;height:600px">
+			<div id="txtLog" th:field="*{conteudoArquivoLog}"></div>
+		</pre>
+			
+	</form>
+</div>
+
+<script src="/js/bootstrap-spinner.js"></script>
+	
+</body>
+</html>

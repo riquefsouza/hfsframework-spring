@@ -21,9 +21,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import br.com.hfsframework.util.DataUtil;
 
 // TODO: Auto-generated Javadoc
@@ -41,7 +38,7 @@ import br.com.hfsframework.util.DataUtil;
 			+ "AND (v.dataNumero <= ?7 OR ?7 IS NULL) "
 			+ "ORDER BY v.id DESC")	
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class VwAdmLog implements Serializable {
 
 	/** The Constant serialVersionUID. */

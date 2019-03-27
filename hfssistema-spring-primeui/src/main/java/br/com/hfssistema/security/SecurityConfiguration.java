@@ -41,9 +41,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-				.antMatchers("/css/**", "/img/**", "/js/**", "/primeui/**", "/scss/**", "/vendor/**").permitAll();
+
+		/*
+		http.authorizeRequests()
+		.antMatchers("/api/public/**").permitAll()
+		.antMatchers("/gera/dados").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+		.antMatchers("/swagger-ui.html").permitAll()
+		.antMatchers("/webjars/**").permitAll()
+		.antMatchers("/swagger-resources/**").permitAll()
+		.antMatchers("/v2/api-docs/**").permitAll()
+		.antMatchers("/configuration/**").permitAll()
+		.antMatchers("/usuarios/**").permitAll()
+			.and()
+			.csrf().disable()
+		*/
+		
+		http.authorizeRequests()
+				.antMatchers("/css/**", "/img/**", "/js/**", "/primeui/**", "/scss/**", "/vendor/**").permitAll()
 				//.antMatchers(HttpMethod.GET, "/").permitAll()
 				//.antMatchers(HttpMethod.GET, "/listarUsuario").hasRole("ADMIN")
 				//.anyRequest().authenticated()
@@ -56,8 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				//.failureUrl("/login?error=401").permitAll()
 				//.defaultSuccessUrl("/").and()
 			//.httpBasic()
-				//.and()
-			//.csrf().disable()
+				.and()
+			.csrf().disable();
 			//.logout()
 				//.permitAll()				
 				//.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

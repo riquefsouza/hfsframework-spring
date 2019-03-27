@@ -24,9 +24,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,7 +38,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 	@NamedQuery(name = "AdmParametro.countAntigo", query = "SELECT COUNT(c) FROM AdmParametro c WHERE LOWER(c.descricao) <> ?1 AND LOWER(c.descricao) = ?2"),
 	@NamedQuery(name = "AdmParametro.getValorByCodigo", query = "SELECT c.valor FROM AdmParametro c WHERE c.codigo= ?1")
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AdmParametro implements Serializable {
 	
 	/** The Constant serialVersionUID. */

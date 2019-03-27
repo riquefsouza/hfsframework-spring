@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="pt-BR">
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<th:block th:include="/private/admin/vwAdmLog/admLogDetalhesDialog"></th:block>
+
+<script>
+	$(document).ready(function(){
+		hfsDatatablesIniciar("AdmLog", 6);
+
+		$(document).ready(function() {
+			$('#tabelaDetalhesLog').DataTable({
+				scrollY: "200px",
+				scrollCollapse: true,
+				paging: false,
+				select: {
+					style: 'single'
+				},
+				language: hfsDatatablesLinguagem()
+			});
+		});
+		
+		$('#dataInicial').datepicker({
+			language: 'pt-BR',
+			format: 'dd/mm/yyyy'
+		});
+		$('#dataFinal').datepicker({
+			language: 'pt-BR',
+			format: 'dd/mm/yyyy'
+		});
+		
+		$('.limparBusca').click(function () {
+			$(this).prev().val('');
+		});
+		
+ 	});
+	
+	$('#admLogDetalhesDialog').on('show.bs.modal', function(e) {
+	    var usuario = $(e.relatedTarget).data('usuario');
+	    var dataNumero = $(e.relatedTarget).data('datanumero');
+	    var operacao = $(e.relatedTarget).data('operacao');
+	    var ip = $(e.relatedTarget).data('ip');
+	    var entidade = $(e.relatedTarget).data('entidade');
+	    var tabela = $(e.relatedTarget).data('tabela');
+	    var chave = $(e.relatedTarget).data('chave');
+
+		 $.ajax({
+		        url: "/vwAdmLogValores/findByFiltros?usuario="+usuario+"&dataNumero="+dataNumero+
+		        		"&operacao="+operacao+"&ip="+ip+"&entidade="+entidade+
+		        		"&tabela="+tabela+"&chave="+chave
+		    }).then(function(data) {
+		    	var tabelaDetalhesLog = $(e.currentTarget).find('table[id="tabelaDetalhesLog"]');
+		    	for (i = 0; i < data.length; i++) { 
+		    		tabelaDetalhesLog.DataTable().row.add( [ data[i].coluna, data[i].valorAnterior, data[i].valor ] );
+		    	}
+		    	tabelaDetalhesLog.DataTable().draw( false );
+		    });        
+	    
+	});
+	
+	$('#admLogDetalhesDialog').on('hide.bs.modal', function(e) {
+		var tabelaDetalhesLog = $(e.currentTarget).find('table[id="tabelaDetalhesLog"]');
+		tabelaDetalhesLog.DataTable().clear().draw( false );
+	});
+	
+</script>
+
+<div th:replace="private/menu :: menu"></div>
+
+<div class="tela-conteudo">
+	<form th:action="@{/vwAdmLogMB/pesquisar}" method="post" th:object="${filtros}">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Visualizar os Logs de Auditoria
+			</div>
+			<div class="panel-body">
+			
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="cmbEntidade">Entidade:</label>
+						<select class="form-control" id="cmbEntidade" name="cmbEntidade" th:field="*{entidade}">
+					 		<option value="">Selecione uma Entidade</option>
+					 		<option th:each="item : ${listaSEntidade}" th:value="${item}" th:text="${item}">
+					 		</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="chaveValor">Valor Id:</label>
+						<input type="text" class="form-control" id="chaveValor" label="Valor Id" maxlength="50" th:field="*{chave}">
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="usuario">Usuário:</label>
+						<input type="text" class="form-control" id="usuario" label="Usuário" maxlength="50" th:field="*{usuario}">
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="ip">IP:</label>
+						<input type="text" class="form-control" id="ip" label="IP" maxlength="15" th:field="*{ip}">
+					</div>							
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="cmbOperacao">Operação:</label>
+						<select class="form-control" id="cmbOperacao" label="Operação" th:field="*{operacao}">
+							<option value="">Todas as operações</option>
+							<option value="I">Inclusão</option>
+							<option value="D">Exclusão</option>
+							<option value="U">Alteração</option>
+						</select>
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="dataInicial">Data Inicial:</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="dataInicial" label="Data Inicial"
+								placeholder="digite a data" data-mask="99/99/9999" data-date-format="dd/mm/yyyy" th:field="*{dataInicioFormatada}">
+							<span class="limparBusca input-group-addon" style="cursor:pointer;"><i class="glyphicon glyphicon-remove-circle"></i></span>
+						</div>
+					</div>
+					<div class="col-md-2 form-group">
+						<label for="dataFinal">Data Final:</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="dataFinal" label="Data Final" 
+								placeholder="digite a data" data-mask="99/99/9999" data-date-format="dd/mm/yyyy" th:field="*{dataFimFormatada}">
+							<span class="limparBusca input-group-addon" style="cursor:pointer;"><i class="glyphicon glyphicon-remove-circle"></i></span>
+						</div>	
+					</div>
+				</div>		
+			
+				<div class="row">
+					<th:block th:include="/private/panelRelatorio"></th:block>					
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+
+			<button type="submit" class="btn btn-info" id="btnPesquisar">
+				<span class="glyphicon glyphicon-search"></span> Pesquisar
+			</button>
+			
+			<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos" onclick="window.location.href='limpar'">
+				<span class="glyphicon glyphicon-star"></span> Limpar
+			</button>
+			
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='/'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+		
+		<table id="tabelaAdmLog"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">
+				
+			<thead>
+				<tr class="tema-principal">
+				  <th>Id Log</th>
+				  <th>Data</th>
+				  <th>Usu&aacute;rio</th>
+				  <th>IP</th>
+				  <th>Entidade</th>
+				  <th>Opera&ccedil;&atilde;o</th>
+				  <th></th>
+				</tr>	
+			</thead>
+			<tbody>
+			 	<tr th:each="item : ${listaBean}">
+					<td th:text="${item.id}"></td>
+			 		<td th:text="${item.dataFormatada}"></td>
+			 		<td th:text="${item.usuario}"></td>
+			 		<td th:text="${item.ip}"></td>
+			 		<td th:text="${item.entidade}"></td>
+			 		<td th:text="${item.operacaoTexto}"></td>			 		
+			 		<td style="width:50px;text-align: center;">
+			 			<button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admLogDetalhesDialog"
+			 				th:data-usuario="${item.usuario}" th:data-datanumero="${item.dataNumero}" th:data-operacao="${item.operacao}"
+			 				th:data-ip="${item.ip}" th:data-entidade="${item.entidade}" th:data-tabela="${item.tabela}" th:data-chave="${item.chave}">
+			 				<span class="glyphicon glyphicon-search" style="font-size:8px"></span>
+			 			</button>
+			 		</td>
+			    </tr>			
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>
