@@ -2,19 +2,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
-	<artifactId>hfsframework-admin-spring-rest</artifactId>
+	<artifactId>hfsframework-admin-spring-rest-oauth</artifactId>
 	<version>1.0.2</version>
-	<name>HFS Framework Admin Spring Restful</name>
-	<description>HFS Framework Admin Spring Restful</description>
+	<name>HFS Framework Admin Spring Restful OAuth</name>
+	<description>HFS Framework Admin Spring Restful OAuth</description>
 	
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
-
+		
+		<!-- maven-plugin -->
+		<version.war.plugin>2.6</version.war.plugin>
+		<version.jar.plugin>3.0.2</version.jar.plugin>
+		<version.javadoc.plugin>2.10.4</version.javadoc.plugin>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		
 		<commons-io.version>2.6</commons-io.version>
-
+		
 		<!-- relatorio -->
 		<poi-ooxml.version>4.0.1</poi-ooxml.version>
 		<pdfbox.version>2.0.13</pdfbox.version>
@@ -23,7 +30,7 @@
 		<!-- swagger2 -->
 		<swagger2.version>2.9.2</swagger2.version>
 	</properties>
-
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -31,62 +38,46 @@
 	</parent>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>hfsframework-admin-spring</artifactId>
 			<version>1.0.2</version>
 			<type>jar</type>
 		</dependency>
-
+		<dependency>
+			<groupId>br.com</groupId>
+			<artifactId>hfsframework-base-spring</artifactId>
+			<classifier>tests</classifier>
+			<type>test-jar</type>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>
+    
 		<!-- #################### SPRING BOOT #################### -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-freemarker</artifactId>
-		</dependency>			
 		<dependency>		
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>		 
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.3.0.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
-		
+	
 		<!-- #################### TEST #################### -->
-
+ 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-  
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -107,44 +98,17 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency> 
-		<!-- 
-		<dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-surefire-plugin</artifactId>
-		    <version>2.21.0</version>
 		</dependency>
-         -->
+        
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
+			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<attach>false</attach>
-						</configuration>
-					</execution>
-				</executions>
-				
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -153,11 +117,22 @@
 					<testFailureIgnore>true</testFailureIgnore>
 					<skipTests>true</skipTests>
 				</configuration>
-			</plugin>			
+			</plugin>
  		</plugins>
 	</build>
 
 	<repositories>
+		<!-- 
+		
+			mvn deploy:deploy-file -Durl=file:///C:/path/hfsframework-admin-spring-rest/repo -Dfile=hfsframework-admin-spring-1.0.jar 
+			-DgroupId=br.com -DartifactId=hfsframework-admin-spring -Dpackaging=jar -Dversion=1.0		
+		
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+		 -->	
 		<repository>
 			<id>spring-releases</id>
 			<name>Spring Releases</name>

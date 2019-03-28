@@ -1,16 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
-	<artifactId>hfsframework-admin-spring-rest</artifactId>
+	<artifactId>hfsframework-admin-spring</artifactId>
 	<version>1.0.2</version>
-	<name>HFS Framework Admin Spring Restful</name>
-	<description>HFS Framework Admin Spring Restful</description>
+	<name>HFS Framework Admin Spring</name>
+	<description>HFS Framework Admin Spring</description>
 	
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<maven.war.plugin>3.2.2</maven.war.plugin>
+		<maven.jar.plugin>3.1.1</maven.jar.plugin>
+		<maven.javadoc.plugin>3.1.0</maven.javadoc.plugin>		
+		<maven.compiler.plugin>3.8.0</maven.compiler.plugin>
+		<maven-surefire-plugin>3.0.0-M3</maven-surefire-plugin>
+		
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<java.version>11</java.version>
 
 		<commons-io.version>2.6</commons-io.version>
@@ -19,125 +29,49 @@
 		<poi-ooxml.version>4.0.1</poi-ooxml.version>
 		<pdfbox.version>2.0.13</pdfbox.version>
 		<jasperreports.version>6.7.0</jasperreports.version>
-
+		
 		<!-- swagger2 -->
-		<swagger2.version>2.9.2</swagger2.version>
+		<swagger2.version>2.9.2</swagger2.version>		
 	</properties>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.3.RELEASE</version>
-	</parent>
-
-	<dependencies>
 	
+	<dependencies>
 		<dependency>
 			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
+			<artifactId>hfsframework-base-spring</artifactId>
 			<version>1.0.2</version>
 			<type>jar</type>
 		</dependency>
-
-		<!-- #################### SPRING BOOT #################### -->
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-freemarker</artifactId>
-		</dependency>			
-		<dependency>		
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
 		
-		<!-- #################### TEST #################### -->
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-  
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>        
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency> 
-		<!-- 
-		<dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-surefire-plugin</artifactId>
-		    <version>2.21.0</version>
-		</dependency>
-         -->
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<attach>false</attach>
-						</configuration>
-					</execution>
-				</executions>
-				
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
 			</plugin>
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.plugin}</version>
+		        <configuration>
+		        	<!-- <outputDirectory>../orcamento/src/main/webapp/WEB-INF/lib</outputDirectory>  -->
+					<archive>
+						<manifestFile>${project.build.sourceDirectory}/META-INF/MANIFEST.MF</manifestFile>
+						<index>true</index>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<!-- <classpathPrefix>lib</classpathPrefix> -->
+							<!-- <mainClass>br.jus.trt1.frameworkdirem.util.ldap.LdapExemplo</mainClass> -->
+						</manifest>
+					</archive>
+		        </configuration>				
 				<executions>
 					<execution>
 						<goals>
@@ -146,14 +80,34 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.plugin}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+			 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin}</version>
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
 					<skipTests>true</skipTests>
 				</configuration>
-			</plugin>			
+			</plugin>
+
+			 			
  		</plugins>
 	</build>
 
@@ -173,6 +127,11 @@
 			<name>jaspersoft Releases</name>
 			<url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts</url>
 		</repository>
+		<repository>
+			<id>geomajas-releases</id>
+			<name>geomajas Releases</name>
+			<url>http://maven.geomajas.org/</url>
+		</repository>		
 	</repositories>
 
 	<pluginRepositories>
