@@ -86,6 +86,7 @@ public class AdmMenuRestController extends BaseRestController<AdmMenu, Long, Adm
 		}
 
 		BeanUtils.copyProperties(bean, obj, "id");
+		//BeanUtils.copyProperties(bean, obj);
 
 		obj = servico.update(obj.get());
 

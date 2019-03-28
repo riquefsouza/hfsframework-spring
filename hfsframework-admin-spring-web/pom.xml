@@ -39,14 +39,6 @@
 			<version>1.0.2</version>
 			<type>jar</type>
 		</dependency>
-		<dependency>
-			<groupId>br.com</groupId>
-			<artifactId>hfsframework-admin-spring</artifactId>
-			<classifier>tests</classifier>
-			<type>test-jar</type>
-			<version>1.0.2</version>
-			<scope>test</scope>
-		</dependency>
 
 		<!-- #################### SPRING BOOT #################### -->
 
