@@ -20,7 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * The Class Aplicacao.
  */
 @SpringBootApplication
-//(scanBasePackages = {"br.com.hfsframework.base.relatorio"})
+//(scanBasePackages = {"br.com.hfsframework.base"},
 //exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class })
 @EnableCaching
 @EnableAspectJAutoProxy
@@ -34,8 +34,8 @@ public class Aplicacao {
 	 *
 	 * @param args the arguments
 	 */
-	public static void main(String[] args) {
-		SpringApplication.run(Aplicacao.class);
+	public static void main(String... args) {
+		SpringApplication.run(Aplicacao.class, args);
 		
 		log.info("------------------------------------------------------------------------");
 		log.info("HFS Sistema Spring PrimeUI");

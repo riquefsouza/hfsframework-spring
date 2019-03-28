@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,9 +33,6 @@ public final class AplicacaoUtil implements Serializable {
 	//private static final Logger log = LoggerFactory.getLogger(AplicacaoUtil.class);
 	
 	public static final String REALM_NAME = "HFSFRAMEWORK-ADMIN";
-	
-	/** The Constant PASSWORD_ENCODER. */
-	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 	
 	/** The port. */
 	public static int port;

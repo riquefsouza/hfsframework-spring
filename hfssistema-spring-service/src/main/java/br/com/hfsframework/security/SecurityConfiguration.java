@@ -13,10 +13,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.hfsframework.AplicacaoBundle;
-import br.com.hfsframework.AplicacaoUtil;
 import br.com.hfsframework.util.ldap.LdapBundle;
 
 // TODO: Auto-generated Javadoc
@@ -27,6 +28,9 @@ import br.com.hfsframework.util.ldap.LdapBundle;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+	/** The Constant PASSWORD_ENCODER. */
+	private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();	
 
 	/** The user details service. */
 	@Autowired
@@ -63,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		} else {
 			auth
 			.userDetailsService(this.userDetailsService)
-				.passwordEncoder(AplicacaoUtil.PASSWORD_ENCODER);			
+				.passwordEncoder(PASSWORD_ENCODER);			
 		}
 	}
 	
