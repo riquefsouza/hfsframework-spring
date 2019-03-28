@@ -55,8 +55,7 @@ public class UserLoginService implements UserDetailsService {
 				AuthorityUtils.createAuthorityList(roles));
 		 */
 		
-		userVO = new UserDetailsVO(admUsuario.get().getId(), 
-				admUsuario.get().getLogin(), admUsuario.get().getSenha());
+		userVO = new UserDetailsVO(admUsuario.get().getLogin(), admUsuario.get().getSenha());
 		
 		return userVO;
 	}

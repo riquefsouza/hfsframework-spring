@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/swagger-resources/**").permitAll()
 		.antMatchers("/v2/api-docs/**").permitAll()
 		.antMatchers("/configuration/**").permitAll()
-		.antMatchers("/AdmUsuarios/**").permitAll()
+		.antMatchers("/usuarios/**").permitAll()
 		.and()
 		.csrf().disable()	
 		.addFilterBefore(statelessLoginFilter, UsernamePasswordAuthenticationFilter.class)		

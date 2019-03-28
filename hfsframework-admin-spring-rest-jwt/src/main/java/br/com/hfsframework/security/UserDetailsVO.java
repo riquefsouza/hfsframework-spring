@@ -12,21 +12,14 @@ public class UserDetailsVO implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
 	@NotBlank
 	private String login;
 
 	@NotBlank
 	private String senha;
 
-	public Long getId() {
-		return id;
-	}
-
-	public UserDetailsVO(Long id, String login, String senha) {
+	public UserDetailsVO(String login, String senha) {
 		super();
-		this.id = id;
 		this.login = login;
 		this.senha = senha;
 	}

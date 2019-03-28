@@ -36,7 +36,7 @@ public class Aplicacao {
 		SpringApplication.run(Aplicacao.class);
 
 		log.info("------------------------------------------------------------------------");
-		log.info("HFS Framework Admin Spring");
+		log.info("HFS Framework Admin Spring Rest JWT");
 		log.info("Desenvolvido por Henrique Figueiredo de Souza");
 		log.info("Versão 1.0.2 - 2019");
 		log.info("------------------------------------------------------------------------");

@@ -164,6 +164,12 @@ public class AdmUsuario implements Serializable {
 		limpar();
 	}
 
+	public AdmUsuario(Long id, String login, String senha) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.senha = senha;
+	}
 	
 	/**
 	 * Instantiates a new adm usuario.
