@@ -7,11 +7,15 @@
 package br.com.hfsframework.admin.view.admParametroCategoria;
 
 import java.io.Serializable;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewController;
 
 /**
@@ -24,8 +28,8 @@ public class AdmParametroCategoriaController extends BaseViewController implemen
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	//@Autowired
-	//private AdmParametroCategoriaRelController rel;
+	@Autowired
+	private AdmParametroCategoriaRelController rel;
 	
 	/** The pagina listar. */
 	private String paginaListar; 
@@ -46,10 +50,10 @@ public class AdmParametroCategoriaController extends BaseViewController implemen
 		return getPaginaListar();
 	}
 	
-	//@ModelAttribute("listaTipoRelatorio")
-	//public List<RelatorioGrupoVO> getListaTipoRelatorio() {
-//		return rel.getListaTipoRelatorio();
-//	}
+	@ModelAttribute("listaTipoRelatorio")
+	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
+		return rel.getListaTipoRelatorio();
+	}
 	
 	/**
 	 * Pega o the pagina listar.

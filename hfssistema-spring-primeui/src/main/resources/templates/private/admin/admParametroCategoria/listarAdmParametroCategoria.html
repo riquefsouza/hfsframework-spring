@@ -77,8 +77,8 @@ $(function() {
 	               totalRecords: (responsePage.page.totalElements-responsePage.page.size)
 	           },
 	           columns: [
-	               {field: 'descricao', headerText: 'Descrição', sortable: true, filter: true},
-	               {field: 'ordem', headerText: 'Ordem', sortable: true, filter: true}
+	               {field: 'descricao', headerText: 'Descrição', sortable: true, filter: false},
+	               {field: 'ordem', headerText: 'Ordem', sortable: true, filter: false}
 	           ],
 	           datasource: function(callback, ui) {
 	           //ui.first = Index of the first record
@@ -108,6 +108,8 @@ $(function() {
 	               	uri = sURL+'?page=0&size='+responsePage.page.size+'&sort='+fieldSort+','+ascDesc;
 	           	else
 	           		uri = sURL+'?page='+((ui.first/ui.rows)+1)+'&size='+responsePage.page.size+'&sort='+fieldSort+','+ascDesc;
+	           	
+	           	console.log(uri);
 	           	
 	               $.ajax({
 	                   type: "GET",
