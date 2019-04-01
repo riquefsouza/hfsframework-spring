@@ -21,121 +21,51 @@
 				<div class="row">
 					<th:block th:include="/private/panelRelatorio"></th:block>					
 				</div>
-			</div>					
+			</div>
 		</div>
 
 		<div class="form-actions" style="margin:5px 0;">
-			<button type="button" class="btn btn-primary" id="btnExportar" onclick="window.open('exportar/'+$('#cmbTipoRelatorio').val()+'/'+$('#forcaDownload')[0].checked,'_blank')">
-				<span class="glyphicon glyphicon-print"></span> Exportar
-			</button>
-			
-			<button type="button" class="btn btn-success" id="btnIncluir" title="Incluir uma nova categoria dos parâmetros de configuração" onclick="window.location.href='incluir'">
-				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
-			</button>
-		
-			<button type="button" class="btn btn-warning" id="btnEditar" title="Editar uma categoria dos parâmetros de configuração" onclick="hfsDatatablesEditar('AdmParametroCategoria')">
-				<span class="glyphicon glyphicon-edit"></span> Editar
-			</button>
-		
-			<button type="button" class="btn btn-danger" id="btnExcluir" title="Excluir uma categoria dos parâmetros de configuração" onclick="hfsDatatablesExcluir('AdmParametroCategoria')">
-				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
-			</button>
+			<button type="button" class="btn btn-primary btn-icon-split" id="btnExportar">
+				<span class="icon text-white-50">
+					<i class="fa fa-file"></i>
+				</span>
+				<span class="text">Exportar</span>
+			</button>			
+			<button type="button" class="btn btn-success btn-icon-split" id="btnIncluir">
+				<span class="icon text-white-50">
+					<i class="fa fa-plus-circle"></i>
+				</span>
+				<span class="text">Incluir</span>
+			</button>			
+			<button type="button" class="btn btn-warning btn-icon-split" id="btnEditar">
+				<span class="icon text-white-50">
+					<i class="fa fa-chevron-circle-up"></i>
+				</span>
+				<span class="text">Editar</span>
+			</button>			
+			<button type="button" class="btn btn-danger btn-icon-split" id="btnExcluir">
+				<span class="icon text-white-50">
+					<i class="fa fa-minus-circle"></i>
+				</span>
+				<span class="text">Excluir</span>
+			</button>			
+			<button type="button" class="btn btn-primary btn-icon-split" id="btnVoltar">
+				<span class="icon text-white-50">
+					<i class="fa fa-arrow-circle-left"></i>
+				</span>
+				<span class="text">Voltar</span>
+			</button>			
+		</div>
 
-			<button type="button" class="btn btn-primary" id="btnVoltar" title="Voltar" onclick="window.location.href='/'">
-				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
-			</button>
+		<div id="dlgDeleteConfirmation" title="Confirmação">
+		    <p>Confirma exclusão?</p>
 		</div>
 
 		<div id="tabelaAdmParametroCategoria"></div>
-		
-		<div id="messages"></div>
-		
 	</form>
 </div>
 
-
-<script type="text/javascript">
-$(function() {  	
-	var sURL = 'http://localhost:8090/admParametroCategorias';
-	
-	 $('#messages').puigrowl();
-	 
- 	$.ajax({
- 	    type: "GET",
- 	    url: sURL,
- 	    dataType: "json",
- 	    context: this,
- 	    success: function(responsePage) {
-	    	
-	       $('#tabelaAdmParametroCategoria').puidatatable({
-	    	   caption: 'Categoria dos Parâmetros de Configuração',
-	    	   lazy: true,
-	           responsive: true,	           
-	           selectionMode: 'single',
-	           paginator: {
-	               rows: responsePage.page.size,
-	               totalRecords: (responsePage.page.totalElements-responsePage.page.size)
-	           },
-	           columns: [
-	               {field: 'descricao', headerText: 'Descrição', sortable: true, filter: false},
-	               {field: 'ordem', headerText: 'Ordem', sortable: true, filter: false}
-	           ],
-	           datasource: function(callback, ui) {
-	           //ui.first = Index of the first record
-               //ui.rows = Number of rows to load
-               //ui.sortField = Field name of the sorted column
-               //ui.sortOrder = Sort order of the sorted column
-               //ui.sortMeta = Array of field names and sort orders of the sorted columns 
-               //ui.filters = Filtering information with field-value pairs like ui.filters['fieldname'] = 'filtervalue'
-	           var uri = '';
-	           var ascDesc = 'asc';
-	           var fieldSort = 'id';
-	           
-	           //console.log(ui);
-	           /*
-	           if (ui.filters){
-	        	   if (ui.filters.length > 0){
-	        	   		console.log(ui.filters[0].field);
-	        	   		console.log(ui.filters[0].value);
-	        	   }	        	   		
-	           }
-	           */	           
-	           
-	            ui.sortField ? fieldSort = ui.sortField : fieldSort = 'id'; 	            
-	            ui.sortOrder == 1 ? ascDesc='asc' : ascDesc='desc';
-	           
-	           	if (ui.first==0)
-	               	uri = sURL+'?page=0&size='+responsePage.page.size+'&sort='+fieldSort+','+ascDesc;
-	           	else
-	           		uri = sURL+'?page='+((ui.first/ui.rows)+1)+'&size='+responsePage.page.size+'&sort='+fieldSort+','+ascDesc;
-	           	
-	           	console.log(uri);
-	           	
-	               $.ajax({
-	                   type: "GET",
-	                   url: uri,
-	                   dataType: "json",
-	                   context: this,
-	                   success: function(response) {
-	                   		callback.call(this, response._embedded.admParametroCategorias);
-	                   }
-	               });
-	           },	           
-	           rowSelect: function(event, data) {
-	               $('#messages').puigrowl('show', [{severity: 'info', summary: 'Row Selected', detail: (data.descricao + ' ' + data.ordem)}]);
-	           },
-	           rowUnselect: function(event, data) {
-	               $('#messages').puigrowl('show', [{severity: 'info', summary: 'Row Unselected', detail: (data.descricao + ' ' + data.ordem)}]);
-	           }	           
-	       });
-	      
-	       
- 	    }
- 	});
- 	
- 	
-});
-</script>
+<script src="/js/admin/listarAdmParametroCategoria.js"></script>
 
 </body>
 </html>

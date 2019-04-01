@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	lang="pt-BR">
 <head th:replace="fragments/header :: header">
 </head>
@@ -10,37 +9,40 @@
 <div th:replace="private/menu :: menu"></div>
 
 <div class="tela-conteudo">
-	<form th:action="@{/admParametroCategoriaMB/salvar}" method="post" th:object="${bean}">
-		<div class="panel panel-default">
-			<div class="panel-heading" 
+	<form id="editarAdmParametroCategoria">
+	
+		<div class="card">
+			<div class="card-header" 
 				style="font-weight: bold;font-size: large;">
 				Categoria dos Parâmetros de Configuração
 			</div>
-			<div class="panel-body">			
-				<div class="form-actions">
-				
-					<button type="submit" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração">
-						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
-					</button>
-				
-					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
-						<span class="glyphicon glyphicon-star"></span> Limpar
+			<div class="card-body">				
+				<div class="form-actions">				
+					<button type="button" class="btn btn-success btn-icon-split" id="btnSalvar">
+						<span class="icon text-white-50">
+							<i class="fa fa-check-circle"></i>
+						</span>
+						<span class="text">Salvar</span>
+					</button>			
+					<button type="reset" class="btn btn-light btn-icon-split" id="btnLimpar">
+	                    <span class="icon text-gray-600">
+	                      <i class="fa fa-eraser"></i>
+	                    </span>
+						<span class="text">Limpar</span>
 					</button>
 
-					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='/admParametroCategoriaMB/listar'">
-						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					<button type="button" class="btn btn-primary btn-icon-split" id="btnCancelar">
+						<span class="icon text-white-50"> <i
+							class="fa fa-times-circle"></i>
+						</span> <span class="text">Cancelar</span>
 					</button>
-				</div>
-			
+				</div>				
 				<div class="row">
 					<div class="col-md-4 form-group">
-						<label for="descricao">Descrição:</label>
-						<input type="hidden" class="form-control" id="id" name="id" th:value="${bean.id}">
-						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="80" th:value="${bean.descricao}">
-						<input type="hidden" class="form-control" id="ordem" name="ordem" th:value="${bean.ordem}">
-						<!--
-						<input type="text" class="form-control" id="descricao" name="descricao" maxlength="80" th:field="*{descricao}">
-						--> 
+						<label for="admParametroCategoria_descricao">Descrição:</label>
+						<input type="hidden" class="form-control" id="admParametroCategoria_id">
+						<input type="text" class="form-control" id="admParametroCategoria_descricao" name="descricao" maxlength="80">
+						<input type="hidden" class="form-control" id="admParametroCategoria_ordem" name="ordem">
 					</div>
 				</div>
 				
@@ -48,6 +50,8 @@
 		</div>
 	</form>	
 </div>
+
+<script src="/js/admin/editarAdmParametroCategoria.js"></script>
 
 </body>
 </html>

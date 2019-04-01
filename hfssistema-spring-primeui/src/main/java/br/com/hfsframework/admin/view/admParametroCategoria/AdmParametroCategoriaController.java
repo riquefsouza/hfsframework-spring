@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.hfsframework.base.relatorio.RelatorioGrupoVO;
 import br.com.hfsframework.base.view.BaseViewController;
@@ -50,6 +53,34 @@ public class AdmParametroCategoriaController extends BaseViewController implemen
 		return getPaginaListar();
 	}
 	
+	
+	@GetMapping("/incluir")
+	public String incluir() {
+		return getPaginaEditar();
+	}
+	
+	@GetMapping("/editar")	
+	public String editar() {
+		return getPaginaEditar();
+	}
+
+	@PostMapping("/salvar")
+	public String salvar() {
+		return getPaginaListar();
+	}
+
+	@GetMapping("/excluir")
+	public String excluir() {
+		return getPaginaListar();
+	}
+
+	@ResponseBody
+	@GetMapping(value = "/exportar/{tipoRelatorio}/{forcarDownload}")
+	public String exportar(@PathVariable("tipoRelatorio") String tipoRelatorio, 
+			@PathVariable("forcarDownload") String forcarDownload)  {
+		return rel.exportar(tipoRelatorio, forcarDownload);
+	}
+		
 	@ModelAttribute("listaTipoRelatorio")
 	public List<RelatorioGrupoVO> getListaTipoRelatorio() {
 		return rel.getListaTipoRelatorio();
