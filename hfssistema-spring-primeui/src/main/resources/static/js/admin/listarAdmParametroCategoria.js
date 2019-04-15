@@ -23,7 +23,12 @@ $('#btnEditar').click(function(event) {
 		$.get(dataRowSelected[0]._links.self.href, function(responsePage) {
 				persistItem("responsePage", responsePage._links.self.href);
 				window.location.href='editar';
-		});
+		}).fail(function() {
+	    	$('#alert-messages').show();
+	    	setTimeout(function() {
+	    		$('#alert-messages').toggle();
+			}, 1500);
+        });
 	} else {
 		$('#alert-messages').show();
 	}
@@ -142,7 +147,10 @@ function construirTabelaAdmParametroCategoria(sURL, responsePage) {
 		        context: this,
 		        success: function(response) {
 		        	callback.call(this, response._embedded.admParametroCategorias);
-		        }
+		        },
+		        error: function(xhr){
+		            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+		        }			
 		    });
 		},	           
 		rowSelect: function(event, data) {
@@ -155,9 +163,21 @@ function construirTabelaAdmParametroCategoria(sURL, responsePage) {
 $(function() {  	
 	var sURL = 'http://localhost:8090/admParametroCategorias';
 	
-	$.get(sURL, function(responsePage) {
-		construirDialogExcluir();
+	//$('#spinner').toggle();
+	
+	$.get(sURL, function(responsePage) {		
 		construirTabelaAdmParametroCategoria(sURL, responsePage);
-	});
+		construirDialogExcluir();
+	}).fail(function(xhr, textStatus, msg){
+		alert("An error occured: " + xhr.status + " " + xhr.statusText);
+		/*
+    	$('#alert-messages').show();
+    	setTimeout(function() {
+    		//$('#alert-messages').toggle();
+		}, 1500);
+		*/
+    }).always(function(){
+    	//$('#spinner').toggle();
+    });
  	 	
 });
