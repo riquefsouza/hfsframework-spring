@@ -6,16 +6,18 @@
  */
 package br.com.hfsframework.config;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class AplicacaoRestMvcConfig.
- */
 @Configuration
-public class AplicacaoRestMvcConfig implements RepositoryRestConfigurer {
+public class AppRepoRestConfigurer implements RepositoryRestConfigurer {
 
 	/*
 		Name				Description
@@ -30,6 +32,9 @@ public class AplicacaoRestMvcConfig implements RepositoryRestConfigurer {
 		returnBodyOnUpdate	change if a body should be returned on updating an entity
 	 */
 	
+	@Autowired
+	private EntityManager em;	
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter#configureRepositoryRestConfiguration(org.springframework.data.rest.core.config.RepositoryRestConfiguration)
 	 */
@@ -37,6 +42,13 @@ public class AplicacaoRestMvcConfig implements RepositoryRestConfigurer {
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 		//config.setBasePath("/api");
 		//config.setDefaultPageSize(defaultPageSize);
+		
+		List<Class<?>> listJavaType = em.getMetamodel().getEntities().stream().map(e -> e.getJavaType())
+		.collect(Collectors.toList());
+		
+		Class<?>[] domainTypes = listJavaType.toArray(new Class[0]);
+		
+		config.exposeIdsFor(domainTypes);		
 	}
 
 }

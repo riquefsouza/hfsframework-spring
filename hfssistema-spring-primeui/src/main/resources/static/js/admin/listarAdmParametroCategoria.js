@@ -1,4 +1,4 @@
-//var dataRowSelected;
+var sURL = sURL_BACKEND + "/admParametroCategorias";
 
 $('#btnExportar').click(function(event) {
 	event.preventDefault();
@@ -10,6 +10,7 @@ $('#btnExportar').click(function(event) {
 $('#btnIncluir').click(function(event) {
 	event.preventDefault();
 	
+	persistItem("responsePage", sURL);
 	window.location.href='incluir';
 });	
 	
@@ -20,9 +21,9 @@ $('#btnEditar').click(function(event) {
 	var dataRowSelected = $('#tabelaAdmParametroCategoria').puidatatable('getSelection');
 	
 	if (dataRowSelected.length > 0) {
-		$.get(dataRowSelected[0]._links.self.href, function(responsePage) {
-				persistItem("responsePage", responsePage._links.self.href);
-				window.location.href='editar';
+		$.get(dataRowSelected[0]._links.self.href, function(responsePage) {			
+			persistItem("responsePage", responsePage._links.self.href);
+			window.location.href='editar';
 		}).fail(function() {
 	    	$('#alert-messages').show();
 	    	setTimeout(function() {
@@ -35,7 +36,7 @@ $('#btnEditar').click(function(event) {
 		
 });	
 
-function construirDialogExcluir(){
+function buildDialogExcluir(){
 	$('#dlgDeleteConfirmation').puidialog({
 	    minimizable: false,
 	    maximizable: false,
@@ -49,7 +50,19 @@ function construirDialogExcluir(){
 	            	var dataRowSelected = $('#tabelaAdmParametroCategoria').puidatatable('getSelection');
 	            	
 	            	if (dataRowSelected.length > 0) {
-	            		console.log(dataRowSelected[0].descricao);	
+	        			$.ajax({
+	        				type: "DELETE",
+	        				url: dataRowSelected[0]._links.self.href,
+	        				dataType: "json",
+	        		        context: this,
+	        		        success: function(data) {
+	        		        	alert(data);	
+	        		        },
+	        		        error: function(xhr){
+	        		            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+	        		        }			
+	        		    });
+
 	            	}
 	            	
 	                $('#dlgDeleteConfirmation').puidialog('hide');
@@ -95,7 +108,7 @@ $('#btnVoltar').click(function(event) {
 });	
 
 
-function construirTabelaAdmParametroCategoria(sURL, responsePage) {
+function buildTableAdmParametroCategoria(sURL, responsePage) {
 	$('#tabelaAdmParametroCategoria').puidatatable({
 		caption: 'Categoria dos Parâmetros de Configuração',
 		lazy: true,
@@ -145,8 +158,8 @@ function construirTabelaAdmParametroCategoria(sURL, responsePage) {
 				url: uri,
 				dataType: "json",
 		        context: this,
-		        success: function(response) {
-		        	callback.call(this, response._embedded.admParametroCategorias);
+		        success: function(data) {
+		        	callback.call(this, data._embedded.admParametroCategorias);
 		        },
 		        error: function(xhr){
 		            alert("An error occured: " + xhr.status + " " + xhr.statusText);
@@ -154,20 +167,20 @@ function construirTabelaAdmParametroCategoria(sURL, responsePage) {
 		    });
 		},	           
 		rowSelect: function(event, data) {
-			//dataRowSelected = data;
+			//console.log(data);
 		}
 	});
 	
 }
 
-$(function() {  	
-	var sURL = 'http://localhost:8090/admParametroCategorias';
+$(function() {
+	
 	
 	//$('#spinner').toggle();
 	
-	$.get(sURL, function(responsePage) {		
-		construirTabelaAdmParametroCategoria(sURL, responsePage);
-		construirDialogExcluir();
+	$.get(sURL, function(data) {		
+		buildTableAdmParametroCategoria(sURL, data);
+		buildDialogExcluir();
 	}).fail(function(xhr, textStatus, msg){
 		alert("An error occured: " + xhr.status + " " + xhr.statusText);
 		/*
